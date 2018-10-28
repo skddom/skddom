@@ -1,0 +1,633 @@
+﻿<?
+
+$prev = $db->get_row("select * from Message$classID where house_id<'$f_house_id' order by house_id desc limit 1", ARRAY_A);
+$next = $db->get_row("select * from Message$classID where house_id>'$f_house_id' order by house_id asc limit 1", ARRAY_A);
+//echo "select * from Message$classID where house_id<'$f_house_id' order by house_id desc limit 1";
+if ($prev) {
+
+    $link = nc_message_link( $prev['Message_ID'], $classID);
+    $img0 = $prev['MainImgPath'];
+    $img =  AGLION_RESIZE( $img0 , 100 , 100 , "c");
+    ?><div class="portfolio-navigation-prev" data-name="CKD-<?=$prev['house_id']?>"><?
+      ?><div class="portfolio-navigation-image"><?
+        ?><a href="<?=$link?>" rel="prev"><img
+            width="100" height="100"
+            src="<?=$img?>" class="attachment-thebuilt-portfolio-nav size-thebuilt-portfolio-nav wp-post-image"
+            alt="CKD-<?=$v['house_id']?>"
+            srcset="<?=$img?> 100w, <?=$img?> 150w, <?=$img?> 40w" sizes="(max-width: 100px) 100vw, 100px"></a> <?
+        ?></div><?
+    ?></div><?
+}
+if ($next) {
+
+    $link = nc_message_link( $next['Message_ID'], $classID);
+    $img0 = $next['MainImgPath'];
+    $img =  AGLION_RESIZE( $img0 , 100 , 100 , "c");
+    ?><div class="portfolio-navigation-next" data-name="CKD-<?=$next['house_id']?>"><?
+      ?><div class="portfolio-navigation-image"><?
+        ?><a href="<?=$link?>" rel="prev"><img
+            width="100" height="100"
+            src="<?=$img?>" class="attachment-thebuilt-portfolio-nav size-thebuilt-portfolio-nav wp-post-image"
+            alt="CKD-<?=$v['house_id']?>"
+            srcset="<?=$img?> 100w, <?=$img?> 150w, <?=$img?> 40w" sizes="(max-width: 100px) 100vw, 100px"></a> <?
+        ?></div><?
+    ?></div><?
+}
+?><div class="content-block by-area">
+<div class="container-bg <?if($bg) echo "with-bg";?> with-bgcolor" data-style="<?=$style;?>background-color: #F4F4F4" style="<?=$style;?>background-color: #F4F4F4">
+    <div class="container-bg-overlay">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="page-item-title">
+              <h1>
+                                <span><?=$f_title?></span>
+
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="breadcrumbs-container-wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12"><?
+          $crumbs = s_browse_path($browse_path);
+          $tmp = explode($browse_path['divider'],$crumbs);
+          switch($ref) {
+              case "/favorites/":
+                  $tmp[count($tmp)-2] = str_replace(array("%NAME","%URL"),array("Избранное",$ref),$browse_path['unactive']);
+              break;
+              case "/catalog/by-area/":
+                  $tmp[count($tmp)-2] = str_replace(array("%NAME","%URL"),array("По площади",$ref),$browse_path['unactive']);
+              break;
+              case "/price/ceny-na-doma-iz-kleenogo-brusa/":
+                  $tmp[count($tmp)-2] = str_replace(array("%NAME","%URL"),array("По цене",$ref),$browse_path['unactive']);
+              break;
+          }
+          $crumbs = join($browse_path['divider'], $tmp);
+echo $crumbs;
+          ?></div>
+        </div>
+      </div>
+    </div>
+    </div>
+<div class="post-container container"><?
+if(isset($_GET['calc'])) {
+    $_REQUEST['house'] = $f_house_id;
+    echo s_list_class(185,581,"&house=$f_house_id");
+} else {
+        if (!$grid) {
+        $current_sub['Icon'] = $f_SliderPath.$f_MainImgPath;
+            ?><div class="blog-post blog-post-single">
+                <article id="post-<?=$sub?>" class="post type-post status-publish format-standard has-post-thumbnail hentry category-house-renovation">
+                            <div class="">
+
+                                <div class="post-content"><?
+                                    ?><div class="row">
+                                        <div class="col-md-9"><?
+                                          if ($current_sub['Icon']) {
+                                              ?><div class="blog-post-thumb text-center">
+                                                  <div class="labels">
+                                                      <?if($f_Hit):?><div class="label hit">Хит продаж</div><br><?endif?>
+                                                      <?if($f_Special):?><div class="label special">Спецпредложение</div><br><?endif?>
+                                                      <?if($f_Cheap):?><div class="label cheap">Выгодная цена</div><?endif?>
+                                                  </div>
+                                                  <!--NEW: FAVORITE BTN START--><?
+
+                                                  ?><form  id='favForm'  method='post' action='/netcat/add.php'>
+<input name='admin_mode' type='hidden' value='' />
+<?=$nc_core->token->get_input()?>
+<input name='catalogue' type='hidden' value='1' />
+<input name='cc' type='hidden' value='584' />
+<input name='sub' type='hidden' value='467' />
+<input name='posting' type='hidden' value='1' />
+<input name='isNaked' type='hidden' value='1' />
+<input name='curPos' type='hidden' value='0' />
+<input name='f_Parent_Message_ID' type='hidden' value='' />
+<input name='f_ID' type='hidden'  value='<?=$message?>' /><?
+                                                  if ($f_FavID) {
+                                                      ?><a data-fav="<?=$f_FavID?>" href="/favorites/" class="btn add_to_favorite in-fav"><i class="svg-icon svg-favorite"></i>В избранном</a>
+
+                                                      <?
+                                                  } else {
+
+                                                  ?><a class="btn add_to_favorite"><i class="svg-icon svg-favorite"></i>Добавить в избранное</a><?
+                                                  }
+                                                  ?></form>
+
+
+<a class="dsorderbtn btn order_btn_style" data-dsconfig="{'nameproject':'<?=$f_title?>'}">Заказать строительство</a>
+                                       <script type="text/javascript">
+                                         jQuery(document).ready(function(){
+                                          jQuery(".dsorderbtn").dsform({
+                                            formID:'dsorder',
+                                          })
+                                         })
+                                       </script>
+                                                  <!--NEW: FAVORITE BTN END--><?
+if ($handle = opendir($_SERVER['DOCUMENT_ROOT'].$f_SliderPath)) {
+
+                        ?><div id="vc_images-carousel-1-1494864491" data-ride="vc_carousel" data-wrap="false" style="width: 100%;" data-interval="0" data-auto-height="yes" data-mode="horizontal" data-partial="false" data-per-view="1" data-hide-on-end="true" class="vc_slide vc_images_carousel">
+                            <!-- Wrapper for slides -->
+                            <div class="vc_carousel-inner">
+                                <div class="vc_carousel-slideline">
+                                    <div class="vc_carousel-slideline-inner"><?
+    //while (false !== ($f = readdir($handle))) {
+$files = scandir($_SERVER['DOCUMENT_ROOT'].$f_SliderPath);
+sort($files);
+foreach ($files as $f) {
+        if (is_file($_SERVER['DOCUMENT_ROOT'].$f_SliderPath.$f)) {
+            $f = ($f_SliderPath.$f);
+                                        ?><div class="vc_item">
+                                            <div class="vc_inner">
+                                                <a href="<?=$f?>"  rel="lightbox1" data-group="main">
+                                                <img width="1170" height="780" src="<?=($f)?>" class="attachment-full" alt="" srcset="<?=$f?> 1170w, <?=$f?> 300w, <?=$f?> 768w, <?=$f?> 1024w" sizes="(max-width: 1170px) 100vw, 1170px" />                                        </a>
+                                            </div>
+                                        </div><?
+            //echo "<img src=\"$f\" alt=\"\" />";
+        }
+    }
+
+                                    ?></div>
+                                </div>
+                            </div>
+                            <!-- Controls -->
+                            <a class="vc_left vc_carousel-control" href="#vc_images-carousel-1-1494864491" data-slide="prev">
+                            <span class="icon-prev"></span>
+                            </a>
+                            <a class="vc_right vc_carousel-control" href="#vc_images-carousel-1-1494864491" data-slide="next">
+                            <span class="icon-next"></span>
+                            </a>
+                        </div>
+                    <?
+
+} else {
+                                                  ?><img width="1170" height="781" src="<?=$current_sub['Icon']?>" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="<?=$f_title?>" sizes="(max-width: 1170px) 100vw, 1170px"><?
+}
+                                              ?></div><?
+                                          }
+        }
+?>
+                                        <!--NEW: SHORT INFO START-->
+                                        <div class="row">
+                                            <div class="col-lg-12 col-sm-12 col-xs-12">
+                                                <div class="short_project_info">
+                                                    <div class="col"><span style="font-style: italic;"></span>
+                                                        <div class="inner_text">
+                                                            <div class="title">Площадь</div><span style="font-weight:bold;"><?=$f_Square?> М<sup>2</sup></span></div>
+                                                    </div>
+                                                    <div class="col"><span style="font-style: italic;"></span>
+                                                        <div class="inner_text">
+                                                            <div class="title">Высота 1-го этажа</div><span style="font-weight:bold;"><?=$f_h1?></span><br>
+                                                            <div class="title">Высота аттиковой стены 2-го этажа</div><span style="font-weight:bold;"><?=$f_h2?></span>
+                                                         </div>
+                                                    </div>
+                                                    <div class="col"><span style="font-style: italic;"></span>
+                                                        <div class="inner_text">
+                                                            <div class="title">Базовая цена</div><span style="font-weight:bold;"><?=$f_Price1?$f_Price1:$f_Price?> руб</span></div>
+                                                    </div>
+                                                    <div class="col"><span style="font-style: italic;"></span>
+                                                        <div class="inner_text"><?
+$m2 =  round(preg_replace('~[^0-9]+~','',$f_Price1?$f_Price1:$f_Price)/preg_replace('~[^0-9]+~','',$f_Square));
+                                                            ?><div class="title">Цена за м<sup>2</sup></div><span style="font-weight:bold;"><?=$m2?> руб</span></div>
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div><?
+                                            /*
+                                            ?><div class="col-lg-4 col-sm-4 col-xs-12">
+                                                <a class="included_price btn" href="/price/calc/?house=<?=$f_house_id?>"><span style="font-style: italic;"></span>Включено в стоимость</a>
+                                            </div><?
+                                            */
+if ($f_Text) {
+    ?><div class="col-lg-12 col-sm-12 col-xs-12 prodesc"><?=$f_Text;?></div><?
+}
+                                        ?>
+
+                                        <!--NEW: SHORT INFO END-->
+                                    </div>
+                                 </div>
+                                 <div class="col-md-3 main-sidebar sidebar">
+        <ul id="main-sidebar"><?
+$q="select a.Subdivision_ID as id, a.Subdivision_Name as name,a.NotShowCities
+from Sub_Class c
+left join Subdivision a ON a.Subdivision_ID=c.Subdivision_ID
+where c.Class_ID=210 and a.Parent_Sub_ID=120 and $query
+order by a.Priority ASC";
+$q = str_replace("a.Cities","a.NotShowCities",$q);
+$arLines = $db->get_results($q,ARRAY_A);
+
+foreach ($rs as $v) $ipro[] = $v['id'];
+$rs = $db->get_results("select house_id as name, Message_ID as id, Subdivision_ID as line from Message210 where Checked=1 order by house_id",ARRAY_A);
+foreach ($rs as $v) $arProjects[$v['line']][] = $v;
+
+?><li id="nav_menu-8" class="widget widget_nav_menu">
+<div class="menu-blog-menu-container"><ul class="menu"><li class="menu-item menu-item-type-taxonomy menu-item-object-category text-transform-uppercase"><a>Каталог проектов СКД</a></li><li><?
+    foreach ($arLines as $v) {
+        ?><div class=""><a class="accordion<?=$v['id']==$sub?" active":""?>">Линейка <?=$v['name']?></a><div class='toggle-content'><?
+            foreach ($arProjects[$v['id']] as $pro) {
+                ?><a class="<?=$pro['id']==$message?"active":""?>" href="<?=nc_message_link($pro['id'],210)?>">CKD - <?=$pro['name']?></a><?
+            }
+        ?></div></div><?
+    }
+?></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category text-transform-uppercase"><a href="/catalog/individualnye-proekty-gallery/">Индивидуальные проекты</a></li></ul></div><script>
+$(function(){
+    $(".accordion").click(function(){
+        $this = $(this);
+        if ($this.hasClass("active")) return false;
+        $(".toggle-content").slideUp(200,function(){
+            $(".accordion").removeClass("active");
+        });
+        $(this).siblings(".toggle-content").slideDown(200,function(){
+            $this.toggleClass("active");
+        });
+        return false;
+    });
+});
+</script></li><?
+
+
+
+
+
+//$docCC = $db->get_var("select Sub_Class_ID from Sub_Class where Subdivision_ID=$sub and Class_ID=2257");
+//if ($docCC) $brochures = s_list_class($sub, $docCC, "");
+if ($brochures) {
+?><li id="text-13" class="widget widget_text"><h2 class="widgettitle">Документы</h2>
+            <div class="textwidget">
+            <?=$brochures?>
+
+</div>
+        </li><?
+}
+if (1) {
+?><li class="widget widget_text cpa3"><?
+        $template_keyword = 'thebuilt';
+        $partial_keyword = 'whatincluded';
+        $data = array('img' => '/banner/shutterstock-writing-copy.jpg','link'=>"/price/calc/?house=$f_house_id");
+        echo $nc_core->template->get_partial($template_keyword, $partial_keyword, $data);
+        ?></li><?
+ }
+?>
+        </ul>
+                                 </div>
+                              </div>
+<?
+
+
+
+for($i=1;$i<6;$i++) {
+    $v =  ${"f_Plan$i"};
+    if ($v) {
+        $v1=explode("</table>",$v);
+        if (count($v1)>1) {
+            foreach ($v1 as $k=>$table) {
+                if ($k>count($v1)-2) continue;
+                $table.="</table>";
+                $plans[] = $table;
+            }
+        } else $plans[]=$v;
+    }
+}
+
+if ($f_Plan) {
+    $plans = array();
+    $tmp = explode("\n", $f_Plan);
+    $cnt=0;
+    foreach ($tmp as $v) {
+        $v = explode(";",$v);
+        $cnt++;
+        $i = ceil($cnt/2);
+        if ($cnt%2!=0) {
+            $plans[$i]['title'] = $v[1];
+        }
+        $plans[$i]['items'][] = $v;
+    }
+}
+
+
+if ($include2=1) {
+        $template_keyword = 'thebuilt';
+        $partial_keyword = 'included';
+        $data = array('house' => $f_house_id,'link'=>"/price/calc/?house=$f_house_id","srok"=>$f_Srok);
+        echo $nc_core->template->get_partial($template_keyword, $partial_keyword, $data);
+        ?><div class="row"><div class="wpb_column vc_column_container vc_col-sm-12">
+
+<div class="vc_column-inner "><div class="wpb_wrapper"><div class="mgt-header-block clearfix text-left text-black   mgt-header-block-style-1 mgt-header-texttransform-header "><h2 class="mgt-header-block-title">Планировки</h2><div class="mgt-header-line"></div></div></div></div></div></div><div class="clearfix"></div><br><br><?
+}
+
+if ($plans) {
+?><div class="vc_tta-container" data-vc-action="collapse">
+    <div class="vc_general vc_tta vc_tta-accordion vc_tta-color-black vc_tta-style-classic vc_tta-shape-square vc_tta-o-shape-group vc_tta-controls-align-left">
+        <div class="vc_tta-panels-container">
+            <div class="vc_tta-panels plans"><?
+            $cnt=0;
+            foreach ($plans as $k=>$v) {
+                $cnt++;
+                if ($v['title']) $title = $v['title'];
+                else $title = $k?"Дополнительная планировка  $k":"Основная планировка";
+                $active = $cnt>1?"":"vc_active";
+                $id = "plan_$k";
+
+                ?><div class="vc_tta-panel <?=$active?>" id="<?=$id?>" data-vc-content=".vc_tta-panel-body">
+                    <div class="vc_tta-panel-heading">
+                        <h4 class="vc_tta-panel-title vc_tta-controls-icon-position-right"><a href="#<?=$id?>" data-vc-accordion="" data-vc-container=".vc_tta-container"><span class="vc_tta-title-text"><?=$title?></span><span style="font-style: italic;"></span></a></h4>
+                    </div>
+                    <div class="vc_tta-panel-body" style="padding:0;">
+                        <div class="wpb_text_column wpb_content_element ">
+                            <div class="wpb_wrapper"><?
+                                if($v['items']) {
+                                    ?><div class="row">
+                                        <div class="col-md-12"><img  src="<?=$v['items'][0][2]?>"><img src="<?=$v['items'][1][2]?>"></div>
+                                    </div><?
+                                } else {
+                                    ?><?=$v?><?
+                                }
+                            ?></div>
+                        </div>
+                    </div>
+                </div><?
+
+            }
+            ?></div>
+        </div>
+    </div>
+</div><?
+/*  don't like the plan?
+?><div class="row"><div class="dontlike wpb_column vc_column_container vc_col-sm-12">
+    <div class="vc_column-inner "><div class="wpb_wrapper">
+        <div class="mgt-cta-block clearfix black-text with-text wpb_content_element">
+            <div class="mgt-button-wrapper mgt-button-wrapper-align-right mgt-button-wrapper-display-newline mgt-button-top-margin-disable"><a data-action="/catalog/architect/" data-show="#parent_popup_form_detail_phone" data-href=".js-callback-wrap" class="btn hvr-default mgt-button mgt-style-solid mgt-size-large mgt-align-right mgt-display-newline mgt-text-size-normal mgt-button-icon-position-left mgt-text-transform-uppercase js-openPopup" href="#">Создать </a></div>
+            <div class="mgt-cta-block-content">Не понравились наши планировки?</div>
+            <h5 class="mgt-cta-block-header">Создайте свою планировку бесплатно</h5>
+            <div class="mgt-cta-block-content">Реализация Ваших идей с архитектором СКД-Дом</div>
+        </div>
+    </div></div>
+</div></div><?*/
+
+/*  Старая форма, изменил 27.11.17 (Трунов)
+        $template_keyword = 'thebuilt';
+        $partial_keyword = 'architect';
+        $data = array('img' => '/banner/shutterstock-writing-copy.jpg','link'=>"/price/calc/?house=$f_house_id");
+        echo $nc_core->template->get_partial($template_keyword, $partial_keyword, $data);
+*/
+    ?>
+        <div class="vc_row wpb_row vc_row-fluid vc_custom_1459500687188"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner "><div class="wpb_wrapper">
+    <div class="mgt-cta-block clearfix parallax white-text with-text wpb_content_element" data-style="background: #ffd300 url(/files/Back-Architecture-3.jpg) no-repeat;" style="background: url(&quot;/files/Back-Architecture-3.jpg&quot;) 50% 101px no-repeat rgb(255, 211, 0);">
+
+        <div class="mgt-button-wrapper mgt-button-wrapper-align-right mgt-button-wrapper-display-newline mgt-button-top-margin-disable">
+      <a onclick="yaCounter4312879.reachGoal('zayavkaarchitector');" data-action="/catalog/architect/" data-show="#parent_popup_form_detail_phone" data-href=".js-callback-wrap" 
+      class="btn btn_new_style_color hvr-bounce-to-right mgt-button mgt-style-solid-invert mgt-size-normal mgt-align-right mgt-display-newline mgt-text-size-normal mgt-button-icon-position-left mgt-text-transform-uppercase js-openPopup" href="#">Записаться </a></div>
+
+    <h3 class="mgt-cta-block-header">Создайте свою планировку! </h3>
+    <div class="mgt-cta-block-content">Запишитесь на встречу с архитектором CKD и разработайте собственную планировку совершенно бесплатно.  </div>
+    </div></div></div></div></div>
+
+    <?
+
+
+
+
+}
+
+
+if ($f_PlanRazrez) {
+    $plans = array();
+    $tmp = explode("\n", $f_PlanRazrez);
+    $cnt=0;
+
+    foreach ($tmp as $v) {
+        $v = explode(";",$v);
+        $cnt++;
+        $i = ceil($cnt/2);
+        if ($cnt%2!=0) {
+            $plans[$i]['title'] = $v[1];
+        }
+        $plans[$i]['items'][] = $v;
+    }
+?><div class="mgt-header-block clearfix text-left text-black wpb_content_element  mgt-header-block-style-1 mgt-header-texttransform-header "><h2 class="mgt-header-block-title">Габаритные размеры </h2><div class="mgt-header-line"></div></div><?
+                        ?><div class="wpb_text_column wpb_content_element ">
+                            <div class="wpb_wrapper"><?
+
+                            foreach($plans as $v) {
+                                if($v['items']) {
+                                    ?><img class="margin-auto" src="<?=$v['items'][0][2]?>"><img class=" margin-auto" src="<?=$v['items'][1][2]?>">
+                                    </div><?
+                                } else {
+                                    ?><?=$v?><?
+                                }
+                            }
+                            ?></div>
+                        </div><?
+}elseif ($f_PlanDoma) {
+?><div class="mgt-header-block clearfix text-left text-black wpb_content_element  mgt-header-block-style-1 mgt-header-texttransform-header "><h2 class="mgt-header-block-title">Габаритные размеры </h2><div class="mgt-header-line"></div></div><?
+?><img src="<?echo $f_PlanDoma;?>" class="img-responsive" alt=""><?
+}
+
+$flds=array("IteriorMain","Interior1","Interior2");
+
+if ($handle = opendir($_SERVER['DOCUMENT_ROOT'].$f_InteriorPath)) {
+    while (false !== ($f = readdir($handle))) {
+        if (is_file($_SERVER['DOCUMENT_ROOT'].$f_InteriorPath.$f) && strpos($f,"thumb_")===false) {
+            $t = $f_InteriorPath."thumb_".$f;
+            $f = $f_InteriorPath.$f;
+            $is = getimagesize($_SERVER['DOCUMENT_ROOT'].$t);
+            if (!file_exists($_SERVER['DOCUMENT_ROOT'].$t) || $is[0]<800) {
+                nc_ImageTransform::imgResize($_SERVER['DOCUMENT_ROOT'].$f,$_SERVER['DOCUMENT_ROOT'].$t,1024,768);
+            }
+            unset($t);
+            if ($f) $interior[]=array($f,($t?$t:$f));
+        }
+    }
+}
+
+/////////////////// info block ///////////////////
+$nachnets = date("d-m-Y", strtotime("next monday"));
+if($f_house_id>=200 && $f_house_id<=254)
+$end = date("d-m-Y", strtotime("+80 day next Monday"));
+else if($f_house_id>=263 && $f_house_id<=352)
+$end = date("d-m-Y", strtotime("+90 day next Monday"));
+else if($f_house_id>=360 && $f_house_id<=415)
+$end = date("d-m-Y", strtotime("+100 day next Monday"));
+else $end = date("d-m-Y", strtotime("+80 day next Monday"));
+/*
+?><div class="cdk-info">
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+            <div class="info-title">Срок строительства CKD-<?=$f_house_id?></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-sm-6 col-xs-12">
+            <div class="font-weight-bold underlined">Заключая с нами договор на этой неделе</div>
+        </div>
+        <div class="col-lg-6 col-sm-6 col-xs-12">
+            <div class="font-weight-bold underlined">Детализированный график строительства</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-sm-6 col-xs-12">
+                <p>Строительство вашего дома начнется <span><? echo $nachnets;?>  </span> </p>
+                <p>А готов он будет уже <span><? echo $end; ?></span></p>
+
+        </div>
+        <div class="col-lg-6 col-sm-6 col-xs-12">
+            <? echo "<div data-url=\"/stroim-dom/stroitelstvo-1/kalkulyator-srokov-stroitelstva/?f_home=$f_house_id\" data-show=\"#parent_popup_form_detail_phone\" data-href=\".js-callback-wrap\" class=\"btn js-openPopupButton see get_price_button\">Рассчитать онлайн</div>";?>
+
+
+        </div>
+    </div>
+</div><?
+*/
+//////////////////////////////////////////////////
+
+
+/*?><div class="mgt-cta-block clearfix white-text with-text wpb_content_element cpa1" data-style="background-color: #212c34;" style="background-color: #212c34;"><div class="mgt-button-wrapper mgt-button-wrapper-align-right mgt-button-wrapper-display-newline mgt-button-top-margin-disable"><a class="btn hvr-default mgt-button mgt-style-bordered mgt-size-normal mgt-align-right mgt-display-newline mgt-text-size-large mgt-button-icon-position-left mgt-text-transform-uppercase " href="http://wp.magnium-themes.com/magnium/magnium-1/contact-us-1/" target=" _blank">
+Записаться </a></div>
+<h5 data-url="/catalog/zakaz/?f_home=<?=$f_house_id?>" class="mgt-cta-block-header">Оставить заявку на показ дома</h5></div><?*/
+//echo $nc_core->widget->show('prosmotr');
+
+
+//Интерьеры
+if ($interior){ 
+
+
+      $foto = ( base64_decode(trim(s_list_class(111,86,"&nc_ctpl=2256&recNum=20&house_id=$f_house_id&name=$f_Name"))));
+      $foto = unserialize($foto);
+      if ($foto['ITEMS']) {
+      ?><div class="mgt-header-block clearfix text-left text-black wpb_content_element  mgt-header-block-style-1 mgt-header-texttransform-header "><h2 class="mgt-header-block-title">Построенные объекты </h2><div class="mgt-header-line"></div></div><?
+          ?><div class="vc_row vc_slide"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner "><div class="portfolio-list portfolio-grid-layout-5 portfolio-grid-layout-0  portfolio-with-spaces clearfix" id="foto-list"><?
+          foreach ($foto['ITEMS'] as $k=>$v) {
+          ?><div class="portfolio-item-block portfolio-item-animation-4 mix building" data-item="<?=($k+1)?>" data-name="<?=$v[4]?>" style="display: inline-block;">
+          <div class="portfolio-item-block-inside">
+            <a href="<?=$v[0]?>" target="_self" rel="lightbox4" title="<?=$v[4]?>">
+              <div class="portfolio-item-image" data-style="background-image: url(<?=$v[0]?>);" style="background-image: url(<?=$v[0]?>);"></div>
+              <div class="portfolio-item-bg"></div>
+              <div class="info">
+                <span class="sub-title"><?=$v[3]?></span>
+                <h4 class="title"><?=$v[4]?></h4><?/*
+                        <div class="project-description">Melbourne, Australia</div>
+                                <div class="view-more btn mgt-button">View more</div>*/
+                      ?></div><?
+            ?></a>
+          </div>
+          </div><?
+          }
+
+          ?></div></div></div></div><?
+          echo $foto['BUTTON'];
+          ?>
+                  <script>(function($){
+                     $(document).ready(function() {
+
+                         function initPortfolioCarousel1() {
+
+                     $("#foto-list").owlCarousel({
+                              items: 3,
+                              itemsDesktop:   [1199,4],
+                              itemsDesktopSmall: [979,1],
+                              itemsTablet: [768,1],
+                              itemsMobile : [479,1],
+                              autoPlay: false,
+                              navigation: true,
+                              navigationText : false,
+                              pagination: false,
+                              afterInit : function(elem){
+                                  $(this).css("display", "block");
+                              }
+                          });
+
+                     }
+
+                     setTimeout(initPortfolioCarousel1, 700);
+
+                     });})(jQuery);
+                  </script>
+          <?
+      }
+
+
+  ?>
+        <div class="mgt-header-block clearfix text-left text-black wpb_content_element  mgt-header-block-style-1 mgt-header-texttransform-header "><h2 class="mgt-header-block-title">Интерьеры </h2><div class="mgt-header-line"></div>
+        </div> </br><?
+        ?><div class="vc_row wpb_row vc_row-fluid vc_custom_1438176948413">
+         <div class="wpb_column vc_column_container vc_col-sm-12">
+            <div class="vc_column-inner ">
+               <div class="wpb_wrapper">
+                  <div class="portfolio-list portfolio-columns-4 portfolio-grid-layout-4 clearfix" id="portfolio-list"><?
+                  foreach ($interior as $k=>$v) {
+                     ?><div class="portfolio-item-block portfolio-item-animation-0 slide-item " data-item="<?=($k+1)?>" data-name="<?=$f_Name?>">
+                        <div class="portfolio-item-block-inside">
+                           <a rel="lightbox3" data-group="interior" href="<?=$v[0]?>" target="_self" rel="" title="">
+                              <div class="portfolio-item-image" data-style="background-image: url(<?=$v[1]?>);"></div><?
+                              /*
+                              ?><div class="portfolio-item-bg"></div><?
+
+                              ?><div class="info">
+                                 <span class="sub-title">Building</span>
+                                 <h4 class="title">Modern House</h4>
+                                 <div class="project-description">Melbourne, Australia</div>
+                                 <div class="view-more btn mgt-button">View more</div>
+                              </div><?
+                              */
+                           ?></a>
+                        </div>
+                     </div><?
+                  }
+                  ?></div>
+                  <script>(function($){
+                     $(document).ready(function() {
+
+                         function initPortfolioCarousel() {
+
+                     $("#portfolio-list").owlCarousel({
+                              items: 3,
+                              itemsDesktop:   [1199,4],
+                              itemsDesktopSmall: [979,1],
+                              itemsTablet: [768,1],
+                              itemsMobile : [479,1],
+                              autoPlay: false,
+                              navigation: true,
+                              navigationText : false,
+                              pagination: false,
+                              afterInit : function(elem){
+                                  $(this).css("display", "block");
+                              }
+                          });
+
+                     }
+
+                     setTimeout(initPortfolioCarousel, 1000);
+
+                     });})(jQuery);
+                  </script>
+               </div>
+            </div>
+         </div>
+      </div><?
+
+  }
+
+//Интерьеры end
+
+if(!$grid){
+                                ?></div>
+                            </div>
+                </article>
+            </div><?
+}
+}
+         ?>
+
+</div>
+<script>
+projectID = <?=$message?>;
+jQuery(function(){
+    if($(window).width()<769) {$sidebar= $(".main-sidebar").clone();$sidebar.addClass("clone");$("article").append($sidebar);$sidebar.show();}
+});
+</script>

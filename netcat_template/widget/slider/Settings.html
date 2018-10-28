@@ -1,0 +1,45 @@
+<?
+$id = "gallery_42_".uniqid();
+$f_Images_tpl = array(
+    'prefix' => "<div class='mgt-header-block'></div>
+					<div class='mgt-post-list-wrapper'>
+						<div class='mgt-post-list wpb_content_element animated' id='$id'
+						 style='display: none;'>",
+    'record' => "<div class='mgt-post normal-blocks'>
+								<a href='%Path%' rel='lightbox' title='%i%. %Name%'>
+									<div class='mgt-post-image' data-style='background-image: url(%Preview%);'>
+										<div class='mgt-post-image-wrapper'>
+											<div class='mgt-post-wrapper-icon'><i class='fa fa-plus'></i></div>
+										</div>
+									</div>
+								</a>								
+							</div>",
+    'divider' => "",
+    'suffix' => "</div>
+					</div>
+					<script>
+						(function($)
+						{
+							$(document).ready(function()
+							{
+								$('#$id').owlCarousel(
+								{
+									items: 3,
+									itemsDesktop: [1024, 1],
+									itemsTablet: [770, 1],
+									itemsMobile: [480, 1],
+									autoPlay: false,
+									navigation: true,
+									navigationText: false,
+									pagination: false,
+									afterInit: function(elem)
+									{
+										$(this).css('display', 'block');
+									}
+								});
+							});
+						})(jQuery);
+					</script> ",
+    'i' => 1
+);
+?>

@@ -1,0 +1,97 @@
+<?= ($warnText ? "<div class='warnText'>$warnText</div>" : "") ?>
+
+<?= ($ForumMessagePreview && $f_Message ?
+  "<div style='background:#EEE; border:1px solid #CCC; padding:7px 10px'>".
+  ($f_Subject ? "<b>".$f_Subject."</b><br/><br/>" : "").
+  stripslashes( nc_bbcode( $current_cc['NL2BR'] ? nl2br( $current_cc['AllowTags'] ? $f_Message : strip_tags($f_Message) ) : ( $current_cc['AllowTags'] ? $f_Message : strip_tags($f_Message) ) ) ).
+  "</div><br/>"
+: "") ?>
+
+<form name='adminForm' id='adminForm' enctype='multipart/form-data' method='post' action='<?= $SUB_FOLDER.$HTTP_ROOT_PATH ?>message.php'>
+<div id='nc_moderate_form'>
+<input name='admin_mode' type='hidden' value='<?= $admin_mode ?>' />
+<input name='catalogue' type='hidden' value='<?= $catalogue ?>' />
+<input name='cc' type='hidden' value='<?= $cc ?>' />
+<input name='sub' type='hidden' value='<?= $sub ?>'/>
+<input name='posting' id='DataPostingField' type='hidden' value='1'/>
+<input name='curPos' type='hidden' value='<?= $curPos ?>'/>
+<input name='message' type='hidden' value='<?= $message ?>'/>
+<input name='f_Parent_Message_ID' type='hidden' value='<?= $f_Parent_Message_ID ?>'/>
+<?=  $nc_core->token->get_input() ?>
+<?= ($admin_mode && !$systemTableID ? "<div id='nc_moderate_settings'>
+  <div class='left'>
+    ".CONTROL_CONTENT_SUBDIVISION_FUNCS_MAINDATA_KEYWORD." <input name='f_Keyword' type='text' size='20' maxlength='255' value='".$f_Keyword."'>
+  </div>
+  <div class='left'>
+    <img src='".$SUB_FOLDER.$ADMIN_PATH."images/prior.gif' width='16' height='16' align='left' alt='".NETCAT_MODERATION_PRIORITY."' title='".NETCAT_MODERATION_PRIORITY."'>
+    <input name='f_Priority' type='text' size='3' maxlength='3' value='".$f_Priority."'/>
+  </div>
+  ".(CheckUserRights( $current_cc['Sub_Class_ID'], "moderate", $posting )? "
+  <div class='left_checkbox'>
+    <input id='chk' name='f_Checked' type='checkbox' value='1' ".($f_Checked ? "checked" : "")."/> <label for='chk'>".NETCAT_MODERATION_TURNON."</label>
+  </div>"
+  : "<input id='chk' name='f_Checked' type='hidden' value='".($f_Checked ? 1 : 0)."'/>")."
+  </div>
+" : NULL ).
+($admin_mode ? "<div id='nc_moderate_info'><table border='0' cellpadding='0' cellspacing='0' align='right'><tr><td>".CLASS_TAB_CUSTOM_ADD.":</td><td><div class='nc_moderate_info_date'>".$f_Created."</div></td><td><div class='nc_idtab_adduser nc_moderate_info_user'>".( $f_newAdminInterface_user_add ? $f_newAdminInterface_user_add : $f_AdminButtons_user_add )."</div>(".$f_IP.")</td></tr>".( $f_LastUserID ?"<tr valign='top'><td>".CLASS_TAB_CUSTOM_EDIT.":</td><td><div class='nc_moderate_info_date'>".$f_LastUpdated."</div></td><td><div class='nc_moderate_info_user nc_idtab_adduser'>".( $f_newAdminInterface_user_change ? $f_newAdminInterface_user_change : $f_AdminButtons_user_change )."</div>(".$f_LastIP.")</td></tr>": NULL )."</table></div>" : "") ?>
+</div>
+
+<?= nc_string_field("Subject", "maxlength='255' style='width:100%'", $classID, 1) ?><br/>
+<br/>
+
+<?= nc_text_field("Message", "id='ForumTopicEdit' rows='10'", $classID, 1) ?><br>
+<br/>
+
+<?=
+// disabled options array
+$disabled = array();
+// check important permission
+switch ($cc_settings['important']) {
+  case 'auth':
+    if (!$AUTH_USER_ID) $disabled[] = 2;
+  break;
+  case 'moders':
+  case 'admins':
+    if ( !( is_object($perm) && $perm->isSubClass($cc, MASK_MODERATE | MASK_ADMIN) ) ) $disabled[] = 2;
+  break;
+}
+// check advertisement permission
+switch ($cc_settings['advertisement']) {
+  case 'auth':
+    if (!$AUTH_USER_ID) $disabled[] = 3;
+  break;
+  case 'moders':
+  case 'admins':
+    if ( !( is_object($perm) && $perm->isSubClass($cc, MASK_MODERATE | MASK_ADMIN) ) ) $disabled[] = 3;
+  break;
+}
+
+// close permission flag
+$close_perm = true;
+// check close permission
+switch ($cc_settings['closed']) {
+  case 'auth':
+    if (!$AUTH_USER_ID) $close_perm = false;
+  break;
+  case 'moders':
+  case 'admins':
+    if ( !( is_object($perm) && $perm->isSubClass($cc, MASK_MODERATE | MASK_ADMIN) ) ) $close_perm = false;
+  break;
+}
+
+echo nc_list_field("Type", "", $classID, 1, "", $disabled)
+?>
+<br/>
+
+<script type='text/javascript'>
+ function PreviewButtonAction () {
+   document.getElementById("DataPostingField").value = 0;
+   document.getElementById("ForumMessagePreview").value = 1;
+   document.getElementById("adminForm").submit();
+ }
+</script>
+<br/><?= NETCAT_MODERATION_INFO_REQFIELDS ?><br/><br/>
+<input type='hidden' id='ForumMessagePreview' name='ForumMessagePreview' value='0'/>
+<button onclick='PreviewButtonAction()'><?= NETCAT_MODULE_FORUM2_COMPONENT_MESSAGE_PREVIEW ?></button>
+<?= nc_submit_button(NETCAT_MODERATION_BUTTON_CHANGE) ?>
+</form>

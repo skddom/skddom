@@ -1,0 +1,97 @@
+<!-- FormPrefix --><?= $f_AdminCommon; ?>
+<div class="option-sub -position_relative">
+<div>
+    
+    <?
+    $prorab0 = $db->get_row("select * from Message294 where Message_ID=".$pro->lk->data['Prorab'], ARRAY_A);
+    // set status
+    $db->query("update Message$classID set Status=$status a.Sub_Class_ID=$cc and Project={$pro->lk->lk}");
+    $rs = $db->get_row("select DATE_FORMAT(a.Date1,'%d.%m.%Y') as Date1,DATE_FORMAT(a.Date2,'%d.%m.%Y') as Date2,
+        DATE_FORMAT(a.Date3,'%d.%m.%Y') as Date3,DATE_FORMAT(a.Date4,'%d.%m.%Y') as Date4,
+        a.Status as StatusID, b.EtapStatus_Name as Status
+        from Message$classID a
+        left join Classificator_EtapStatus b ON a.Status=b.EtapStatus_ID
+        left join Sub_Class c ON a.Sub_Class_ID=c.Sub_Class_ID
+        where a.Subdivision_ID=$sub and Project={$pro->lk->lk}
+        order by c.Priority
+        limit 1
+    ", ARRAY_A);
+
+   
+    ?>
+    <div class="robototitle"><?=$option?><?if($rs['StatusID'] < 3):?><i class="star"></i><?endif?></div>
+    <?if ($rs):
+    $f_Date1 = $rs['Date1'];
+    $f_Date2 = $rs['Date2'];
+    $f_Date3 = $rs['Date3'];
+    $f_Date4 = $rs['Date4'];    
+    $f_Status_id = $status;
+    ?>
+    <span class="title-status option-status status-<?=$status?>">Статус  <span class="EtapStatus_Name"><?=$db->get_var("select EtapStatus_Name from Classificator_EtapStatus where EtapStatus_ID=$status")?></span></span>
+<?if($f_Date1 || $f_Date3):?><p class="date-notice"><?if(!$f_Date3):?><i class="star"></i>Рекомендованная дата<?else:?>Дата<?endif?> начала выполнения данного этапа <span class="lkdate"><?=$f_Date3?$f_Date3:$f_Date1?></span></p><?endif?>
+<?if($f_Date2 || $f_Date4):?><p class="date-notice"><?if(!$f_Date4):?><i class="star"></i>Рекомендованная дата<?else:?>Дата<?endif?> окончания выполнения данного этапа <span class="lkdate"><?=$f_Date4?$f_Date4:$f_Date2?></span></p><?endif?>
+<br>
+    <p>Здесь вы можете отследить всю работу над Вашим проектом на этапе &laquo;<?=$cc_env['Subdivision_Name']?>&raquo;</p>
+    <p>Для более подробной информации по каждому разделу этапа &laquo;<?=$cc_env['Subdivision_Name']?>&raquo; 
+    перейдите на страницу раздела по ссылке в левом меню</p>
+    <?endif?>
+</div>  
+<table class="recomm">
+    <thead>
+    <tr>
+        <th width="315">Наименование подэтапа</th>
+        <th width="215">Рекомендованная дата начала и завершения работ</th>
+        <th width="230">Дата начала<br>и завершения работ</th>
+        <th>Прораб</th>
+        <th width="180">Статус</th>
+    </tr>
+    </thead>
+    <tbody><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?
+$f_RowID = $f_ObjectID;
+$prorab = $f_Prorab?$db->get_row("select * from Message294 where Message_ID=".$f_Prorab,ARRAY_A):$prorab0;
+$f_Slider = nc_load_multifield(1816, $f_ObjectID);
+$files = $f_Slider->to_array();
+$f_Date1=$f_Date2=$f_Date3=$f_Date4=false;
+if($f_Time1>0) $f_Date1 = date(DATE_FORMAT,$f_Time1); else $f_Date1 = "";
+if($f_Time2>0) $f_Date2 = date(DATE_FORMAT,$f_Time2); else $f_Date2 = "";
+if ($f_StatusID == 3  ) $f_Time3 = $f_Time1; else unset($f_Time3);
+if ($f_StatusID == 3 ) $f_Time4 = $f_Time2; else unset($f_Time4);
+if($f_Time3>0) $f_Date3 = date(DATE_FORMAT,$f_Time3); else $f_Date3 = "";
+if($f_Time4>0) $f_Date4 = date(DATE_FORMAT,$f_Time4); else $f_Date4 = "";
+/*?><div data-callback="initSliders();" data-target=".js-ajax-result" data-load1="<?=$f_Link?>" class="option-itm">
+    <div class="option-name"><?=$f_Name?></div>
+    <div class="option-img" style="background-image:url(<?=$files[0]->Preview?>);"></div>    
+    <div class="option-status status-<?=$f_StatusID?>"><?=$f_Status?></div>    
+</div>*/?>
+<tr class="<?=!is_even($f_RowNum)?"even":"odd"?>">
+    <td><a href="#" data-target=".expand<?=$f_RowID?>" class="expand js-expand"><?=$f_Name?></a>
+    <div class="mobile option-status status-<?=$f_StatusID?>"><?=$f_Status?></div>
+    </td>
+    <td><?if(!$f_Date4):?><?=$f_Date1?> - <?=$f_Date2?><?endif?></td>
+    <td><?=$f_Date3?> - <?=$f_Date4?></td><?
+    ?><td><a href="#" data-target=".expand_prorab_<?=$f_RowID?>" class="expand js-expand"><?=$prorab['Name']?></a></td><?
+    
+    ?><td class=" option-status desktop status-<?=$f_StatusID?>"><?=$f_Status?></td>    
+</tr><?
+if ($prorab) {
+?><tr class="recomm_text expand_prorab expand_prorab_<?=$f_RowID?>">
+    <td></td>
+    <td colspan="4"><div><?=$prorab['Info']?></div>
+        <a data-target=".expand_prorab_<?=$f_RowID?>" href="#" class="expand js-expand slideUp">Свернуть</a>
+    </td>
+</tr><?
+}
+if ($f_Text) {
+?><tr class="recomm_text expand<?=$f_RowID?>">
+    <td colspan="5"><div><?=$f_Text?></div>
+        <a data-target=".expand<?=$f_RowID?>" href="#" class="expand js-expand slideUp">Свернуть</a>
+    </td>
+</tr><?
+}
+?><!-- /RecordTemplate -->
+
+<!-- FormSuffix --></tbody>
+</table>
+</div><!-- /FormSuffix -->

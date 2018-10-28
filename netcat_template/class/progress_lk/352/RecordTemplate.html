@@ -1,0 +1,59 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+<?
+eval ($f_CustomSettings);
+if ($old != $f_Option) {
+    if ($old) {
+        ?></tbody></table></div><?
+    }
+    $old = $f_Option;
+    ?>
+    <div class="">
+    <h2><?=$f_Option?></h2>
+    <table class="recomm" width="100%" cellspacing=0>
+    <thead>
+    <tr>
+        <th width="300" style="width: 300px;">Наименование&nbsp;подэтапа</th>
+        <th width="220">Рекомендованная дата начала и завершения работ</th>
+        <th width="200">Дата начала и<br>завершения работ</th>
+        <th width="150">Прораб</th>
+        <th width="120">Статус</th><th></th>
+    </tr>
+    </thead>
+    <tbody><?
+    $cnt=0;
+}
+?>
+<? /*<b><?=$f_Option?></b>: <?=$f_Name?> [<a target="_blank" href="/netcat/admin/#subclass.edit(<?=$f_c1?>,<?=$f_s1?>)">продолжительность <?=$CustomSettings['Days']?>; задержка <?=$CustomSettings['Delay']?></a>]<br> */?>
+<?
+$f_RowID = $f_ObjectID;
+$prorab = $f_Prorab?$db->get_row("select * from Message294 where Message_ID=".$f_Prorab,ARRAY_A):$prorab0;
+$f_Slider = nc_load_multifield(1816, $f_ObjectID);
+$files = $f_Slider->to_array();
+$f_StatusID = $f_Status_id;
+/*if($f_Time1>0) $f_Date1 = date(DATE_FORMAT,$f_Time1); else $f_Date1 = "";
+if($f_Time2>0) $f_Date2 = date(DATE_FORMAT,$f_Time2); else $f_Date2 = "";*/
+if ($f_StatusID == 3) {
+    $f_Date3 = $f_Date1;
+    $f_Date4 = $f_Date2;
+} else {
+    $f_Date3=$f_Date4=false;
+}    
+/*if($f_Time3>0) $f_Date3 = date(DATE_FORMAT,$f_Time3); else $f_Date3 = "";
+if($f_Time4>0) $f_Date4 = date(DATE_FORMAT,$f_Time4); else $f_Date4 = "";*/
+$cnt++;
+/*$f_Date3=explode(" ", $f_Date3);
+$f_Date3=$f_Date3[0];
+$f_Date4=explode(" ", $f_Date4);
+$f_Date4=$f_Date4[0];*/
+?>
+<tr class="<?=!is_even($cnt)?"even":"odd"?>">
+    <td><div style="max-width: 300px;"><?=$f_Name?><br>
+    [<a target="_blank" href="/netcat/admin/#subclass.edit(<?=$f_c1?>,<?=$f_s1?>)">продолжительность <?=$CustomSettings['Days']?>; задержка <?=$CustomSettings['Delay']?></a>]
+    </div></td>
+    <td><?if(!$f_Date4):?><?=$f_Date1_day?>.<?=$f_Date1_month?>.<?=$f_Date1_year?>-<?=$f_Date2_day?>.<?=$f_Date2_month?>.<?=$f_Date2_year?><?endif?></td>
+    <td><?if($f_Date3 && $f_Date4):?><?=$f_Date1_day?>.<?=$f_Date1_month?>.<?=$f_Date1_year?> - <?=$f_Date2_day?>.<?=$f_Date2_month?>.<?=$f_Date2_year?><?endif?></td>
+    <td><?=$prorab['Name']?></td>
+    <td class=" option-status status-<?=$f_StatusID?>"><?=$f_Status?></td>
+    <td><?=$f_AdminButtons?></td>
+</tr>
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

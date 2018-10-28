@@ -1,0 +1,132 @@
+<?
+//echo "<pre>"; print_r($rs); echo "<pre>";
+foreach($rs as $floor=>$val){
+    $cnt++;
+    if ($floor!=$old) {
+        $old = $floor;
+        $floorCnt++;
+        $class1 = $floorCnt==1?"first_storey":"second_storey";
+        if($floorCnt>1) {
+					?></div><?       
+        } 
+        if($floorCnt==2) {
+					?><div class="storey add_second_storey">
+						<div class="big_title">2 этаж
+							<div class="btn big green_border" data-action="add_second_storey">Добавить этаж</div>
+						</div>
+					</div><?         
+        }
+					?><div class="storey <?=$class1?>">
+						<div class="big_title"><?=$floor?><?
+                        if ($floorCnt>1) {
+                            ?><div class="btn big green_border" data-action="remove_<?=$class1?>">Убрать этаж</div><?
+                        }
+                        ?></div><?
+                        foreach($hidden[$f_Floor]  as $arr) {
+                            ?><input type="hidden" value="<?=$arr[5]?>" data-check="<?=$arr[8]?0:1?>"><?
+                        }
+    }
+    $addSleeping=0;
+    foreach($val as $k=>$vs) { 
+        $v = $vs[0];
+        extract($v);
+        if ($f_Type_id<3) {
+            if ($f_Type_id==2 && !$addSleeping) {
+                        $addSleeping++;
+						?><div class="room">
+							<div class="options">
+								<div class="bedroom_options">
+									<div class="add_room_btn">Добавить спальню</div>
+								</div>
+							</div>
+						</div><?               
+            }
+						?><div class="room<?if($f_Type_id==2):?> bedroom<?endif?>" <?if($f_Type_id==2):?>data-default="1"<?endif?> data-room_preview="1" data-preview_title="<?=$f_Name?>">
+							<div class="data">
+								<div class="icon">
+									<div class="title"><?=$f_Floor?></div>
+									<div class="icon_img" style="background-image:url('<?=$f_Icon?>');"></div>
+								</div>
+								<div class="slider_wrapper">
+									<div class="big_title"><?=$f_Name?></div>
+                                    <div class="slider"></div>
+                                    <div class="numbers"><input <?if($building_area):?>data-only_building_area="1" <?endif?><?if($f_Name=="Гостиная" || strpos($f_Name,"гостин")!==false):?>data-copy_to="checkbox_common_2_0"<?endif?> type="hidden" data-check="1" /><?
+                                    $fcnt=0;
+                                    foreach ($f_Room->to_array() as $file) {
+                                        $fcnt++;
+    ?><span class="<?=$fcnt==1?"active":""?>" data-img="<?=$file->Path?>"
+										 data-value="<?=$file->Name?>" data-default="<?=$fcnt==1?1:null?>"><?=$file->Name?></span><?
+    
+}
+                                    ?></div>
+								</div>
+								<div class="info">
+									<span></span> <div>м<sup>2</sup></div></div>
+							</div><?
+                        if(count($vs)>1 ) {
+							?><div class="options">
+								<div class="title">дополнительные опции</div>
+								<div class="cols">
+									<div class="col"><?
+                                    foreach($vs as $k1=>$v) {
+                                        if ($k1==0) continue;
+                                        extract($v);
+                                        if (($k1-1)%2==0  && $k1>1) {
+									?></div>
+									<div class="col"><?
+                                        }
+										?><div class="option">
+											<input type="checkbox" <?if($building_area):?>data-only_building_area="1" <?endif?> id="checkbox_<?=$k?>_<?=$k1?>" <?if($f_Flag):?>checked="checked" <?endif?>data-default_check="<?=$f_Flag?>"
+											 value="<?=$f_Default_area?>" data-default_value="<?=$f_Default_area?>" data-check="<?=$f_No_check?0:1?>" />
+											<label class="text" for="checkbox_<?=$k?>_<?=$k1?>"><?=$f_Name?></label>
+											<label class="spinner_wrapper">
+												<input class="spinner" type="text" value="<?=$f_Default_area?>" />
+												<div class="suffiex">м<sup>2</sup></div>
+											</label>
+										</div><?                                       
+                                    }
+									?></div>
+								</div>
+								<div class="bedroom_options">
+									<div class="add_room_btn">Добавить ещё одну спальню</div>
+									<div class="btn normal white del_bedroom">Удалить спальню</div>
+								</div>
+							</div>
+						<?                                    
+                        }
+						?></div><?  
+                        
+        }
+    }
+    if ($common[$floor]) {
+						?><div class="room">
+							<div class="options">
+								<div class="title">дополнительные опции <?=$floor?>а</div>
+								<div class="cols">
+									<div class="col"><?
+                                    foreach($common[$floor] as $k=>$v) {
+                                        extract($v);
+										?><div class="option" data-k="<?=$k?>">
+											<input <?if($building_area):?>data-only_building_area="1" <?endif?> type="checkbox" id="checkbox_common_<?=$floorCnt?>_<?=$k?>"<?if($f_Flag):?> checked="checked"<?endif?> data-default_check="<?=$f_Flag?>"
+											 value="<?=$f_Default_area?>" data-default_value="<?=$f_Default_area?>" data-check="<?=$f_No_check?0:1?>" <?if($floorCnt==2 && $k==0):?>data-second_light="1"<?endif?> />
+											<label class="text" for="checkbox_common_<?=$floorCnt?>_<?=$k?>"><?=$f_Name?></label>
+											<?if($floorCnt==2 && $k==0):?><?else:?><label class="spinner_wrapper">
+												<input <?if($f_Fix_area):?> class="fixed_val" readonly<?else:?> name="" class="spinner"<?endif?> type="text" value="<?=$f_Default_area?>" />
+												<div class="suffiex">м<sup>2</sup></div>
+											</label><?endif?>
+										</div><?
+                                        if ($k==ceil(count($common[$floor])/2)-1 && $k>0) {
+									?></div>
+									<div class="col"><?
+                                        }
+                                    }
+									?></div>
+								</div>
+							</div>
+						</div><?                                   
+    }
+}
+if ($floorCnt) {
+    ?></div><?
+}
+?><style>.spinner_wrapper{height:auto!important;}</style>

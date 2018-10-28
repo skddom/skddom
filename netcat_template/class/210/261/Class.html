@@ -1,0 +1,24 @@
+<!-- FormPrefix --><?php $result .= " $f_AdminCommon
+<div class=\"clear\"></div> "; ?><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?php $result .= " ";if($f_SliderPath&&$f_MainImgPath)$f_MainImg=$f_SliderPath.$f_MainImgPath;$result.="		
+$f_AdminButtons
+<div class=\"project\" style='$f_Style'>
+			<a href=\"$fullLink\">
+<img src=\"$f_MainImg\" width=\"165\" height=\"110\" alt=\"\" />
+</a><br />
+			<a href=\"$fullLink\">$f_Name<span class=\"brn\">>></span></a><br />
+<p>площадь: <strong>$f_Square м²</strong></p>
+			<p>
+			<span class=\"green-spec\">СПЕЦПРЕДЛОЖЕНИЕ:</span><br>
+			в компл.С1: <strong>$f_Price1 р.</strong><br>	
+				
+
+					
+			
+			
+другие компл: <a title=\"Базовые и индивидуальная комплектации проекта СКД-$f_house_id\" class=\"link-calc\" href=\"/price/calc/?house=$f_house_id\">калькулятор</a>		
+			
+		</p></div> "; ?><!-- /RecordTemplate -->
+
+<!-- FormSuffix --><?php $result .= " <div class=\"clear\"></div> "; ?><!-- /FormSuffix -->

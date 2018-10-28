@@ -1,0 +1,54 @@
+<!-- FormPrefix -->$f_AdminCommon
+        <div class=\"slider slider_projects\">
+          <ul id=\"slider\">
+<!-- /FormPrefix -->
+
+<!-- RecordTemplate -->";if($f_SliderPath&&$f_MainImgPath)$f_MainImg=$f_SliderPath.$f_MainImgPath;
+if (is_array($br->projects[$f_RowID])) extract($br->projects[$f_RowID]);
+$result.="$f_AdminButtons
+
+            <li><a href='$fullLink'><img src=\"$f_SliderPath$f_MainImgPath\" alt=\"$f_Name\" title=\"$f_Name\" /></a><span class=\"icon\"></span>
+              <div class=\"rhino-caption\">
+                <div class=\"name corbel\"><a href=\"$fullLink\">$f_Name</a></div>
+                <div class=\"price\"> <a href=\"/price/calc/?house=$f_house_id\" class=\"calc newcalc\">Другие<br>комплектации</a>
+                  <p> <span><a href=\"$fullLink\">Цена в базовой комплектации</a>: </span> <a href=\"$fullLink\" class=\"cos\">$f_Price1 р.</a></p>
+                  <p> <span><a href=\"$fullLink\">Прощадь дома - </a>:</span> <a href=\"$fullLink\" class=\"cos\">$f_Square кв.м.</a></p>
+                </div>
+               <!--  <a href=\"$fullLink\" class=\"special\">Спецпредложение</a> </div> -->
+            </li>
+<!-- /RecordTemplate -->
+
+<!-- FormSuffix -->          </ul>
+        </div><!-- /FormSuffix -->
+
+<!-- RecordTemplateFull --><!-- /RecordTemplateFull -->
+
+<!-- Settings -->$ignore_sub=$ignore_cc=true;
+$query_where = "a.Slider=1 and LENGTH(a.MainImgPath)>0";
+$br = CBranding::get_object();
+$br->getProjects();
+$br->ExModifyQueryWhere($query_where, $cc_env, $inside_admin, $admin_mode);<!-- /Settings -->
+
+<!-- AddTemplate --><!-- /AddTemplate -->
+
+<!-- AddCond --><!-- /AddCond -->
+
+<!-- AddActionTemplate --><!-- /AddActionTemplate -->
+
+<!-- EditTemplate --><!-- /EditTemplate -->
+
+<!-- EditCond --><!-- /EditCond -->
+
+<!-- EditActionTemplate --><!-- /EditActionTemplate -->
+
+<!-- CheckActionTemplate --><!-- /CheckActionTemplate -->
+
+<!-- DeleteTemplate --><!-- /DeleteTemplate -->
+
+<!-- DeleteCond --><!-- /DeleteCond -->
+
+<!-- DeleteActionTemplate --><!-- /DeleteActionTemplate -->
+
+<!-- FullSearchTemplate --><!-- /FullSearchTemplate -->
+
+<!-- SearchTemplate --><!-- /SearchTemplate -->

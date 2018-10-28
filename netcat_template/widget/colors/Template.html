@@ -1,0 +1,49 @@
+<?
+
+$dir = $_SERVER['DOCUMENT_ROOT'].$f_Folder;
+if (is_dir($dir)) {
+    if ($dh = opendir($dir)) {
+        while (($file = readdir($dh)) !== false) {
+            if ($file!="." && $file!=".." && is_dir($dir.$file)) $dirs[] = $f_Folder . $file . "/";
+        }
+    }
+}
+
+if (!$dirs) $dirs = array($f_Folder);
+
+foreach($dirs as $dir) {
+
+$dir1 = $_SERVER['DOCUMENT_ROOT'].$dir; //$f_Folder;
+$rs=array();
+if (is_dir($dir1)) {
+    if ($dh = opendir($dir1)) {
+        while (($file = readdir($dh)) !== false) {
+           // echo $dir.$file."<br>";
+            if (!is_file($dir1 ."/". $file)) continue;
+            $tmp = explode("-", $file);
+            if ($file[0]==".") continue;
+            if (strpos($file,".txt")!==false) $rs[$tmp[0]]["Name"] = file_get_contents($dir1.$file);
+            else $rs[$tmp[0]]["Image"] = $dir.$file;
+        }
+        closedir($dh);
+    }
+    ksort($rs);reset($rs);
+    //print_r($rs);
+}
+?><div class="csc-default colorswrap"><?
+    if (file_exists($dir1.".name.php")) {
+    ?><h3><?include ($dir1.".name.php")?></h3><?
+    }
+    foreach($rs as $v) {
+				?><div class="hoverbox-rahmen">
+					<div>
+						<div class="outerbox">
+							<img class="innerPic" src="<?=$v['Image']?>" alt="">
+							<span class="hoverbox-text"><?=$v['Name']?></span>
+						</div>
+					</div>
+				</div> <?   
+    }
+?></div><br><?
+}
+?>

@@ -1,0 +1,31 @@
+<?php
+if (isset($_POST['project'])) {
+    $_SESSION['project'] = intval($_POST['project']);
+}
+$project = $_SESSION['project'];
+
+if ($project>0) {
+    $ignore_parent = true;
+    $query_where = "a.Project=$project";
+}
+if ($_POST['fill']) {
+    $rs = $db->get_results("select * from Message$classID where Sub_Class_ID=$cc and Parent_Message_ID=0",ARRAY_A);
+    foreach ($rs as $v) {
+        $v['Parent_Message_ID'] = $v['Message_ID'];
+        unset($v['Message_ID']);
+        unset($v['Image']);
+        unset($v['Created']);
+        unset($v['LastUpdated']);
+        $v['LastUser_ID'] = $AUTH_USER_ID;
+        $v['Project'] = $project;
+        foreach ($v as $key=>$val) $v[$key] = $db->escape($val);
+        $sql = "INSERT INTO Message$classID(`".join("`, `",array_keys($v))."`) VALUES('".join("', '",$v)."')";
+        $db->query($sql);
+    }
+}
+
+
+$lk = new CPersonal($project);
+$pro = new CProgress($lk, 340);
+
+?>

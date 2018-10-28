@@ -1,0 +1,13 @@
+<?="<script>
+\$(function(){
+    \$(\".js-code\").submit(        function(){
+            \$this=\$(this);
+            \$.post(\$this.attr(\"action\")+\"?ajax=1\", \$this.serialize(),function(data){
+                \$(\"#result\").html(data);
+            })
+            return false;
+        });
+
+
+});
+</script>";?>

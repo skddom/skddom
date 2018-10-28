@@ -1,0 +1,15 @@
+<?= $f_AdminCommon; ?><div class="text">
+<?
+
+$rs = $db->get_results("select Name, Message_ID from Message295 where Checked=1", ARRAY_A);
+?>
+<form action="" method="post" id="pro">
+    <select name="project" onchange="document.getElementById('pro').submit()">
+        <option value="0">Справочник</option>
+        <?foreach($rs as $v) {
+            ?><option <?if($v['Message_ID'] == $project):?>selected <?endif?>value="<?=$v['Message_ID']?>"><?=$v['Name']?></option><?
+        }?>
+    </select>
+    <button>Перейти</button>
+    <?if($project):?><input type="submit" name="fill" value="Заполнить" /><?endif?>
+</form>

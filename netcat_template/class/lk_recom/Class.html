@@ -1,0 +1,58 @@
+<!-- FormPrefix --><?= $f_AdminCommon; ?><div class="text tpl-<?=$classID?>">
+<?
+
+$rs = $db->get_results("select Name, Message_ID from Message295 where Checked=1", ARRAY_A);
+?>
+<?if($inside_admin || $admin_mode):?>
+<form action="" method="post" id="pro">
+    <select name="project" onchange="document.getElementById('pro').submit()">
+        <option value="0">Справочник</option>
+        <?foreach($rs as $v) {
+            ?><option <?if($v['Message_ID'] == $project):?>selected <?endif?>value="<?=$v['Message_ID']?>"><?=$v['Name']?></option><?
+        }?>
+    </select>
+    <button>Перейти</button>
+    <?if($project):?><input type="submit" name="fill" value="Заполнить" /><?endif?>
+</form>
+<?else:?>
+    <div class="robototitle"><?=$cc_env['Sub_Class_Name']?></div>
+    <?=str_replace("#TITLE#", $lk->data['Title1'], $cc_settings['Text'])?>
+<?endif?>
+<table class="recomm" data-url="<?=$subLink?>">
+    <thead>
+    <tr>
+        <th>Наименование рекомендации</th>
+        <th>Дата выполнения</th>
+        <th>Периодичность выполнения</th>
+        <th>&nbsp;</th>
+    </tr>
+    </thead>
+    <tbody><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><tr data-id="<?=$f_RowID?>" class="<?=!is_even($f_RowNum)?"even":"odd"?>">
+    <td><?= $f_AdminButtons; ?><a <?if($f_Done):?>style="text-decoration: line-through"<?endif?> href="#" data-target=".expand<?=$f_RowID?>" class="expand js-expand"><?=$f_Name?></a><?if($f_Done):?> выполнено<?endif?>
+    <?if(!$admin_mode && !$demo):?><div style="padding-top:10px;"><a data-skip onclick="if(!confirm('Пропустить событие?')) return false;" style="border-bottom:1px dashed;" href="#">пропустить</a></div><?endif?>
+    </td>
+    <td><?if($f_Date1 && $f_Date1!="00.00.0000"):?><?=$f_Date1?><?elseif($f_Date):?><?=$f_Date0?><?endif?></td>
+    <td><?=$f_PeriodText?></td>
+    <td><button data-show="#parent_popup_form_detail_phone" data-href=".js-callback-wrap" class="btn hvr-bounce-to-top mgt-button mgt-style-bordered mgt-size-normal mgt-display-inline mgt-text-size-normal mgt-button-icon-position-left mgt-text-transform-uppercase js-openPopup" href="/kabinet/rekomendatsii/order.html?f_ToPerson=4&f_Text=<?=urlencode($f_Name)?>">заказать</button>
+   <?if(!$admin_mode && !$demo):?> <br><div style="padding-top:10px;"><a data-done onclick="if(!confirm('Пометить событие выполненным?')) return false;" style="border-bottom:1px dashed;" href="#">отметить выполненным</a></div><?endif?>
+        
+    </td>    
+</tr><?
+if ($f_Text) {
+?><tr data-id="<?=$f_RowID?>" class="recomm_text expand<?=$f_RowID?>">
+    <td colspan="4"><div><?=$f_Text?></div>
+        <a data-target=".expand<?=$f_RowID?>" href="#" class="expand js-expand slideUp">Свернуть</a>
+        
+    </td>
+</tr><?}?><!-- /RecordTemplate -->
+
+<!-- FormSuffix --></tbody>
+</table>
+<?if(!$totRows):?>
+<p>На текущий момент у нас нет для Вас индивидуальных рекомендаций. Следите за обновлениями или согласитесь на отправку появившихся рекомендаций на электронную почту.</p>
+<?endif?>
+<br>
+<form action="<?=$subLink?>" method="post"><input class="js-notify" type="checkbox" value="1" name="notify"<?if($lk->data['Send']):?> checked<?endif?> id="iwantto"><label for="iwantto">Хочу получать на электронную почту уведомления о новых
+рекомендациях для моего проекта</label></form><!-- /FormSuffix -->

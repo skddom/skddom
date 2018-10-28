@@ -1,0 +1,9 @@
+<?php
+$widget_mode = isset($widget_mode) ? $widget_mode : 0;
+if ($widget_mode) {
+    $sql = "SELECT COUNT(*) FROM `Message{$classID}` WHERE `Sub_Class_ID` = {$cc} AND `ShowOnHome` = 1";
+    $widget_count = $db->get_var($sql);
+} else {
+    $widget_count = 0;
+}
+?>

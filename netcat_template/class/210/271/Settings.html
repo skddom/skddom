@@ -1,0 +1,7 @@
+<?php $ignore_sub=$ignore_cc=$ignore_catalogue=true;
+if ($sub==258) $cc_settings['Source']=$sub;
+$query_where = "a.Slider=1 and LENGTH(a.MainImgPath)>0";
+if ($cc_settings['Source']) $query_where = "a.Sub_Class_ID>0 and a.Subdivision_ID=".$cc_settings['Source']." and LENGTH(a.MainImgPath)>0";
+$br = CBranding::get_object();
+$br->getProjects();
+$br->ExModifyQueryWhere($query_where, $cc_env, $inside_admin, $admin_mode); ?>

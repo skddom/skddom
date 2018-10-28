@@ -1,0 +1,59 @@
+<? echo "".( $nc_core->get_settings('deny_reg', 'auth') ? NETCAT_MODULE_AUTH_SELFREG_DISABLED : "
+".( $warnText ? "<div class='warnText'>$warnText</div>" : NULL )."
+<form name='adminForm' id='adminForm' enctype='multipart/form-data' method='post' action='".$nc_core->SUB_FOLDER."/netcat/add.php' class='form'>
+<div id='nc_moderate_form'>
+  <div class='nc_clear'></div>
+  <input name='admin_mode' type='hidden' value='$admin_mode' />
+  <input name='catalogue' type='hidden' value='$catalogue' />
+  <input name='cc' type='hidden' value='$cc' />
+  <input name='sub' type='hidden' value='$sub' />
+  <input name='posting' type='hidden' value='1' />
+  <input name='curPos' type='hidden' value='$curPos' />
+  <div class='nc_clear'></div>
+</div>
+<div class='block'>
+	<label>Имя (*)</label><br />
+	<input type='text' name='f_Login' value='".$f_Login."' />
+	<span id='nc_auth_wait' class='nc_auth_login_check'>". NETCAT_MODULE_AUTH_LOGIN_WAIT ."</span>
+	<span id='nc_auth_login_ok' class='nc_auth_login_check'>". NETCAT_MODULE_AUTH_LOGIN_FREE ."</span>
+	<span id='nc_auth_login_fail' class='nc_auth_login_check'>". NETCAT_MODULE_AUTH_LOGIN_BUSY ."</span>
+	<span id='nc_auth_login_incorrect' class='nc_auth_login_check'>". NETCAT_MODULE_AUTH_LOGIN_INCORRECT ."</span>
+</div>
+<div class='block'>
+	<label>Аватар</label><br />
+	<input type='file' name='f_ForumAvatar' value='".$f_ForumAvatar."' />
+</div>
+<div class='block'>
+	<label>Email (*)</label><br />
+	<input type='text' name='f_Email' value='".$f_Email."' />
+</div>
+<div class='block'>
+	<label>Пароль (*)</label><br />
+	<input id='Password1' name='Password1' type='password' value='' />
+	<span id='nc_auth_pass1_security'>Надёжность: </span>
+	<span id='nc_auth_pass1_s1' class='nc_auth_pass1_check'>Низкая</span>
+	<span id='nc_auth_pass1_s2' class='nc_auth_pass1_check'>Средняя</span>
+	<span id='nc_auth_pass1_s3' class='nc_auth_pass1_check'>Высокая</span>
+	<span id='nc_auth_pass1_s4' class='nc_auth_pass1_check'>Очень высокая</span>
+	<span id='nc_auth_pass1_empty'>Пароль не может быть пустым</span>
+	<span id='nc_auth_pass_min'>Пароль слишком короткий</span>
+</div>
+<div class='block'>
+	<label>Введите пароль ещё раз (*)</label><br />
+	<input id='Password2' name='Password2' type='password' value='' />
+	<span id='nc_auth_pass2_ok' class='nc_auth_pass2_check'>Пароли совпадают</span>
+	<span id='nc_auth_pass2_fail' class='nc_auth_pass2_check'>Пароли не совпадают</span>
+</div>
+
+".(!$AUTH_USER_ID && $current_cc['UseCaptcha'] && $MODULE_VARS['captcha'] ? nc_captcha_formfield()."<br/><br/>".NETCAT_MODERATION_CAPTCHA." (*):<br/><input type='text' name='nc_captcha_code' size='10'><br/><br/>" : "")."
+".( $nc_core->get_settings('agreed', 'auth') ? "<input type='checkbox' name='nc_agreed' id='nc_agreed' value='1' /><label for='nc_agreed'>".str_replace('%USER_AGR', $nc_core->SUB_FOLDER."/lk/registration/agreed/", NETCAT_MODULE_AUTH_USER_AGREEMENT)."</label><br/><br/>" : "")."
+<input type='submit' value='".NETCAT_MODULE_AUTH_REGISTER."' />
+<script type='text/javascript'>
+   var nc_auth_obj = new nc_auth(".json_encode(array('check_login'=>$nc_core->get_settings('check_login', 'auth'),
+                                                     'pass_min' => intval($nc_core->get_settings('pass_min', 'auth')),
+                                                     'check_pass'=>$nc_core->get_settings('check_pass', 'auth'),
+                                                     'check_pass2'=>$nc_core->get_settings('check_pass2', 'auth'))).");
+</script>
+" )."
+</form>";
+?>

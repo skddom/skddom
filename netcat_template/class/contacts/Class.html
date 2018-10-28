@@ -1,0 +1,252 @@
+<!-- FormPrefix --><?= $f_AdminCommon; ?><div class="vc_row wpb_row vc_row-fluid">
+	<div class="wpb_column vc_column_container vc_col-sm-12">
+		<div class="vc_column-inner ">
+			<div class="wpb_wrapper">
+				<div class="vc_tta-container" data-vc-action="collapse">
+					<div class="vc_general seo_tta vc_tta vc_tta-tabs vc_tta-color-black vc_tta-style-classic vc_tta-shape-square vc_tta-o-shape-group vc_tta-o-no-fill vc_tta-tabs-position-top vc_tta-controls-align-left">
+						<div class="vc_tta-tabs-container">
+							<ul class="vc_tta-tabs-list"><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?echo  $f_AdminButtons;
+$tabs[$f_RowID] = array("f_Name"=>$f_Name,"f_Address"=>$f_Address,"f_Contacts"=>$f_Contacts,"f_Map"=>$f_Map,"f_Time"=>$f_Time,
+"f_Address2"=>$f_Address2,"f_Contacts2"=>$f_Contacts2,"f_Map2"=>$f_Map2,"f_Time2"=>$f_Time2,"f_Time0"=>$f_Time0,
+"f_Projects"=>$f_Projects,
+"f_PersonEmail"=>$f_PersonEmail,"f_PersonImage"=>$f_PersonImage_preview_url,"f_PersonJob"=>$f_PersonJob,"f_PersonName"=>$f_PersonName,"f_PersonTel"=>$f_PersonTel);
+?><li class="vc_tta-tab<?if($f_RowID==1) echo " vc_active";?>" data-vc-tab><a href="#cont-<?=$f_RowID?>" data-vc-tabs data-vc-container=".vc_tta"><span class="vc_tta-title-text"><?=$f_Name?></span></a></li><!-- /RecordTemplate -->
+
+<!-- FormSuffix -->							</ul>
+						</div>
+						<div class="vc_tta-panels-container">
+							<div class="vc_tta-panels"><?
+                            $cnt=0;
+                            foreach ($tabs as $k=>$v) {
+                                $cnt++;
+                                extract($v);
+								?><div class="vc_tta-panel<?if($f_Projects == 'Москва'):?> vc_active<?endif?>" id="cont-<?=$k?>" data-vc-content=".vc_tta-panel-body"><?
+									?><div class="vc_tta-panel-heading">
+										<h4 class="vc_tta-panel-title"><a href="#cont-<?=$k?>" data-vc-accordion data-vc-container=".vc_tta-container"><span class="vc_tta-title-text"><?=$f_Name?></span></a></h4>
+									</div><?
+                                    ?><div class="vc_tta-panel-body">
+										<div class="vc_row wpb_row vc_inner vc_row-fluid vc_custom_1464164432268 vc_row-has-fill">
+
+											<div class="wpb_column vc_column_container vc_col-sm-4">
+												<div class="vc_column-inner ">
+													<div class="wpb_wrapper">
+														<div class="mgt-header-block clearfix text-left text-white wpb_content_element  mgt-header-block-style-1 mgt-header-texttransform-none  vc_custom_1464163924767">
+															<h3 class="mgt-header-block-title">Контакты</h3>
+														</div>
+														<div class="mgt-icon-box wpb_content_element wpb_animate_when_almost_visible wpb_left-to-right mgt-icon-box-right mgt-icon-fa text-white ">
+															<div class="mgt-icon-box-icon hvr-icon-push">
+																<div class="mgt-font-icon"><i class="fa fa-phone"></i></div>
+															</div>
+															<div class="mgt-icon-box-content">
+																<?=$f_Contacts?>
+															</div>
+															<div class="clearfix"></div>
+														</div>
+
+
+													</div>
+												</div>
+											</div>
+											<div class="wpb_column vc_column_container vc_col-sm-4">
+												<div class="vc_column-inner ">
+													<div class="wpb_wrapper">
+														<div class="mgt-header-block clearfix text-left text-white wpb_animate_when_almost_visible wpb_left-to-right wpb_content_element  mgt-header-block-style-1 mgt-header-texttransform-none  vc_custom_1464164091335">
+															<h3 class="mgt-header-block-title">Время работы</h3>
+														</div>
+														<div class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_left-to-right">
+															<div class="wpb_wrapper">
+																<?=$f_Time0?>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="wpb_column vc_column_container vc_col-sm-4">
+                                                <div class="vc_column-inner ">
+                                                    <div class="wpb_wrapper"></div>
+                                                </div>
+                                            </div>
+                                        <div class="clear clearfix"></div>
+
+											<div class="wpb_column vc_column_container vc_col-sm-4">
+												<div class="vc_column-inner ">
+													<div class="wpb_wrapper">
+
+														<div style="margin-top:0;" class="mgt-icon-box wpb_content_element wpb_animate_when_almost_visible wpb_left-to-right mgt-icon-box-right mgt-icon-fa text-white ">
+															<div class="mgt-icon-box-icon hvr-icon-push">
+																<div class="mgt-font-icon"><i class="fa fa-map"></i></div>
+															</div>
+															<div class="mgt-icon-box-content">
+																<?=$f_Address?>
+															</div>
+															<div class="clearfix"></div>
+														</div>
+
+													</div>
+												</div>
+											</div>
+											<div class="wpb_column vc_column_container vc_col-sm-4">
+												<div class="vc_column-inner ">
+													<div class="wpb_wrapper">
+														<div class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_left-to-right">
+															<div class="wpb_wrapper">
+																<?=$f_Time?>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="wpb_column vc_column_container vc_col-sm-4">
+												<div class="vc_column-inner ">
+													<div class="wpb_wrapper">
+														<div class="wpb_gmaps_widget wpb_content_element">
+															<div class="wpb_wrapper">
+																<div class="wpb_map_wraper">
+																	<?=$f_Map?>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+                                            <div class="clear clearfix"></div><?
+if($f_Address2) {
+											?><div class="wpb_column vc_column_container vc_col-sm-4">
+												<div class="vc_column-inner ">
+													<div class="wpb_wrapper">
+
+														<div style="margin-top:0;" class="mgt-icon-box wpb_content_element wpb_animate_when_almost_visible wpb_left-to-right mgt-icon-box-right mgt-icon-fa text-white ">
+															<div class="mgt-icon-box-icon hvr-icon-push">
+																<div class="mgt-font-icon"><i class="fa fa-map"></i></div>
+															</div>
+															<div class="mgt-icon-box-content">
+																<?=$f_Address2?>
+															</div>
+															<div class="clearfix"></div>
+														</div>
+
+													</div>
+												</div>
+											</div>
+											<div class="wpb_column vc_column_container vc_col-sm-4">
+												<div class="vc_column-inner ">
+													<div class="wpb_wrapper">
+														<div class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_left-to-right">
+															<div class="wpb_wrapper">
+																<?=$f_Time2?>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="wpb_column vc_column_container vc_col-sm-4">
+												<div class="vc_column-inner ">
+													<div class="wpb_wrapper">
+														<div class="wpb_gmaps_widget wpb_content_element">
+															<div class="wpb_wrapper">
+																<div class="wpb_map_wraper">
+																	<?=$f_Map2?>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+                                            <div class="clear clearfix"></div><?
+}
+										?></div>
+										<div class="vc_row wpb_row vc_inner vc_row-fluid">
+											<div class="wpb_column vc_column_container vc_col-sm-4">
+												<div class="vc_column-inner ">
+													<div class="wpb_wrapper">
+														<div class="mgt-header-block clearfix text-left text-black wpb_content_element  mgt-header-block-style-1 mgt-header-texttransform-subheader  vc_custom_1464103235021">
+
+															<p class="mgt-header-block-subtitle mgt-header-block-subtitle_hh">напишите нам</p>
+															<div class="mgt-header-line"></div>
+														</div>
+														<div class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_left-to-right">
+															<div class="wpb_wrapper">
+																<p>Для получения консультации заполните эту форму:</p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="wpb_column vc_column_container vc_col-sm-4">
+												<div class="vc_column-inner ">
+													<div class="wpb_wrapper">
+														<div role="form" class="" id="feedback-<?=$id?>" lang="ru-RU" dir="ltr">
+															<div class="screen-reader-response"></div><a id="#toform" style="position:relative;top:-130px;"></a>
+															<form onsubmit="yaCounter4312879.reachGoal('otpravit');" data-action="/netcat/add.php" method="post" class="">
+																<div style="display: none;">
+																	<input type="hidden" name="catalogue" value="<?=$catalogue?>" />
+																	<input type="hidden" name="sub" value="475" />
+																	<input type="hidden" name="cc" value="602" />
+																	<input type="hidden" name="city1" value="<?=$k?>" />
+																	<input type="hidden" name="isNaked" value="0" />
+
+                                                                    <input type="hidden" name="posting" value="1" />
+																</div><div class="result"></div><div class="error"></div>
+																<p>Ваше Имя (обязательно)<br />
+																	<span class="wpcf7-form-control-wrap your-name"><input required type="text" name="f_Name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" /></span>
+																</p>
+																<p>Ваш Email (обязательно)<br />
+																	<span class="wpcf7-form-control-wrap your-email"><input required type="email" name="f_Email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" /></span>
+																</p>
+																<p>Тема<br />
+																	<span class="wpcf7-form-control-wrap your-subject"><input type="text" name="f_Subject" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false" /></span>
+																</p>
+																<p>Сообщение<br />
+																	<span class="wpcf7-form-control-wrap your-message"><textarea required name="f_Text" cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea" aria-invalid="false"></textarea></span>
+																</p>
+																<p style='font-size: 14px;'>Нажимая на кнопку "Отправить", Вы соглашаетесь с <a href="/policy-personal-data/">правилами обработки персональных данных.</a></p>
+																<p><input type="submit" value="Отправить" class="wpcf7-form-control wpcf7-submit" /></p>
+																<div class="wpcf7-response-output wpcf7-display-none"></div>
+															</form>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="wpb_column vc_column_container vc_col-sm-4">
+												<div class="vc_column-inner ">
+													<div class="wpb_wrapper">
+														<div class="mgt-header-block clearfix text-left text-black wpb_animate_when_almost_visible wpb_left-to-right wpb_content_element  mgt-header-block-style-1 mgt-header-texttransform-subheader  vc_custom_1464167635013">
+
+															<p class="mgt-header-block-subtitle">также по любым вопросам вы можете связаться со мной</p>
+															<div class="mgt-header-line"></div>
+														</div>
+														<div class="wpb_single_image wpb_content_element vc_align_left  wpb_animate_when_almost_visible wpb_left-to-right">
+															<figure class="wpb_wrapper vc_figure">
+																<div class="vc_single_image-wrapper   vc_box_border_grey"><img class="vc_single_image-img " src="<?=$f_PersonImage?>" width="120" height="100" alt="<?=$f_PersonName?>" title="<?=$f_PersonName?>" /></div>
+															</figure>
+														</div>
+														<div class="mgt-header-block clearfix text-left text-black wpb_animate_when_almost_visible wpb_left-to-right wpb_content_element  mgt-header-block-style-1 mgt-header-texttransform-subheader  vc_custom_1464167645725">
+															<h4 class="mgt-header-block-title"><?=$f_PersonName?></h4>
+															<p class="mgt-header-block-subtitle"><?=$f_PersonJob?></p>
+														</div>
+														<div class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_left-to-right vc_custom_1464167650373">
+															<div class="wpb_wrapper">
+																<p>
+																	<a href="mailto:<?=$f_PersonEmail?>"><?=$f_PersonEmail?></a>
+																</p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div><?
+
+                                ?></div><?
+                            }
+                            ?></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /FormSuffix -->

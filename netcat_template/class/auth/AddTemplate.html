@@ -1,0 +1,71 @@
+<?if($AUTH_USER_ID):?>
+
+<?else:
+if ($demo) {
+    // получаем объект nc_core
+    $nc_core = nc_Core::get_object();
+    // авторизовать пользователя
+    $nc_core->user->authorize_by_id( 28 );
+    ob_clean();
+    header("Location: ./");
+    die();
+} elseif ($template==101) {
+    ?></article></div></div></div><style>
+    #classical, #classical td,#classical tr {padding:0;border:0;background:none;}
+    </style><?
+}
+?>
+<div id="auth" class="mgt-promo-block parallax white-text text-size-large darken mgt-promo-block-82145598531 wpb_content_element" data-style="background-image: url(http://wp.magnium-themes.com/thebuilt/thebuilt-1/wp-content/uploads/2016/04/15579349-engineer-builder-at-construction-site-m.jpg);background-repeat: no-repeat;width: 100%; height: 450px;" style="background-image: url(&quot;http://wp.magnium-themes.com/thebuilt/thebuilt-1/wp-content/uploads/2016/04/15579349-engineer-builder-at-construction-site-m.jpg&quot;); background-repeat: no-repeat; width: 100%; height: 450px; background-position: 50% 55px;">
+    <div class="mgt-promo-block-content">
+        <div class="mgt-promo-block-content-inside">
+            <div class="container">
+               <div class="vc_row wpb_row vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner "><div class="wpb_wrapper"><div class="mgt-header-block clearfix text-left text-black wpb_content_element  mgt-header-block-style-1 mgt-header-texttransform-header "><h2 class="mgt-header-block-title">Авторизация </h2><div class="mgt-header-line"></div></div></div></div></div></div>
+            
+<form style="margin: 40px 0" action="" method="post" name="AUTH_FORM" id="AUTH_FORM">
+    <input type="hidden" name="AuthPhase" value="1">
+
+<?if($_REQUEST['AuthPhase'] == 1 && !$AUTH_USER_ID):?>
+<p align="center" style="color: red;">Неправильный логин или пароль</p>
+<?endif?>
+    <table border="0" cellpadding="4" cellspacing="0" id="classical" style="margin: 0px auto;">
+        <tbody><tr>
+            <td></td>
+            <td class="nc-text-red"></td>
+        </tr>
+        <tr>
+            <td><label>Логин</label></td>
+            <td><input type="text" name="AUTH_USER" size="32" id="AUTH_USER" class="nc--blocked" maxlength="255"></td>
+        </tr>
+        <tr>
+            <td><label>Пароль</label></td>
+            <td><input type="password" name="AUTH_PW" size="32" class="nc--blocked" maxlength="255"></td>
+        </tr>
+
+                   
+                 <tr class="btns">
+                        <td><br>
+                            <button type="submit" class="nc-btn btn nc--blue">Войти</button>
+                            <span id="menu"></span>
+                </td>
+                <td>
+                <div class="a-forget"><i></i><span>Забыли пароль?</span></div>
+                <div class="a-remember"><input type="checkbox" name="loginsave" id="loginsave"> <label for="loginsave">Запомнить логин и пароль</label></div></td>
+            </tr>
+        </tbody></table>
+<p align="center"><a class="btn hvr-default mgt-button mgt-style-bordered mgt-size-normal mgt-align-left mgt-display-inline mgt-text-size-normal mgt-button-icon-position-left mgt-text-transform-none " href="?demo=yes">Демо-вход</a></p>
+        <!-- форма авторизация по токену -->
+                    </form>
+            </div>                
+        </div>
+    </div>
+</div><?
+if ($template==101) {
+    ?><div class="page-container container">
+    <div class="row">
+      			<div class="col-md-12 entry-content">
+      
+      <article><?
+      echo s_list_class($sub,557,"");
+}
+                    
+                    ?><?endif?>

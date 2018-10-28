@@ -1,0 +1,11 @@
+<?php
+if (!$admin_mode) {
+    $lk = new CPersonal();
+    $pro = new CProgress($lk, 340);
+    $ignore_parent = true;
+    $query_where = "a.Project=$lk->lk and a.Phase IN(".join(",", $pro->completed).")";
+} else {
+    $project = $_SESSION['project'];
+}
+
+?>

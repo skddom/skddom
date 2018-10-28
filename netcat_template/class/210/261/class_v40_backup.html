@@ -1,0 +1,487 @@
+<!-- FormPrefix -->$f_AdminCommon
+<div class=\"clear\"></div><!-- /FormPrefix -->
+
+<!-- RecordTemplate -->";if($f_SliderPath&&$f_MainImgPath)$f_MainImg=$f_SliderPath.$f_MainImgPath;$result.="		
+$f_AdminButtons
+<div class=\"project\" style='$f_Style'>
+			<a href=\"$fullLink\">
+<img src=\"$f_MainImg\" width=\"165\" height=\"110\" alt=\"\" />
+</a><br />
+			<a href=\"$fullLink\">$f_Name<span class=\"brn\">>></span></a><br />
+<p>площадь: <strong>$f_Square м²</strong></p>
+			<p>
+			<span class=\"green-spec\">СПЕЦПРЕДЛОЖЕНИЕ:</span><br>
+			в компл.С1: <strong>$f_Price1 р.</strong><br>	
+				
+
+					
+			
+			
+другие компл: <a title=\"Базовые и индивидуальная комплектации проекта СКД-$f_house_id\" class=\"link-calc\" href=\"/price/calc/?house=$f_house_id\">калькулятор</a>		
+			
+		</p></div><!-- /RecordTemplate -->
+
+<!-- FormSuffix --><div class=\"clear\"></div><!-- /FormSuffix -->
+
+<!-- RecordTemplateFull -->      <div class=\"good-card\">
+
+          ".s_browse_path_range(0,$sub_level_count-1,$path)."
+		  
+          <h1>$f_Name</h1>
+		  <div class=\"nobg\">
+";
+if ($print=="Y") {
+echo "<img src=\"$f_SliderPath$f_MainImgPath\" alt=\"\" />
+		              
+		        
+		                <div class=\"price\"> <p> <span>Цена ".opt($f_Price1,"в комплектации С1").": </span> ".($f_Price1?$f_Price1:$f_Price)." р.</p>
+		                  <p> <span>Площадь:</span> $f_Square кв.м.</p>
+		                </div>
+		             
+		            ";
+} else {
+echo "
+<div class=\"slider fullslider\">
+          <ul id=\"slider\">
+";
+if ($handle = opendir($_SERVER['DOCUMENT_ROOT'].$f_SliderPath)) {
+	while (false !== ($f = readdir($handle))) { 
+		if (is_file($_SERVER['DOCUMENT_ROOT'].$f_SliderPath.$f)) {
+			$f = $f_SliderPath.$f;
+			echo "			<li><img src=\"$f\" alt=\"\" />
+		              <div class=\"rhino-caption\">
+		        
+		                <div class=\"price\"> <a href=\"/price/calc/?house=$f_house_id\" class=\"calc\"><span>Другие комплектации - калькулятор</span></a>
+		                  <p> <span>Цена ".opt($f_Price1,"в комплектации <a href=\"/price/calc/?house=$f_house_id\" title=\"Тултип\">С1</a>").": </span> <a href=\"/price/calc/?house=$f_house_id\" class=\"price_a\">".($f_Price1?$f_Price1:$f_Price)."</a> р.</p>
+		                  <p> <span><span title=\"Строительная площадь по осям стен, включая террасы.\">Площадь</span>:</span> $f_Square кв.м.</p>
+		                </div>
+		                ".opt($f_Price1,"<a  class=\"special\">Спецпредложение</a>")." </div>
+		            </li>";		
+		}	
+	}
+} else {
+	$flds=array("MainImg","Dom1","Dom2","Dom3");
+	foreach ($flds as $f) {
+		$f = "f_$f";
+		$f = $$f;
+		if ($f) echo "			<li><img src=\"$f\" alt=\"\" />
+	              <div class=\"rhino-caption\">
+	        
+	                <div class=\"price\"> <a href=\"/price/calc/?house=$f_house_id\" class=\"calc\"><span>Другие комплектации</span></a>
+	                  <p> <span>Цена ".opt($f_Price1,"в комплектации <a href=\"#\" title=\"Тултип\">С1</a>").": </span> ".($f_Price1?$f_Price1:$f_Price)." р.</p>
+	                  <p> <span><a href=\"#\" title=\"Строительная площадь по осям стен, включая террасы.\">Прощадь</a>:</span> $f_Square кв.м.</p>
+	                </div>
+	                ".opt($f_Price1,"<a href=\"#\" class=\"special\">Спецпредложение</a>")." </div>
+	            </li>";
+	}
+}
+echo"
+          </ul>
+        </div>
+<div class=\"share\">
+<div class=\"soc-like\">
+".$cc_settings['share']."
+</div>";
+}
+echo "
+
+".opt($f_Special && $print!="Y","
+<a class=\"prize\" ".opt($f_Design,"target='_blank' href=\"$f_Design\"").">
+<i></i>
+Готовый дизайн-проект 
+в подарок
+</a>
+")."
+<div class=\"clr\"></div>
+</div>  
+";
+$flds=array("IteriorMain","Interior1","Interior2");
+
+if ($handle = opendir($_SERVER['DOCUMENT_ROOT'].$f_InteriorPath)) {
+	while (false !== ($f = readdir($handle))) { 
+		if (is_file($_SERVER['DOCUMENT_ROOT'].$f_InteriorPath.$f) && strpos($f,"thumb_")===false) {
+			$t = $f_InteriorPath."thumb_".$f;
+			$f = $f_InteriorPath.$f;
+			if (!file_exists($_SERVER['DOCUMENT_ROOT'].$t)) {
+				nc_ImageTransform::imgResize($_SERVER['DOCUMENT_ROOT'].$f,$_SERVER['DOCUMENT_ROOT'].$t,320,240);
+			}
+			if ($f) $interior.="                <li> <a onclick='return hs.expand(this)' class='jg_interoir_photo' href=\"$f\"> <img src=\"".($t?$t:$f)."\" alt=\"\">
+	                  <div class=\"hover\"></div>
+	                  
+	                  </a> </li>";
+		}
+	}
+}
+if (!$interior) {
+	foreach ($flds as $f) {
+		$f = "f_$f";
+		$t = "f_".$f."Thumb";
+		$t = $$t;
+		$f = $$f;
+		if ($f) $interior.="                <li> <a onclick='return hs.expand(this)' class='jg_catelem_photo' href=\"$f\"> <img src=\"".($t?$t:$f)."\" alt=\"\">
+	                  <div class=\"hover\"></div>
+	                  
+	                  </a> </li>";
+	}
+}
+echo"
+".($print=="Y" ? "<br>": "
+<div class=\"projects\">
+".opt($interior,"
+	<div class=\"pr\">
+          <div class=\"robototitle\">ИНТЕРЬЕР: ОТДЕЛКА ВНУТРИ ДОМА</div>
+          <div class=\"jcarousel-wrapper\">
+            <div class=\"jcarousel\">
+              <ul>$interior
+              </ul>
+            </div>
+            <a href=\"#\" class=\"jcarousel-control-prev\">&lsaquo;</a> <a href=\"#\" class=\"jcarousel-control-next\">&rsaquo;</a> </div>
+        </div>")."
+".s_list_class(111,86,"&nc_ctpl=254&recNum=20&house_id=$f_house_id")."
+</div>")."
+      
+
+
+		
+
+
+
+
+
+</div></div>
+
+
+      		   <div class=\"robototitle\">Планы</div>
+
+		<div class=\"info\">
+		<div class=\"inner\">
+
+
+".opt($f_Print0,"<a href=\"$_Print\" rel='nofollow' target='_blank' id=\"printmini\" style=\"right:23px; top:23px;\"><i></i><span>Распечатать все планировки</span></a>")."
+
+
+";
+if ($f_bigDom1) $plan=1;
+for ($i=2;$i<8;$i++) {
+$f = "f_Plan$i";
+if ($$f) {$plan++;$$f = str_replace(array("width:","height:"),array("width:100%; min-width:","min-height:"),$$f);}
+}
+echo "
+".($print=="Y"?null:"
+<script type=\"text/javascript\">
+        \$(document).ready(function(){
+		\$('.allplans tr.plan-itm:gt(0)').hide();
+		
+		    \$('.moreplan').click(function(){
+                 
+				   
+\$('.allplans tr.plan-itm:gt(0)').toggle('fast', function() {
+                        if (\$('.allplans tr.plan-itm:gt(0)').is(\":hidden\"))      
+                            \$('.moreplan').text('Ещё планировки: $plan');
+                        else
+                            \$('.moreplan').text('Скрыть планировки');
+                    });
+			
+                   return false;
+                 });
+
+			
+		});
+		
+</script>")."
+
+
+
+
+<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"allplans\">
+  <tr class='plan-itm'>
+    <td><a onclick='return hs.expand(this)' class='jg_catelem_photo' href=\"$f_PlanDoma\"><img src=\"$f_PreviewPlan\"></a><br /><br />$f_Plan1".opt($plan,"
+
+    ".($print=="Y"?null:"<a href=\"#\" class=\"moreplan\" style=\"\">Ещё планировки: $plan</a>"))."</td>
+
+    </tr>
+".opt($f_bigDom1,"
+<tr><td>".opt($f_bigDom1,"<img src=\"$f_bigDom1\">")."</td>
+  </tr>")."
+
+    ".opt($f_Plan100,"<tr>
+    <td>$f_Plan1<br /></td>
+</tr>")."
+".opt($f_Plan2,"<tr class='plan-itm'>
+    <td>$f_Plan2<br /></td>
+  </tr>")."
+  
+
+    ".opt($f_Plan3,"<tr class='plan-itm'>
+    <td>$f_Plan3<br /></td></tr>")."
+".opt($f_Plan4,"<tr class='plan-itm'>
+    <td>$f_Plan4<br /></td>
+  </tr>")."
+  
+    ".opt($f_Plan5,"<tr class='plan-itm'>
+    <td>$f_Plan5<br /></td></tr>")."
+".opt($f_Plan6,"<tr class='plan-itm'>
+
+    <td>$f_Plan6<br /></td>
+  </tr>")."
+</table>
+
+
+
+
+<div class=\"clr\"></div>
+</div></div>
+
+<style>
+.fullslider #slider {
+height: 553px;
+}
+.rhino-toggle {
+top: 404px;
+}
+.rhino-bullets {
+top: 412px;
+}
+.rhino-prev, .rhino-next {
+top: 244px;
+}
+.fullslider .rhino-caption .price a.calc span {
+padding-top:0;
+}
+.price_a {
+color:#fff;
+}
+.price_a:hover {
+color:#aaa;
+}
+.notes1 { padding:10px 30px;  }
+</style>
+
+
+".($print=="Y"?"
+<p>
+$subHost$fullLink
+</p>
+":"")."
+<div class='notes1'> *Строительная площадь: по осям стен, включая террасы.</div><!-- /RecordTemplateFull -->
+
+<!-- Settings -->require_once($nc_core->INCLUDE_FOLDER."classes/nc_imagetransform.class.php");
+global $path;
+$ignore_sub=$ignore_cc=true;<!-- /Settings -->
+
+<!-- AddTemplate --><!-- /AddTemplate -->
+
+<!-- AddCond --><!-- /AddCond -->
+
+<!-- AddActionTemplate -->";
+  require_once($nc_core->INCLUDE_FOLDER."classes/nc_imagetransform.class.php");
+  if ($_FILES[f_PlanDoma][size]!=0 && $_FILES[f_PlanDoma][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('PlanDoma','PreviewPlan',688,900);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'PlanDoma', "");
+$is = @getimagesize($photo_path);
+    //if ($photo_path && $is[0]>688) nc_ImageTransform::imgResize($photo_path,$photo_path,688,900);
+  }
+  if ($_FILES[f_MainImg][size]!=0 && $_FILES[f_MainImg][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('MainImg','MainImgThumb',379,284);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'MainImg', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600);
+  }
+  if ($_FILES[f_Dom1][size]!=0 && $_FILES[f_Dom1][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Dom1','Dom1Thumb',113,85);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Dom1', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600);
+  }
+  if ($_FILES[f_Dom2][size]!=0 && $_FILES[f_Dom2][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Dom2','Dom2Thumb',113,85);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Dom2', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600);
+  }
+  if ($_FILES[f_Dom3][size]!=0 && $_FILES[f_Dom3][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Dom3','Dom3Thumb',113,85);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Dom3', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600); // 618, 900
+  }
+  if ($_FILES[f_IteriorMain][size]!=0 && $_FILES[f_IteriorMain][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('IteriorMain','IteriorMainThumb',236,177);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'IteriorMain', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600); // 618,900
+  }
+  if ($_FILES[f_Interior1][size]!=0 && $_FILES[f_Interior1][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Interior1','Iterior1Thumb',105,78);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Interior1', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600); // 618,900
+  }
+  if ($_FILES[f_Interior2][size]!=0 && $_FILES[f_Interior2][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Interior2','Iterior2Thumb',105,78);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Interior2', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600); // 618,900
+  }
+//------ тест ----------
+  if ($_FILES[f_smallDom1][size]!=0 && $_FILES[f_smallDom1][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'smallDom1', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,200, 150, 3, 'jpg', 100); // 618,900
+  }
+  if ($_FILES[f_bigDom1][size]!=0 && $_FILES[f_bigDom1][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'bigDom1', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path, 1280, 0, 3, 'jpg', 100); // 618,900
+  }
+
+
+
+### default
+if($inside_admin) {
+ ob_end_clean();
+ header("Location: ".$goBackLink."&inside_admin=1");
+ exit;
+}
+else {
+  echo NETCAT_MODERATION_MSG_OBJADD;
+  echo "<br><br>".$goBack;
+}
+echo "<!-- /AddActionTemplate -->
+
+<!-- EditTemplate --><!-- /EditTemplate -->
+
+<!-- EditCond --><!-- /EditCond -->
+
+<!-- EditActionTemplate -->";
+  require_once($nc_core->INCLUDE_FOLDER."classes/nc_imagetransform.class.php");
+  if ($_FILES[f_PlanDoma][size]!=0 && $_FILES[f_PlanDoma][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('PlanDoma','PreviewPlan',688,900);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'PlanDoma', "");
+//$is = @getimagesize($photo_path);
+    //if ($photo_path && $is[0]>688) nc_ImageTransform::imgResize($photo_path,$photo_path,688,900);
+  }
+  if ($_FILES[f_MainImg][size]!=0 && $_FILES[f_MainImg][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('MainImg','MainImgThumb',379,284);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'MainImg', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600);
+  }
+  if ($_FILES[f_Dom1][size]!=0 && $_FILES[f_Dom1][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Dom1','Dom1Thumb',113,85);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Dom1', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600);
+  }
+  if ($_FILES[f_Dom2][size]!=0 && $_FILES[f_Dom2][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Dom2','Dom2Thumb',113,85);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Dom2', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600);
+  }
+  if ($_FILES[f_Dom3][size]!=0 && $_FILES[f_Dom3][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Dom3','Dom3Thumb',113,85);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Dom3', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600); // 618, 900
+  }
+  if ($_FILES[f_IteriorMain][size]!=0 && $_FILES[f_IteriorMain][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('IteriorMain','IteriorMainThumb',236,177);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'IteriorMain', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600); // 618,900
+  }
+  if ($_FILES[f_Interior1][size]!=0 && $_FILES[f_Interior1][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Interior1','Iterior1Thumb',105,78);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Interior1', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600); // 618,900
+  }
+  if ($_FILES[f_Interior2][size]!=0 && $_FILES[f_Interior2][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Interior2','Iterior2Thumb',105,78);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Interior2', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600); // 618,900
+  }
+
+//------ тест ----------
+  if ($_FILES[f_smallDom1][size]!=0 && $_FILES[f_smallDom1][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'smallDom1', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path, 200, 150, 1, 'jpg', 100);
+  }
+  if ($_FILES[f_bigDom1][size]!=0 && $_FILES[f_bigDom1][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'bigDom1', "");
+    if ($photo_path) {
+	nc_ImageTransform::imgResize($photo_path,$photo_path, 1280, 1024, 0, 'jpg', 100);
+	// nc_ImageTransform::putWatermark_file($photo_path, '/images/copyright.png', 2); // установка водяного знака в правый верхний угл
+    }
+  }
+
+
+### default
+if($inside_admin) {
+ ob_end_clean();
+ header("Location: ".$goBackLink."&inside_admin=1");
+ exit;
+}
+else {
+  echo NETCAT_MODERATION_MSG_OBJADD;
+  echo "<br><br>".$goBack;
+}
+echo "<!-- /EditActionTemplate -->
+
+<!-- CheckActionTemplate --><!-- /CheckActionTemplate -->
+
+<!-- DeleteTemplate --><!-- /DeleteTemplate -->
+
+<!-- DeleteCond --><!-- /DeleteCond -->
+
+<!-- DeleteActionTemplate --><!-- /DeleteActionTemplate -->
+
+<!-- FullSearchTemplate --><!-- /FullSearchTemplate -->
+
+<!-- SearchTemplate --><!-- /SearchTemplate -->

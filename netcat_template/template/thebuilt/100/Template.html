@@ -1,0 +1,85 @@
+<!-- Header --><?
+$transparentHeader = $template_settings['transparentHeader'];
+$bg = $template_settings['Image']['resultpath'];
+if ($bg) $style = "background-image: url('$bg');";
+?>%Header
+<div class="content-block">
+<div class="container-bg <?if($bg) echo "with-bg ";?> with-bgcolor" data-style="<?=$style;?>background-color: #F4F4F4" style="background-color: #F4F4F4">
+	<div class="container-bg-overlay">
+	  <div class="container">
+	    <div class="row">
+	      <div class="col-md-12">
+	        <div class="page-item-title">
+	          <h1><span><?=$f_title?></span></h1>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+    </div>
+      <div class="breadcrumbs-container-wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12"><?
+          if ($sub == 185) {
+              $items = array(
+                  array("NAME"=>$current_catalogue['Catalogue_Name'],"URL"=>"/")
+              );
+              $arProject = $db->get_row("select Subdivision_ID as sub, house_id, Message_ID as id from Message210 where house_id=".intval($house),ARRAY_A);
+              $items[] = array("NAME"=>"Каталог проектов","URL"=>"/catalog/proekti/");
+              $items[] = $db->get_row("select Subdivision_Name NAME,ExternalURL as URL from Subdivision where Subdivision_ID=".$arProject['sub'], ARRAY_A);
+              $items[] = array("NAME"=>"CKD-".intval($house),"URL"=>nc_message_link($arProject['id'],210));
+              $crumbs = $browse_path['prefix'];
+              foreach ($items as $k=>$v) {
+                  $item = $browse_path['unactive'];
+                  foreach ($v as $key=>$val) $item = str_replace("%$key",$val,$item);
+                  $crumbs .= ($k?$browse_path['divider']:null).$item;
+              }
+              $crumbs .= $browse_path['divider'] . str_replace("%NAME","Калькулятор",$browse_path['active_link']);
+              $crumbs .= $browse_path['suffix'];
+              echo $crumbs;
+          } else echo s_browse_path($browse_path);
+          ?></div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+<div class="page-container<?if($classID!=2303):?> container<?endif?>">
+    <div class="row">
+      			<div class="col-md-12 entry-content">
+      
+      <article><!-- /Header -->
+
+<!-- Footer --></article>
+</div>
+</div>
+</div>
+
+<? if($_SERVER['REQUEST_URI'] == '/uslugi/'){?>
+<style> .footer-sidebar-2-wrapper{margin-top: -30px;}</style>
+<div class="wpb_wrapper" style="background-color:#F4F4F4;     padding: 45px;">
+<div class="container">
+<p><span style="font-weight:bold">Виды услуг</span></p>
+<ul>
+    <li>Проектирование. Осуществляется комплексная разработка проектной документации для возведения объектов из клееного бруса или адаптация типовых проектов под существующий ландшафт и нужды заказчика.</li>
+    <li>Производство клееного бруса. Домокомплекты изготавливаются на собственном предприятии компании в Костромской области.</li>
+    <li>Строительство. Осуществляется возведение фундамента, сборка стен и перекрытий, монтаж кровельной конструкции, окон и дверей.</li>
+    <li>Профессиональная покраска. Окрашиваются все части деревянного дома для декоративного оформления и защиты материала от разрушения.</li>
+    <li>Инженерные и электромонтажные работы. Предоставляются все виды услуг по установке коммуникаций.</li>
+    <li>Отделка. Производится с учетом особенностей деревянных конструкций.</li>
+    <li>Ландшафтные работы. Выполняется благоустройство участка по подготовленному проекту.</li>
+</ul>
+<p><span style="font-weight:bold">Плюсы обращения в компанию «СКД-дом»</span></p>
+<ul>
+    <li>Многолетний опыт работы. Изготовление клееного бруса и строительство домов из него ведется нами с 2003 года, за это время реализовано множество проектов.</li>
+    <li>Собственное производство. Заказчик получает материал от производителя без наценок и переплат.</li>
+    <li>Ориентированность на клиента. Предоставляются отдельные виды услуг или комплексное сопровождение объекта до полного завершения всех работ.</li>
+    <li>Соблюдение сроков и гарантии. Все мероприятия неукоснительно выполняются в соответствии с договором.</li>
+</ul>
+<p>Чтобы узнать больше о рабочих процессах, свяжитесь с менеджером по телефону или задайте вопросы через чат на странице.</p>
+</div>
+</div>
+<?}?>
+
+</div>
+%Footer<!-- /Footer -->

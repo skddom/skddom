@@ -1,0 +1,8 @@
+{
+    "require": {
+        "paragonie/random_compat": "^2.0",
+        "roave/security-advisories": "dev-master",
+        "facebook/graph-sdk": "^5.4",
+        "hybridauth/hybridauth": "^2.8"
+    }
+}

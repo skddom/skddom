@@ -1,0 +1,69 @@
+<div class="tpl-block-full tpl-component-goods">
+<?php
+
+$item = new nc_netshop_item($resMsg);
+nc_netshop::get_instance()->goodslist_recent->add($f_RowID, $classID);
+
+echo "<h1>$item[FullName]</h1>";
+
+echo $f_AdminButtons;
+echo nc_netshop_item_variant_admin_table($item);
+
+?>
+
+<!-- Изображения -->
+<?php if ($item["Slider"]): ?>
+    <div class="tpl-property-slider"><?= $item["Slider"] ?></div>
+<?php endif; ?>
+
+<!-- Цена -->
+<?php if (!$item["ItemPrice"] || !$item["Checked"]): /* Товар отключён — показываем диапазон цен */ ?>
+
+    <?php if ($item["ItemPriceMin"] != $item["OriginalPriceMin"]): ?>
+        <div class="tpl-block-original-price">
+            <span class="tpl-property-original-price tpl-property-original-price-range"><?= $item["OriginalPriceRange"] ?></span>
+        </div>
+    <?php endif; ?>
+
+    <div class="tpl-property-price tpl-property-price-range"><?= $item["ItemPriceRange"] ?></div>
+
+<?php else: /* Показываем цену на текущий товар */ ?>
+
+    <?php if ($item["ItemDiscount"]): ?>
+        <div class="tpl-block-original-price">
+            <span class="tpl-property-original-price"><?= $item["OriginalPriceF"] ?></span>
+            <span class="tpl-property-discount-percent">(скидка: <?=$item["DiscountPercent"] ?>%)</span>
+        </div>
+    <?php endif; ?>
+
+    <div class="tpl-property-price"><?= $item["ItemPriceF"] ?></div>
+    
+<?php endif; ?>
+
+<!-- Описание -->
+<?php if ($item['Description']): ?>
+    <div class="tpl-property-description">
+        <?= $item['Description']; ?>
+    </div>
+<?php endif; ?>
+
+<?php if ($item['Vendor']): ?>
+    <div class="tpl-property-vendor">
+        <span class="tpl-caption">Производитель: </span>
+        <span class="tpl-value"><?= $item['Vendor'] ?></span>
+    </div>
+<?php endif; ?>
+
+<?php if ($item['Article']): ?>
+    <div class="tpl-property-article">
+        <span class="tpl-caption">Артикул: </span>
+        <span class="tpl-value"><?= $item['Article'] ?></span>
+    </div>
+<?php endif; ?>
+
+</div>
+
+<?php if ($nc_comments instanceof nc_comments): ?>
+    <h2>Комментарии</h2>
+    <div class="tpl-block-comments"><?= $nc_comments->wall($f_RowID) ?></div>
+<?php endif; ?>

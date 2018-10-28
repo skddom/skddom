@@ -1,0 +1,51 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+<?php
+$item = new nc_netshop_item($res[$f_RowNum]);
+?>
+
+<div class="tpl-block-list tpl-component-goods">
+    <div class="tpl-block-list-object">
+        <h3><a href="<?= $fullLink ?>"><?= $item["FullName"] ?></a></h3>
+
+        <?= $f_AdminButtons; ?>
+        <?= nc_netshop_item_variant_admin_table($item); ?>
+
+        <?php if ($item["BigImage"]): ?>
+            <div class="tpl-property-big-image">
+                <a href="<?= $fullLink ?>">
+                    <img src="<?= $item["BigImage"] ?>" alt="<?= htmlspecialchars($item["Name"], ENT_QUOTES) ?>" style="max-height: 200px" />
+                </a>
+            </div>
+        <?php endif; ?>
+
+        <div class="tpl-property-description">
+            <?= $item["Description"] ?>
+        </div>
+
+        <div class="tpl-block-prices">
+            <?php
+            if ($cc_settings["show_price_range"] || !$item["ItemPrice"] || !$item["Checked"]):
+                // Показываем диапазон цен, если это указано в настройках, или у товара нет цены,
+                // или товар отключён:
+
+                if ($item["ItemPriceMin"] != $item["OriginalPriceMin"]): ?>
+                    <div class="tpl-property-original-price tpl-property-original-price-range">
+                        <?= $item["OriginalPriceRange"] ?>
+                    </div>
+                <?php endif; ?>
+
+                <div class="tpl-property-item-price tpl-property-item-price-range"><?= $item["ItemPriceRange"] ?></div>
+
+            <?php else: ?>
+                <?php if ($item["ItemDiscount"]): ?>
+                    <div class="tpl-block-discount">
+                        <span class="tpl-property-original-price"><?= $item["OriginalPriceF"] ?></span>
+                        <span class="tpl-property-discount-percent">(скидка: <?= $item["DiscountPercent"] ?>%)</span>
+                    </div>
+                <?php endif; ?>
+                    <div class="tpl-property-item-price"><?= $item["ItemPriceF"] ?></div>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

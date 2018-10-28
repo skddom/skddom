@@ -1,0 +1,51 @@
+<?
+$id = "gallery_42_".uniqid();
+if ($f_Images) echo $f_Images;
+else {
+// get images
+global $current_sub;
+if ($f_Eval) eval ($f_Eval);
+if (!$f_Eval && !$f_Folder) $f_Folder = $current_sub['Image'];
+echo $f_Eval;
+?><div class="wpb_wrapper" style="margin:0 -10px;">
+<div class="wpb_images_carousel wpb_content_element vc_clearfix vc_custom_1461316928842">
+    <div class="wpb_wrapper">
+                <div id="<?=$id?>" data-ride="vc_carousel" data-wrap="true" style="width: 100%;" data-interval="0" data-auto-height="yes" data-mode="horizontal" data-partial="false" data-per-view="2" data-hide-on-end="true" class="vc_slide vc_images_carousel">
+                        <!-- Wrapper for slides slider2  -->
+            <div class="vc_carousel-inner">
+                <div class="vc_carousel-slideline">
+                    <div class="vc_carousel-slideline-inner"><?
+
+if ($f_Folder) {
+    $images = array();
+    if ($handle = opendir($_SERVER['DOCUMENT_ROOT'].$f_Folder)) {
+        while (false !== ($file = readdir($handle))) { 
+            if (strlen($file)>3)
+            $images[$file] = array("f_Image"=>$f_Folder."/$file","f_Name"=>"","f_Preview"=>"$f_Folder/$file");
+        }
+    }
+}
+ksort($images); reset($images);
+                                            foreach ($images as $v) {
+// get vars
+extract ($v);
+        ?><div class="vc_item">
+                                <div class="vc_inner">
+                                                                            <img width="1170" height="780" src="<?=$v['f_Image']?>" class="attachment-full" alt="" srcset="<?=$v['f_Preview']?> 1170w, <?=$v['f_Preview']?> 300w, <?=$v['f_Preview']?> 768w, <?=$v['f_Preview']?> 1024w" sizes="(max-width: 1170px) 100vw, 1170px" />                                                                    </div>
+                            </div><?
+                                                                        
+                                       }
+                        ?></div>
+            </div>
+                            <!-- Controls -->
+                <a class="vc_left vc_carousel-control" href="#<?=$id?>" data-slide="prev">
+                    <span class="icon-prev"></span>
+                </a>
+                <a class="vc_right vc_carousel-control" href="#<?=$id?>" data-slide="next">
+                    <span class="icon-next"></span>
+                </a>
+                    </div>
+    </div>
+</div></div></div><?
+}                    
+?>                    

@@ -1,0 +1,10 @@
+/netcat_cache/*
+/netcat_cache_old/*
+/netcat_dump/*
+/netcat_trash/*
+vars.inc.php
+/.cache/*
+/.config/*
+/.local/*
+.bash_history
+gcommit.sh

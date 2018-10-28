@@ -1,0 +1,57 @@
+<? echo $f_AdminCommon; ?>
+<div style='margin-bottom:10px; font-weight:bold'>
+	
+	<? if ($rssLink) : ?>
+		<img src='<?= $SUB_FOLDER ?>/images/rss.png' alt='RSS' /><a href='<?= $rssLink ?>'>RSS</a> |
+	<? endif; ?>
+
+   <a href='
+        <?= $addLink ?>
+        <? if ($curPos) : ?>
+            <?= strstr($addLink, "?") ? "&amp;" : "?" ?>
+            curPos= <?= $curPos ?>
+        <? endif; ?>
+   '>Новый топик</a>
+</div>
+
+<table cellpadding='5' cellspacing='1' border='0' style='width:100%; background:#CCC'>
+<tr valign='top'>
+<td colspan='6' style='background:#EEE'>
+<form name='sorting' method='get'>
+<? if ($inside_admin) : ?>
+    <input type='hidden' name='inside_admin' value='1' />
+    <input type='hidden' name='sub' value='<?= $sub ?>' />
+    <input type='hidden' name='cc' value='<?= $cc ?>' />
+<? endif; ?>
+<? if ($curPos) : ?>
+<input type='hidden' name='curPos' value='<?= $curPos ?>'/>    
+<? endif; ?>
+сортировать по 
+<select name='sort' class='no_special_style'>
+  <option value='updated' <?= $sort=="updated" ? " selected" : "" ?> >дате обновления</option>
+  <option value='created' <?= $sort=="created" ? " selected" : "" ?> >дате создания темы</option>
+  <option value='subject' <?= $sort=="subject" ? " selected" : "" ?> >названию</option>
+  <option value='replies' <?= $sort=="replies" ? " selected" : "" ?> >количеству ответов</option>
+  <option value='views' <?= $sort=="views" ? " selected" : "" ?> >количеству просмотров</option>
+  <option value='author' <?= $sort=="author" ? " selected" : "" ?> >автору темы</option>
+</select>
+порядок 
+<select name='sortDir' class='no_special_style'>
+  <option value='desc' <?= $sortDir=="desc" ? " selected" : "" ?> >по убыванию</option>
+  <option value='asc' <?= $sortDir=="asc" ? " selected" : "" ?> >по возрастанию</option>
+</select>
+<input type='submit' value='отобразить'/>
+</form>
+</td>
+</tr>
+<tr valign='top'>
+  <td style='width:1%; background:#EEE; font-weight:bold'>#</td>
+  <td style='width:50%; background:#EEE; font-weight:bold'>Тема</td>
+  <td style='width:10%; background:#EEE; text-align:center; font-weight:bold'>Ответов</td>
+  <td style='width:10%; background:#EEE; text-align:center; font-weight:bold'>Автор</td>
+  <td style='width:10%; background:#EEE; text-align:center; font-weight:bold'>Просмотров</td>
+  <td style='width:19%; background:#EEE; font-weight:bold'>Последний пост</td>
+</tr>
+<? if (!$advertisement && $adv_messages) : ?>
+    <?= s_list_class($sub, $cc, "&advertisement=1", 1).opt($topicType = 3, "") ?>
+<? endif; ?>

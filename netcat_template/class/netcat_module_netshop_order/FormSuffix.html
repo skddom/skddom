@@ -1,0 +1,16 @@
+<? if ($inside_admin) { ?>
+        </tbody>
+    </table>
+</div>
+    <div style="margin: 15px 0">
+        <?=
+        browse_messages($cc_env, 15, array(
+            'prefix' => "",
+            'suffix' => "",
+            'active' => "<b>%PAGE</b>",
+            'unactive' => "<a href=%URL>%PAGE</a>",
+            'divider' => " | ",
+        )) ?></div>
+<? } else { ?>
+</div></div>
+<? } ?>

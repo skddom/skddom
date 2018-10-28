@@ -1,0 +1,67 @@
+.dsorder {
+	box-shadow: none;
+	border-radius: 0px;
+	border:none;
+}
+.dsorder .close-dspopup-modal{
+	top: 10px;
+right: 10px;
+	}
+.dsorder .form-head {
+	border:none;
+	margin:0px;
+	color: #2A2F35;
+	font-weight: normal;
+	font-size: 22px;
+	text-align: center;
+	text-transform: uppercase;
+}
+.dsorder input[type="text"] {
+margin-bottom:0px;
+box-sizing: border-box;
+height: 30px;
+}
+.dsorder .buttonform {
+	text-align: center;
+}
+.dsorder .buttonform input[type="submit"] {
+	padding: 16px 30px;
+	line-height: 1;
+	color: #fff;
+	text-align: left;
+	text-shadow: none;
+	text-decoration: none;
+	vertical-align: middle;
+	cursor: pointer;
+	background: #b76c00;
+	border: none;
+	border-radius: 0;
+	filter: none;
+	box-shadow: none;
+	text-align: center;
+	font-size: 14px;
+	font-weight: normal;
+	height: 46px;
+	text-transform: uppercase;
+}
+.dsorder .buttonform input[type="submit"]:hover {
+	color: white;
+	text-decoration: none;
+}
+  a.order_btn_style {
+  z-index: 1;
+  background: rgba(35,43,51,.51);
+  position: absolute;
+  left: 320px;
+  bottom: 20px;
+  border: 2px solid #fff;
+  line-height: 42px;
+  padding:0px 10px;
+  box-sizing: border-box;
+  }
+
+@media screen and (max-width:767px){    
+	a.order_btn_style {
+  display: none;
+  }
+ }

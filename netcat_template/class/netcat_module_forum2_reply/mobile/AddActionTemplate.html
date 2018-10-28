@@ -1,0 +1,21 @@
+<?
+// get topic object
+$nc_forum2_topic = nc_forum2_topic::get_object();
+// determine topic url
+$topic_url = $nc_forum2_topic->get_url($f_Topic_ID);
+// for subscribe
+if ( $nc_core->modules->get_by_keyword('subscriber') && $MODULE_VARS['subscriber']['VERSION'] > 1 ) {
+  $nc_subscriber = nc_subscriber::get_object();
+  $nc_subscriber->new_message ( $cc, $message, $cc_array[0], $f_Topic_ID);
+}
+// redirect in back-office or link in front-office mode
+if($inside_admin) {
+  ob_end_clean();
+  header("Location: ".$goBackLink."&inside_admin=1");
+  exit;
+}
+else {
+  echo $IsChecked ? NETCAT_MODULE_FORUM2_COMPONENT_REPLY_ADDED : NETCAT_MODULE_FORUM2_COMPONENT_REPLY_ADDED_MODERATION;
+  echo "<br/><br/><a href='".$topic_url.($curPos ? ( strstr($topic_url, "?") ? "&amp;" : "?" )."curPos=".$curPos : "")."'>".NETCAT_MODULE_FORUM2_COMPONENT_RETURN_TO_THE_TOPIC."</a>";
+}
+?>

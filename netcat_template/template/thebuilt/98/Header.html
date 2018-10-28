@@ -1,0 +1,72 @@
+<?
+//$grid = in_array($classID,array(22,2231,21,23,252,269));
+$bg = $template_settings['Image']['resultpath'];
+
+if($_SERVER['REQUEST_URI'] == '/uslugi/stroitelstvo/otdelocnie-raboti/'){
+$f_title = 'Отделка';
+}
+if($_SERVER['REQUEST_URI'] == '/price/kredit/'){
+$f_title = 'Строительство дома в кредит';	
+}
+
+
+if ($bg) $style = "background-image: url('$bg');";
+?>%Header
+<div class="content-block">
+<div class="container-bg <?if($bg) echo "with-bg";?> with-bgcolor" data-style="<?=$style;?>background-color: #F4F4F4" style="<?=$style;?>background-color: #F4F4F4">
+	<div class="container-bg-overlay">
+	  <div class="container">
+	    <div class="row">
+	      <div class="col-md-12">
+	        <div class="page-item-title">
+	          <h1>
+								<span><?=$f_title?></span>
+
+	          </h1>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+    </div>
+      <div class="breadcrumbs-container-wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+<?=s_browse_path($browse_path);?>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+<div class="post-container container">
+	<div class="row">
+		<div class="col-md-9"><?
+        if (!$grid) {
+			?>
+      <?if ($_SERVER["REQUEST_URI"]=="/o-kompanii/otzyvy/"):?>
+        <div id="dsotziv"></div>
+        <script type="text/javascript">
+          jQuery(document).ready(function(){
+            jQuery("#dsotziv").dsform({
+              formID:'dsotziv',
+              modal:false,
+            });
+          })
+        </script>
+      <?endif;?>
+      <div class="blog-post blog-post-single">
+				<article id="post-<?=$sub?>" class="post type-post status-publish format-standard has-post-thumbnail hentry category-house-renovation">
+							<div class="post-content-wrapper">
+
+								<div class="post-content"><?
+                                if ($current_sub['Icon'] && !$message) {?>
+<!--                                    <div class="blog-post-thumb text-center">
+
+									<img width="1170" height="781" src="<?=$current_sub['Icon']?>" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="<?=$f_title?>" sizes="(max-width: 1170px) 100vw, 1170px">
+
+									</div>
+-->
+                                    <?
+                                }
+        }
+?>

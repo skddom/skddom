@@ -1,0 +1,59 @@
+<!-- FormPrefix --><?php $result .= " $f_AdminCommon
+
+          <ul id=\"bxslider$sub\" class=\"bxslider\">
+ "; ?><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?php $result .= " ";if($f_SliderPath&&$f_MainImgPath)$f_MainImg=$f_SliderPath.$f_MainImgPath;
+if (is_array($br->projects[$f_RowID])) extract($br->projects[$f_RowID]);
+$result.="$f_AdminButtons
+
+            <li><a data-type='link' data-ajax='false' href='$fullLink'><img  style='margin-bottom:42px;' src=\"$f_SliderPath$f_MainImgPath\" alt=\"$f_Name\" title=\"$f_Name\" /></a><span class=\"icon\"></span>
+              <div class=\"rhino-caption\" style=\"height:42px;\">
+                <div style=\"line-height:42px;\" class=\"name corbel\"><a style='font-size:16px;' href=\"$fullLink\">".str_replace("Проект дома из клееного бруса ","",$f_Name)."</a>
+                
+                   <span><a data-type='link' data-ajax='false' href=\"$fullLink\">Стоимость</a>: </span> <a data-type='link' data-ajax='false' style='font-size:16px;' href=\"$fullLink\" class=\"cos\">$f_Price р.</a>
+                  
+                </div>
+                <a data-type='link' data-ajax='false' style='width:40px;height:35px;' href=\"$fullLink\" class=\"special\">Спецпредложение</a> </div>
+            </li>
+ "; ?><!-- /RecordTemplate -->
+
+<!-- FormSuffix --><?php $result .= "           </ul>&nbsp;
+<style>
+.a.special.ui-link { background-size:contain; }
+.rhino-prev, .rhino-next {
+top: 245px;
+}
+.rhino-toggle {
+top: 445px;
+}
+.rhino-bullets {
+top: 453px;
+}
+#bxslider$sub {  }
+#bxslider$sub img { width:100%; }
+#bxslider$sub li {
+/*height: 604px;*/
+margin-bottom:10px;
+}
+
+.rhino-caption .special { text-indent: -99999px; }
+</style>
+<script>
+$(function(){
+  \$(document).ready(function(){
+    \$('.bxslider').bxSlider({
+        adaptiveHeight: true,
+        pager: false,
+        infiniteLoop: false
+    });
+    $(document).on('pagebeforeshow', 'catalog', function(){       
+      \$('.bxslider').bxSlider({
+          adaptiveHeight: true,
+          pager: false,
+          infiniteLoop: false
+      });
+    });
+  });
+});
+</script> "; ?><!-- /FormSuffix -->

@@ -1,0 +1,21 @@
+<?php require_once($nc_core->INCLUDE_FOLDER."classes/nc_imagetransform.class.php");
+global $path;
+$br = CBranding::get_object();
+$br->getProjects();
+$br->ExModifyQueryWhere($query_where, $cc_env, $inside_admin, $admin_mode); 
+$br->ExModifyQueryWhere($query, $cc_env, $inside_admin, $admin_mode);
+$f_Images_tpl = array(
+    'prefix' => "",
+    'record' => "%i%,%Name%,%Path%,%Preview%",
+    'divider' => ";",
+    'suffix' => "",
+    'i' => 1
+);
+$f_Plan_tpl = array(
+    'prefix' => "<div style='margin-top:20px;' class=\"mgt-header-block clearfix text-left text-black wpb_animate_when_almost_visible wpb_top-to-bottom wpb_content_element  mgt-header-block-style-2 mgt-header-texttransform-header  wpb_start_animation\"><h2 class=\"mgt-header-block-title\">Планировочное решение</h2><div class=\"mgt-header-line\"></div></div>",
+    'record' => "<span><img style='max-width:100%' alt='%Name%' src='%Path%' class='img-responsive-0'></span>",
+    'divider' => "\n",
+    'suffix' => "",
+    'i' => 1
+);
+?>

@@ -1,0 +1,15 @@
+<? 
+if($f_Topic_ID) {
+// get topic object
+$nc_forum2_topic = nc_forum2_topic::get_object();
+// check closed status
+if ( $nc_forum2_topic->get_closed_status($f_Topic_ID) ) {
+  $warnText = NETCAT_MODULE_FORUM2_COMPONENT_TOPIC_CLOSED;
+  $posting = 0;
+}
+}
+else {
+$warnText = 'Нельзя добавить ответ без привязки к топику. Добавляйте ответы, открыв нужный топик.';
+$posting = 0;
+}
+?>

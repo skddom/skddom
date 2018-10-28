@@ -1,0 +1,1043 @@
+<?
+
+$nc_core = nc_core::get_object();
+$netshop = nc_netshop::get_instance();
+
+// --- Таблица с содержимым заказа на первой странице оформления заказа, в блоке «Подтверждение состава заказа»
+function tpl_netshop_make_cart_contents_table() {
+    $netshop = nc_netshop::get_instance();
+    $items = $netshop->cart->get_items();
+    $has_discount_column = $items->any('ItemDiscount', 0, '>');
+
+    $result = "";
+
+    $result .= $netshop->cart->get_quantity_notifications() .
+               "<table class='tpl-block-order-items'>\n<tr>\n" .
+               "<th class='tpl-property-name'>" . NETCAT_MODULE_NETSHOP_ITEM . "</th>\n" .
+               ($has_discount_column ? "<th class='tpl-property-original-price'>" . NETCAT_MODULE_NETSHOP_PRICE_WITHOUT_DISCOUNT_SHORT . "</th>\n" : "") .
+               ($has_discount_column ? "<th class='tpl-property-item-discount'>" . NETCAT_MODULE_NETSHOP_DISCOUNT . "</th>\n" : "") .
+               "<th class='tpl-property-item-price'>" . ($has_discount_column ? NETCAT_MODULE_NETSHOP_PRICE_WITH_DISCOUNT_SHORT : NETCAT_MODULE_NETSHOP_ITEM_PRICE) . "</th>\n" .
+               "<th class='tpl-property-qty'>" . NETCAT_MODULE_NETSHOP_QTY . "</th>\n" .
+               "<th class='tpl-property-total-price'>" . NETCAT_MODULE_NETSHOP_COST . "</th>\n";
+
+    foreach ($items as $item) {
+        $result .= "<tr>" .
+                   "<td class='tpl-property-name'><a href='$item[URL]'>$item[FullName]</a></td>" .
+                   ($has_discount_column ? "<td class='tpl-property-original-price'>$item[OriginalPriceF]</td>" : "") .
+                   ($has_discount_column ? ("<td class='tpl-property-item-discount'>" . ($item['ItemDiscount'] ? $item['ItemDiscountF'] : '—') . "</td>") : "") .
+                   "<td class='tpl-property-item-price'>$item[ItemPriceF]</td>" .
+                   "<td class='tpl-property-qty'>$item[Qty] $item[Units]</td>" .
+                   "<td class='tpl-property-total-price'>$item[TotalPriceF]</td>" .
+                   "</tr>\n";
+    }
+
+    if ($netshop->cart->get_cart_discount_sum()) {
+        $discount_sum = $netshop->cart->get_cart_discount_sum();
+        $result .= "<tr class='tpl-property-cart-discount-sum'>" .
+                   "<td colspan='" . ($has_discount_column ? 5 : 3) . "' class='tpl-caption'>" .
+                      ($discount_sum > 0 ? NETCAT_MODULE_NETSHOP_CART_DISCOUNT : NETCAT_MODULE_NETSHOP_SURCHARGE) .
+                   "</td>" .
+                   "<td>" .
+                      ($discount_sum > 0 ? "<span class='tpl-value-sign'>&minus;</span>" : "") .
+                      "<span class='tpl-value'>" . $netshop->format_price(abs($discount_sum)) . "</span>" .
+                   "</td>" .
+                   "</tr>\n";
+    }
+
+    $result .= "<tr class='tpl-property-totals'>" .
+               "<td colspan='" . ($has_discount_column ? 5 : 3) . "' class='tpl-caption'>" . NETCAT_MODULE_NETSHOP_SUM . "</td>" .
+               "<td><span class='tpl-value'>" . $netshop->format_price($netshop->cart->get_totals()) . "</span></td>" .
+               "</tr>\n";
+
+    $result .= "</table>\n<br>";
+
+    return $result;
+}
+
+
+
+if (!$netshop->cart->get_item_count()) {
+
+    // корзина пуста! оформление заказа невозможно
+    echo "<div class='tpl-block-message tpl-state-error'>", NETCAT_MODULE_NETSHOP_ERROR_CART_EMPTY, "</div>\n";
+
+} else {
+
+    /**
+     *  Оформление заказа производится:
+     *  — на одной странице, если возможные методы доставки и оплаты не зависят от данных,
+     *    указываемых пользователем при оформлении заказа;
+     *  — на двух страницах, если методы доставки или оплаты зависят от данных,
+     *    указываемых пользователем при оформлении заказа, и возможные способы оплаты не
+     *    зависят от способов доставки;
+     *  — на трёх страницах, если методы оплаты зависят от способов доставки.
+     *
+     *  1-страничный режим: данные заказа и выбор способа оплаты и выбор способа доставки
+     *  2-страничный режим: данные заказа → выбор способа оплаты и выбор способа доставки
+     *                 или: данные заказа и выбор способа оплаты → выбор способа доставки
+     *  3-страничный режим: данные заказа → выбор способа оплаты → выбор способа доставки
+     *
+     *  Если включена опция «Показывать страницу подтверждения заказа», то также будет
+     *  дополнительно отображена страница подтверждения.
+     */
+
+    // Список способов доставки и оплаты на текущем сайте:
+
+    $all_delivery_methods = $netshop->delivery->get_enabled_methods();
+    $all_payment_methods = $netshop->payment->get_enabled_methods();
+
+    // объекты, необходимые для дальнейших расчётов для способов доставки и оплаты:
+    $order = nc_netshop_order::from_post_data((array)$nc_core->input->fetch_post(), $netshop);
+    $context = $netshop->get_condition_context();
+    $context->set_order($order);
+
+    // -------------------------------------------------------------------------
+    // Некоторые настройки отображения
+    // -------------------------------------------------------------------------
+    // Для изменения настроек используйте соответствующие пункты в «Настройках
+    // отображения компонента» в настройках инфоблока.
+
+    // Загружать данные о стоимости и сроках доставки для способов с
+    // автоматизированным расчётом через AJAX (по умолчанию — true):
+    $use_ajax_to_load_delivery_estimate =
+        isset($cc_settings['delivery_ajax_loading']) ? $cc_settings['delivery_ajax_loading'] : true;
+
+    // Показывать недоступные методы доставки в списке способов доставки:
+    $show_unavailable_delivery_methods =
+        isset($cc_settings['show_all_delivery_methods']) ? $cc_settings['show_all_delivery_methods'] : false;
+
+    // Показывать недоступные методы оплаты в списке способов оплаты:
+    $show_unavailable_payment_methods =
+        isset($cc_settings['show_all_payment_methods']) ? $cc_settings['show_all_payment_methods'] : false;
+
+    // Показывать страницу подтверждения (по умолчанию — true):
+    $show_confirmation_page =
+        isset($cc_settings['show_confirmation_page']) ? $cc_settings['show_confirmation_page'] : true;
+
+    // -------------------------------------------------------------------------
+    // Определение количества страниц, которое потребуется для оформления заказа
+    // -------------------------------------------------------------------------
+
+    // Сколько страниц будет в оформлении заказа:
+    $pages = 1;
+
+    // Страница, на которой пользователя спросят о способах доставки:
+    $delivery_page = count($all_delivery_methods) ? 1 : 0;
+    // Страница, на которой пользователя спросят о способах оплаты:
+    $payment_page = count($all_payment_methods) ? 1 : 0;
+    // Страница подтверждения заказа:
+    $confirmation_page = 0;
+
+    // Если способы доставки зависят от полей заказа, показывать их на второй странице
+    if ($all_delivery_methods->any('depends_on_order_data', true)) {
+        $pages = 2;
+        $delivery_page = 2;
+    }
+
+    // Если способы оплаты зависят от полей заказа, показывать их на второй странице
+    if ($all_payment_methods->any('depends_on_order_data', true)) {
+        $pages = 2;
+        $payment_page = 2;
+    }
+
+    // Если способы оплаты зависят от способов доставки, показывать их на отдельной
+    // (второй или третьей) странице
+    if ($all_payment_methods->any('depends_on_delivery_method', true)) {
+        $pages++;
+        $payment_page = $delivery_page + 1;
+    }
+
+    // Учесть страницу подтверждения заказа:
+    if ($show_confirmation_page) {
+        $pages++;
+        $confirmation_page = $pages;
+    }
+
+    // Заголовки страниц
+    $page_titles = array(
+        1 => NETCAT_MODULE_NETSHOP_CHECKOUT_ORDER_DATA_SECTION,
+    );
+
+    if ($payment_page == 2 && $payment_page == $delivery_page) {
+        $page_titles[$payment_page] = NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_AND_PAYMENT_METHOD_SECTION;
+    } else {
+        if ($delivery_page > 1) {
+            $page_titles[$delivery_page] = NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_METHOD_SECTION;
+        }
+        if ($payment_page > 1) {
+            $page_titles[$payment_page] = NETCAT_MODULE_NETSHOP_CHECKOUT_PAYMENT_METHOD_SECTION;
+        }
+    }
+
+    if ($confirmation_page) {
+        $page_titles[] = NETCAT_MODULE_NETSHOP_CHECKOUT_CONFIRMATION_SECTION;
+    }
+
+    if ($all_payment_methods->any("handler_id", 0, ">")) {
+        $page_titles[] = NETCAT_MODULE_NETSHOP_PAYMENT;
+    }
+
+    // Текущая страница:
+    $current_page = $is_posted = $nc_core->input->fetch_post('current_page');
+    if (!$current_page) {
+        $current_page = 1;
+    }
+    $go_to_next_page = $nc_core->input->fetch_post('go_to_next_page');
+
+    // -------------------------------------------------------------------------
+    // Сообщения об ошибках в полях формы
+    // -------------------------------------------------------------------------
+
+    // В многостраничном режиме — проверить данные заказа на первой странице
+    // (обязательные поля, формат полей)
+    if ($is_posted && $pages > 1) {
+        $posting = 1;
+        require $nc_core->ROOT_FOLDER . "message_fields.php"; // nb, not require_once
+        $posting = 0;
+        // Если возникла ошибка — возврат на первую страницу
+        if ($warnText) {
+            $current_page = 1;
+        }
+    }
+
+    // Ошибки в случае, если форма заполнена неправильно, выводятся в блоке «Данные заказа».
+    // Если ошибок нет — переходим к следующей странице
+
+    if (!$warnText && $go_to_next_page && $pages > 1) {
+        $current_page++;
+    }
+
+    // -------------------------------------------------------------------------
+    // Общая часть формы (начало)
+    // -------------------------------------------------------------------------
+    ?>
+
+    <div class="tpl-block-main tpl-component-order">
+    <form method='post' action='<?= $SUB_FOLDER . $HTTP_ROOT_PATH ?>add.php'
+          id='nc_netshop_add_order_form'>
+    <input name='admin_mode' type='hidden' value='<?= $nc_core->admin_mode ?>'/>
+    <?= $nc_core->token->get_input() . "\n" ?>
+    <input name='catalogue' type='hidden' value='<?= $catalogue ?>'/>
+    <input name='cc' type='hidden' value='<?= $cc ?>'/>
+    <input name='sub' type='hidden' value='<?= $sub ?>'/>
+    <input name='posting' type='hidden' value='0'/>
+    <input name='curPos' type='hidden' value='0'/>
+    <input name='f_Parent_Message_ID' type='hidden' value='0'/>
+    <input name='current_page' type='hidden' value='<?= $current_page ?>'/>
+
+    <!-- Хлебные крошки-->
+    <div class="tpl-block-breadcrumbs tpl-block-breadcrumbs-steps">
+        <div class="tpl-block-breadcrumbs-item">
+            <a href="<?= $nc_core->SUB_FOLDER; ?>/"><?= $nc_core->catalogue->get_current('Catalogue_Name'); ?></a>
+        </div>
+        <div class="tpl-block-breadcrumbs-item">
+            <a href="<?= $nc_core->SUB_FOLDER; ?>/cart/"><?= NETCAT_MODULE_NETSHOP_CART ?></a>
+        </div>
+        <?
+
+        for ($i = 1; $i <= sizeof($page_titles); $i++) {
+            echo '<div class="tpl-block-breadcrumbs-item">',
+            '<a href="#" class="tpl-state-', ($current_page < $i ? 'disabled' : 'current'), '">',
+            $page_titles[$i],
+            "</a></div>\n";
+        }
+
+        ?>
+    </div>
+    <? if ($current_page == 1) { ?>
+        <fieldset class="tpl-block-order-confirm-items">
+            <legend><?= NETCAT_MODULE_NETSHOP_CHECKOUT_ITEMS_SECTION; ?></legend>
+            <?= tpl_netshop_make_cart_contents_table() ?>
+        </fieldset>
+    <? } ?>
+
+    <fieldset>
+    <legend><?= $page_titles[$current_page]; ?></legend>
+
+    <?
+
+    // Количество блоков (адрес / доставка / оплата), уже показанных на текущей странице:
+    $blocks_shown = 0;
+
+    // -------------------------------------------------------------------------
+    // Данные заказа
+    // -------------------------------------------------------------------------
+
+    if ($current_page == 1) {
+        // Подготавливаем данные пользователя:
+        $user = $AUTH_USER_ID ? nc_Core::get_object()->user->get_by_id($AUTH_USER_ID) : null;
+        $last_order = null;
+
+        if ($AUTH_USER_ID) {
+            $sql = "SELECT `Message_ID` FROM `Message{$classID}` WHERE `User_ID` = {$AUTH_USER_ID} ORDER BY `Created` DESC LIMIT 1";
+
+            $last_order_id = $db->get_var($sql);
+            if ($last_order_id) {
+                $last_order = new nc_netshop_order();
+                $last_order->set_catalogue_id($catalogue_id);
+                $last_order->load($last_order_id);
+            }
+        }
+
+        $contact_name = null;
+        if (!isset($f_ContactName)) {
+            if (isset($user['ForumName']) || isset($user['Login'])) {
+                $contact_name = $user['ForumName'] ? $user['ForumName'] : $user['Login'];
+            } else if (isset($_COOKIE['Order_ContactName'])) {
+                $contact_name = $_COOKIE['Order_ContactName'];
+            }
+        }
+
+        $contact_email = null;
+        if (!isset($f_Email)) {
+            if (isset($user['Email'])) {
+                $contact_email = $user['Email'];
+            } else if (isset($_COOKIE['Order_Email'])) {
+                $contact_email = $_COOKIE['Order_Email'];
+            }
+        }
+
+        $contact_phone = null;
+        if (!isset($f_Phone)) {
+            if ($last_order) {
+                $contact_phone = $last_order['Phone'];
+            } else if (isset($_COOKIE['Order_Phone'])) {
+                $contact_phone = $_COOKIE['Order_Phone'];
+            }
+        }
+
+        $address = null;
+        if (!isset($f_Address)) {
+            if ($last_order) {
+                $address = $last_order['Address'];
+            } else if (isset($_COOKIE['Order_Address'])) {
+                $address = $_COOKIE['Order_Address'];
+            }
+        }
+
+        $zip = null;
+        if (!isset($f_Zip)) {
+            if ($last_order) {
+                $zip = $last_order['Zip'];
+            } else if (isset($_COOKIE['Order_Zip'])) {
+                $zip = $_COOKIE['Order_Zip'];
+            }
+        }
+
+
+        // Сделать выбранным по умолчанию город, в котором расположен магазин
+        $selected_city = null;
+        if (!isset($f_City)) {
+            if (isset($_COOKIE['Order_City'])) {
+                $selected_city = $_COOKIE['Order_City'];
+            } else {
+                $selected_city = $netshop->get_setting('City');
+            }
+        }
+
+        $sign_up = $nc_core->input->fetch_post('f_SignUp');
+
+        // Сообщение об ошибке (если есть)
+        if ($warnText) {
+            echo "<p class='tpl-block-message tpl-state-error'>$warnText</p>\n";
+        }
+
+        // Поля формы:
+        ?>
+        <div class="tpl-block-order-customer">
+            <h2><?= NETCAT_MODULE_NETSHOP_CHECKOUT_CUSTOMER_DATA_SECTION ?></h2>
+
+            <p class="tpl-property-e-mail">
+                <label><span class="tpl-caption">E-mail*</span>
+                    <?= nc_string_field("Email", "maxlength='255' size='50' class='tpl-value'", $classID, 0, $contact_email); ?>
+                </label>
+            </p>
+
+            <p class="tpl-property-contact-name">
+                <label><span class="tpl-caption">ФИО*</span>
+                    <?= nc_string_field("ContactName", "maxlength='255' size='50' class='tpl-value'", $classID, 0, $contact_name); ?>
+                </label>
+            </p>
+
+            <p class="tpl-property-phone">
+                <label><span class="tpl-caption">Телефон</span>
+                    <?= nc_string_field("Phone", "maxlength='255' size='50' class='tpl-value'", $classID, 0, $contact_phone); ?>
+                </label>
+            </p>
+
+            <? if (!$AUTH_USER_ID): ?>
+                <p class="tpl-block-register">
+                    <label>
+                        <input type="checkbox" name="f_SignUp"
+                               value="1" <?= $sign_up ? 'checked="checked"' : ''; ?>/>
+                    <span>
+                        Зарегистрироваться на сайте для отслеживания вашего заказа,
+                        а также будущих покупок и получения скидок
+                    </span>
+                    </label>
+                </p>
+            <? endif; ?>
+
+        </div>
+
+        <div class="tpl-block-order-address">
+            <h2><?= NETCAT_MODULE_NETSHOP_CHECKOUT_CUSTOMER_ADDRESS_SECTION ?></h2>
+
+            <p class="tpl-property-city">
+                <label><span class="tpl-caption">Город*</span><span
+                        class="tpl-value">
+                <?= nc_list_field('City', "class='tpl-value'", $classID, false, $selected_city); ?>
+            </span></label>
+            </p>
+
+            <p class="tpl-property-address">
+                <label><span class="tpl-caption">Адрес</span>
+                    <?= nc_string_field("Address", "maxlength='255' size='50' class='tpl-value'", $classID, 0, $address); ?>
+                </label>
+            </p>
+
+            <p class="tpl-property-index">
+                <label><span class="tpl-caption">Индекс</span>
+                    <?= nc_string_field("Zip", "maxlength='255' size='50' class='tpl-value'", $classID, 0, $zip); ?>
+                </label>
+            </p>
+
+            <p class="tpl-property-comments">
+                <label><span class="tpl-caption">Примечание</span>
+                    <?= nc_text_field("Comments", "size='50' class='tpl-value'", $classID); ?>
+                </label>
+            </p>
+
+        </div>
+
+        <?
+
+        // В случае возврата со страницы подтверждения нужно сохранить выбранные
+        // способы доставки и оплаты
+        foreach (array('f_DeliveryMethod', 'f_PaymentMethod') as $var) {
+            if (isset($$var)) {
+                echo "<input type='hidden' name='" . $$var . "' value='" . htmlspecialchars($$var, ENT_QUOTES) . "' />\n";
+            }
+        }
+
+        $blocks_shown++;
+
+    } // "if $current_page == 1"
+    else {
+
+        // Это уже не первая страница; необходимо сохранить введённые значения
+        // в hidden-полях формы:
+        foreach ((array)$nc_core->input->fetch_post() as $key => $value) {
+            if (strpos($key, "f_") === 0) {
+                echo "<input type='hidden' name='" . htmlspecialchars($key, ENT_QUOTES) . "' value='" .
+                    htmlspecialchars($value, ENT_QUOTES) . "' />\n";
+            }
+        }
+
+    } // конец блока «Данные заказа»
+
+    // -------------------------------------------------------------------------
+    // Выбор способа доставки
+    // -------------------------------------------------------------------------
+
+    if ($delivery_page == $current_page) {
+
+        echo "<div class='tpl-block-order-delivery'>\n";
+
+        if ($blocks_shown || $delivery_page == $payment_page) {
+            echo "<h2>", NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_METHOD_SECTION, "</h2>\n";
+        }
+
+        $available_delivery_methods = $all_delivery_methods->matching($context);
+        $methods_to_show = $show_unavailable_delivery_methods
+            ? $all_delivery_methods
+            : $available_delivery_methods;
+
+        $num_methods_to_show = count($methods_to_show);
+
+        if (!count($available_delivery_methods)) {
+            echo "<p class='tpl-block-message tpl-state-error'>",
+            NETCAT_MODULE_NETSHOP_CHECKOUT_NO_AVAILABLE_DELIVERY_METHODS,
+            "</p>\n";
+        }
+
+        $is_first = true; // флаг для пред-выбора первого элемента
+        $method_ids_to_load_with_ajax = array();
+
+    foreach ($methods_to_show as $method) {
+        ?>
+        <div class="tpl-block-order-delivery-method">
+            <?
+
+            /** @var nc_netshop_delivery_method $method */
+            $is_available = !$show_unavailable_delivery_methods || $method->evaluate_conditions($context);
+            $method_id = $method->get_id();
+            $method_description = $method->get('description');
+
+            ?>
+            <label>
+                <?
+                // --- Название способа доставки ---
+                if ($num_methods_to_show > 1) {
+                    // Если способов доставки более одного — нужны радио-кнопки
+
+                    // Решаем, должен ли текущий пункт быть выбранным:
+                    if ($is_available) {
+                        // checked, если уже был указан метод доставки (возврат со страницы
+                        // подтверждения), иначе — если это первый метод в списке:
+                        $is_checked = isset($f_DeliveryMethod) ? $f_DeliveryMethod == $method_id : $is_first;
+                    } else {
+                        // недоступные методы никогда не являются выбранными
+                        $is_checked = false;
+                    }
+
+                    // Выводим блок для текущего способа доставки:
+                    echo "<input type='radio' name='f_DeliveryMethod' value='$method_id' " .
+                        (!$is_available ? " disabled" : "") .
+                        ($is_checked ? " checked" : "") . "/> ";
+                } else {
+                    // Если выбора нет:
+                    if ($is_available) {
+                        echo "<input type='hidden' name='f_DeliveryMethod' value='$method_id'/>";
+                    }
+                } ?>
+                <span class="tpl-property-delivery-method-name">
+                        <?= $method->get('name'); ?>
+                    </span>
+
+                <div class="tpl-property-delivery-method-description">
+                    <?= $method_description; ?>
+                </div>
+
+                <div class="tpl-property-delivery-method-estimate">
+                    <?
+                    // --- Оценка стоимости и времени доставки ---
+                    // Для методов доставки, вычисляющих стоимость и сроки на основании данных
+                    // от внешних служб, загрузка информации производится через AJAX.
+                    // Это сделано для того, чтобы не замедлять отображение страницы при
+                    // большом количестве таких вариантов доставки и/или медленном ответе
+                    // внешних служб.
+
+                    $price_estimate = "";
+                    $dates_estimate = "";
+                    $show_dates_estimate = true;
+                    $estimate_error = "";
+
+                    // Сбор данных
+                    if ($use_ajax_to_load_delivery_estimate && $method->get('handler_id')) {
+                        // "(данные загружаются)"
+                        $price_estimate = NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_ESTIMATE_LOADING;
+                        $method_ids_to_load_with_ajax[] = $method_id;
+                    } else {
+                        // расчёт сроков и стоимости производятся на нашем сервере
+                        $estimate = $method->get_estimate($order);
+
+                        if ($estimate->has_error()) {
+                            // при расчёте стоимости возникла ошибка
+                            $estimate_error = $estimate->get('error');
+                            $price_estimate = "";
+                        } else {
+                            // значение для блока «Стоимость доставки»
+                            $price_estimate = $estimate->get_formatted_price_and_discount();
+
+                            // значение для блока «Ожидаемые даты доставки»:
+                            $dates_estimate =
+                                "<span>" .
+                                // "Ожидаемая дата доставки:" / "Ожидаемые даты доставки:"
+                                ($estimate->has_dates_interval()
+                                    ? NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_ESTIMATE_DATES
+                                    : NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_ESTIMATE_DATE) .
+                                "</span> " .
+                                "<span>" . $estimate->get_dates_string() . "</span>";
+                            // показывать блок с датами доставки только если есть оценка сроков:
+                            $show_dates_estimate = strlen($estimate->get('min_days')) > 0;
+
+                        } // конец блока «произведён расчёт на нашем сервере (без ошибок)»
+                    }
+
+                    // Сбор данных окончен. Выводим оценку сроков.
+
+
+                    if ($estimate_error) {
+                        echo "<div class='tpl-state-error'>",
+                            // Не удалось рассчитать стоимость доставки: $estimate_error
+                            NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_ESTIMATE_ERROR . ": " . $estimate_error .
+                            "</div>\n";
+                    } else {
+                        // Вывод стоимости доставки:
+                        echo "<div class='tpl-block-delivery-cost'>",
+                            // "Стоимость:"
+                        "<span>", NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_ESTIMATE_PRICE, "</span> ",
+                            // собственно стоимость
+                            "<span id='nc_netshop_dm_{$method_id}_price'>" . $price_estimate . "</span>",
+                        "</div>\n";
+
+                        // Вывод сроков доставки:
+                        if ($show_dates_estimate) {
+                            echo "<div class='tpl-block-dates-estimate' id='nc_netshop_dm_{$method_id}_dates'>",
+                            $dates_estimate,
+                            "</div>\n";
+                        }
+                    }
+                    ?>
+                </div>
+            </label>
+            <?
+            if ($is_available) {
+                $is_first = false;
+            }
+            ?>
+        </div>
+    <?
+
+    } // foreach $methods_to_show
+
+    // загрузка оценки доставки через AJAX (требуется jQuery):
+    if ($method_ids_to_load_with_ajax) {
+    ?>
+        <script>
+            $(function () {
+                var ids = <?=json_encode($method_ids_to_load_with_ajax) ?>,
+                    form_data = $('#nc_netshop_add_order_form').serializeArray(),
+
+                // Функция, загружающая данные для указанного метода доставки
+                    request_data = function (method_id) {
+                        $.ajax({
+                            url: '<?= nc_module_path('netshop') . 'actions/delivery.php' ?>',
+                            type: 'post',
+                            dataType: 'json',
+                            data: {
+                                action: 'calculate_delivery',
+                                form_data: form_data,
+                                delivery_method_id: method_id
+                            }
+                        })
+                            .done(function (estimate) {
+                                if (!estimate || typeof estimate != 'object' || $.isEmptyObject(estimate)) {
+                                    // получен ответ неправильного формата
+                                    show_error(method_id, '<?=htmlspecialchars(NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_ESTIMATE_ERROR_NO_RESPONSE, ENT_QUOTES) ?>');
+                                }
+                                else if (estimate.error) {
+                                    // ошибка при вычислении сроков и стоимости доставки
+                                    show_error(method_id, estimate.error);
+                                }
+                                else {
+                                    // все ok, выводим полученные данные
+                                    $('#nc_netshop_dm_' + method_id + '_price').html(estimate.formatted_price_and_discount);
+
+                                    if (estimate.min_days != null) {
+                                        var dates_span_html = "<span>" +
+                                            (estimate.min_days == estimate.max_days
+                                                ? '<?=htmlspecialchars(NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_ESTIMATE_DATE, ENT_QUOTES) ?>'
+                                                : '<?=htmlspecialchars(NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_ESTIMATE_DATES, ENT_QUOTES) ?>') +
+                                            "</span>" +
+                                            "<span>" + estimate.dates_string + "</span>";
+
+                                        $('#nc_netshop_dm_' + method_id + '_dates').html(dates_span_html);
+                                    }
+                                }
+                            })
+                            .fail(function () {
+                                show_error(method_id, '<?=htmlspecialchars(NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_ESTIMATE_ERROR_NO_RESPONSE, ENT_QUOTES) ?>');
+                            });
+                    }, // конец функции request_data
+
+                // Отображение ошибки, возникшей при получении или вычислении данных
+                    show_error = function (method_id, error_message) {
+                        // "неизвестно. Не удалось вычислить стоимость и сроки доставки: [error_message]"
+                        $('#nc_netshop_dm_' + method_id + '_price').addClass('tpl-state-error').html(
+                            '<?=htmlspecialchars(NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_ESTIMATE_PRICE_UNKNOWN, ENT_QUOTES) ?>' +
+                                '. ' +
+                                '<?=htmlspecialchars(NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_ESTIMATE_ERROR, ENT_QUOTES) ?>' +
+                                ': ' +
+                                error_message);
+
+                    };
+
+                // Инициировать загрузку данных:
+                for (var i = 0, last = ids.length; i < last; i++) {
+                    // Запрос данных вынесен в отдельную функцию для сохранения
+                    // ID метода доставки для обработчика события fail
+                    request_data(ids[i]);
+                }
+            });
+        </script>
+    <?
+    } // "if $method_ids_to_load_with_ajax"
+
+        $blocks_shown++;
+
+        echo "</div>\n";
+
+    } // конец блока «Выбор способа доставки»
+
+    // -------------------------------------------------------------------------
+    // Выбор способа оплаты
+    // -------------------------------------------------------------------------
+
+    if ($payment_page == $current_page) {
+
+        echo "<div class='tpl-block-order-payment'>\n";
+
+        if ($blocks_shown) {
+            echo "<h2>", NETCAT_MODULE_NETSHOP_CHECKOUT_PAYMENT_METHOD_SECTION, "</h2>\n";
+        }
+
+        $available_payment_methods = $all_payment_methods->matching($context);
+        $methods_to_show = $show_unavailable_payment_methods
+            ? $all_payment_methods
+            : $available_payment_methods;
+
+        $num_methods_to_show = count($methods_to_show);
+
+        if (!count($available_payment_methods)) {
+            echo "<p class='tpl-block-message tpl-state-error'>" . NETCAT_MODULE_NETSHOP_CHECKOUT_NO_AVAILABLE_PAYMENT_METHODS . "</p>\n";
+        }
+
+        // Если ранее был указан способ оплаты (возврат со страницы подтверждения
+        // заказа), проверим, доступен ли он до сих пор (мог измениться способ
+        // доставки):
+        $previously_selected_method_is_available = isset($f_PaymentMethod)
+            ? $available_payment_methods->any('id', $f_PaymentMethod)
+            : false;
+
+        $is_first = true; // флаг для пред-выбора первого элемента
+
+        foreach ($methods_to_show as $method) {
+            ?>
+            <div class="tpl-block-order-payment-method">
+                <?
+                /** @var nc_netshop_payment_method $method */
+                $is_available = $method->evaluate_conditions($context);
+                $method_id = $method->get_id();
+
+                ?>
+                <label>
+                    <?
+                    // --- Название способа оплаты ---
+                    if ($num_methods_to_show > 1) {
+                        // Если способов оплаты более одного — нужны радио-кнопки
+
+                        // Решаем, должен ли текущий пункт быть выбранным:
+                        if ($is_available) {
+                            // checked, если уже был указан метод оплаты (возврат со страницы
+                            // подтверждения), иначе — если это первый метод в списке:
+                            $is_checked = isset($f_PaymentMethod) && $previously_selected_method_is_available
+                                ? $f_PaymentMethod == $method_id
+                                : $is_first;
+                        } else {
+                            // недоступные методы никогда не являются выбранными
+                            $is_checked = false;
+                        }
+
+                        // Выводим блок с названием текущего способа оплаты:
+
+                        echo "<input type='radio' name='f_PaymentMethod' value='$method_id' id='$radio_id' " .
+                            (!$is_available ? " disabled" : "") .
+                            ($is_checked ? " checked" : "") . "/> ";
+                    } else {
+                        // Если выбора нет:
+                        if ($is_available) {
+                            echo "<input type='hidden' name='f_PaymentMethod' value='$method_id' />";
+                        }
+                    }
+                    ?>
+                    <span class="tpl-property-payment-method=name"><?= $method->get('name'); ?></span>
+
+                    <div class="tpl-property-payment-method-description">
+                        <?= $method->get('description'); ?>
+                        <?
+                        // --- Наценка за способ оплаты ---
+                        if ($method->evaluate_conditions($context)) {
+                            $extra_cost = $method->get_extra_cost($order);
+                            if ($extra_cost) {
+                                echo "<div>",
+                                "<span>",
+                                    // "Дополнительный сбор: "
+                                NETCAT_MODULE_NETSHOP_CHECKOUT_PAYMENT_EXTRA_CHARGE,
+                                "</span> ",
+                                "<span>", $netshop->format_price($extra_cost), "</span>",
+                                "</div>\n";
+                            }
+                        }
+                        ?>
+                    </div>
+                </label>
+                <?
+                if ($is_available) {
+                    $is_first = false;
+                }
+                ?>
+            </div>
+        <?
+        } // foreach $methods_to_show
+
+        $blocks_shown++;
+
+        echo "</div>\n";
+
+    } // конец блока «Выбор способа оплаты»
+
+    // -------------------------------------------------------------------------
+    // Подтверждение заказа
+    // -------------------------------------------------------------------------
+
+    if ($confirmation_page == $current_page) {
+        // Итоговая сумма к оплате
+        $total_sum = $netshop->cart->get_totals();
+
+        echo "<div class='tpl-block-order-confirmation'>\n",
+            // "Подтверждение заказа"
+            // "<h2>", NETCAT_MODULE_NETSHOP_CHECKOUT_CONFIRMATION_SECTION, "</h2>\n",
+            // "Пожалуйста, проверьте правильность указанных данных."
+        "<p class='tpl-block-message tpl-state-info'>", NETCAT_MODULE_NETSHOP_CHECKOUT_PLEASE_REVIEW_ORDER, "</p>";
+
+        // --- Блок «Подтверждение контактных данных и адреса» ---
+        echo "<div class='tpl-block-order-address-confirmation'>\n",
+            // "Контактные данные и адрес доставки"
+        "<h3>", NETCAT_MODULE_NETSHOP_CHECKOUT_ORDER_DATA_SECTION, "</h3>\n";
+
+        $order_component = $nc_core->get_component($classID);
+        foreach ($order->to_array() as $field_name => $value) {
+            // Способы оплаты и доставки показываются в отдельном блоке:
+            if ($field_name == 'DeliveryMethod' || $field_name == 'PaymentMethod') {
+                continue;
+            }
+
+            $field = $order_component->get_field($field_name);
+
+            // Не выводить поля, не являющиеся полем компоненты или «служебные» (напр., "user_hash")
+            if (!$field || !$field['description']) {
+                continue;
+            }
+
+            // Не выводить поля без значений:
+            if (!strlen($value)) {
+                continue;
+            }
+
+            // форматирование / подготовка значения в зависимости от типа поля:
+            switch ($field['type']) {
+                case NC_FIELDTYPE_BOOLEAN:
+                    $value = $value ? NETCAT_MODULE_NETSHOP_CHECKOUT_BOOLEAN_FIELD_YES
+                        : NETCAT_MODULE_NETSHOP_CHECKOUT_BOOLEAN_FIELD_NO;
+                    break;
+
+                case NC_FIELDTYPE_TEXT:
+                    $value = "<blockquote>" . nl2br(htmlspecialchars($value)) . "</blockquote>\n";
+                    break;
+
+                case NC_FIELDTYPE_SELECT:
+                case NC_FIELDTYPE_MULTISELECT:
+                    $values = explode(",", $value);
+                    $value = "";
+                    foreach ($values as $id) {
+                        $value .= ($value ? ', ' : '') . nc_get_list_item_name($field['table'], $id);
+                    }
+                    break;
+
+                case NC_FIELDTYPE_DATETIME:
+                    $value = date(NETCAT_MODULE_NETSHOP_DATETIME_FORMAT, strtotime($value));
+                    $value = preg_replace('/\s+(?:00:)00:00$/', '', $value);
+                    break;
+            }
+
+            // Строка со значением поля:
+            echo "<div class='tpl-property-" . nc_camelcase_to_dashcase($field['name']) . "'>\n",
+            "<span class='tpl-caption'>$field[description]:</span> ",
+            "<span class='tpl-value'>$value</span>\n",
+            "</div>\n";
+
+        } // foreach order field
+
+        // Кнопка «Изменить» [введённые данные]
+        ?>
+        <button type="submit" class="tpl-link-change" name="current_page" value="1">
+            <?= NETCAT_MODULE_NETSHOP_CHECKOUT_CHANGE_BUTTON; ?>
+        </button>
+        <?
+
+        echo "</div>\n"; // конец блока «Подтверждение контактных данных и адреса»
+
+        // --- Блок «Подтверждение состава заказа» ---
+        $items = $netshop->cart->get_items();
+        $has_discount_column = $items->any('ItemDiscount', 0, '>');
+
+        echo "<div class='tpl-block-order-items'>\n",
+             "<h3>", NETCAT_MODULE_NETSHOP_CHECKOUT_ITEMS_SECTION, "</h3>\n",
+             tpl_netshop_make_cart_contents_table(),
+             "</div>\n";
+
+        // --- Блок «Подтверждение способа доставки» ---
+        if (isset($f_DeliveryMethod)) {
+            echo "<div class='tpl-block-order-delivery-confirmation'>\n",
+                // "Доставка"
+            "<h3>", NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_METHOD_SECTION, "</h3>\n";
+
+            $method = $netshop->delivery->get_method_if_enabled($f_DeliveryMethod, $context);
+            if (!$method) {
+                echo "<p class='tpl-block-message tpl-state-error'>",
+                NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_INCORRECT_METHOD,
+                "</p>\n";
+            } else {
+                echo "<div class='tpl-property-delivery-method-name'>\n",
+                "<span class='tpl-caption'>",
+                    // "Способ доставки: "
+                NETCAT_MODULE_NETSHOP_CHECKOUT_SELECTED_DELIVERY_METHOD,
+                "</span> ",
+                    // (Название способа доставки)
+                "<span class='tpl-value'>", $method->get('name'), "</span>\n",
+                "</div>\n";
+
+                /** @var nc_netshop_delivery_estimate $estimate */
+                $estimate = $method->get_estimate($order);
+                if ($estimate->has_error()) {
+                    echo "<p class='tpl-state-error'>",
+                        // "Не удалось вычислить стоимость и сроки доставки"
+                    NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_ESTIMATE_ERROR,
+                    ': ',
+                    $estimate->get('error'),
+                    "</p>\n";
+                } else {
+                    $total_sum += $estimate->get('price');
+
+                    // Стоимость доставки
+                    echo "<div class='tpl-property-delivery-method-estimate-price'>\n",
+                    "<span class='tpl-caption'>",
+                        // "Стоимость: "
+                    NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_ESTIMATE_PRICE,
+                    "</span> ",
+                    "<span class='tpl-value'>", $estimate->get_formatted_price_and_discount(), "</span>\n",
+                    "</div>\n";
+
+                    // Даты доставки
+                    if ($estimate->get('min_days') != null) {
+                        echo "<div class='tpl-property-delivery-method-estimate-dates'>\n",
+                        "<span class='tpl-caption'>",
+                            // "Ожидаемая дата доставки:" / "Ожидаемые даты доставки:"
+                            ($estimate->has_dates_interval()
+                                ? NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_ESTIMATE_DATES
+                                : NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_ESTIMATE_DATE) .
+                            "</span> " .
+                            "<span class='tpl-value'>" . $estimate->get_dates_string() . "</span>\n",
+                        "</div>\n";
+                    }
+                }
+            }
+
+            // Кнопка «Изменить» [способ доставки]
+            if (count($all_delivery_methods->matching($context)) > 1) {
+                ?>
+                <button type="submit" class="tpl-link-change" name="current_page" value="<?= $delivery_page; ?>">
+                    <?= NETCAT_MODULE_NETSHOP_CHECKOUT_CHANGE_BUTTON; ?>
+                </button>
+            <?
+            }
+
+            echo "</div>\n";
+        }
+
+        // --- Блок «Подтверждение способа оплаты» ---
+        if (isset($f_PaymentMethod)) {
+            echo "<div class='tpl-block-payment-confirmation'>\n",
+                // "Способ оплаты"
+            "<h3>", NETCAT_MODULE_NETSHOP_CHECKOUT_PAYMENT_METHOD_SECTION, "</h3>\n";
+
+            $method = $netshop->payment->get_method_if_enabled($f_PaymentMethod, $context);
+            if (!$method) {
+                echo "<p class='tpl-block-message tpl-state-error'>",
+                NETCAT_MODULE_NETSHOP_CHECKOUT_PAYMENT_INCORRECT_METHOD,
+                "</p>\n";
+            } else {
+                echo "<div class='tpl-property-payment-method-name'>\n",
+                "<span class='tpl-caption'>",
+                    // "Способ оплаты: "
+                NETCAT_MODULE_NETSHOP_CHECKOUT_SELECTED_PAYMENT_METHOD,
+                "</span> ",
+                    // (Название способа оплаты)
+                "<span class='tpl-value'>", $method->get('name'), "</span>\n",
+                "</div>\n";
+
+                $extra_cost = $method->get_extra_cost($order);
+                if ($extra_cost) {
+                    $total_sum += $extra_cost;
+
+                    echo "<div class='tpl-property-payment-method-extra-cost'>\n",
+                    "<span class='tpl-caption'>",
+                        // "Дополнительный сбор: "
+                    NETCAT_MODULE_NETSHOP_CHECKOUT_PAYMENT_EXTRA_CHARGE,
+                    "</span> ",
+                    "<span class='tpl-value'>", $netshop->format_price($extra_cost), "</span>\n",
+                    "</div>\n";
+                }
+            }
+
+            // Кнопка «Изменить» [способ оплаты]
+            if (count($all_payment_methods->matching($context)) > 1) {
+                ?>
+                <button type="submit" class="tpl-link-change" name="current_page" value="<?= $payment_page; ?>">
+                    <?= NETCAT_MODULE_NETSHOP_CHECKOUT_CHANGE_BUTTON; ?>
+                </button>
+            <?
+            }
+
+            echo "</div>\n";
+        }
+
+        // --- Итоговые суммы ---
+        echo "<div class='tpl-block-totals-confirmation'>\n",
+            // "Итого"
+        "<h3>", NETCAT_MODULE_NETSHOP_CHECKOUT_TOTALS_SECTION, "</h3>\n",
+        "<div class='tpl-property-items-totals'>\n",
+        "<span class='tpl-caption'>",
+            // "Стоимость товаров: "
+        NETCAT_MODULE_NETSHOP_CHECKOUT_CART_TOTALS,
+        "</span> ",
+            // (Общая сумма)
+        "<span class='tpl-value'>", $netshop->format_price($netshop->cart->get_totals()), "</span>\n",
+        "</div>\n",
+        "<div class='tpl-property-totals'>\n",
+        "<span class='tpl-caption'>",
+            // "Общая сумма к оплате: "
+        NETCAT_MODULE_NETSHOP_CHECKOUT_ORDER_TOTALS,
+        "</span> ",
+            // (Общая сумма)
+        "<span class='tpl-value'>", $netshop->format_price($total_sum), "</span>\n",
+        "</div>\n",
+        "</div>\n";
+
+        // --- Конец секции ---
+        echo "</div>\n";
+    }
+
+    // -------------------------------------------------------------------------
+    // Общая завершающая часть формы
+    // -------------------------------------------------------------------------
+
+    ?>
+    <div class="tpl-block-order-actions">
+        <? if ($current_page > 1) { ?>
+            <button type="submit" class="tpl-link-prev" name="current_page"
+                    value="<?= $current_page - 1; ?>">
+                <?= NETCAT_MODULE_NETSHOP_CHECKOUT_PREV_PAGE_BUTTON; ?>
+            </button>
+        <? } ?>
+        <? if ($current_page == $pages) { ?>
+            <button type="submit" name="posting" value="1"
+                    class="tpl-link-checkout">
+                <?= NETCAT_MODULE_NETSHOP_CHECKOUT_BUTTON; ?>
+            </button>
+        <?
+        } else {
+            ?>
+            <button type="submit" class="tpl-link-next" name="go_to_next_page"
+                    value="1">
+                <?= NETCAT_MODULE_NETSHOP_CHECKOUT_NEXT_PAGE_BUTTON; ?>
+            </button>
+        <? } ?>
+    </div>
+
+    </fieldset>
+    </form>
+    </div>
+<? } ?>

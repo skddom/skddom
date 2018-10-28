@@ -1,0 +1,55 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+
+        <?
+        $order = new nc_netshop_order($res[$f_RowNum]);
+        $order->set_catalogue_id($catalogue);
+
+        if (isset($inside_netshop)) {
+            $order_link = nc_core('ADMIN_PATH') . "#module.netshop.order.view($catalogue,$f_RowID)";
+        }
+        else {
+            $order_link = nc_core('ADMIN_PATH') . "#object.view($cc,$f_RowID)";
+        }
+        ?>
+        <tr>
+            <td><input type="checkbox" name="selected_order_ids[]" value="<?= $f_RowID ?>"></td>
+            <td><?= $f_Created_day ?>.<?= $f_Created_month ?>.<?= $f_Created_year ?></td>
+            <td>
+                <a href="<?= $order_link  ?>" target="_top" title="<?= NETCAT_MODERATION_CHANGE ?>"><?= $f_RowID ?></a>
+            </td>
+            <td>
+                <? if ($f_UserID): ?>
+                    <a href="<?= nc_core('ADMIN_PATH') . "#user.edit($f_UserID)" ?>" target="_blank"><?= $f_ContactName ?></a>
+                <? else: ?>
+                    <?= $f_ContactName ?>
+                <? endif ?>
+            </td>
+            <td>
+            <?
+                $contact_data = array();
+                if ($f_Email) { $contact_data[] = $f_Email; }
+                if ($f_Phone) { $contact_data[] = $f_Phone; }
+                echo join(',<br>', $contact_data);
+            ?>
+            </td>
+            <td>
+                <a href="<?= $order_link  ?>" target="_top" title="<?= NETCAT_MODERATION_CHANGE ?>">
+                <? foreach ($order->get_items() as $item): ?>
+                    <?= htmlspecialchars($item['FullName']) ?>&nbsp;— <?= $item['Qty'] ?>&nbsp;<?= $item['Units'] ?><br>
+                <? endforeach ?>
+                </a>
+            </td>
+            <td class="tpl-property-total-price"><?= $order['TotalPriceF'] ?></td>
+            <td><?= $order['DeliveryMethodName'] ?></td>
+            <td>
+                <input type="hidden" name="Checked[<?= $f_RowID ?>]" value="<?= $f_Checked ?>"/>
+                <select name="Status[<?= $f_RowID ?>]" data-nc-original="<?= (int)$f_Status_id ?>">
+                    <option value="0"><?= NETCAT_MODULE_NETSHOP_ORDER_NEW ?></option>
+                    <? foreach ($statuses as $status) { ?>
+                        <option value="<?= $status['ShopOrderStatus_ID'] ?>" <?= $f_Status_id == $status['ShopOrderStatus_ID'] ? 'selected' : '' ?>><?= $status['ShopOrderStatus_Name'] ?></option>
+                    <? } ?>
+                </select>
+            </td>
+        </tr>
+
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

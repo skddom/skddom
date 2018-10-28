@@ -1,0 +1,8 @@
+</tbody>
+</table>
+<?if(!$totRows):?>
+<p>На текущий момент у нас нет для Вас индивидуальных рекомендаций. Следите за обновлениями или согласитесь на отправку появившихся рекомендаций на электронную почту.</p>
+<?endif?>
+<br>
+<form action="<?=$subLink?>" method="post"><input class="js-notify" type="checkbox" value="1" name="notify"<?if($lk->data['Send']):?> checked<?endif?> id="iwantto"><label for="iwantto">Хочу получать на электронную почту уведомления о новых
+рекомендациях для моего проекта</label></form>

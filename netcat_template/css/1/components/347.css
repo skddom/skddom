@@ -1,0 +1,19 @@
+.tpl-component-tabs-lk ul.tabs { list-style: none; padding:0; margin:0; display:table; width: 100%; }
+.tpl-component-tabs-lk ul.tabs li { display: table-cell; line-height: 50px; text-align: center; }
+.tpl-component-tabs-lk ul.tabs li a { display: block; text-decoration: none; background: #F4EAD3; font-size: 15px; color: #000; padding: 0 10px; }
+.tpl-component-tabs-lk ul.tabs li a:hover, .tpl-component-tabs-lk ul.tabs li a.active { background: #EBC59B; }
+.tpl-component-tabs-lk .mobile { display:none; }
+@media(max-width:768px) { 
+.tpl-component-tabs-lk .mobile { display:block; }
+.tpl-component-tabs-lk ul.tabs li { display:block;text-align:left; }
+.tpl-component-tabs-lk .option-sub .title-status { width:38%;text-align:right; }
+.tpl-component-tabs-lk .option-sub .title-status .EtapStatus_Name { font-size:12px;white-space:nowrap; }
+.tpl-component-tabs-lk .btpl-348 p.date-notice { margin-right:30%;font-size:15px;line-height:normal;margin-bottom:10px; }
+.tpl-component-tabs-lk table.recomm tr td:nth-child(1) { width:20%; }
+.tpl-component-tabs-lk table.recomm tr td:nth-child(2), .tpl-component-tabs-lk table.recomm tr th:nth-child(2), .tpl-component-tabs-lk table.recomm tr td:nth-child(4), .tpl-component-tabs-lk table.recomm tr th:nth-child(4), .tpl-component-tabs-lk table.recomm tr th:nth-child(5), .tpl-component-tabs-lk table.recomm tr td:nth-child(5) { display:none; }
+.tpl-component-tabs-lk .expand_prorab { display:none; }
+ }
+@media(max-width:360px) { 
+.tpl-component-tabs-lk .option-sub .title-status { width:100%;position:static;padding-bottom:20px;float:none;display:block;text-align:center; }
+.tpl-component-tabs-lk .btpl-348 p.date-notice { margin:0 0 10px 0; text-align:center; }
+ }

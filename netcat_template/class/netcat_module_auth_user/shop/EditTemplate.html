@@ -1,0 +1,49 @@
+<?= ($warnText ? "<div class='warnText'>$warnText</div>" : NULL) ?>
+<form name='adminForm' id='adminForm' class='nc-form' enctype='multipart/form-data' method='post' action='<?= $SUB_FOLDER ?><?= $HTTP_ROOT_PATH ?>message.php'>
+    <div id='nc_moderate_form'>
+        <div class='nc_clear'></div>
+        <input name='admin_mode' type='hidden' value='<?= $admin_mode ?>'/>
+        <?= $nc_core->token->get_input() ?>
+        <input name='catalogue' type='hidden' value='<?= $catalogue ?>'/>
+        <input name='cc' type='hidden' value='<?= $cc ?>'/>
+        <input name='sub' type='hidden' value='<?= $sub ?>'/><input name='message' type='hidden' value='<?= $message ?>'/>
+        <input name='posting' type='hidden' value='1'/>
+        <input name='curPos' type='hidden' value='<?= $curPos ?>'/>
+        <input name='f_Parent_Message_ID' type='hidden' value='<?= $f_Parent_Message_ID ?>'/>
+        <?= nc_form_moderate('change', $admin_mode, 1, $systemTableID, $current_cc, (isset($f_Checked) ? $f_Checked  : null), $f_Priority , $f_Keyword, $f_ncTitle, $f_ncKeywords, $f_ncDescription, $f_ncSMO_Title, $f_ncSMO_Description, $f_ncSMO_Image ) ?>
+    </div>
+    <?
+    $component = $component = new nc_Component($classID, 3);
+    $fields = $component->get_fields(NC_FIELDTYPE_STRING);
+    $ForumName_field = null;
+    $Email_field = null;
+
+    foreach ($fields as $field) {
+        if ($field['name'] == 'ForumName') {
+            $ForumName_field = $field;
+            continue;
+        }
+
+        if ($field['name'] == 'Email') {
+            $Email_field = $field;
+            continue;
+        }
+    }
+    ?>
+    <table class="account-modify-form">
+        <tr>
+            <td width="200"><?= nc_field_caption($ForumName_field); ?></td>
+            <td><?= nc_string_field('ForumName', "maxlength='255' size='50'", ($class_id ? $class_id : $classID)) ?></td>
+        </tr>
+        <tr>
+            <td><?= nc_field_caption($Email_field); ?></td>
+            <td><?= nc_string_field('Email', "maxlength='255' size='50'", ($class_id ? $class_id : $classID)) ?></td>
+        </tr>
+    </table>
+
+    <br/>
+
+    <div><?= NETCAT_MODERATION_INFO_REQFIELDS ?></div>
+    <br/>
+    <?= nc_submit_button(NETCAT_MODERATION_BUTTON_CHANGE, true) ?>
+</form>

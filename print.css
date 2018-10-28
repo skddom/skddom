@@ -1,0 +1,20 @@
+@media print {
+	
+	body {background-color: green;}
+	
+	/* * {display: none} */
+	
+/*	#img {display: block; visibility: visible; border: 2px solid #ccc;}
+	
+	.page {
+		display: block;
+		visibility: visible;
+		
+		width: 100px;
+		height: 100px;
+		background-color: green;
+	}
+	*/
+}
+
+

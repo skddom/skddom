@@ -1,0 +1,54 @@
+<!-- FormPrefix --><?= $f_AdminCommon; ?>
+<? if ($widget_mode) { ?>
+<? if ($widget_count) { ?>
+<div class="tpl-widget-netshop-goods-offers">
+    <h2>Акции</h2>
+
+    <div class="tpl-block-list-objects">
+        <? } ?>
+        <? } else { ?>
+        <div class="tpl-component-offers tpl-block-list">
+            <div class="tpl-block-list-objects tpl-layout-tiles">
+                <? } ?><!-- /FormPrefix -->
+
+                <!-- RecordTemplate -->
+                <? if (!$widget_mode || ($widget_mode && $f_ShowOnHome)) { ?>
+                    <div class="tpl-block-list-object">
+                        <?= $f_AdminButtons; ?>
+                        <article>
+                            <a class="tpl-link-more" href="<?= $f_Link; ?>">
+                                <? if ($f_Image) { ?>
+                                    <img class="tpl-property-image" src='<?= $f_Image ?>' alt='<?= $f_Title ?>'/>
+                                <? } ?>
+
+                                <? if ($f_Price || $f_OldPrice) { ?>
+                                    <div class="tpl-block-prices <?= !$f_Image ? 'tpl-state-left' : ''; ?>">
+                                        <div class="<?= $widget_mode ? 'tpl-property-item-price' : 'tpl-property-price'; ?>">
+                                            <span class="tpl-value"><?= $f_Price ?></span>
+                                        </div><br>
+                                        <div class="<?= $widget_mode ? 'tpl-property-original-price' : 'tpl-property-old-price'; ?>">
+                                            <span class="tpl-value"><?= $f_OldPrice ?></span>
+                                        </div>
+                                    </div>
+                                <? } ?>
+
+                                <div class="tpl-block-text <?= !$f_Image && !$f_Price && !$f_OldPrice ? 'tpl-state-up' : ''; ?>">
+                                    <h3><?= $f_Title; ?></h3>
+                                    <h4><?= $f_SubTitle; ?></h4>
+
+                                    <? if (!$f_Image && !$f_Price && !$f_OldPrice) { ?>
+                                        <p><?= $f_Description; ?></p>
+                                    <? } ?>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                <? } ?>
+                <!-- /RecordTemplate -->
+
+                <!-- FormSuffix -->
+                <? if (!$widget_mode || $widget_count) { ?>
+            </div>
+        </div>
+    <? } ?>
+        <!-- /FormSuffix -->

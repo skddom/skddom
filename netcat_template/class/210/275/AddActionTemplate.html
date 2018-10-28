@@ -1,0 +1,96 @@
+<?php echo " ";
+  require_once($nc_core->INCLUDE_FOLDER."classes/nc_imagetransform.class.php");
+  if ($_FILES[f_PlanDoma][size]!=0 && $_FILES[f_PlanDoma][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('PlanDoma','PreviewPlan',688,900);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'PlanDoma', "");
+$is = @getimagesize($photo_path);
+    //if ($photo_path && $is[0]>688) nc_ImageTransform::imgResize($photo_path,$photo_path,688,900);
+  }
+  if ($_FILES[f_MainImg][size]!=0 && $_FILES[f_MainImg][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('MainImg','MainImgThumb',379,284);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'MainImg', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600);
+  }
+  if ($_FILES[f_Dom1][size]!=0 && $_FILES[f_Dom1][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Dom1','Dom1Thumb',113,85);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Dom1', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600);
+  }
+  if ($_FILES[f_Dom2][size]!=0 && $_FILES[f_Dom2][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Dom2','Dom2Thumb',113,85);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Dom2', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600);
+  }
+  if ($_FILES[f_Dom3][size]!=0 && $_FILES[f_Dom3][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Dom3','Dom3Thumb',113,85);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Dom3', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600); // 618, 900
+  }
+  if ($_FILES[f_IteriorMain][size]!=0 && $_FILES[f_IteriorMain][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('IteriorMain','IteriorMainThumb',236,177);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'IteriorMain', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600); // 618,900
+  }
+  if ($_FILES[f_Interior1][size]!=0 && $_FILES[f_Interior1][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Interior1','Iterior1Thumb',105,78);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Interior1', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600); // 618,900
+  }
+  if ($_FILES[f_Interior2][size]!=0 && $_FILES[f_Interior2][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Interior2','Iterior2Thumb',105,78);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Interior2', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600); // 618,900
+  }
+//------ тест ----------
+  if ($_FILES[f_smallDom1][size]!=0 && $_FILES[f_smallDom1][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'smallDom1', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,200, 150, 3, 'jpg', 100); // 618,900
+  }
+  if ($_FILES[f_bigDom1][size]!=0 && $_FILES[f_bigDom1][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'bigDom1', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path, 1280, 0, 3, 'jpg', 100); // 618,900
+  }
+
+
+
+### default
+if($inside_admin) {
+ ob_end_clean();
+ header("Location: ".$goBackLink."&inside_admin=1");
+ exit;
+}
+else {
+  echo NETCAT_MODERATION_MSG_OBJADD;
+  echo "<br><br>".$goBack;
+}
+echo " "; ?>

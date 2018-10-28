@@ -1,0 +1,52 @@
+.tpl-component-210.tpl-template-2292 .info { margin-bottom:0; }
+.tpl-component-210.tpl-template-2292 .by-area .projects .portfolio-list.portfolio-grid-layout-6 .portfolio-item-block .title { font-size:22px; font-weight:400; }
+.tpl-component-210.tpl-template-2292 .by-area .portfolio-list.portfolio-grid-layout-6 .portfolio-item-block
+.tpl-component-210.tpl-template-2292 .by-area .projects .portfolio-list.portfolio-grid-layout-6 .portfolio-item-block .info { min-height: 304px; padding-top:40px }
+.tpl-component-210.tpl-template-2292 .by-area .portfolio-item-block .project-description { font-size:15px; padding-bottom: 30px; }
+.tpl-component-210.tpl-template-2292 .by-area .view-more { text-transform:uppercase; font-size:15px; }
+.tpl-component-210.tpl-template-2292 .by-area .view-more:after { content: '\2192'; font-size:17px; line-height: 15px; margin:0 0 0 5px; }
+.tpl-component-210.tpl-template-2292 .by-area .projects .portfolio-list.portfolio-grid-layout-6 .portfolio-item-block .info { padding-top: 30px; padding-bottom: 80px; min-height:304px; }
+.tpl-component-210.tpl-template-2292 .labels { display: inline-block; float:left; position:relative; padding-top:5px; }
+.tpl-component-210.tpl-template-2292 .by-area .info { float:left; }
+.tpl-component-210.tpl-template-2292 .by-area .labels .label { background:green; color:#fff; display:inline-block; font-weight:300; margin:10px 0 0 0; padding:0 15px 0 15px; line-height: 30px; border-radius: 0; font-family: roboto; font-size:14px; letter-spacing:1px; position:relative; }
+.tpl-component-210.tpl-template-2292 .by-area .labels .label:after { content:""; border: 15px solid transparent; border-left: 15px green solid; border-top: 15px green solid; position:absolute; right:-15px; }
+.tpl-component-210.tpl-template-2292 .by-area .labels .label:before { content:""; border: 15px solid transparent; border-bottom: 15px green solid; border-left: 15px green solid; position:absolute; right:-15px; }
+.tpl-component-210.tpl-template-2292 .by-area .labels .label.special { background:red; }
+.tpl-component-210.tpl-template-2292 .by-area .labels .label.special:after { content:""; border: 15px solid transparent; border-left: 15px red solid; border-top: 15px red solid; position:absolute; right:-15px; }
+.tpl-component-210.tpl-template-2292 .by-area .labels .label.special:before { content:""; border: 15px solid transparent; border-bottom: 15px red solid; border-left: 15px red solid; position:absolute; right:-15px; }
+.tpl-component-210.tpl-template-2292 .by-area .labels .label.cheap { background:#b76c00; }
+.tpl-component-210.tpl-template-2292 .by-area .labels .label.cheap:after { content:""; border: 15px solid transparent; border-left: 15px #b76c00 solid; border-top: 15px #b76c00 solid; position:absolute; right:-15px; }
+.tpl-component-210.tpl-template-2292 .by-area .labels .label.cheap:before { content:""; border: 15px solid transparent; border-bottom: 15px #b76c00 solid; border-left: 15px #b76c00 solid; position:absolute; right:-15px; }
+.tpl-component-210.tpl-template-2292 .portfolio-filter+.area-range { margin:-15px 0 15px; font-size: 18px; font-family: roboto; }
+.tpl-component-210.tpl-template-2292 .portfolio-filter+.area-range a { color:#bbb; font-weight: 400; cursor:pointer; }
+.tpl-component-210.tpl-template-2292 .portfolio-filter+.area-range a:before { content:""; width:2px; height:100%; min-height:15px; display:inline-block; background:#bbb; vertical-aling:bottom; margin:0 10px 0; position:relative; top: 1px; }
+.tpl-component-210.tpl-template-2292 .portfolio-filter+.area-range a:first-child:before { content:none; }
+.tpl-component-210.tpl-template-2292 .portfolio-filter+.area-range a.active { color:#000; }
+.tpl-component-210.tpl-template-2292 .portfolio-filter { background:none; border-bottom:1px solid #ba7100; display:block; }
+.tpl-component-210.tpl-template-2292 .portfolio-filter a { background:#f9f9f9; border:1px solid #b97100; border-bottom:0; font-family:Roboto; font-size: 18px; color:#000; margin-right:3px; }
+.tpl-component-210.tpl-template-2292 .portfolio-filter a.active { background: #b97100; color:#fff; }
+@media(max-width:550px) { 
+.tpl-component-210.tpl-template-2292 a.btn { white-space: normal; height: auto; line-height: normal; }
+.tpl-component-210.tpl-template-2292 .portfolio-filter a { padding:5px; font-size:15px; }
+.tpl-component-210.tpl-template-2292 .portfolio-filter+.area-range a { font-size:14px; }
+ }
+@media(max-width:550px) { 
+.tpl-component-210.tpl-template-2292 .labels { position:absolute;top:-10px; }
+.tpl-component-210.tpl-template-2292 .projects .portfolio-list.portfolio-grid-layout-6 .portfolio-item-block .info .project-description { width:100%; }
+.tpl-component-210.tpl-template-2292 .projects .portfolio-list.portfolio-grid-layout-6 .portfolio-item-block .info { padding:10px; }
+.tpl-component-210.tpl-template-2292 .projects .portfolio-list.portfolio-grid-layout-6 .portfolio-item-block .title { font-size:20px; }
+ }
+@media(max-width:767px) { 
+.tpl-component-210.tpl-template-2292 .by-area .projects .portfolio-list.portfolio-grid-layout-6 .portfolio-item-block .info { min-height:initial; }
+.tpl-component-210.tpl-template-2292 .by-area .portfolio-item-block .project-description { padding-bottom:0; }
+ }
+@media(max-width:360px) { 
+.tpl-component-210.tpl-template-2292 .line-pro-title { font-size:16px; }
+.tpl-component-210.tpl-template-2292 .mgt-header-block.mgt-header-block-style-2 .mgt-header-block-title { font-size:20px; }
+.tpl-component-210.tpl-template-2292 div#portfolio-list .portfolio-item-block { padding-bottom:55%!important; }
+.tpl-component-210.tpl-template-2292 .portfolio-list .mix { clear:both; }
+.tpl-component-210.tpl-template-2292 .projects .portfolio-list.portfolio-grid-layout-6 .portfolio-item-block .info { padding:10px; }
+.tpl-component-210.tpl-template-2292 .projects .portfolio-list.portfolio-grid-layout-6 .portfolio-item-block .title { font-size:20px; }
+.tpl-component-210.tpl-template-2292 .by-area .projects .portfolio-list.portfolio-grid-layout-6 .portfolio-item-block .info { min-height:initial; }
+.tpl-component-210.tpl-template-2292 .by-area .portfolio-item-block .project-description { padding-bottom:0; }
+ }

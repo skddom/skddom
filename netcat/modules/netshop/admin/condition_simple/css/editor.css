@@ -1,0 +1,48 @@
+/**
+ * "CONDITION EDITOR" styles
+ */
+
+.nc-netshop-condition-editor {
+    border: 1px solid #DADADA;
+    margin-top: 5px;
+}
+
+/**
+ * Conditions
+ */
+.nc-netshop-condition-editor .condition {
+    line-height: 2.2em;
+    padding: 5px 0 5px 62px;
+}
+
+.nc-netshop-condition-editor .condition-param, .nc-netshop-condition-editor .condition-string {
+    padding-right: 15px;
+}
+
+/**
+ * Inputs
+ */
+.nc-netshop-condition-editor .condition-param input {
+    margin: 0 !important;
+}
+
+.nc-netshop-condition-editor .condition input[type=number] {
+    width: 105px;
+    text-align: center;
+}
+
+.nc-netshop-condition-editor .condition-param input.condition-param-value {
+    vertical-align: middle;
+}
+
+
+/* "SIMPLE CONDITION EDITOR" specific styles */
+
+.nc-netshop-condition-editor-simple .condition {
+    background: none !important;
+    padding: 15px 20px;
+}
+
+.nc-netshop-condition-editor-simple input[type=number] {
+    width: 105px !important;
+}

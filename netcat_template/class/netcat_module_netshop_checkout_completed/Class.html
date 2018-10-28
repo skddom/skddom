@@ -1,0 +1,58 @@
+<!-- FormPrefix --><div class="tpl-block-main tpl-component-order-added">
+    <fieldset>
+        <legend>Заказ оформлен</legend>
+        <div class="tpl-block-order-info">
+            Ваш заказ оформлен!<br>
+            Информация по доставке придет на почту<br>
+            в течение 5 минут.<br><br>
+        </div>
+        <div class="tpl-block-order-actions">
+            <?
+            try {
+                $invoice_id = (int)$nc_core->input->fetch_get('invoice');
+            
+                if ($invoice_id) {
+                    $invoice = new nc_payment_invoice();
+                    $invoice->load($invoice_id);
+                
+                    if ($invoice->get('status') == nc_payment_invoice::STATUS_SUCCESS) {
+                        ?>Благодарим Вас за оплату счёта!<?
+                    }
+                    else {                    
+                        $invoice_customer_id = $invoice->get('customer_id');
+                        if (!$invoice_customer_id || $invoice_customer_id == $AUTH_USER_ID) {
+                            $payment_method = nc_payment_factory::create($invoice->get('payment_system_id'));
+                            echo $payment_method->get_request_form($invoice);
+                        }
+                        else if (!$AUTH_USER_ID) {
+                          ?>
+                          <div class="tpl-block-message tpl-state-error">
+                              Пожалуйста, войдите на сайт со своим логином и паролем,<br>
+                              чтобы оплатить счёт.
+                          </div>
+                          <?
+                        }
+                    }
+                }
+                else {
+                    ?><a class="tpl-link-catalog" href="<?= $nc_core->SUB_FOLDER; ?>/products/">Вернуться к покупкам</a><?
+                }
+          }
+          catch (Exception $e) {
+              ?>
+              <div class="tpl-block-message tpl-state-error">
+                  Не удалось получить информацию о выставленном счёте.<br>
+                  Пожалуйста, сообщите о том, что вам не удалось оплатить заказ,<br>
+                  когда с Вами свяжется сотрудник нашего магазина.
+              </div>
+              <?
+          }
+          ?>
+        </div>
+    </fieldset>
+</div>
+<!-- /FormPrefix -->
+
+<!-- RecordTemplate --><!-- /RecordTemplate -->
+
+<!-- FormSuffix --><!-- /FormSuffix -->

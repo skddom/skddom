@@ -1,0 +1,9 @@
+<?
+if($inside_admin) {
+    ob_end_clean();
+    header('Location: '.$goBackLink.'&inside_admin=1');
+    exit;
+} else { 
+if (is_array($message)){echo NETCAT_MODERATION_MSG_OBJSDELETED;} else {echo NETCAT_MODERATION_MSG_OBJDELETED;}	echo "<br /><br />".$goBack;
+}
+?>

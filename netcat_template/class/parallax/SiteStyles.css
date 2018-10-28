@@ -1,0 +1,23 @@
+.skd-parallax h2 {
+    font-weight:400;
+    font-family: Roboto;
+    text-transform: uppercase;
+    font-size: 31px;
+    max-width: 280px;
+    line-height: 40px;
+    margin:0 0 25px 0;
+}
+.skd-parallax .btn {
+    background:transparent;
+    border:2px solid #b76c00;
+    padding:15px 20px;
+}
+.skd-parallax .btn:hover {
+	background: #b76c00;
+}
+.skd-parallax{margin-bottom:-60px !important;}
+@media(max-width:768px) {
+	.parallax {background-attachment: initial !important;background-repeat-y:no-repeat!imporant;
+    background-repeat: no-repeat!important;
+    background-position: top center!important;}
+}

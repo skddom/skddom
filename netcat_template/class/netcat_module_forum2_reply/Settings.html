@@ -1,0 +1,44 @@
+<?
+$ignore_parent = 1;
+
+// get objects
+$forum_obj = nc_forum2_forum::get_object();
+
+// check possibillity, view replies only from topic message
+if (!$inside_admin && !$topic) {
+  header("Location: ".$current_sub['Hidden_URL']);
+}
+
+if ($topic) {
+  // set parent topic
+  $query_where = "`Topic_ID` = '".intval($topic)."'";
+}
+else {
+  // edit replies info
+  if ($inside_admin) nc_print_status(NETCAT_MODULE_FORUM2_COMPONENT_REPLIES_EDIT_IN_PLACE, "info");
+}
+
+$query_select = "usr.`User_ID` AS `Author_ID`, IF(usr.`ForumName` <> '',usr.`ForumName`,usr.`Login`) AS `Author`, UNIX_TIMESTAMP(usr.`Created`) AS `Author_Regdate` ".($MODULE_VARS['forum2']['FORUM_SIGNATURE_FIELD'] ? ", usr.`".$MODULE_VARS['forum2']['FORUM_SIGNATURE_FIELD']."` AS `Author_Signature`" : "");
+$query_join = "LEFT JOIN `User` AS usr ON a.`User_ID` = usr.`User_ID`";
+$result_vars = '$f_Author_ID, $f_Author, $f_Author_Regdate'.($MODULE_VARS['forum2']['FORUM_SIGNATURE_FIELD'] ? ', $f_Author_Signature' : '');
+
+// check current user rights
+if ( is_object($perm) ) {
+  $editRight = $perm->isSubClass ($cc, MASK_EDIT | MASK_MODERATE);
+  $deleteRight = $perm->isSubClass ($cc, MASK_DELETE | MASK_MODERATE);
+}
+else {
+  $editRight = false;
+  $deleteRight = false;
+}
+
+// модуль личный кабинет
+$m_auth = $nc_core->modules->get_by_keyword('auth');
+$pw_allow = false; // доступны личные сообщения
+$materials_url  = false; // ссылка на "мои материалы"
+if ( $m_auth ) {
+  $pw_allow = $AUTH_USER_ID && $nc_core->get_settings('pm_allow', 'auth');
+  $materials_url = $nc_core->get_settings('materials_url', 'auth');
+  if ( $materials_url ) $materials_url .= "?by_user_id=";
+}
+?>

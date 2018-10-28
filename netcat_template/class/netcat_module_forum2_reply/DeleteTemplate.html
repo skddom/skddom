@@ -1,0 +1,8 @@
+<p>Подтвердите удаление сообщения:<br />
+
+<? $f_delete_true = $admin_mode
+  ? $admin_url_prefix."message.php?".$nc_core->token->get_url()."&amp;catalogue=".$catalogue."&sub=".$sub."&cc=".$cc."&message=".$message."&delete=1&posting=1&curPos=".$curPos."&admin_mode=1".$system_env['AdminParameters']
+  : $SUB_FOLDER.$current_sub['Hidden_URL']."drop_".$current_cc['EnglishName']."_".$message.".html?".$nc_core->token->get_url()."";?>
+<? sprintf(NETCAT_MODERATION_WARN_COMMITDELETION, $message) ?><br/><br/>
+<a href='<?= $f_delete_true ?>'><?= NETCAT_MODERATION_COMMON_KILLONE ?></a> | <a href='<?= $goBackLink.$system_env['AdminParameters'] ?>'><?= NETCAT_MODERATION_BACKTOSECTION ?></a>
+</p>

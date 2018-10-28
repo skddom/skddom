@@ -1,0 +1,104 @@
+<?
+//$rs = array();
+//foreach($rs as $v) $rs[$v['Option']][$v['Name']] = $v;
+$pro->rs = $rs1;
+
+//calc_dates($pro,$start,$square);
+$debug = CalculateHouse($square, $start, $pro);
+
+$rs = array();
+foreach($pro->rs as $v) if ($v['Option']!=$v['Name']) $rs[$v['Option']][$v['Name']] = $v;
+//if ($current_user['Login'] == "developer") echo "<pre>".print_r($pro,1)."</pre>";
+//if ($current_user['Login'] == "developer") echo $debug;
+if ($square && $_REQUEST['start']) {
+?><table class="calc" data-start="<?=$start?>">
+    <thead>
+        <tr>
+            <td>Этап работы</td>
+            <td>Описание работы</td>
+            <td>Начало работ</td>
+            <td>Окончание работ</td>
+        </tr>
+    </thead>
+    <tbody><?
+        foreach ($rs as $etap=>$v) {
+            $cnt++;
+            $option=false;
+            
+            foreach ($v as $name=>$arr) {
+                if (!$option) {
+                    $cnt1=0;
+                ?><tr class=""><?
+                    
+                       
+                        ?><td class="option mob" colspan="4"><span class="-ico -ico<?=$cnt?>"></span><div><?=$etap?></div></td><?
+                        
+                        
+                    
+                    
+                ?></tr><?                    
+                }
+                $cnt1++;
+                ?><tr class="<?=$cnt1==count($v)?"-last ":""?><?=$cnt1%2==0?"odd":"even"?>"><?
+                    if (!$option) {
+                       
+                        ?><td class="option" rowspan="<?=count($v)?>"><span class="-ico -ico<?=$cnt?>"></span><div><?=$etap?></div></td><?
+                        $option = $etap;
+                        
+                    }
+                    ?><td class="name"><?=$name?></td><?
+                    ?><td><?=date("d.m.Y",$arr['Time1']);?></td><?
+                    ?><td><?=date("d.m.Y",$arr['Time2']);?></td><?
+                ?></tr><?
+                
+            }
+        }
+    ?></tbody>
+</table><?
+}
+?><script>
+	jQuery().ready(function() {
+        jQuery( "#start" ).datepicker({
+             minDate: new Date(<?=date("Y")?>,<?=(date("n")-1)?>,<?=date("d")?>),
+             dateFormat: "dd.mm.yy",
+             dayNamesMin: [ "Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб" ],
+             currentText: "Сегодня",
+             monthNames: [ "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" ]
+        });
+		// validate the comment form when it is submitted
+		jQuery("#calcForm").validate({
+			rules: {
+				start: "required",
+				square: {
+					required: true,
+					min: 150
+				},
+            },
+			messages: {
+				start: "не введены данные",
+				square: {
+					required: "не введены данные",
+					min: "площадь не менее 150 м2"
+				},
+            }            
+        });
+    });
+</script><style>
+#ui-datepicker-div{z-index:1111!important;background:#fff;}
+table.ui-datepicker-calendar {width:auto;margin:0;}
+table.ui-datepicker-calendar tr:nth-child(2n),table.ui-datepicker-calendar tr{background:transparent;}
+table.ui-datepicker-calendar  thead th,
+table.ui-datepicker-calendar  tbody td{color:inherit;background:inherit;padding:5px;}
+table.ui-datepicker-calendar thead th{text-align:center;}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{display:block;text-align:center;padding:0 4px;color: #b76c00;}
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight{color:#fff;background:#b76c00;border-color:#b76c00}
+
+.ui-datepicker-title {text-align:center;background:#b76c00;color:#fff;}
+
+a.ui-datepicker-prev.ui-corner-all{font-size:0;float:left;border:1px solid transparent;}
+a.ui-datepicker-prev.ui-corner-all:before{content:"<";font-size:14px;margin:0 5px;color:#fff;}
+a.ui-datepicker-next.ui-corner-all:after{content:">";font-size:14px;margin:0 5px;color:#fff;}
+a.ui-datepicker-next.ui-corner-all{font-size:0;float:right;border:1px solid transparent;}
+
+.ui-datepicker-header.ui-widget-header.ui-helper-clearfix.ui-corner-all {line-height:30px;}
+</style>

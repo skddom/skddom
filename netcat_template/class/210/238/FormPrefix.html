@@ -1,0 +1,14 @@
+<?php $result .= "         <div class=\"inner site{$current_catalogue[Catalogue_ID]}\">
+          <div class=\"category robototitle-dark\">".$parent_sub_tree[$sub_level_count-1]['Subdivision_Name']."</div>
+          <h1>".$current_sub['Subdivision_Name']."</h1>
+".opt($cc_settings['Text1'],"
+          <div class=\"vvod\">
+            ".$cc_settings['Text1']."
+          </div>")."
+          <div class=\"info\">
+            <div class=\"inner\">
+".opt( $cc_settings['Text2'],"
+              <div class=\"att\">
+                ".$cc_settings['Text2']."
+</div>
+              <br />")." "; ?>

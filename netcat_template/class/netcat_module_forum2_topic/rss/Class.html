@@ -1,0 +1,40 @@
+<!-- FormPrefix --><<??>?xml version="1.0" encoding="<?= MAIN_ENCODING ?>"?>
+<rss version="2.0" xml:lang="ru-RU">
+  <channel>
+  <title><?= htmlspecialchars($parent_sub_tree[0]['Subdivision_Name'], ENT_QUOTES) ?></title>
+  <link>http://<?= $HTTP_HOST ?></link>
+    <description>
+    <![CDATA[
+    <?= htmlspecialchars(strip_tags($parent_sub_tree[0]['Description']), ENT_QUOTES) ?>
+    ]]>
+    </description>
+    <image>
+	<title><?= NETCAT_MODULE_FORUM2 ?></title>
+	<?= ($cc_settings['ShowImage'] ? "<url>http://".$HTTP_HOST.$ADMIN_TEMPLATE."/img/i_info_big.gif</url>" : "") ?>
+	<link>http://<?= $HTTP_HOST ?></link>
+    </image>
+    <language>ru-RU</language>
+    <copyright>Copyright <?= date("Y")." ".htmlspecialchars($system_env['ProjectName'], ENT_QUOTES) ?></copyright>
+    <lastBuildDate><?= gmdate("D, d M Y H:i:s", $UpdatedTopic) ?> GMT</lastBuildDate>
+    <generator><?= NETCAT_MODULE_FORUM2 ?></generator>
+    <category><?= NETCAT_MODULE_FORUM2_COMPONENT_FORUM_DEFAULT_TOPIC_NAME ?></category>
+    <managingEditor><?= $system_env['SpamFromEmail']." (".htmlspecialchars($system_env['SpamFromName'], ENT_QUOTES) ?>)</managingEditor>
+    <webMaster><?= $system_env['SpamFromEmail']." (".htmlspecialchars($system_env['SpamFromName'], ENT_QUOTES) ?>)</webMaster>
+    <ttl><?= $cc_settings['ttl'] ?></ttl>
+	<?= (!$advertisement && $adv_messages ? s_list_class($sub, $cc, "&advertisement=1") : "") ?><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><item>
+<title><?= htmlspecialchars(strip_tags($f_Subject), ENT_QUOTES) ?></title>
+<link>http://<?= $HTTP_HOST.$f_fullLink ?></link>
+  <description>
+  <![CDATA[ 
+  <?= htmlspecialchars(strip_tags(nc_bbcode(strlen($f_Message) > strlen($f_Message_Croped) ? rtrim($f_Message_Croped, " .,;:-—_+=?")."..." : $f_Message)), ENT_QUOTES) ?>
+  ]]>
+  </description>
+  <pubDate><?= gmdate("D, d M Y H:i:s", strtotime($f_Created)) ?> GMT</pubDate>
+  <guid isPermaLink="true">http://<?= $HTTP_HOST.$f_fullLink ?></guid>
+  <author><?= htmlspecialchars(strip_tags($f_Topic_Author), ENT_QUOTES) ?></author>
+</item><!-- /RecordTemplate -->
+
+<!-- FormSuffix -->  </channel>
+</rss><!-- /FormSuffix -->

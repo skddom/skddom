@@ -1,0 +1,62 @@
+<?php
+$netshop = nc_netshop::get_instance($catalogue);
+$delivery_methods = array();
+foreach($netshop->delivery->get_enabled_methods() as $method) {
+$delivery_methods[$method['id']] = $method['name'];
+}
+
+$payment_methods = array();
+foreach($netshop->payment->get_enabled_methods() as $method) {
+$payment_methods[$method['id']] = $method['name'];
+}
+?>
+<?= ($warnText ? "<div class='warnText'>$warnText</div>" : NULL) ?>
+<form name='adminForm' id='adminForm' class='nc-form' enctype='multipart/form-data' method='post' action='<?= $SUB_FOLDER ?><?= $HTTP_ROOT_PATH ?>message.php'>
+    <div id='nc_moderate_form'>
+        <div class='nc_clear'></div>
+        <input name='admin_mode' type='hidden' value='<?= $admin_mode ?>'/>
+        <?= $nc_core->token->get_input() ?>
+        <input name='catalogue' type='hidden' value='<?= $catalogue ?>'/>
+        <input name='cc' type='hidden' value='<?= $cc ?>'/>
+        <input name='sub' type='hidden' value='<?= $sub ?>'/><input name='message' type='hidden' value='<?= $message ?>'/>
+        <input name='posting' type='hidden' value='1'/>
+        <input name='curPos' type='hidden' value='<?= $curPos ?>'/>
+        <input name='f_Parent_Message_ID' type='hidden' value='<?= $f_Parent_Message_ID ?>'/>
+        <?= nc_form_moderate('change', $admin_mode, 0, $systemTableID, $current_cc, (isset($f_Checked) ? $f_Checked : null), $f_Priority, $f_Keyword, $f_ncTitle, $f_ncKeywords, $f_ncDescription, $f_ncSMO_Title, $f_ncSMO_Description, $f_ncSMO_Image ) ?>
+    </div>
+    <?= nc_list_field('Status', "", ($class_id ? $class_id : $classID), 1) ?><br/>
+    <br/>
+    <? if (nc_field_check_admin_perm()) { ?>
+    <?= nc_list_field('OrderCurrency', "", ($class_id ? $class_id : $classID), 1) ?><br/>
+    <? } ?><br/>
+    <?= nc_string_field('ContactName', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?><br/>
+    <br/>
+    <?= nc_string_field('Phone', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?><br/>
+    <br/>
+    <?= nc_string_field('Email', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?><br/>
+    <br/>
+    <?= nc_list_field('City', "", ($class_id ? $class_id : $classID), 1) ?><br/>
+    <br/>
+    <?= nc_string_field('Address', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?><br/>
+    <br/>
+    <?= nc_string_field('Zip', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?><br/>
+    <br/>
+    <?= nc_text_field('Comments', "", ($class_id ? $class_id : $classID), 1) ?><br/>
+    <br/>
+    <?= nc_admin_select_simple(NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_METHOD_SECTION . ':', 'f_DeliveryMethod', $delivery_methods, $f_DeliveryMethod); ?>
+    <br/>
+    <? if (nc_field_check_admin_perm()) { ?>
+    <?= nc_float_field('DeliveryCost', "maxlength='12' size='12'", ($class_id ? $class_id : $classID), 1) ?><br/>
+    <? } ?><br/>
+    <?= nc_admin_select_simple(NETCAT_MODULE_NETSHOP_CHECKOUT_PAYMENT_METHOD_SECTION . ':', 'f_PaymentMethod', $payment_methods, $f_PaymentMethod); ?>
+    <br/>
+    <? if (nc_field_check_admin_perm()) { ?>
+    <?= nc_float_field('PaymentCost', "maxlength='12' size='12'", ($class_id ? $class_id : $classID), 1) ?><br/>
+    <? } ?><br/>
+    <?= nc_text_field('PaymentInfo', "", ($class_id ? $class_id : $classID), 1) ?><br/>
+    <br/>
+
+    <div><?= NETCAT_MODERATION_INFO_REQFIELDS ?></div>
+    <br/>
+    <?= nc_submit_button(NETCAT_MODERATION_BUTTON_CHANGE) ?>
+</form>

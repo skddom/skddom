@@ -1,0 +1,57 @@
+<!-- FormPrefix --><? echo $f_AdminCommon; ?>
+<div class='nc_forum_feed'>
+	
+	<? if ($rssLink) : ?>
+		<img src='<?= $SUB_FOLDER ?>/images/rss.png' alt='RSS' /><a href='$rssLink'>RSS</a>
+	<? endif; ?>
+	
+	<? if (!$inside_admin && is_object($perm) && $perm->isSubClass($cc, MASK_ADD)) : ?>
+ 		<a href='<?= $addLink ?>'>Добавить форум</a>
+	<? endif; ?>
+	
+</div>
+<table class='nc_forum_header' cellpadding='5' cellspacing='1' >
+<tr valign='top'>
+  <td class='cell' style='width:1%;' >#</td>
+  <td class='cell' style='width:60%;'>Название форума</td>
+  <td class='cell_main' style='width:10%;'>Топиков</td>
+  <td class='cell_main' style='width:10%;'>Ответов</td>
+  <td class='cell' style='width:19%;'>Последний пост</td>
+</tr><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><? $f_Last_Topic_Message = nc_substr(nc_bbcode_clear($f_Last_Topic_Message_full), 0, 50);
+if (nc_strrpos($f_Last_Topic_Message, " ")) {
+  $f_Last_Topic_Message = nc_substr($f_Last_Topic_Message, 0, nc_strrpos($f_Last_Topic_Message, " "));
+}
+
+$f_Last_Reply_Message = nc_substr(nc_bbcode_clear($f_Last_Reply_Message_full), 0, 50);
+if (nc_strrpos($f_Last_Reply_Message, " ")) {
+  $f_Last_Reply_Message = nc_substr($f_Last_Reply_Message, 0, nc_strrpos($f_Last_Reply_Message, " "));
+}
+?>
+<? if ($f_Category!=$category) : ?>
+<tr>
+  <td colspan='5' class='nc_forum_category'><?= $f_Category?><?= $f_CatDescription ? "<div class='nc_forum_desc'>".$f_CatDescription."</div>" : "" ?></td>
+</tr><?= opt($category = $f_Category, "") ?>
+<? endif; ?>
+
+<tr valign='top'>
+  <td class='nc_forum_forum'><img src='<?= $SUB_FOLDER.$HTTP_ROOT_PATH ?>modules/forum2/images/forum.gif' border='0' alt=''></td>
+  <td class='nc_forum_forum'><a href='<?= $SUB_FOLDER.$f_SubLink ?>'><?= $f_SubName ?></a>
+	  <? if ($f_SubDescription) : ?>
+	  	<div class='nc_forum_desc'><?= $f_SubDescription ?></div>
+  	  <? endif; ?>
+  </td>
+  <td class='nc_forum_forum' style='text-align:center'><?= intval($f_Topics) ?></td>
+  <td class='nc_forum_forum' style='text-align:center'><?= intval($f_Replies) ?></td>
+  <td class='nc_forum_forum'>
+  <?= strtotime($f_Last_Reply_Date) > strtotime($f_Last_Topic_Date)
+    ? ($f_Last_Reply_ID ? $f_Last_Reply_Date."<br/><b>".($f_Last_Reply_Author ? $f_Last_Reply_Author : NETCAT_MODULE_FORUM2_USER_GUEST)."</b><br/><a href='".$f_Last_Reply_Topic_Link.($reply_obj->get_curpos_by_topic_id($f_Last_Reply_Topic_ID) ? ( strstr($f_Last_Reply_Topic_Link, "?") ? "&amp;" : "?" )."curPos=".$reply_obj->get_curpos_by_topic_id($f_Last_Reply_Topic_ID) : "")."#reply".$f_Last_Reply_ID."'>".htmlspecialchars(( $f_Last_Reply_Subject ? $f_Last_Reply_Subject : rtrim($f_Last_Reply_Message, ".,;:-_+=?")."..." ), ENT_QUOTES)."</a>" : "<center>—</center>")
+    : ($f_Last_Topic_ID ? $f_Last_Topic_Date."<br/><b>".($f_Last_Topic_Author ? $f_Last_Topic_Author : NETCAT_MODULE_FORUM2_USER_GUEST)."</b><br/><a href='".$f_Last_Topic_Link."'>".htmlspecialchars(( $f_Last_Topic_Subject ? $f_Last_Topic_Subject : rtrim($f_Last_Topic_Message, ".,;:-_+=?")."..." ), ENT_QUOTES)."</a>" : "<center>—</center>") ?>
+  </td>
+</tr><!-- /RecordTemplate -->
+
+<!-- FormSuffix --><? if ($totRows > $f_RowNum) : ?>
+  <tr><td colspan='5' style='background:#EEE'>Страницы: <?= browse_messages($cc_env, 5) ?></td></tr>"
+<? endif; ?>
+</table><!-- /FormSuffix -->

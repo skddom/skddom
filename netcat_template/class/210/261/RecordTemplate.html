@@ -1,0 +1,21 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+<?php $result .= " ";if($f_SliderPath&&$f_MainImgPath)$f_MainImg=$f_SliderPath.$f_MainImgPath;$result.="		
+$f_AdminButtons
+<div class=\"project\" style='$f_Style'>
+			<a href=\"$fullLink\">
+<img src=\"$f_MainImg\" width=\"165\" height=\"110\" alt=\"\" />
+</a><br />
+			<a href=\"$fullLink\">$f_Name<span class=\"brn\">>></span></a><br />
+<p>площадь: <strong>$f_Square м²</strong></p>
+			<p>
+			<span class=\"green-spec\">СПЕЦПРЕДЛОЖЕНИЕ:</span><br>
+			в компл.С1: <strong>$f_Price1 р.</strong><br>	
+				
+
+					
+			
+			
+другие компл: <a title=\"Базовые и индивидуальная комплектации проекта СКД-$f_house_id\" class=\"link-calc\" href=\"/price/calc/?house=$f_house_id\">калькулятор</a>		
+			
+		</p></div> "; ?>
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

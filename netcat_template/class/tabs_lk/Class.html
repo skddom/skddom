@@ -1,0 +1,35 @@
+<!-- FormPrefix --><?= $f_AdminCommon; ?><ul class="tabs"><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?
+if (!$tab) {
+    $f_cc = $db->get_var("select Sub_Class_ID from Sub_Class where Subdivision_ID=$f_ID");
+    $tab = s_list_class($f_ID, $f_cc,"");
+    $class = "active";
+} else $class="";
+if ($f_Keyword == "location") $eval = ""; //ymaps.ready(init);";
+else $eval = "";
+if ($f_Keyword == "events") {
+    $cnt = $db->get_var("select count(*) from Message363 where Project=".$lk->data['Message_ID']);
+} else $cnt=true;
+?><?if($cnt):?><li>
+    <a class="<?=$class?>" href="#<?=$f_Keyword?>" data-load="<?=$f_Url?>?isNaked=1" data-eval="<?=$eval?>"><?=$f_Name?></a>
+</li><?endif?><!-- /RecordTemplate -->
+
+<!-- FormSuffix --></ul><div id="result"><?=$tab?></div>
+<script>
+$(function(){
+    $(document).on({
+        click: function(){
+            $this=$(this);
+            $this.closest("ul").find("a").removeClass("active");
+            $this.addClass("active");
+            
+            $("#result").load($(this).data("load"),function(){
+                top.location.href=$this.attr("href");
+                eval($this.data("eval"));
+            });
+            return false;
+        }
+    },"[data-load]");
+});
+</script><!-- /FormSuffix -->

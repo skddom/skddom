@@ -1,0 +1,12 @@
+<?
+if ($ajax1) ob_clean();
+if (!$lk) $lk = new CPersonal();
+echo "<div class='nc_mail_from_site'>".str_replace("%NAME", htmlspecialchars($f_Name), ( $cc_settings[TextAfterSend] ? $cc_settings[TextAfterSend] : $default_cc_settings[TextAfterSend][default_value] ) )."</div>";
+
+$EmailTo = $db->get_var("select Email from Message294 where Message_ID=".intval($f_ToPerson));
+$EmailTo = "voxdei@ya.ru";
+$f_Email = $current_user['Email'];
+
+sendwebform ($classID,"Заказ рекомендации по проекту {$lk->data['Name']} с сайта $_SERVER[HTTP_HOST]","noreply@$_SERVER[HTTP_HOST]",$EmailTo,'windows-1251',$f_Name,"Заказ рекомендации с $_SERVER[HTTP_HOST] по проекту {$lk->data['Name']}",1,($f_Email?$f_Email:"noreply@$_SERVER[HTTP_HOST]"),$message);
+if ($ajax1) die();
+?>

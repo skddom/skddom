@@ -1,0 +1,28 @@
+<!-- FormPrefix --><?= $f_AdminCommon; ?><div class="text">
+<?
+
+$rs = $db->get_results("select Name, Message_ID from Message295 where Checked=1", ARRAY_A);
+?>
+<form action="" method="post" id="pro">
+    <select name="project" onchange="document.getElementById('pro').submit()">
+        <option value="0">Справочник</option>
+        <?foreach($rs as $v) {
+            ?><option <?if($v['Message_ID'] == $project):?>selected <?endif?>value="<?=$v['Message_ID']?>"><?=$v['Name']?></option><?
+        }?>
+    </select>
+    <button>Перейти</button>
+    <?if($project):?><input type="submit" name="fill" value="Заполнить" /><?endif?>
+</form>
+<!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?
+if (!$f_Image) {
+    $f_Image = $f_Image_preview_url = nc_file_path($classID, $f_Parent_Message_ID, "Image", false, true);
+}
+if ($project) $active = in_array($f_Phase, $pro->completed);
+else $active=true;
+?><div style="<?if(!$active):?>opacity:0.5;<?endif?>text-align:center; height: 200px;  color: #fff; text-shadow: 1px 1px 1px rgba(0,0,0,0.8); font-size: 20px; line-height: 30px; display: inline-block; width: 260px; margin: 10px 35px 10px 25px; background: url(<?=$f_Image_preview_url?>); background-size: cover;"><?= $f_AdminButtons; ?><?=$f_Name?>
+
+</div><!-- /RecordTemplate -->
+
+<!-- FormSuffix --></div><!-- /FormSuffix -->

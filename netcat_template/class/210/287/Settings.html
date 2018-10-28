@@ -1,0 +1,6 @@
+<?php $ignore_sub=$ignore_cc=true;
+$mobile = $current_catalogue[Catalogue_ID]==2;
+$query_where = "a.Subdivision_ID='$s' and a.Message_ID NOT IN(".intval($m).")";
+$br = CBranding::get_object();
+$br->getProjects();
+$br->ExModifyQueryWhere($query_where, $cc_env, $inside_admin, $admin_mode); ?>

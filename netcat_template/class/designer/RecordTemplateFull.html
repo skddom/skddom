@@ -1,0 +1,7 @@
+<?= $f_AdminButtons; ?><?
+    if ($f_Photo) {
+        ?><div class="img"><img src="<?=$f_Photo?>" alt="" class="img-responsive"><span class="caption"><?=$f_Name?></span></div><?
+    }
+?><? echo $f_Text; ?><?
+    echo s_list_class(200,256,"&nc_ctpl=2259&author=$message");
+?>

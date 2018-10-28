@@ -1,0 +1,30 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+<div class="block" style="padding-top: 5px;">
+  <img src='<?= ($f_ForumAvatar ? $f_ForumAvatar : $nc_core->SUB_FOLDER.$cc_settings['NoAvatarImg']) ?>' alt='' />
+  <a href='<?= $fullLink ?>'><?= ($f_ForumName ? $f_ForumName : $f_Login) ?></a> (<?= (nc_auth_is_online($f_RowID) ? "<span class='online'>online</span>" : "<span class='offline'>offline</span>") ?>)
+</div>
+    <?
+    if ($AUTH_USER_ID && $pm_allow) {
+        ?><div class="block"><?= ($f_RowID != $AUTH_USER_ID ? "<a href='".nc_auth_messages_url($f_RowID)."'>Отправить сообщение</a>" : "") ?></div>
+    <?
+    }
+    if ($allow_rel) {
+        ?> <div class="block"> <?
+        if ($AUTH_USER_ID != $f_RowID) {
+            if (in_array($f_RowID, $friends)) {
+                ?>
+                    <a href='<?= nc_auth_drop_rel_url($f_RowID) ?>'>Убрать из друзей</a> <?
+        } else {
+            if (in_array($f_RowID, $banned)) {
+                    ?>
+                        <a href='".nc_auth_drop_rel_url($f_RowID)."'>Убрать из врагов</a><?
+            } else {
+                echo ( $friend_allow ? "<a href='".nc_auth_add_to_friend_url($f_RowID)."'>Добавить в друзья</a><br/>" : "" );
+                echo ( $banned_allow ? "<a href='".nc_auth_add_to_banned_url($f_RowID)."'>Добавить во враги</a>" : "");
+            }
+        }
+        ?>
+    <? } ?> </div>
+<? } ?>
+<div class="tr_last"></div>
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

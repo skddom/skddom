@@ -1,0 +1,14 @@
+<div class="text">
+    <div class="robototitle"><?=$f_Name?></div>
+    <div><?=$f_Date?></div>
+    <div>
+    <?=$f_Text?>
+    </div><br>
+<div class="etap1"><?=$f_Photo?></div>
+<div id="bx-pager" style="padding: 25px 8px 0 21px;">
+<?$arr = $f_Photo->to_array()?>
+<?foreach($arr as $k=>$v):?>
+<div style="margin:0 8px; max-width: 149px; border: 1px solid #ccc;"><span style="display: block; width: 100%; height: 106px; background:url(<?=$v['Preview']?>) center; background-size: cover;"></span><?if($v['Name']):?><span style="line-height: 30px; font-size: 15px; padding:0 5px;"><?=$v['Name']?></span><?endif?></div>
+<?endforeach?>
+</div>    
+</div>

@@ -1,0 +1,66 @@
+<?php
+$browse_template[0]['prefix']   = "<ul id='menu-main-menu-1' class='nav'>";
+    $browse_template[0]['suffix']   = "<!--<li class='btn_m2 menu-item menu-item-type-post_type menu-item-object-page menu-contact-us'><a  data-sub='%SUB' href='/o-kompanii/faq2/#add' data-show='#parent_popup_form_detail_phone' data-href='.js-callback-wrap' class='js-openPopup1 text-color-theme js-ask mgt-button hvr-bounce-to-right' data-ahref='#'><span style='font-weight: bold;'>Задать вопрос</span></a></li>--><li class='btn_m1 menu-item menu-item-type-post_type menu-item-object-page menu-contact-us mgt-animated mgt-highlight menu-item menu-item-type-post_type menu-item-object-page'><a href='#' data-action='/callback1/'  data-show='#parent_popup_form_detail_phone' data-href='.js-callback-wrap' class=' js-openPopup js-callback mgt-button hvr-bounce-to-right'><span style='font-weight: bold;'>Перезвонить мне</span></a></li></ul>";
+$browse_template[0]['active']   = "<li class='menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item current_page_item current-menu-ancestor current_page_ancestor'><a data-sub='%SUB' href='%URL'><span style='font-weight: bold;'>%NAME</span></a>%NEXT_LEVEL</li>";
+$browse_template[0]['unactive'] = "<li class='menu-item menu-item-type-post_type menu-item-object-page page_item'><a data-sub='%SUB' href='%URL'><span style='font-weight: bold;'>%NAME</span></a>%NEXT_LEVEL</li>";
+
+$browse_template[1]['prefix'] = "<ul class='sub-menu  megamenu-column-1 level-0'>";
+$browse_template[1]['suffix'] = "</ul>";
+$browse_template[1]['unactive'] = "<li data-sub='%SUB' class='menu-item menu-item-type-custom menu-item-object-custom'><a href='%URL'>%NAME</a>%NEXT_LEVEL</li>";
+$browse_template[1]['active'] = "<li data-sub='%SUB' class='menu-item menu-item-type-custom menu-item-object-custom current-menu-item'><a href='%URL'>%NAME</a>%NEXT_LEVEL</li>";
+
+
+$browse_template[2]['prefix'] = "<ul class='sub-menu level-1'>";
+$browse_template[2]['suffix'] = "</ul>";
+$browse_template[2]['unactive'] = "<li class='menu-item menu-item-type-post_type menu-item-object-page'><a data-sub='%SUB' href='%URL'>%NAME</a></li>";
+$browse_template[2]['active'] = "<li class='menu-item menu-item-type-post_type menu-item-object-page current-menu-item'><a data-sub='%SUB' href='%URL'>%NAME</a></li>";
+
+
+$browse_footer['prefix'] = "<ul id='menu-footer-sidebar-menu' class='menu'>";
+$browse_footer['unactive'] = "<li  class='menu-item menu-item-type-post_type menu-item-object-page'><a href='%URL'>%NAME</a></li>";
+$browse_footer['active'] = "<li  class='menu-item menu-item-type-post_type menu-item-object-page'><a href='%URL'>%NAME</a></li>";
+$browse_footer['suffix'] = "</ul>";
+
+$browse_nav['prefix'] = "<ul id='menu-offcanvas-menu' class='menu'>";
+$browse_nav['active'] = "<li class='menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item  current_page_item'><a href='%URL'>%NAME</a></li>";
+$browse_nav['unactive'] = "<li class='menu-item menu-item-type-post_type menu-item-object-page'><a href='%URL'>%NAME</a></li>";
+$browse_nav['suffix'] = "</ul>";
+
+$browse_path['prefix'] = "<div class='breadcrumbs' itemscope itemtype='http://schema.org/BreadcrumbList'>";
+$browse_path['suffix'] = "</div>";
+$browse_path['unactive'] = "<span itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'><a itemprop='item' title='%NAME' href='%URL' class=''><span itemprop='name'>%NAME</span></a>
+<meta itemprop='position' content='%i'></span>";
+$browse_path['active'] = "<span itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'><a itemprop='item' title='%NAME' href='%URL' class=''><span itemprop='name'>%NAME</span></a>
+<meta itemprop='position' content='%i'></span>";
+$browse_path['active_link'] = "<span itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'><span itemprop='name'>%NAME</span><meta itemprop='position' content='%i'></span>";
+$browse_path['divider'] = " <span class='path-divider'>→</span> ";
+
+$browse_aside['prefix'] = "<ul class='menu'>";
+$browse_aside['suffix'] = "</ul>";
+$browse_aside['unactive'] = "<li class='menu-item menu-item-type-taxonomy menu-item-object-category'><a href='%URL'>%NAME</a></li>";
+$browse_aside['active'] = "<li class='menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item'><a href='%URL'>%NAME</a></li>";
+$browse_aside['active_link'] = "<li class='menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item'><a>%NAME</a></li>";
+
+// с аккордеоном
+$browse_aside1[0]['prefix'] = "<ul class='menu'>";
+$browse_aside1[0]['suffix'] = "</ul>";
+$browse_aside1[0]['unactive'] = ""; //<li class='menu-item menu-item-type-taxonomy menu-item-object-category'><a href='%URL'>%NAME</a></li>";
+$browse_aside1[0]['active'] = "<li class='menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item'><a href='%URL'>%NAME</a></li>%NEXT_LEVEL";
+$browse_aside1[0]['active_link'] = "<li class='menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item'><a>%NAME</a></li>%NEXT_LEVEL";
+
+$browse_aside1[1]['prefix'] = "<li>";
+$browse_aside1[1]['suffix'] = "</li>";
+$browse_aside1[1]['unactive'] = "<div><a href='%URL' class='accordion'>%NAME</a>%NEXT_LEVEL</div>";
+$browse_aside1[1]['active'] = "<div><a href='%URL' class='accordion active'>%NAME</a>%NEXT_LEVEL</div>";
+$browse_aside1[1]['active_link'] = "<div><a href='%URL' class='accordion active'>%NAME</a>%NEXT_LEVEL</div>";
+
+$browse_aside1[2]['prefix'] = "<div class='toggle-content'>";
+$browse_aside1[2]['suffix'] = "</div>";
+$browse_aside1[2]['unactive'] = "<a class='' href='%URL'>%NAME</a>";
+$browse_aside1[2]['active'] = "<a class='active' href='%URL'>%NAME</a>";
+
+//постраничная навигация
+$browse_msg['active'] = "<span>%PAGE</span>";
+$browse_msg['unactive'] = "<a href='%URL'>%PAGE</a>";
+$browse_msg['divider'] = "  ";
+?>

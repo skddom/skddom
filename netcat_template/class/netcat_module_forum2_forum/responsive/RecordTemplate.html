@@ -1,0 +1,17 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+<tr class="nc_forum-post" id="">
+<td class="nc_forum-name">
+    <a href='<?= $SUB_FOLDER ?><?= $f_SubLink ?>'><?= $f_SubName ?></a>
+    <? if ($f_SubDescription) : ?>
+        <div class="nc_forum-description"><?= $f_SubDescription ?></div>
+    <? endif; ?>
+</td>
+<td class="nc_forum-count"><?= intval($f_Topics) ?></td>
+<td class="nc_forum-reply"><?= intval($f_Replies) ?></td>
+<td class="nc_forum-last"  id='forum_column' >
+<a title="last" href="#"><?= strtotime($f_Last_Reply_Date) > strtotime($f_Last_Topic_Date)
+    ? ($f_Last_Reply_ID ? "<a href='".$f_Last_Reply_Topic_Link.($reply_obj->get_curpos_by_topic_id($f_Last_Reply_Topic_ID) ? ( strstr($f_Last_Reply_Topic_Link, "?") ? "&amp;" : "?" )."curPos=".$reply_obj->get_curpos_by_topic_id($f_Last_Reply_Topic_ID) : "")."#reply".$f_Last_Reply_ID."'>".htmlspecialchars(( $f_Last_Reply_Subject ? $f_Last_Reply_Subject : rtrim($f_Last_Reply_Message, ".,;:-_+=?")."..." ), ENT_QUOTES)."</a><br> От <b>".($f_Last_Reply_Author ? $f_Last_Reply_Author : NETCAT_MODULE_FORUM2_USER_GUEST)."</b>, ".$f_Last_Reply_Date."<br/>" : "<center>—</center>")
+    : ($f_Last_Topic_ID ? "<a href='".$f_Last_Topic_Link."'>".htmlspecialchars(( $f_Last_Topic_Subject ? $f_Last_Topic_Subject : rtrim($f_Last_Topic_Message, ".,;:-_+=?")."..." ), ENT_QUOTES)."</a><br><b>".($f_Last_Topic_Author ? $f_Last_Topic_Author : NETCAT_MODULE_FORUM2_USER_GUEST)."</b> (".$f_Last_Topic_Date.")<br/>" : "<center>—</center>") ?></a>
+</td>
+</tr>
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

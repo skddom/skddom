@@ -1,0 +1,18 @@
+<!-- FormPrefix --><?= $f_AdminCommon; ?><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><div><?= $f_AdminButtons; ?>
+<?=$f_Name?>
+<? $file = $f_Projects;
+
+
+    if(file_exists($_SERVER['DOCUMENT_ROOT'].$file)) {
+      $fp=fopen($_SERVER['DOCUMENT_ROOT'].$file, "r");
+      $projects = array();
+      while ( ($data=fgetcsv($fp,10000,";"))!==false ) {
+          $projects[$data[0]] = $data;
+      }
+    }
+?>
+</div><!-- /RecordTemplate -->
+
+<!-- FormSuffix --><!-- /FormSuffix -->

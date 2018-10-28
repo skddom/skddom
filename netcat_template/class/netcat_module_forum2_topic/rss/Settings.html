@@ -1,0 +1,43 @@
+<?
+global $parent_sub_tree, $ccLink;
+
+// get topic object
+$forum_obj = nc_forum2_forum::get_object();
+$topic_obj = nc_forum2_topic::get_object();
+$reply_obj = nc_forum2_reply::get_object();
+
+if ($inside_admin) {
+  nc_print_status( sprintf(NETCAT_MODULE_FORUM2_COMPONENT_INSIDE_ADMIN_RSS, $forum_obj->get_rss_url($sub)), "info" );
+  $ignore_all = true;
+  $ignore_prefix = true;
+  $ignore_suffix = true;
+  return;
+}
+
+// replies  Sub_Class_ID
+$replies_cc_id = $reply_obj->get_subclass_id($sub);
+
+//if ( !$topic_obj->check_rss_is_naked() ) header("Location:".$ccLink."?isNaked=1");
+
+// get host adress
+$HTTP_HOST = $nc_core->get_variable("HTTP_HOST");
+
+$ignore_cc = 1;
+
+// fullLink query part
+$fullLink = "CONCAT('".$SUB_FOLDER."',sub.`Hidden_URL`, cc.`EnglishName`, '_', a.`Message_ID`,'.html') AS `fullLink`";
+
+$query_select = "SUBSTRING_INDEX(a.`Message`, ' ', '".intval($cc_settings['CropMessage'] ? $cc_settings['CropMessage'] : 25)."') AS Message_Croped, fu.`Login` AS `Topic_Author`, ".$fullLink;
+$query_join = " LEFT JOIN `User` AS fu ON a.`User_ID` = fu.`User_ID`";
+$query_order = "a.`Type` DESC, a.`LastUpdated` DESC";
+$result_vars = '$f_Message_Croped, $f_Topic_Author, $f_fullLink';
+
+if ($action != "full") {
+  $adv_messages = $db->get_var("SELECT COUNT(m.`Type`) FROM `Message".$topic_obj->get_class_id()."` AS m LEFT JOIN `Sub_Class` AS cc ON m.`Sub_Class_ID` = cc.`Sub_Class_ID` WHERE cc.`Subdivision_ID` = '".intval($sub)."'");
+
+  if ($adv_messages) {
+    $recNum = $cc_env['RecordsPerPage'] - $adv_messages;
+    $query_limit = $cc_env['RecordsPerPage'] ? intval($curPos).", ".$recNum : "";
+  }
+}
+?>

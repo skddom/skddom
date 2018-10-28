@@ -1,0 +1,8 @@
+a {color: #4C90C9;}
+
+.top_menu  {background: #4C90C9 url('../i/templates/blue/top_menu_gradient.gif') repeat-x left top;}
+.top_menu .top_menu_bg1 {background: transparent url('../i/templates/blue/top_menu_bg1.gif') no-repeat left top;}
+.top_menu .top_menu_bg2 {background: transparent url('../i/templates/blue/top_menu_bg2.gif') no-repeat right top;}
+.nc_subdivision_list .nc_menu_item a {background: transparent url('../i/templates/blue/arrow.gif') no-repeat right center;}
+.top_menu a {border-right: 1px solid #4C90C9;}
+.orange_border {background: #4C90C9;}

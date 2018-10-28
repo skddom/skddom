@@ -1,0 +1,21 @@
+<!-- FormPrefix --><?php $result .= " $f_AdminCommon
+".( $totRows ? "<div class='".$cc_settings['class']."'> " : NULL )." "; ?><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?php 
+
+//echo "<pre>".print_r($data,1)."</pre>";
+$dir = $data['SliderPath'];
+$img = $dir.$data['MainImgPath'];
+
+//$result .= "<div class='row'><div class='col-md-9'><img class='img-responsive' src='$img'></div><div class='col-md-3'></div></div>";
+
+$result .= " $f_AdminButtons
+<script>var house = ".($nc_core->input->fetch_get("house")?$nc_core->input->fetch_get("house"):0)."; // тип дома
+</script>
+".opt($template<89,"<h1>$f_Zag</h1>")."$f_TextContent "; ?><!-- /RecordTemplate -->
+
+<!-- FormSuffix --><?php $result .= " ".( $totRows ? "</div> " : NULL )." ";
+
+echo $nc_core->template->get_partial("thebuilt", "save_compl", $data);
+
+?><!-- /FormSuffix -->

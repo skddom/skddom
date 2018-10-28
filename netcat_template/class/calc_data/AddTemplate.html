@@ -1,0 +1,73 @@
+<?=( $warnText ? "<div class='warnText'>$warnText</div>" : NULL )?>
+<form name='adminForm' id='adminForm' class='nc-form' enctype='multipart/form-data' method='post' action='<?= $SUB_FOLDER ?><?= $HTTP_ROOT_PATH ?>add.php'>
+<div id='nc_moderate_form'>
+<div class='nc_clear'></div>
+<input name='admin_mode' type='hidden' value='<?= $admin_mode ?>' />
+<?= $nc_core->token->get_input() ?>
+<input name='catalogue' type='hidden' value='<?= $catalogue ?>' />
+<input name='cc' type='hidden' value='<?= $cc ?>' />
+<input name='sub' type='hidden' value='<?= $sub ?>' /><input name='posting' type='hidden' value='1' />
+<input name='curPos' type='hidden' value='<?= $curPos ?>' />
+<input name='f_Parent_Message_ID' type='hidden' value='<?= $f_Parent_Message_ID ?>' />
+<?= nc_form_moderate('add', $admin_mode, 0, $systemTableID, $current_cc, (isset($f_Checked) ? $f_Checked  : null), $f_Priority , $f_Keyword, $f_ncTitle, $f_ncKeywords, $f_ncDescription ) ?>
+</div>
+<div class='nc-field nc-field-type-string'><?= nc_string_field('house_id', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class='nc-field nc-field-type-float'><?= nc_float_field('h', "maxlength='12' size='12'", ( $class_id ? $class_id : $classID), 1) ?></div>
+
+<div class='nc-field nc-field-type-int'><?= nc_int_field('c1', "maxlength='12' size='12'", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class='nc-field nc-field-type-int'><?= nc_int_field('c2', "maxlength='12' size='12'", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<?
+$works = $db->get_results("select s.Subdivision_Name as Cycle, a.Name,a.Price, c.CustomSettings, a.Message_ID as ID
+from Message2275 a
+left join Subdivision s ON a.Subdivision_ID=s.Subdivision_ID
+left join Sub_Class c ON a.Sub_Class_ID=c.Sub_Class_ID
+order by s.Priority, a.Priority", ARRAY_A);
+$base = unserialize($f_base);
+?>
+<table border="1" cellspacing="0" cellpadding="2"><?
+        ?><tr><?
+            ?><td>Цикл</td><?
+            ?><td>Наименование работ</td><?
+            ?><td>Объем</td><?
+            ?><td>Тепловой&nbsp;контур</td><?
+            ?><td>+Инженерные&nbsp;сети</td><?
+            ?><td>+Черновая&nbsp;отделка</td><?
+            ?><td>Процент скидки</td><?
+            ?><td>Выбор</td><?
+            ?><td>Номер группы</td><?
+            ?><td>По умолч.</td><?
+        ?></tr><?
+    foreach ($works as $v) {
+        $data = $base[$v['ID']];
+        $vol = $set1 = $set2 = $set3 = $discount = null;
+        extract($data);
+        ?><tr><?
+            ?><td><?=$v['Cycle']?></td><?
+            ?><td><?=$v['Name']?></td><?
+            ?><td><input type="number" value="<?=$vol?>" name="base[<?=$v['ID']?>][vol]?>" size="5"></td><?
+            ?><td><input <?if($set1) echo "checked";?> type="checkbox" name="base[<?=$v['ID']?>][set1]?>" value="1"></td><?
+            ?><td><input <?if($set1) echo "checked";?> type="checkbox" name="base[<?=$v['ID']?>][set2]?>" value="1"></td><?
+            ?><td><input <?if($set1) echo "checked";?> type="checkbox" name="base[<?=$v['ID']?>][set3]?>" value="1"></td><?
+            ?><td><input type="number" value="<?=$discount?>" name="base[<?=$v['ID']?>][discount]?>" size="5"></td><?
+            $data = $custom[$v['ID']];
+            $choice = $group = $def = null;
+            extract($data);
+            ?><td><select name="custom[<?=$v['ID']?>]['choice']"><?
+                  ?><option <?if($choice == 0) echo "selected "; ?>value='0'>ничего</option><?
+                  ?><option <?if($choice == 1) echo "selected "; ?>value='1'>изменить невозможно</option><?
+                  ?><option <?if($choice == 2) echo "selected "; ?>value='2'>выбрать одно</option><?
+                  ?><option <?if($choice == 3) echo "selected "; ?>value='3'>выбрать множество</option><?
+            ?></select></td><?
+            ?><td><input type="number" value="<?=$group?>" name="custom[<?=$v['ID']?>][group]?>" size="5"></td><?
+            ?><td><input <?if($def) echo "checked "; ?> type="checkbox" name="custom[<?=$v['ID']?>][def]?>" value="1"></td><?
+        ?></tr><?
+    }
+?></table>
+
+<? if (!$AUTH_USER_ID && $current_cc['UseCaptcha'] && $MODULE_VARS['captcha']) { ?><?= nc_captcha_formfield() ?><br/><br/><?= NETCAT_MODERATION_CAPTCHA ?> (*):<br/><input type='text' name='nc_captcha_code' size='10'><br/><br/><? } ?>
+<div class='nc-hint nc-hint-required-fields'><?= NETCAT_MODERATION_INFO_REQFIELDS ?></div>
+<?= nc_submit_button(NETCAT_MODERATION_BUTTON_ADD) ?>
+</form>

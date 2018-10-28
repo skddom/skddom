@@ -1,0 +1,48 @@
+<div class="form">
+  <div style='float: left;'>            
+    <img style='margin:0 10px 0 0' src='<?= ($f_ForumAvatar ? $f_ForumAvatar : $nc_core->SUB_FOLDER.$cc_settings['NoAvatarImg']) ?>' alt='<?= $f_Login ?>' />
+  </div>
+  <div class='block'>
+    <label>Имя пользователя:</label><br />  
+    <b><?= ($f_ForumName ? $f_ForumName : $f_Login) ?></b> 
+  </div>
+  <div class='block'>
+    <label>Статус:</label><br />  
+    <? if (nc_auth_is_online($f_RowID)) { ?><span style='color:#090'>online</span><? } else { ?><span style='color:#900'>offline</span><? } ?>
+  </div>
+  <div class='block'>
+    <label>Дата регистрации:</label><br />  
+    <?= $f_Created_day.".".$f_Created_month.".".$f_Created_year." - ".$f_Created_hours.":".$f_Created_minutes ?>
+  </div>
+  <div class='block'>
+    <label>Подпись на форуме:</label><br />  
+    <?= ($f_ForumSignature ? $f_ForumSignature : "<em>нет подписи</em>") ?>
+  </div>
+  <? if ($friend_allow) { ?> 
+  <div class='block'>
+    <label>Список друзей:</label><br />  
+    <?= ( $friend_list ? join(', ', $friend_list) : "список пуст") ?>
+  </div>
+  <? } ?>
+  <div class='block'>
+            <? if ($noIam) {
+                if ($pm_allow) { ?><a class='nc_link_btn' href='<?= nc_auth_messages_url($f_RowID) ?>'>Личное сообщение</a><?
+        }
+        if ($friend_allow) {
+            if (nc_auth_is_friend($f_RowID)) {
+                ?> 
+                        <a class='nc_link_btn' href='<?= nc_auth_drop_rel_url($f_RowID) ?>'>Убрать из друзей</a><? } else { ?> 
+                        <a class='nc_link_btn' href='<?= nc_auth_add_to_friend_url($f_RowID) ?>'>Добавить в друзья</a> <?
+        }
+        if ($banned_allow) {
+            if (nc_auth_is_banned($f_RowID)) {
+                            ?> 
+                            <a class='nc_link_btn' href='<?= nc_auth_drop_rel_url($f_RowID) ?>'>Убрать из врагов</a><? } else { ?>
+                            <a class='nc_link_btn' href='<?= nc_auth_add_to_banned_url($f_RowID) ?>'>Добавить во враги</a><?
+            }
+        }
+    }
+}
+            ?>
+  </div>
+</div>

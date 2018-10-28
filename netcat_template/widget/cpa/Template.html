@@ -1,0 +1,22 @@
+<?
+$bg = "background-color: #222222;";
+if(strpos($f_Link,"popup:")!==false) {
+    $tmp = explode(":", $f_Link);
+    $link = $tmp[1];
+    $f_Link = "#";
+    $isPopup = true;
+}
+if ($f_Image) $bg = "background: url('$f_Image') ".($f_BGPos?$f_BGPos:"50% 165px")." no-repeat;";
+?><div class="mgt-cta-block clearfix <?if($f_Image) echo "parallax "; ?>white-text with-text wpb_content_element" data-style="<?=$bg?>" style="<?=$bg?>">
+    <div class="mgt-button-wrapper mgt-button-wrapper-align-right mgt-button-wrapper-display-newline mgt-button-top-margin-disable">
+        <a <?if($f_Goal){?>onclick="yaCounter4312879.reachGoal('<?=$f_Goal?>');" <?}?><?if($isPopup){?>data-action="<?=$link?>" data-show="#parent_popup_form_detail_phone" data-href=".js-callback-wrap"<?}?> class="<?if($isPopup) echo "js-openPopup";?> btn <?=$f_LinkClass?$f_LinkClass:"hvr-default mgt-button mgt-style-bordered mgt-size-normal mgt-align-right mgt-display-newline mgt-text-size-large mgt-button-icon-position-left mgt-text-transform-uppercase"?> " 
+            href="<?=$f_Link?>" 
+            target=" _blank"><i class="fa fa-check-circle"></i><?=$f_LinkText?></a>
+    </div>
+    <div style="    font-family: 'Roboto';
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;" class="mgt-cta-block-header"><?=$f_Name?></div>
+    <div class="mgt-cta-block-content"><?=$f_Text?></div>
+</div>

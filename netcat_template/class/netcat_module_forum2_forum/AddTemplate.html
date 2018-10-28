@@ -1,0 +1,49 @@
+<fieldset>
+<legend><b><?= NETCAT_MODULE_FORUM2_COMPONENT_FORUM_LEGEND ?></b></legend>
+<form name='adminForm' id='adminForm' enctype='multipart/form-data' method='post' action='<?= $SUB_FOLDER ?><?= $HTTP_ROOT_PATH ?>add.php'>
+<input name='admin_mode' type='hidden' value='<?= $admin_mode ?>'/>
+<input name='catalogue' type='hidden' value='<?= $catalogue ?>'/>
+<input name='cc' type='hidden' value='<?= $cc ?>'/>
+<input name='sub' type='hidden' value='<?= $sub ?>'/>
+<input name='posting' type='hidden' value='1'/>
+<?=  $nc_core->token->get_input() ?> 
+<input name='curPos' type='hidden' value='<?= $curPos ?>'/>
+<? if ($warnText) : ?><br/><span style='color:#A00'><?= $warnText ?></span><br/><? endif; ?>
+<input name='Checked' type='checkbox' value='1' checked /> <?= NETCAT_MODULE_FORUM2_COMPONENT_FORUM_FIELD_CHECKED ?><br/>
+<br/>
+<?= NETCAT_MODULE_FORUM2_COMPONENT_FORUM_FIELD_KEYWORD ?>*<br/>
+<input name='Keyword' type='text' size='50' maxlength='255' value='<?= $Keyword ?>' /><br/>
+<br/>
+<?= NETCAT_MODULE_FORUM2_COMPONENT_FORUM_FIELD_NAME ?>*<br/>
+<input name='Name' type='text' size='50' maxlength='255' value='<?= $Name ?>' /><br/>
+<br/>
+<?= NETCAT_MODULE_FORUM2_COMPONENT_FORUM_FIELD_DESCRIPTION ?><br/>
+<textarea name='Description' row='5' style='width:50%'><?= $Description ?></textarea><br/>
+<br/>
+<?
+$groups = $db->get_results("SELECT `ID`, `Name` FROM `Forum_Groups` WHERE `Subdivision_ID` = '". intval($sub)." ?>'", ARRAY_A);
+if ( !empty($groups) ) {
+  echo NETCAT_MODULE_FORUM2_COMPONENT_FORUM_FIELD_GROUP."<br/><select name='Group' style='width:50%'>";
+  foreach ($groups as $_row) {
+    echo "<option value='". $_row['ID']."'>". $_row['ID'].". ".$_row['Name']."</option>";
+  }
+  echo "</select><br/><br/>";
+}
+echo NETCAT_MODULE_FORUM2_COMPONENT_FORUM_FIELD_TOPIC_KEYWORD."<br/>";
+?>
+
+<input name='Topic_Keyword' type='text' size='50' maxlength='255' value='<?= ($Topic_Keyword ? $Topic_Keyword : NETCAT_MODULE_FORUM2_COMPONENT_FORUM_DEFAULT_TOPIC_KEYWORD) ?>' /><br/>
+<br/>
+<?= NETCAT_MODULE_FORUM2_COMPONENT_FORUM_FIELD_TOPIC_NAME ?><br/>
+<input name='Topic_Name' type='text' size='50' maxlength='255' value='<?= ($Topic_Name ? $Topic_Name : NETCAT_MODULE_FORUM2_COMPONENT_FORUM_DEFAULT_TOPIC_NAME) ?>' /><br/>
+<br/>
+<?= NETCAT_MODULE_FORUM2_COMPONENT_FORUM_FIELD_REPLY_KEYWORD ?><br/>
+<input name='Reply_Keyword' type='text' size='50' maxlength='255' value='<?= ($Reply_Keyword ? $Reply_Keyword : NETCAT_MODULE_FORUM2_COMPONENT_FORUM_DEFAULT_REPLY_KEYWORD) ?>' /><br/>
+<br/>
+<?= NETCAT_MODULE_FORUM2_COMPONENT_FORUM_FIELD_REPLY_NAME ?><br/>
+<input name='Reply_Name' type='text' size='50' maxlength='255' value='<?= ($Reply_Name ? $Reply_Name : NETCAT_MODULE_FORUM2_COMPONENT_FORUM_DEFAULT_REPLY_NAME) ?>' /><br/>
+<br/>
+<?= NETCAT_MODERATION_INFO_REQFIELDS ?><br/><br/>
+<?= nc_submit_button(NETCAT_MODERATION_BUTTON_ADD) ?>
+</form>
+</fieldset>

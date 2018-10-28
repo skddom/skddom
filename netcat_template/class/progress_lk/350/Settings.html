@@ -1,0 +1,14 @@
+<?php
+$ignore_all = true;
+$query_from = "Sub_Class c, Subdivision s";
+$query_select  = "c.Sub_Class_Name as Name, s.Subdivision_Name as `Option`, s.Hidden_URL as Url, CONCAT(s.Hidden_URL,c.EnglishName,'.html') as Link";
+$query_order = "s.Priority, c.Priority";
+$query_where = "s.Parent_Sub_ID=$sub and s.Subdivision_ID=c.Subdivision_ID and c.Class_ID=$classID and c.Priority>0";
+
+global $pro;
+if (!$pro) {
+    $lk = new CPersonal();
+    $pro = new CProgress($lk, 340);
+}
+$cc1 = $db->get_var("select Sub_Class_ID from Sub_Class where Subdivision_ID=".$pro->rs[0]['sub']." and Checked=1 order by Priority asc limit 1");
+?>

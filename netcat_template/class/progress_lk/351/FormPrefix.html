@@ -1,0 +1,29 @@
+<?= $f_AdminCommon; ?>
+<div class="option-sub -position_relative atpl-<?=$classID?>">
+<div>
+    
+    <?
+    $rs = $db->get_row("select DATE_FORMAT(a.Date1,'%d.%m.%Y') as Date1,DATE_FORMAT(a.Date2,'%d.%m.%Y') as Date2,
+        a.Status as StatusID, b.EtapStatus_Name as Status
+        from Message$classID a
+        left join Classificator_EtapStatus b ON a.Status=b.EtapStatus_ID
+        where a.Sub_Class_ID=$cc and Project={$pro->lk->lk}
+    ", ARRAY_A);
+
+   
+    ?>
+    <div class="robototitle"><?=$option?><?if($rs['StatusID'] < 3):?><i class="star"></i><?endif?></div>
+    <?if ($rs):
+    $f_Date1 = $rs['Date1'];
+    $f_Date2 = $rs['Date2'];
+    $f_Status_id = $rs['StatusID'];
+    ?>
+    <span class="title-status option-status status-<?=$rs['StatusID']?>">Статус - <?=$rs['Status']?></span>
+<?if($f_Date1 ):?><p class="date-notice"><?if($f_Status_id==1):?><i class="star"></i>Рекомендованная дата<?else:?>Дата<?endif?> начала выполнения данного этапа <span class="lkdate"><?=$f_Date1?></span></p><?endif?>
+<?if($f_Date2 ):?><p class="date-notice"><?if($f_Status_id!=3):?><i class="star"></i>Рекомендованная дата<?else:?>Дата<?endif?> окончания выполнения данного этапа <span class="lkdate"><?=$f_Date2?></span></p><?endif?>
+<br>
+    <p>Здесь вы можете отследить всю работу над Вашим проектом на этапе &laquo;<?=$cc_env['Subdivision_Name']?>&raquo;</p>
+    <p>Для более подробной информации по каждому разделу этапа &laquo;<?=$cc_env['Subdivision_Name']?>&raquo; 
+    перейдите на страницу раздела по ссылке в левом меню</p>
+    <?endif?>
+</div>    

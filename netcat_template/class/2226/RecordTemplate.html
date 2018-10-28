@@ -1,0 +1,16 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+<div><?= $f_AdminButtons; ?>
+<?=$f_Name?>
+<? $file = $f_Projects;
+
+
+    if(file_exists($_SERVER['DOCUMENT_ROOT'].$file)) {
+      $fp=fopen($_SERVER['DOCUMENT_ROOT'].$file, "r");
+      $projects = array();
+      while ( ($data=fgetcsv($fp,10000,";"))!==false ) {
+          $projects[$data[0]] = $data;
+      }
+    }
+?>
+</div>
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

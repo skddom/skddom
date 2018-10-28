@@ -1,0 +1,72 @@
+<html>
+<head>
+    <title>{shop.ShopName}: заказ № {order.Message_ID} от {order.Date}</title>
+</head>
+<body>
+
+<? if ($site['logo_header']): ?>
+    <p><img src="{site.logo_header}" style="max-height: 150px" /></p>
+<? endif; ?>
+
+<p>Здравствуйте!</p>
+
+<p>Благодарим вас за заказ в магазине &laquo;{shop.ShopName}&raquo;.</p>
+
+<p>Номер вашего заказа: <strong>{order.Message_ID}</strong>.</p>
+
+<p><strong>Состав заказа:</strong></p>
+
+<table cellpadding="4" cellspacing="2">
+	<tbody>
+		<tr style="background: #EEE">
+			<th>Артикул</th>
+			<th>Товар</th>
+			<th>Цена</th>
+			<th>Количество</th>
+			<th>Стоимость</th>
+		</tr>
+		<?php foreach ($cart as $item): ?>
+		<tr>
+			<td>{item.Article}</td>
+			<td><a href="{item.URL}">{item.FullName}</a></td>
+			<td style="text-align: right; vertical-align: top; white-space: nowrap">{item.ItemPriceF}</td>
+			<td style="text-align: center; vertical-align: top; white-space: nowrap">{item.Qty} {item.Units}</td>
+			<td style="text-align: right; vertical-align: top; white-space: nowrap">{item.TotalPriceF}</td>
+		</tr>
+		<? endforeach; ?>
+		<tr>
+			<td colspan="4" style="text-align: right;"><strong>Итого&nbsp;</strong></td>
+			<td style="text-align: right;">{order.TotalItemPriceF}</td>
+		</tr>
+	</tbody>
+</table>
+
+<? if ($order['DeliveryMethodName']): ?>
+    <p>
+        Способ доставки: {order.DeliveryMethodName}<br />
+        <? if ($order['DeliveryAddress']): ?>Адрес доставки: {order.City}, {order.DeliveryAddress}<br /><? endif; ?>
+        <? if ($order['DeliveryPointDescription']): ?>{order.DeliveryPointDescription}<br /><? endif; ?>
+        <? if ($order['DeliveryPointSchedule']): ?>Время работы пункта выдачи: {order.DeliveryPointSchedule}<br /><? endif; ?>
+        <? if ($order['DeliveryPrice']): ?>Стоимость доставки: {order.DeliveryPriceF}<br /><? endif; ?>
+        <? if ($order['DeliveryDates']): ?>Ожидаемые даты доставки: {order.DeliveryDates}<? endif; ?>
+    </p>
+<? endif; ?>
+
+<? if ($order['PaymentMethodName']): ?>
+    <p>
+        Способ оплаты: {order.PaymentMethodName}<br />
+        <? if ($order['PaymentPrice']): ?>Дополнительный сбор за выбранный способ оплаты: {order.PaymentPriceF}<? endif; ?>
+    </p>
+<? endif; ?>
+
+<? if ($order['TotalItemPrice'] != $order['TotalPrice']): ?>
+    <p><strong>ИТОГО: {order.TotalPriceF}</strong></p>
+<? endif; ?>
+
+<p>Для подтверждения заказа с вами в самое ближайшее время свяжется наш менеджер.</p>
+
+<p><br />С уважением,<br /> <a href="{shop.URL}">{shop.ShopName}</a></p>
+<? if ($shop['Phone']): ?><p>Телефон: {shop.Phone}</p><? endif; ?>
+
+</body>
+</html>

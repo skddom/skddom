@@ -1,0 +1,8 @@
+<? echo $f_AdminCommon; ?>
+
+<?= s_browse_cc($browse_tabs) ?>
+<h2><?= $PageTitle ?></h2>
+<? if (!$totRows) : ?>
+	<div style='margin-top: 10px;'>Нет записей.</div>
+<? endif; ?>
+<table cellpadding='5' cellspacing='1' border='0' style='width:100%; background:#CCC; margin-top: 10px;'>

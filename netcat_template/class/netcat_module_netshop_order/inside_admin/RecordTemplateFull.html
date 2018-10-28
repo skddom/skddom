@@ -1,0 +1,427 @@
+<?
+
+/** @var nc_core $nc_core */
+/** @var nc_db $db */
+
+$netshop = nc_netshop::get_instance($catalogue);
+$order = $netshop->load_order($message);
+
+$statuses = (array)$db->get_results("SELECT * FROM `Classificator_ShopOrderStatus` WHERE `Checked` = 1 ORDER BY `ShopOrderStatus_Priority`", ARRAY_A);
+
+$discount_admin_prefix = $nc_core->ADMIN_FOLDER . '#module.netshop.promotion.discount';
+
+?>
+
+<div class="tpl-block-order">
+    <style scoped>
+    .tpl-block-order .tpl-caption { font-weight: bold; margin-right: 3px; }
+    .tpl-block-order-controls { float: right; }
+    .tpl-block-order-status, .tpl-block-order-forms { margin-bottom: 10px; }
+    .tpl-block-order-forms .tpl-caption { display: block; margin-bottom: 4px;}
+    .tpl-property-comments, .tpl-property-delivery-method, .tpl-property-payment-method { margin-top: 15px; }
+    .tpl-block-order-items, .tpl-block-order-manager-comments { margin-top: 30px; }
+    .tpl-block-order-items th { font-weight: bold; }
+    .tpl-block-order-items-summary { font-weight: bold; }
+    .tpl-block-order-items-summary td:first-of-type { text-align: right; padding-right: 20px; }
+    .tpl-block-order-comments-rights-hint { font-size: 90%; color: #8d8d8d; }
+    .tpl-block-order-manager-comments textarea { width: 100% !important; }
+    .tpl-block-order-manager-comments-save-result { display: none; padding-left: 20px; color: #8d8d8d; }
+    .tpl-block-order-last-update { margin: 15px 0; font-style: italic; }
+    </style>
+
+    <div class="tpl-block-order-controls">
+        <div class="tpl-block-order-status">
+            <form>
+            <div class="tpl-property-status">
+                <span class="tpl-caption">Статус заказа:</span>
+                <span class="tpl-value">
+                    <input type="hidden" name="Checked[<?= $f_RowID ?>]" value="<?= $f_Checked ?>"/>
+                    <select name="Status[<?= $f_RowID ?>]" data-nc-original="<?= (int)$f_Status_id ?>">
+                        <option value="0"><?= NETCAT_MODULE_NETSHOP_ORDER_NEW ?></option>
+                        <? foreach ($statuses as $status): ?>
+                            <option value="<?= $status['ShopOrderStatus_ID'] ?>" <?=
+                                $f_Status_id == $status['ShopOrderStatus_ID'] ? 'selected' : '' ?>><?=
+                                $status['ShopOrderStatus_Name'] ?></option>
+                        <? endforeach; ?>
+                    </select>
+                </span>
+            </div>
+            </form>
+        </div>
+
+        <div class="tpl-block-order-forms">
+            <span class="tpl-caption">Печать документов:</span>
+            <form method="GET" target="_blank" action="<?= nc_module_path('netshop') ?>forms.php">
+                <input type="hidden" name="phase" value="print">
+                <input type="hidden" name="order" value="<?= $message ?>">
+                <input type="hidden" name="catalogue" value="<?= $catalogue ?>">
+                <select name="type" id="nc_netshop_order_print_form">
+                    <option value="">выберите бланк</option>
+                    <? foreach ($netshop->forms->get_objects() as $k => $form): ?>
+                    <option value="<?=$form->keyword ?>"><?=$form->name ?></option>
+                    <? endforeach ?>
+                </select>
+            </form>
+        </div>
+
+        <? if ($netshop->is_feature_enabled('1c')): ?>
+        <div class="tpl-block-order-export">
+            <a href="<?= nc_module_path('netshop') . "export/cml2_orders.php?order_id=$message&amp;catalogue_id=$catalogue" ?>">
+                <?= NETCAT_MODULE_NETSHOP_EXPORT_COMMERCEML ?>
+            </a>
+        </div>
+        <? endif; ?>
+
+    </div>
+
+    <div class="tpl-block-order-data">
+
+        <div class="tpl-property-contact-name">
+            <span class="tpl-caption">Фамилия и имя:</span>
+            <span class="tpl-value"><?= htmlspecialchars($f_ContactName) ?></span>
+        </div>
+
+        <div class="tpl-property-phone">
+            <span class="tpl-caption">Контактный телефон:</span>
+            <span class="tpl-value"><?= htmlspecialchars($f_Phone ?: "не указан") ?></span>
+        </div>
+
+        <div class="tpl-property-email">
+            <span class="tpl-caption">E-mail:</span>
+            <span class="tpl-value"><?
+                if ($f_Email) {
+                    $value = htmlspecialchars($f_Email);
+                    echo '<a href="mailto:' . $value . '">' . $value . '</a>';
+                }
+                else {
+                    echo 'не указан';
+                }
+            ?></span>
+        </div>
+
+        <div class="tpl-property-city">
+            <span class="tpl-caption">Город доставки:</span>
+            <span class="tpl-value"><?= htmlspecialchars($f_City ?: "не указан") ?></span>
+        </div>
+
+        <div class="tpl-property-address">
+            <span class="tpl-caption">Адрес доставки:</span>
+            <span class="tpl-value"><?= htmlspecialchars($f_Address ?: "не указан") ?></span>
+        </div>
+
+        <div class="tpl-property-zip">
+            <span class="tpl-caption">Почтовый индекс:</span>
+            <span class="tpl-value"><?= htmlspecialchars($f_Zip ?: "не указан") ?></span>
+        </div>
+
+        <div class="tpl-property-comments">
+            <span class="tpl-caption">Комментарий к заказу:</span>
+            <span class="tpl-value"><?= htmlspecialchars(nl2br($f_Comments ?: "нет")) ?></span>
+        </div>
+
+        <div class="tpl-property-delivery-method">
+            <span class="tpl-caption">Способ доставки:</span>
+            <span class="tpl-value"><?
+                try {
+                    $delivery_method = new nc_netshop_delivery_method($f_DeliveryMethod);
+                    echo $delivery_method->get('name');
+                }
+                catch (nc_record_exception $e) {
+                    echo '(ошибка)';
+                }
+            ?></span>
+        </div>
+
+        <div class="tpl-property-delivery-cost">
+            <span class="tpl-caption">Стоимость доставки:</span>
+            <span class="tpl-value"><?= $f_DeliveryCost ? $netshop->format_price($f_DeliveryCost) : 'бесплатно' ?></span>
+            <? if ($order['DeliveryDiscountSum']): ?>
+                (скидка: <?= $order['DeliveryDiscountSumF'] ?>,
+                к оплате за доставку: <?= $order['DeliveryPriceWithDiscountF'] ?>)
+            <? endif; ?>
+        </div>
+
+        <div class="tpl-property-payment-method">
+            <span class="tpl-caption">Способ оплаты:</span>
+            <span class="tpl-value"><?
+                try {
+                    $payment_method = new nc_netshop_payment_method($f_PaymentMethod);
+                    echo $payment_method->get('name');
+                }
+                catch (nc_record_exception $e) {
+                    echo '(ошибка)';
+                }
+            ?></span>
+        </div>
+
+        <? if ($f_PaymentCost): ?>
+            <div class="tpl-property-payment-cost">
+                <span class="tpl-caption">Наценка за способ оплаты:</span>
+                <span class="tpl-value"><?= $netshop->format_price($f_PaymentCost) ?></span>
+            </div>
+        <? endif; ?>
+
+    </div>
+
+    <div class="tpl-block-order-items">
+        <table class="nc-table nc--hovered nc--wide">
+            <tr>
+                <th>Товар</th>
+                <th>Полная цена</th>
+                <th>Скидка</th>
+                <th>Цена со скидкой</th>
+                <th>Количество</th>
+                <th>Стоимость</th>
+            </tr>
+            <? foreach ($order->get_items() as $item): ?>
+            <tr>
+                <!-- название -->
+                <td>
+                    <?= ($item['Article'] ? '<span class="nc-text-grey">' . htmlspecialchars($item['Article']) . '</span> &nbsp; ' : '') ?>
+                    <a href="<?= $item['URL'] ?>" target="_blank">
+                        <?= htmlspecialchars($item['FullName']) ?>
+                    </a>
+                </td>
+
+                <!-- Цена без скидки -->
+                <td class="nc--nowrap"> <?= $item['OriginalPriceF'] ?></td>
+
+                <!-- Информация о применённых скидках -->
+                <td>
+                    <? if ($item['Discounts']): ?>
+                        <? foreach ($item['Discounts'] as $discount): ?>
+                            <div>
+                                <? if ($discount['id']): ?>
+                                    <a href="<?= "$discount_admin_prefix.item.edit($discount[id])" ?>"
+                                    target="_blank"><?= htmlspecialchars($discount['name']) ?></a>&nbsp;—
+                                <? else: ?>
+                                    <?= htmlspecialchars($discount['name']) ?>&nbsp;—
+                                <? endif; ?>
+                                <?= $netshop->format_price($discount['sum']); ?>
+                            </div>
+                        <? endforeach; ?>
+                    <? else: ?>
+                        нет
+                    <? endif; ?>
+                </td>
+
+                <!-- Цена со скидкой -->
+                <td class="nc--nowrap"><?= $item['ItemPriceF'] ?></td>
+
+                <!-- Количество -->
+                <td class="nc--nowrap"><?= $item['Qty'] ?> <?= $item['Units'] ?></td>
+
+                <!-- Стоимость -->
+                <td class="nc--nowrap"><?= $item['TotalPriceF'] ?></td>
+            </tr>
+            <? endforeach; ?>
+
+            <!-- Итого по товарам -->
+            <tr class="tpl-block-order-items-summary">
+                <td colspan="5">СТОИМОСТЬ ТОВАРОВ</td>
+                <td><?= $order['TotalItemPriceWithoutCartDiscountF'] ?></td>
+            </tr>
+
+            <!-- Скидки на корзину -->
+            <? if ($order->get_order_discount_sum()): ?>
+            <tr>
+                <td colspan="5">
+                <? foreach ($order->get_cart_discounts() as $discount): ?>
+                    <div>
+                        <? if ($discount['id']): ?>
+                            <a href="<?= "$discount_admin_prefix.cart.edit($discount[id])" ?>"
+                            target="_blank"><?= htmlspecialchars($discount['name']) ?></a>&nbsp;—
+                        <? else: ?>
+                            <?= htmlspecialchars($discount['name']) ?>&nbsp;—
+                        <? endif; ?>
+                        <?= $netshop->format_price($discount['sum']); ?>
+                    </div>
+                <? endforeach; ?>
+                </td>
+                <td>&minus;<?= $order['OrderDiscountSumF'] ?></td>
+            </tr>
+            <? endif; ?>
+
+            <!-- Доставка -->
+            <? if ($f_DeliveryCost): ?>
+            <tr>
+                <td colspan="5">Стоимость доставки</td>
+                <td><?= $order['DeliveryPriceF'] ?></td>
+            </tr>
+            <? endif; ?>
+
+            <!-- Оплата -->
+            <? if ($f_PaymentCost): ?>
+            <tr>
+                <td colspan="5">Наценка за способ оплаты</td>
+                <td><?= $order['PaymentPriceF'] ?></td>
+            </tr>
+            <? endif; ?>
+
+            <!-- Общий итог -->
+            <? if ($order->get_order_discount_sum() || $f_DeliveryCost || $f_PaymentCost): ?>
+            <tr class="tpl-block-order-items-summary">
+                <td colspan="5">ИТОГО</td>
+                <td><?= $order['TotalPriceF'] ?></td>
+            </tr>
+            <? endif; ?>
+
+        </table>
+    </div>
+
+    <div class="tpl-block-order-manager-comments">
+        <div class="tpl-property-manager-comments">
+            <span class="tpl-caption">Комментарии оператора:</span>
+            <? if ($nc_core->get_component($classID)->has_field('ManagerComments')): ?>
+                <? if (!nc_field_check_admin_perm()): ?>
+                    <!-- Поле ManagerComments в стандартном компоненте «Заказ» имеет доступ «для администратора» -->
+                    <span class="tpl-value"><?= nl2br(htmlspecialchars($f_ManagerComments ?: "нет")) ?></span>
+                    <div class="tpl-block-order-comments-rights-hint">
+                        Для изменения комментария текущий пользователь должен быть администратором раздела
+                        «<a href="<?= $nc_core->ADMIN_FOLDER ?>#subdivision.system(<?= $sub ?>)"
+                           target="_blank"><?= $sub . ". " . $nc_core->subdivision->get_by_id($sub, 'Subdivision_Name') ?></a>».
+                        Добавить соответствующие права редактора раздела может администратор сайта
+                        по следующей ссылке:
+                        <?
+                        $user_rights_link = $nc_core->url->get_host_url() . $nc_core->ADMIN_FOLDER . '#user.rights(' . $AUTH_USER_ID . ')';
+                        ?>
+                        <a href="<?= $user_rights_link ?>" target="_blank"><?= $user_rights_link ?></a>
+                    </div>
+                <? else: ?>
+                    <form method="POST" action="<?= $SUB_FOLDER . $HTTP_ROOT_PATH ?>message.php">
+                        <?= $nc_core->token->get_input() ?>
+                        <input type="hidden" name="posting" value="1"/>
+                        <input type="hidden" name="partial" value="1"/>
+                        <input type="hidden" name="admin_mode" value="1"/>
+                        <input type="hidden" name="inside_admin" value="1" />
+                        <input type="hidden" name="catalogue" value="<?= $catalogue ?>"/>
+                        <input type="hidden" name="cc" value="<?= $cc ?>"/>
+                        <input type="hidden" name="sub" value="<?= $sub ?>"/>
+                        <input type="hidden" name="message" value="<?= $message ?>"/>
+                        <input type="hidden" name="f_Checked" value="<?= $f_Checked ?>" />
+                        <textarea name="f_ManagerComments" class="no_cm"><?= htmlspecialchars($f_ManagerComments) ?></textarea>
+                        <button type="submit" class="nc-btn">Сохранить комментарий</button>
+                        <span class="tpl-block-order-manager-comments-save-result">Изменения сохранены.</span>
+                    </form>
+                <? endif; ?>
+            <? else: /* поле ManagerComments не существует */ ?>
+                <p><em>Для добавления комментария оператора
+                <a href="<?= $nc_core->ADMIN_FOLDER ?>#field_fs.add(<?= $classID ?>)" target="_blank">создайте
+                поле компонента</a>
+                (название поля: <code>ManagerComments</code>,
+                описание: «Комментарий оператора»,
+                тип поля: «Текстовый блок»,
+                разрешать HTML-тэги: нет).</em></p>
+            <? endif; ?>
+        </div>
+    </div>
+
+    <div class="tpl-block-order-last-update">
+        Заказ создан <?=
+            $f_Created_day . '.' . $f_Created_month . '.' . $f_Created_year
+        ?><? if ($f_LastUser_ID): ?>,
+        последнее изменение
+        <?= $f_LastUpdated_day . '.' . $f_LastUpdated_month . '.' . $f_LastUpdated_year ?>
+        (<?= $nc_core->user->get_by_id($f_LastUserID, 'ForumName') ?:
+             $nc_core->user->get_by_id($f_LastUserID, 'Login')
+        ?>)
+        <? endif; ?>
+    </div>
+
+    <script>
+    (function() {
+        var $nc = nc_has_frame() ? top.mainView.oIframe.contentWindow.$nc : $nc;
+        // Сохранение статуса
+        $nc('SELECT[name^="Status["').on('change', function (e) {
+            var $this = $nc(e.target),
+                status_name = $this.find("option:selected").text(),
+                confirmation_text = '<?= NETCAT_MODULE_NETSHOP_CONFIRM_STATUS_CHANGE_TO ?>'.replace('%s', status_name);
+
+            if (confirm(confirmation_text)) {
+                var value = $this.val();
+                $this.attr('data-nc-original', value);
+                var id = /\[(\d+)\]/.exec($this.attr('name'));
+                id = id[1];
+
+                var checked = $nc('INPUT[name="Checked[' + id + ']"').val();
+                nc.process_start('status_change_' + id);
+
+                var url = '<?= $SUB_FOLDER . $HTTP_ROOT_PATH . "message.php?inside_admin=1&catalogue=" . $catalogue . "&sub=" . $sub . "&cc=" . $cc . "&classID=" . $classID . "&posting=1" . ($curPos ? "&curPos=" . $curPos : "") . ($admin_mode ? "&admin_mode=1" : "") ?>';
+                url += '&message=' + id + '&f_Status=' + value + '&f_Checked=' + checked + '&do_not_respond=1';
+
+                $nc.get(url, function () {
+                    nc.process_stop('status_change_' + id);
+                });
+            }
+            else {
+                $this.val($this.attr('data-nc-original'));
+                console.log($this.attr('data-nc-original'));
+                console.log($this.val());
+            }
+            return true;
+        });
+
+        // Открытие бланков
+        $nc('#nc_netshop_order_print_form').change(function() {
+            if (this.value) {
+                $nc(this.parentNode).submit();
+                $nc(this).val('');
+            }
+        });
+
+        // Сохранение комментария оператора
+        $nc('.tpl-property-manager-comments form').on('submit', function(e) {
+            var form = $nc(this),
+                button = form.find('button[type=submit]');
+
+            button.addClass('nc--loading');
+            $nc.post(form.attr('action'), form.serialize())
+                .success(function() {
+                    $nc('.tpl-block-order-manager-comments-save-result').delay(500).fadeIn().delay(5000).fadeOut();
+                })
+                .always(function() {
+                    button.removeClass('nc--loading');
+                });
+
+            e.preventDefault();
+        });
+    })();
+    </script>
+
+</div>
+<?
+
+// Добавляем в интерфейсе нужные нам кнопки
+if (isset($UI_CONFIG)) {
+    // помним, что шаблон может использоваться как в обычном режиме администрирования,
+    // так и внутри модуля (#module.netshop.order.view(id))
+    if (!isset($inside_netshop)) {
+        $inside_netshop = 0;
+    }
+
+    $UI_CONFIG->actionButtons = array(
+        array(
+            "id" => "back",
+            "caption" => NETCAT_MODULE_NETSHOP_ORDER_BACK_TO_LIST,
+            "location" => ($inside_netshop ? "#module.netshop.order($catalogue)" : "#object.list($cc)"),
+            "align" => "left"
+        ),
+        array(
+            "id" => "edit",
+            "caption" => NETCAT_MODULE_NETSHOP_ORDER_EDIT,
+            "action" => "nc.load_dialog('$editLink&inside_admin=1&inside_netshop=1')",
+            "align" => "left"
+        ),
+        array(
+            "id" => "duplicate",
+            "caption" => NETCAT_MODULE_NETSHOP_ORDER_DUPLICATE,
+            "action" => "if (confirm('Создать копию заказа?')) { nc.load_dialog('" .
+                nc_module_path('netshop') .
+                "admin/?controller=order&action=duplicate&order_id=$message" .
+                "&hash=" . sha1("$message:$f_Created:" . session_id()) .
+                "&inside_netshop=$inside_netshop') }",
+            "align" => "right"
+        ),
+    );
+}
+

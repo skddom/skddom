@@ -1,0 +1,20 @@
+<!-- FormPrefix -->		<script>
+			var building_area_coeff = 1.08,
+				storeys_diff_percent = 5,
+				covering_cost_coeff = <?=$cc_settings['covering_cost_coeff']?>,
+				one_storey_img_height_px_coeff = 100,
+				two_storey_img_height_px_coeff = 60,
+        min_first_storey_height = 2.3,
+        max_first_storey_height = 3.5,
+        min_second_storey_height = 0.8,
+        max_second_storey_height = 3,                
+				id_from = 100;
+                save_key = 'house_1';
+		</script>
+        <? include $_SERVER['DOCUMENT_ROOT']."/calc/calc.php"; ?><?
+
+        ?><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?= $f_AdminButtons; ?><!-- /RecordTemplate -->
+
+<!-- FormSuffix --><!-- /FormSuffix -->

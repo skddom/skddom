@@ -1,0 +1,22 @@
+<form class="tpl-block-auth-form tpl-block-popup" action='<?=$nc_core->SUB_FOLDER ?>/netcat/add.php' method="post" name='adminForm' id='adminForm' enctype='multipart/form-data'>
+    <div class="tpl-block-auth-form-title">Регистрация</div>
+    <? if ($warnText): ?><div class="tpl-error"><?=$warnText ?></div><? endif ?>
+
+    <p><input name="f_Email" id="f_Email" value="<?=htmlspecialchars($f_Email) ?>" type="text" placeholder="E-mail*"></p>
+   
+    <p><input name="Password1" id="Password1" type="password" placeholder="Пароль*"></p>
+    <p><input name="Password2" id="Password2" type="password" placeholder="Повторите пароль*"></p>
+
+    <p><input name="f_ForumName" id="f_ForumName" value="<?=htmlspecialchars($f_ForumName) ?>" type="text" placeholder="Как к вам обращаться*"></p>
+
+    <div class="tpl-block-auth-form-actions">
+        <button type="submit">Зарегистрироваться</button>
+    </div>
+
+    <input name='admin_mode' type='hidden' value='<?=$admin_mode ?>' />
+    <input name='catalogue' type='hidden' value='<?=$catalogue ?>' />
+    <input name='cc' type='hidden' value='<?=$cc ?>' />
+    <input name='sub' type='hidden' value='<?=$sub ?>' />
+    <input name='posting' type='hidden' value='1' />
+    <input name='curPos' type='hidden' value='<?=$curPos ?>' />
+</form>

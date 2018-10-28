@@ -1,0 +1,18 @@
+<!-- FormPrefix --><? echo $f_AdminCommon; ?>
+<table cellpadding='5' cellspacing='1' border='0' style='width:100%; background:#CCC'>
+<col width='1%'/><col width='99%'/><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><? echo $f_AdminButtons; ?>
+
+<? $f_Message = nc_substr(nc_bbcode_clear($f_Message_full), 0, 50);
+if (nc_strrpos($f_Message, " ")) {
+  $f_Message = nc_substr($f_Message, 0, nc_strrpos($f_Message, " "));
+} ?>
+
+<tr valign='top'>
+  <td style='background:<?= is_even($f_RowNum) ? "#EEE" : "#FFF" ?>'><img src='<?= $SUB_FOLDER.$HTTP_ROOT_PATH ?>"modules/forum2/images/<?= $f_Type ?>.gif' border='0' alt=''/></td>
+  <td style='background:<?= is_even($f_RowNum) ? "#EEE" : "#FFF" ?>'><a href='<?= $f_fullLink ?>'><?= htmlspecialchars(($f_Subject ? $f_Subject : $f_Message), ENT_QUOTES) ?></a><br/>
+      <?= $f_Created ?>, <b><?= $f_Author ?></b></td>
+</tr><!-- /RecordTemplate -->
+
+<!-- FormSuffix --></table><!-- /FormSuffix -->

@@ -1,0 +1,68 @@
+<?php
+
+// Путь к шаблону виджета (!не виджет-компонента)
+$template_folder = $nc_core->WIDGET_TEMPLATE_FOLDER . $widget_class_id . DIRECTORY_SEPARATOR . $widget_id . DIRECTORY_SEPARATOR;
+
+if ( ! file_exists($template_folder)) {
+	mkdir($template_folder);
+}
+
+// Сохраняем шаблон виджета
+$tpl_file = $template_folder . 'WidgetTemplate.html';
+file_put_contents($tpl_file, '<?/******* template_header *******/?>' . $post['f_template_header'] . '<?/******* /template_header *******/?>
+<? foreach($data as $f_RowNum => $row): ?>
+<? extract($row, EXTR_PREFIX_ALL, "f"); ?>
+<?/******* template_body *******/?>' . $post['f_template_body'] . '<?/******* /template_body *******/?>
+<? endforeach ?>
+<?/******* template_footer *******/?>' . $post['f_template_footer'] . '<?/******* /template_footer *******/?>');
+
+
+// Парсинг CSS
+$widget_selector  = '.nc-widget-' . $widget_id;
+$larger_selector  = '.nc-lg-';
+$smaller_selector = '.nc-sm-';
+$split_keyword    = '/*NC_WIDGET_SIZE';
+$css              = '';
+$sizes_dirty      = explode($split_keyword, $post['f_css']);
+
+foreach ($sizes_dirty as $row) {
+	$row = trim($row);
+	if ($row) {
+		preg_match('/^:(\d*),(\d*)/', $row, $matches);
+		$larger        = $matches[1] ? $larger_selector . (int) $matches[1] : false;
+		$smaller       = $matches[2] ? $smaller_selector . (int) $matches[2] : false;
+		$size_selector = $widget_selector . $larger . $smaller;
+
+		$size_css = $split_keyword . $row;
+
+		// Вырезаем комментарии /* ... */
+		$size_css = preg_replace('@/\*[^(\*/)]*\*/@ui', '', $size_css);
+
+		// Минимизируем css
+		$size_css = preg_replace('/\s+/', ' ', $size_css);
+		$size_css = str_replace('}', '}' . PHP_EOL, $size_css);
+		$size_css = preg_replace('/(,|:|{|;) /', '$1', $size_css);
+
+		$size_css = explode(PHP_EOL, trim($size_css));
+		foreach ($size_css as $css_rule) {
+			if ($pos = strpos($css_rule, '{')) {
+				$selector_list = explode(',', trim(substr($css_rule, 0, $pos)));
+				$style         = substr($css_rule, $pos);
+
+				$selector = '';
+				foreach ($selector_list as $val) {
+					if ($selector) $selector .= ',' . PHP_EOL;
+					$selector .= $size_selector . ' ' . $val;
+				}
+
+				$css .= $selector . $style . PHP_EOL;
+			}
+		}
+
+		$css .= PHP_EOL . PHP_EOL . PHP_EOL;
+	}
+}
+
+// Сохраняем CSS
+$css_file = $template_folder . 'style.css';
+file_put_contents($css_file, $css);

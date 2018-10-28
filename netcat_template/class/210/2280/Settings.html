@@ -1,0 +1,25 @@
+<?php $ignore_sub=$ignore_cc=true;
+
+if(isset($_REQUEST['delete_all'])) {
+    $db->query("delete from  Message2279 where User='$AUTH_USER_ID' or CookieID='".$_COOKIE['skd_token']."'");
+}
+
+$query_where = "a.Message_ID IN(select ID from Message2279 where User='$AUTH_USER_ID' or CookieID='".$_COOKIE['skd_token']."')";
+$query_order = "a.Priority";
+
+$br = CBranding::get_object();
+$br->getProjects();
+$br->ExModifyQueryWhere($query_where, $cc_env, $inside_admin, $admin_mode);
+
+
+
+$PARAMS = explode("\n", $cc_settings['PARAMS']);
+foreach ($PARAMS as $v) {
+    $v = explode(";",$v);
+    if (!$v[1]) $v[1]=$v[0];
+    $range = explode('-', $v[1]);
+    $id = md5($v[0]);
+    $arRange[] = array("ID"=>$id,"NAME"=>$v[0], "RANGE"=>$range);
+}
+
+?>

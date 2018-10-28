@@ -1,0 +1,35 @@
+@font-face {
+	font-family: SegoeWP;
+	src: local("../font/SegoeWP.ttf"),
+	url(../font/SegoeWP.ttf);
+}
+
+@font-face {
+	font-family: SegoeWP-Black;
+	src: local("../font/SegoeWP-Black.ttf"),
+	url(../font/SegoeWP-Black.ttf);
+}
+
+@font-face {
+	font-family: SegoeWP-Bold;
+	src: local("../font/SegoeWP-Bold.ttf"),
+	url(../font/SegoeWP-Bold.ttf);
+}
+
+@font-face {
+	font-family: SegoeWP-Light;
+	src: local("../font/SegoeWP-Light.ttf"),
+	url(../font/SegoeWP-Light.ttf);
+}
+
+@font-face {
+	font-family: SegoeWP-Semibold;
+	src: local("../font/SegoeWP-Semibold.ttf"),
+	url(../font/SegoeWP-Semibold.ttf);
+}
+
+@font-face {
+	font-family: SegoeWP-Semilight;
+	src: local("../font/SegoeWP-Semilight.ttf"),
+	url(../font/SegoeWP-Semilight.ttf);
+}

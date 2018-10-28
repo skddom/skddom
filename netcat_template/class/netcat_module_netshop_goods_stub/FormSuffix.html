@@ -1,0 +1,21 @@
+</div>
+<div class="tpl-block-list-suffix">
+    <!-- Список страниц -->
+    <div class="tpl-block-pagination">
+        <? if (strlen($prevLink)): ?>
+            <a href="<?= $prevLink; ?>" class="tpl-link-prev" title="Предыдущая страница">Предыдущая страница</a>
+        <? elseif (strlen($nextLink)): ?>
+            <a class="tpl-link-prev tpl-state-disabled" title="Предыдущая страница">Предыдущая страница</a>
+        <? endif; ?>
+        <?= nc_browse_messages($cc_env, 5, $GLOBALS['pages_template']); ?>
+        <? if (strlen($nextLink)): ?>
+            <a href="<?= $nextLink; ?>" class="tpl-link-next" title="Следующая страница">Следующая страница</a>
+        <? elseif (strlen($prevLink)): ?>
+            <a class="tpl-link-next tpl-state-disabled" title="Следующая страница">Следующая страница</a>
+        <? endif; ?>
+    </div>
+</div>
+</div>
+</div>
+
+<script>window.tpl_init_content && tpl_init_content();</script>

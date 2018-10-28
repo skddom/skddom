@@ -1,0 +1,15 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+<?= $f_AdminButtons; ?>
+<div class="robototitle"><?=$cc_env['Sub_Class_Name']?><?if($f_Status_id<3):?><i class="star"></i><?endif?></div>
+<span class="title-status option-status status-<?=$f_Status_id?>">Статус - <?=$f_Status?></span>
+<?if($f_Date1 && $f_Date1_year>0):?><p class="date-notice"><?if($f_Status_id==1):?><i class="star"></i>Рекомендованная дата<?else:?>Дата<?endif?> начала выполнения данного этапа <span class="lkdate"><?=$f_Date1_day?>.<?=$f_Date1_month?>.<?=$f_Date1_year?></span></p><?endif?>
+<?if($f_Date2 && $f_Date2_year>0):?><p class="date-notice"><?if($f_Status_id!=3):?><i class="star"></i>Рекомендованная дата<?else:?>Дата<?endif?> окончания выполнения данного этапа <span class="lkdate"><?=$f_Date2_day?>.<?=$f_Date2_month?>.<?=$f_Date2_year?></span></p><?endif?>
+<br><p>В данном разделе вы можете проследить процесс выполнения этапа &laquo;<?=$cc_env['Sub_Class_Name']?>&raquo; на Вашем проекте</p>
+<div class="etap1"><?=$f_Photo?></div>
+<div id="bx-pager" style="padding: 25px 8px 0 21px;">
+<?$arr = $f_Photo->to_array()?>
+<?foreach($arr as $k=>$v):?>
+<div style="margin:0 8px; max-width: 149px; border: 1px solid #ccc;"><span style="display: block; width: 100%; height: 106px; background:url(<?=$v['Preview']?>) center; background-size: cover;"></span><span style="line-height: 30px; font-size: 15px; padding:0 5px;"><?=$v['Name']?></span></div>
+<?endforeach?>
+</div>
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

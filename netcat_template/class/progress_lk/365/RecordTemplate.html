@@ -1,0 +1,45 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+<?
+$f_RowID = $f_ObjectID;
+$prorab = $f_Prorab?$db->get_row("select * from Message294 where Message_ID=".$f_Prorab,ARRAY_A):$prorab0;
+$f_Slider = nc_load_multifield(1816, $f_ObjectID);
+$files = $f_Slider->to_array();
+$f_Date1=$f_Date2=$f_Date3=$f_Date4=false;
+if($f_Time1>0) $f_Date1 = date(DATE_FORMAT,$f_Time1); else $f_Date1 = "";
+if($f_Time2>0) $f_Date2 = date(DATE_FORMAT,$f_Time2); else $f_Date2 = "";
+if ($f_StatusID == 3  ) $f_Time3 = $f_Time1; else unset($f_Time3);
+if ($f_StatusID == 3 ) $f_Time4 = $f_Time2; else unset($f_Time4);
+if($f_Time3>0) $f_Date3 = date(DATE_FORMAT,$f_Time3); else $f_Date3 = "";
+if($f_Time4>0) $f_Date4 = date(DATE_FORMAT,$f_Time4); else $f_Date4 = "";
+/*?><div data-callback="initSliders();" data-target=".js-ajax-result" data-load1="<?=$f_Link?>" class="option-itm">
+    <div class="option-name"><?=$f_Name?></div>
+    <div class="option-img" style="background-image:url(<?=$files[0]->Preview?>);"></div>    
+    <div class="option-status status-<?=$f_StatusID?>"><?=$f_Status?></div>    
+</div>*/?>
+<tr class="<?=!is_even($f_RowNum)?"even":"odd"?>">
+    <td><a href="#" data-target=".expand<?=$f_RowID?>" class="expand js-expand"><?=$f_Name?></a>
+    <div class="mobile option-status status-<?=$f_StatusID?>"><?=$f_Status?></div>
+    </td>
+    <td><?if(!$f_Date4):?><?=$f_Date1?> - <?=$f_Date2?><?endif?></td>
+    <td><?=$f_Date3?> - <?=$f_Date4?></td><?
+    ?><td><a href="#" data-target=".expand_prorab_<?=$f_RowID?>" class="expand js-expand"><?=$prorab['Name']?></a></td><?
+    
+    ?><td class=" option-status desktop status-<?=$f_StatusID?>"><?=$f_Status?></td>    
+</tr><?
+if ($prorab) {
+?><tr class="recomm_text expand_prorab expand_prorab_<?=$f_RowID?>">
+    <td></td>
+    <td colspan="4"><div><?=$prorab['Info']?></div>
+        <a data-target=".expand_prorab_<?=$f_RowID?>" href="#" class="expand js-expand slideUp">Свернуть</a>
+    </td>
+</tr><?
+}
+if ($f_Text) {
+?><tr class="recomm_text expand<?=$f_RowID?>">
+    <td colspan="5"><div><?=$f_Text?></div>
+        <a data-target=".expand<?=$f_RowID?>" href="#" class="expand js-expand slideUp">Свернуть</a>
+    </td>
+</tr><?
+}
+?>
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

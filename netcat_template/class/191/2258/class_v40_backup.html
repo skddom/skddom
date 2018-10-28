@@ -1,0 +1,41 @@
+<!-- FormPrefix -->$f_AdminCommon
+".( $totRows ? "<div class='".$cc_settings['class']."'> " : NULL )."<!-- /FormPrefix -->
+
+<!-- RecordTemplate -->$f_AdminButtons
+<script>var house = ".($nc_core->input->fetch_get("house")?$nc_core->input->fetch_get("house"):0)."; // тип дома
+</script>
+".opt($template<89,"<h1>$f_Zag</h1>")."$f_TextContent<!-- /RecordTemplate -->
+
+<!-- FormSuffix -->".( $totRows ? "</div> " : NULL )."<!-- /FormSuffix -->
+
+<!-- RecordTemplateFull --><!-- /RecordTemplateFull -->
+
+<!-- Settings -->global $template;
+if ($cc_settings['Source']) {
+    $ignore_cc=$ignore_sub=$ignore_catalogue=true;
+    $query_where = "a.Sub_Class_ID=".$cc_settings['Source'];
+}<!-- /Settings -->
+
+<!-- AddTemplate --><!-- /AddTemplate -->
+
+<!-- AddCond --><!-- /AddCond -->
+
+<!-- AddActionTemplate --><!-- /AddActionTemplate -->
+
+<!-- EditTemplate --><!-- /EditTemplate -->
+
+<!-- EditCond --><!-- /EditCond -->
+
+<!-- EditActionTemplate --><!-- /EditActionTemplate -->
+
+<!-- CheckActionTemplate --><!-- /CheckActionTemplate -->
+
+<!-- DeleteTemplate --><!-- /DeleteTemplate -->
+
+<!-- DeleteCond --><!-- /DeleteCond -->
+
+<!-- DeleteActionTemplate --><!-- /DeleteActionTemplate -->
+
+<!-- FullSearchTemplate --><!-- /FullSearchTemplate -->
+
+<!-- SearchTemplate --><!-- /SearchTemplate -->

@@ -1,0 +1,97 @@
+<!-- FormPrefix --><?
+function getExtension000($filename) {
+    $path_info = pathinfo($filename);
+    return $path_info['extension'];
+}
+function formatSize000($size) { 
+  $filesizename = array( " Bytes", " KB", " MB", " GB", " TB", " PB", " EB", " ZB", " YB" ); 
+  return $size ? 
+    round($size/pow(1024, ($i = floor(log($size, 1024)))), 2) . $filesizename[$i] :
+    '0 ' . $filesizename[0]; 
+}
+if ($cc_settings['PDF']) {
+    $file = $_SERVER['DOCUMENT_ROOT'].$cc_settings['PDF'];
+    $size = filesize($file);
+    $ext = strtoupper(getExtension000($cc_settings['PDF']));
+    $pdf = "<a class='pdf' href='".$cc_settings['PDF']."' target='_blank'>Каталог проектов CKD<span>".formatSize000($size).",".$ext."</span></a>";
+    $cc_settings['Text2'] = str_replace("<!-- pdf -->",$pdf,$cc_settings['Text2']);
+}
+?><div class="vc_row wpb_row vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner "><div class="wpb_wrapper">
+	<div class="wpb_text_column wpb_content_element ">
+		<div class="wpb_wrapper">
+			<p><?
+            if ($totRows) {
+            ?><a class="btn hvr-default mgt-button mgt-style-solid mgt-size-small mgt-align-left mgt-display-inline mgt-text-size-normal mgt-button-icon-position-left mgt-text-transform-none  wpb_animate_when_almost_visible wpb_left-to-right wpb_start_animation" href="?delete_all" target=" _blank">Очистить избранное</a><?
+           } echo $cc_settings['Text2'];
+           ?></p>
+
+		</div>
+	</div>
+</div></div></div></div>
+<div class="vc_row wpb_row vc_row-fluid vc_custom_1438333348452 by-area">
+    <div class="projects wpb_column vc_column_container vc_col-sm-12">
+        <div class="vc_column-inner ">
+            <div class="wpb_wrapper">
+		        <div class="portfolio-list portfolio-columns-4 portfolio-grid-layout-6  portfolio-with-spaces clearfix" id="portfolio-list"><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?php $result .= " ";
+if (is_array($br->projects[$f_RowID])) extract($br->projects[$f_RowID]);
+$t=explode("CKD",$f_Name);
+if(count($t)>1) $f_Name="<span class='fs12'>$t[0]</span> CKD$t[1]";
+else {
+    $t=explode("СКД",$f_Name);
+    if(count($t)>1) $f_Name="<span class='fs12'>$t[0]</span> CKD$t[1]";
+}
+/*if($f_SliderPath&&$f_MainImgPath)$f_MainImg=$f_SliderPath.$f_MainImgPath;*/
+$f_MainImg=$f_MainImgPath;
+if (strpos($f_MainImg,"files/")===false) $f_MainImg = $f_SliderPath.$f_MainImg;
+
+if (!$f_MainImg) $f_MainImg = $f_ResizeImg;
+
+foreach ($arRange as $v) {
+    if ($f_house_id >= $v['RANGE'][0] && $f_house_id<$v['RANGE'][1]) $id = $v['ID'];
+}
+
+$result0.="              <div class=\"special\">
+                <div class=\"pic\"><a href=\"$fullLink\"><img src=\"$f_ResizeImg\" alt=\" \" class='img2' /></a></div>
+                <div class=\"desc\"> <a href=\"$fullLink\">
+                  <div class=\"name\"><span class='fs12'></span> $f_Name</div>
+                  <div class=\"area\">Площадь дома - $f_Square кв.м.</div>
+                  <div class=\"clr\"></div>
+                  <div class=\"cost\">  <span style='padding-left:0'>Цена в базовой компл.<br>
+                    <span>$f_Price1 р.</span></span> </div>
+                  </a> <a class=\"calc calcnew\" href=\"/price/calc/?house=$f_house_id\">Другие компл.</a> </div>
+              </div> "; ?>
+<div data-class="<?=$id?>" class="<?=$id?> portfolio-item-block portfolio-item-animation-2 mix building" data-item="<?=$f_RowNum?>" data-name="<?=$f_Name?>" style="display: inline-block;">
+	<div class="portfolio-item-block-inside">
+	  <a href="<?=$fullLink?>" target="_self" rel="" title="<?=strip_tags($f_Name)?>">
+	    <div class="portfolio-item-image" data-style="background-image: url('<?=$f_MainImg?>');" style="background-image: url('<?=$f_MainImg?>');"></div>
+	    <div class="portfolio-item-bg"></div>
+		
+												<div class="info">
+													<h4 class="title">CKD-<?=$f_house_id?></h4>
+													<div class="project-description">Площадь <?=$f_Square?> м<sup>2</sup><br>Цена <?=$f_Price?> руб.</div>
+													<div class="hvr-icon-wobble-horizontal mgt-button mgt-style-textwhite mgt-size-normal mgt-align-left mgt-display-newline mgt-text-size-small mgt-button-icon-position-right mgt-text-transform-uppercase">УЗНАТЬ БОЛЬШЕ<i class="fa fa-arrow-right"></i></div>
+												</div>
+				
+        <div class="labels">
+	       <?if($f_Hit):?><div class="label hit">Хит продаж</div><br><?endif?>
+           <?if($f_Special):?><div class="label special">Спецпредложение</div><br><?endif?>
+           <?if($f_Cheap):?><div class="label cheap">Выгодная цена</div><?endif?>
+        </div>
+	  </a>
+	</div>
+	</div><!-- /RecordTemplate -->
+
+<!-- FormSuffix -->                </div>
+<script>(function($){
+	    $(document).ready(function() {
+
+		    $("#portfolio-list").mixItUp({effects:["fade","scale"],easing:"snap"});
+
+	    });})(jQuery);</script>
+            </div>
+        </div>
+    </div>
+</div>
+<?php echo $cc_settings['Text1'].$cc_settings['Text3']; ?><!-- /FormSuffix -->

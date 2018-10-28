@@ -1,0 +1,36 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+
+                <? if (!$widget_mode || ($widget_mode && $f_ShowOnHome)) { ?>
+                    <div class="tpl-block-list-object">
+                        <?= $f_AdminButtons; ?>
+                        <article>
+                            <a class="tpl-link-more" href="<?= $f_Link; ?>">
+                                <? if ($f_Image) { ?>
+                                    <img class="tpl-property-image" src='<?= $f_Image ?>' alt='<?= $f_Title ?>'/>
+                                <? } ?>
+
+                                <? if ($f_Price || $f_OldPrice) { ?>
+                                    <div class="tpl-block-prices <?= !$f_Image ? 'tpl-state-left' : ''; ?>">
+                                        <div class="<?= $widget_mode ? 'tpl-property-item-price' : 'tpl-property-price'; ?>">
+                                            <span class="tpl-value"><?= $f_Price ?></span>
+                                        </div><br>
+                                        <div class="<?= $widget_mode ? 'tpl-property-original-price' : 'tpl-property-old-price'; ?>">
+                                            <span class="tpl-value"><?= $f_OldPrice ?></span>
+                                        </div>
+                                    </div>
+                                <? } ?>
+
+                                <div class="tpl-block-text <?= !$f_Image && !$f_Price && !$f_OldPrice ? 'tpl-state-up' : ''; ?>">
+                                    <h3><?= $f_Title; ?></h3>
+                                    <h4><?= $f_SubTitle; ?></h4>
+
+                                    <? if (!$f_Image && !$f_Price && !$f_OldPrice) { ?>
+                                        <p><?= $f_Description; ?></p>
+                                    <? } ?>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                <? } ?>
+                
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

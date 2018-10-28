@@ -1,0 +1,28 @@
+<?
+//echo $message_select;
+if ($start == "now") $start = "";
+?><script src="/ui/jquery-ui.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/messages_ru.min.js"></script>
+<link rel="stylesheet" href="/ui/jquery-ui.min.css">
+<link rel="stylesheet" href="/ui/jquery-ui.structure.min.css">
+<link rel="stylesheet" href="/ui/jquery-ui.theme.min.css">
+<form id="calcForm" novalidate class="form-data  tpl-<?=$classID?>-c"><div class="row">
+    <div class="col-md-4">
+            <p class="required">Дата начала строительства:</p>
+            <p><span class="wpcf7-form-control-wrap your-name"><input onfocus="blur()" id="start" required placeholder="Укажите дату" type="text" name="start" value="<?=htmlspecialchars(strip_tags($start))?>" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span></p>
+    </div>
+    <div class="col-md-4">
+            <p class="required">Площадь дома (м<sup>2</sup>):</p>
+            <p><span class="wpcf7-form-control-wrap your-name"><input required placeholder="<?=$square?$square:"площадь"?>" type="text" min="150" name="square" value="<?=$square>0?intval($square):""?>" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span></p>
+    </div>
+    <div class="col-md-4">
+        <p>&nbsp;</p>
+        <p><input onclick="yaCounter4312879.reachGoal('calculate');" type="submit" value="Рассчитать" class="wpcf7-form-control wpcf7-submit"></p>
+    </div>
+</div></form>
+
+
+<? /*
+<div class="mgt-header-block clearfix text-left text-black wpb_content_element  mgt-header-block-style-1 mgt-header-texttransform-header  vc_custom_1464338281654"><h2 class="mgt-header-block-title">Что включено в стоимость</h2><div class="mgt-header-line"></div></div>
+*/ ?>

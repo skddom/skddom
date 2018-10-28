@@ -1,0 +1,62 @@
+<?= ($warnText ? "<div class='warnText'>".$warnText."</div>" : "") ?>
+
+<?= ($ForumMessagePreview && $f_Message ?
+  "<div style='background:#EEE; border:1px solid #CCC; padding:7px 10px'>".
+  ($f_Subject ? "<b>".$f_Subject."</b><br/><br/>" : "").
+  stripslashes( nc_bbcode( $current_cc['NL2BR'] ? nl2br( $current_cc['AllowTags'] ? $f_Message : strip_tags($f_Message) ) : ( $current_cc['AllowTags'] ? $f_Message : strip_tags($f_Message) ) ) ).
+  "</div><br/>"
+: "") ?>
+<div id="nc_answer-content">
+<form name='adminForm' id='adminForm' enctype='multipart/form-data' method='post' action='<?= $SUB_FOLDER ?><?= $HTTP_ROOT_PATH ?>add.php'>
+<div id='nc_moderate_form'>
+<input name='admin_mode' type='hidden' value='<?= $admin_mode ?>'/>
+<input name='catalogue' type='hidden' value='<?= $catalogue ?>'/>
+<input name='cc' type='hidden' value='<?= $cc ?>'/>
+<input name='sub' type='hidden' value='<?= $sub ?>'/>
+<input name='posting' id='DataPostingField' type='hidden' value='1'/>
+<input name='curPos' type='hidden' value='<?= $curPos ?>'/>
+<input name='f_Parent_Message_ID' type='hidden' value='<?= $f_Parent_Message_ID ?>'/>
+<?= $nc_core->token->get_input() ?>
+<?= ( $admin_mode && !$systemTableID ? "".($moderationID==1 &&  !isset($f_Checked) ? opt($f_Checked = 1, "") : "")."
+<div id='nc_moderate_settings'>
+  ".($admin_mode ? "<div class='left'>
+    ".CONTROL_CONTENT_SUBDIVISION_FUNCS_MAINDATA_KEYWORD." <input name='f_Keyword' type='text' size='20' maxlength='255' value='".$f_Keyword."'>
+  </div>
+  <div class='left'>
+    <img src='".$SUB_FOLDER.$ADMIN_PATH."images/prior.gif' width='16' height='16' align='left' alt='".NETCAT_MODERATION_PRIORITY."' title='".NETCAT_MODERATION_PRIORITY."'>
+    <input name='f_Priority' type='text' size='3' maxlength='3' value='".$f_Priority."'>
+  </div>" : "")."
+  ".( CheckUserRights($current_cc['Sub_Class_ID'], "moderate", $posting) ? "
+  <div class='left_checkbox'>
+    <input id='chk' name='f_Checked' type='checkbox' value='1'".($f_Checked ? " checked" : "")."/> <label for='chk'>".NETCAT_MODERATION_TURNON."</label>
+  </div>"
+  : "<input id='chk' name='f_Checked' type='hidden' value='".($f_Checked ? 1 : 0)."'/>")."
+  </div>
+" : NULL ) ?><div class='nc_clear'></div>
+</div>
+<fieldset>
+        <div>
+                <?= nc_string_field("Subject", "maxlength='255' size='50'", $classID, 1) ?>
+        </div>
+</fieldset>
+<fieldset>
+        <div>
+               <?= nc_text_field("Message", "id='ForumTopicAdd' rows='10'", $classID, 1) ?><br/>
+        </div>
+</fieldset>
+<script type='text/javascript'>
+ function PreviewButtonAction () {
+   document.getElementById("DataPostingField").value = 0;
+   document.getElementById("ForumMessagePreview").value = 1;
+   document.getElementById("adminForm").submit();
+ }
+</script>
+<div>
+<?= (!$AUTH_USER_ID && $current_cc['UseCaptcha'] && $MODULE_VARS['captcha'] ? nc_captcha_formfield()."<br/><br/>".NETCAT_MODERATION_CAPTCHA." (*):<br/><input type='text' name='nc_captcha_code' size='10'/><br/><br/>" : "") ?>
+<br/><?= NETCAT_MODERATION_INFO_REQFIELDS ?><br/><br/>
+<input type='hidden' id='ForumMessagePreview' name='ForumMessagePreview' value='0'/>
+<input type='button' onclick='PreviewButtonAction()' value='<?= NETCAT_MODULE_FORUM2_COMPONENT_MESSAGE_PREVIEW ?>' />
+<?= nc_submit_button(NETCAT_MODERATION_BUTTON_ADD) ?>
+</div>
+</form>
+</div>

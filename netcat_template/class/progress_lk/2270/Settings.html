@@ -1,0 +1,27 @@
+<?php
+$ignore_all = true;
+
+if ($house_id) $square = intval($house_id);
+
+if ($square && $start) {
+$query_from = "Sub_Class c, Subdivision s";
+$query_select  = "s.Subdivision_ID as ID, c.Sub_Class_ID as cID, c.Sub_Class_Name as Name, c.CustomSettings, c.Checked as isOn, s.Subdivision_Name as `Option`, s.Hidden_URL as Url, CONCAT(s.Hidden_URL,c.EnglishName,'.html') as Link";
+$query_order = "s.Priority, c.Priority";
+$query_where = "s.Parent_Sub_ID=".$current_sub['Subdivision_ID']." and s.Subdivision_ID=c.Subdivision_ID and c.Class_ID=$classID and c.Priority>0 and c.Checked=1";
+} else {
+    $query_where = "0";
+}
+
+$lk = new CPersonal();
+$lk->lk = 12;
+$pro = new CProgress($lk, $current_sub['Subdivision_ID']);
+if ($current_user['Login']=="developer") {
+    //echo "<pre>"; print_r($pro->rs); echo "</pre>";
+}
+if (!$start) $start = "now";
+if ($square) $square+=0;
+//if ($square==0) $square=240;
+calc_dates($pro,$start,$square);
+
+$cc1 = $db->get_var("select Sub_Class_ID from Sub_Class where Subdivision_ID=".$pro->rs[0]['sub']." and Checked=1 order by Priority asc limit 1");
+?>

@@ -1,0 +1,48 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+<?php $result .= " ";
+if (is_array($br->projects[$f_RowID])) extract($br->projects[$f_RowID]);
+$t=explode("CKD",$f_Name);
+if(count($t)>1) $f_Name="<span class='fs12'>$t[0]</span> CKD$t[1]";
+else {
+    $t=explode("СКД",$f_Name);
+    if(count($t)>1) $f_Name="<span class='fs12'>$t[0]</span> CKD$t[1]";
+}
+if($f_SliderPath&&$f_MainImgPath)$f_MainImg=$f_SliderPath.$f_MainImgPath;
+if (!$f_MainImg) $f_MainImg = $f_ResizeImg;
+
+if ($f_ListImage) $f_MainImg = $f_ListImage;
+
+$s =  $f_Images;
+$s = explode(";", $s);
+$s = explode(",", $s[0]);
+if (!$f_MainImg) $f_MainImg = $s[2];
+
+foreach ($arLines as $v) {
+    if ($f_SubID >= $v['id']) $id = $v['id']; 
+        
+}
+$exists[$f_SubID]=true;
+ ?>
+<div data-class="line<?=$f_SubID?>" class="line<?=$f_SubID?> portfolio-item-block portfolio-item-animation-2 mix building" data-item="<?=$f_RowNum?>" data-name="<?=$f_Name?>" style="display: inline-block;">
+	<div class="portfolio-item-block-inside">
+	  <a href="<?=$fullLink?>" target="_self" rel="" title="<?=strip_tags($f_Name)?>">
+	    <div class="portfolio-item-image" data-style="background-image: url('<?=$f_MainImg?>');" style="background-image: url('<?=$f_MainImg?>');"></div>
+	    <div class="portfolio-item-bg"></div>
+	    <div class="info">
+	      <span class="sub-title"></span>
+	      <h4 class="title"><?=$f_Name?></h4>
+	      	      <div class="project-description">
+                      <?=$f_Location?>
+                     
+                  </div>
+	  	  	      	      <div class="btn">Подробнее</div>
+	  	  	    </div>
+                <div class="labels">
+	    <?if($f_Hit):?><div class="label hit">Хит продаж</div><br><?endif?>
+        <?if($f_Special):?><div class="label special">Спецпредложение</div><br><?endif?>
+        <?if($f_Cheap):?><div class="label cheap">Выгодная цена</div><?endif?>
+  </div>
+	  </a>
+	</div>
+	</div>
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

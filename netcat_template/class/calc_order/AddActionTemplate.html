@@ -1,0 +1,39 @@
+<p></p><?
+if ($ajax1) ob_clean();
+
+/* mail  */
+include_once($_SERVER['DOCUMENT_ROOT']."/calc/mail.php");
+//$data = json_decode($f_Data,true);
+
+$subject = "Расчет площади и стоимости дома | СКД дом";
+$subject = "=?utf-8?B?".base64_encode($subject)."?="; 
+
+$from = 'calculator@skd-dom.ru'; 
+$to = $f_Email; //'voxdei@ya.ru';
+
+$headers = "MIME-Version: 1.0\r\n". 
+            "Content-type: text/html; charset=utf-8\r\n". 
+            "From: {$from}\r\n". 
+            "Reply-To: {$from}\r\n". 
+            "Return-Path: {$from}\r\n". 
+            "X-Mailer: PHP/".phpversion(); 
+if($f_Name) $text=str_replace("<!-- f_Name -->",", $f_Name",$text);
+$status = mail($to, $subject, $text, $headers);
+
+$to = 'voxdei@ya.ru';
+$status = mail($to, $subject, "<blockquote>$f_Name
+$f_Email
+$f_Phone</blockquote>".$text, $headers);
+
+/* /mail */
+
+echo "<div class='nc_mail_from_site'>".str_replace("%NAME", htmlspecialchars($f_Name), ( $cc_settings[TextAfterSend] ? $cc_settings[TextAfterSend] : $default_cc_settings[TextAfterSend][default_value] ) )."</div>";
+$br = CBranding::get_object();
+//print_r($data);
+//if ($br->current['Email']) $cc_settings['EmailTo'] = $br->current['Email'];
+
+//sendwebform ($classID,"Заказ звонка с $_SERVER[HTTP_HOST]","noreply@$_SERVER[HTTP_HOST]",$cc_settings['EmailTo'],'windows-1251',$f_Name,"Заказ звонка с $_SERVER[HTTP_HOST]",1,($f_Email?$f_Email:"noreply@$_SERVER[HTTP_HOST]"),$message);
+//echo "<script>ga('send', 'event', 'callback', 'send'); yaCounter4312879.reachGoal('callme');
+//ga('send','usp-na-perezvon');
+//</script><?
+if ($ajax1) die();?>

@@ -1,0 +1,5 @@
+RewriteEngine on
+RewriteRule ^bill_signed_(.+)\.pdf$ admin/?controller=bills&action=print&hash=$1&signed=1 [NC,L]
+RewriteRule ^bill_(.+)\.pdf$ admin/?controller=bills&action=print&hash=$1 [NC,L]
+RewriteRule ^act_signed_(.+)\.pdf$ admin/?controller=acts&action=print&hash=$1&signed=1 [NC,L]
+RewriteRule ^act_(.+)\.pdf$ admin/?controller=acts&action=print&hash=$1 [NC,L]

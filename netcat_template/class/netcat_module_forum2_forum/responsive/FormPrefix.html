@@ -1,0 +1,15 @@
+<? echo $f_AdminCommon; ?>
+<h1><?= $current_sub['Subdivision_Name']; ?></h1>
+<table class="nc_forum">
+<thead>
+<tr>
+    <th class="nc_forum-name">Форум</th>
+    <th class="nc_forum-count">Топики</th>
+    <th class="nc_forum-reply">Ответы</th>
+    <th class="nc_forum-last"  id='forum_column' >Последний пост</th>
+</tr>
+</thead>
+<tfoot <?= ($totRows > $f_RowNum ? "style='display:none;'" : "") ?>>
+	<tr><td colspan='4'><?= browse_messages($cc_env, 5) ?></td></tr>
+</tfoot>
+<tbody>

@@ -1,0 +1,217 @@
+/**
+ * "CONDITION EDITOR" styles
+ */
+
+.nc-netshop-condition-editor {
+    border: 1px solid #DADADA;
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+/**
+ * "Buttons"
+ */
+.nc-netshop-condition-editor a {
+    cursor: pointer;
+}
+
+.nc-netshop-condition-editor .nc-icon-s.nc--remove {
+    margin:0 -20px 0 4px; /* prevent moving the icon to the separate line */
+}
+
+.nc-netshop-condition-editor .operator-cell {
+    margin: 18px 0 8px;
+}
+
+.nc-netshop-condition-editor .operator-cell .chosen-container {
+    margin-right: 6px;
+}
+
+.nc-netshop-condition-editor .operator-cell .chosen-single span {
+    font-weight: 700;
+}
+
+.nc-netshop-condition-editor .operator-label {
+    position: absolute;
+    top: 83px;
+    display: none;
+    z-index: 100;
+    cursor: pointer;
+    min-width: 24px;
+    font-size: 14px;
+    padding: 3px 10px;
+}
+
+.nc-netshop-condition-editor.enable-transitions .operator-label {
+    transition: top 0.5s;
+}
+
+.nc-netshop-condition-editor .operator-label.visible {
+    display: inline-block;
+}
+
+.nc-netshop-condition-editor .condition-cell {
+    margin: 10px 0 4px;
+}
+
+.nc-netshop-condition-editor .buttons-cell {
+    margin-top: 12px;
+}
+
+/**
+ * Styles for Chosen options / optgroups
+ */
+.nc-netshop-condition-editor .create-group-option {
+    font-weight: bold;
+}
+
+.nc-netshop-condition-editor .group-result {
+    color: #1A87C2;
+}
+
+/**
+ * Groups
+ */
+.nc-netshop-condition-editor .condition-group {
+    position: relative;
+}
+
+.nc-netshop-condition-editor .condition-group-container.even-level {
+    background: #f7f7f7;
+}
+
+.nc-netshop-condition-editor .condition-group .condition-group {
+    padding: 10px 0 10px 40px;
+}
+
+.nc-netshop-condition-editor .condition-group-container {
+    padding: 4px 28px 16px 20px;
+    background: white;
+}
+
+.nc-netshop-condition-editor .condition-group .condition-group .condition-group-container {
+    border: 1px solid #1A87C2;
+    border-radius: 3px;
+}
+
+.nc-netshop-condition-editor .condition-group .operator-cell {
+}
+
+/* Условия по умолчанию (в середине) */
+.nc-netshop-condition-editor .condition,
+.nc-netshop-condition-editor .condition-group .condition-group {
+    /*background: url('../img/middle.png') no-repeat 17px -59px;*/
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAfQAQMAAACQam9aAAAABlBMVEX///8ah8JF21jIAAAAAXRSTlMAQObYZgAAADJJREFUeF7tzrERAAAEADGjG9kGWIPLF6k/MraHsre6ckuSJEmSJEmSJEmSJEmSJEmSA/Dx7JqZ0PUaAAAAAElFTkSuQmCC') no-repeat 17px -49px;
+}
+
+.nc-netshop-condition-editor .condition-group .condition-group {
+    background-position: 17px -35px;
+}
+
+.nc-netshop-condition-editor.enable-transitions .condition,
+.nc-netshop-condition-editor.enable-transitions .condition-group .condition-group {
+    transition: padding 0.4s;
+}
+
+/* Первое условие в начале */
+.nc-netshop-condition-editor .condition:first-child,
+.nc-netshop-condition-editor .condition-group .condition-group:first-child {
+    /*background: url('../img/top.png') no-repeat 17px 19px;*/
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAfQBAMAAABYiuAqAAAAFVBMVEX///8qj8bv9/v6/P59u9wah8J+u92f6EKPAAAAAXRSTlMAQObYZgAAAIVJREFUeF7tyDERACAMBLDXwB07IhDCgoX6l8BeLCRjsudtUivdyOco1SillFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSqkHiCZ2YAZ0BB4AAAAASUVORK5CYII=') no-repeat 17px 29px;
+}
+
+.nc-netshop-condition-editor .condition-group .condition-group:first-child {
+    background-position: 17px 44px;
+}
+
+/* Последнее условие */
+.nc-netshop-condition-editor .condition:last-child,
+.nc-netshop-condition-editor .condition-group .condition-group:last-child {
+    /*background: url('../img/bottom.png') no-repeat 17px -59px;*/
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAABQBAMAAACDncp8AAAAG1BMVEX///8qj8Ypj8Z9u9z6/P7v9/vw9/sah8J+u91vB32mAAAAAXRSTlMAQObYZgAAACVJREFUeF5jKGBAB4NYaFRoVGhUaFRoVEgUU6gjAUPIWb0cDQAAWUwqiMZeGh8AAAAASUVORK5CYII=') no-repeat 17px -49px;
+}
+
+.nc-netshop-condition-editor .condition-group .condition-group:last-child {
+    background-position: 17px -35px;
+}
+
+.nc-netshop-condition-editor .condition:only-child {
+    /* Единственное условие */
+    background: none;
+    padding-left: 0 !important;
+}
+
+.nc-netshop-condition-editor .condition-group .condition-group:only-child {
+    /* Единственная группа условий */
+    background: none;
+    padding-left: 0 !important;
+}
+
+/**
+ * Conditions
+ */
+.nc-netshop-condition-editor .condition {
+    line-height: 2.2em;
+    padding: 10px 0 10px 72px;
+}
+
+.nc-netshop-condition-editor .condition-param, .nc-netshop-condition-editor .condition-string {
+    vertical-align: middle;
+    padding-right: 20px;
+    display: inline-block;
+    margin: 2px 0;
+}
+
+/**
+ * Inputs
+ */
+.nc-netshop-condition-editor .condition-param input.condition-param-value {
+    vertical-align: middle;
+    margin: 0 !important;
+    width: 250px;
+}
+
+.nc-netshop-condition-editor .condition-param input.condition-param-value[type=number] {
+    width: 105px;
+    text-align: center;
+}
+
+.nc-netshop-condition-editor .chosen-single,
+.nc-netshop-condition-editor .chosen-drop {
+    border-radius: 0;
+}
+
+.nc-netshop-condition-editor .chosen-single {
+    box-shadow: none;
+    border-color: #DADADA;
+    background: white;
+}
+
+.nc-netshop-condition-editor .chosen-container-active.chosen-with-drop .chosen-single {
+    border-color: #AAA;
+}
+
+.nc-netshop-condition-editor .chosen-container-active .chosen-single {
+    border-color: #1A87C2;
+}
+
+.nc-netshop-condition-editor .chosen-container-single .chosen-single span {
+    /* IE: prevent text clipping */
+    min-width: 50px;
+    text-overflow: clip;
+    margin-right: 15px;
+}
+
+/* Chosen highlight color -- "netcat blue"
+.nc-netshop-condition-editor .condition-group .chosen-container-single .active-result.highlighted {
+    background: #1A87C2;
+}
+*/
+
+.nc-netshop-condition-editor .condition-param input[type=time],
+.nc-netshop-condition-editor .condition-param input.condition-param-value-date {
+    width: 105px;
+    text-align: center;
+}
+
+.nc-netshop-condition-editor a.condition-param-popup:focus { outline: 1px dotted #1A87C2; }

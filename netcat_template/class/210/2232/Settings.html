@@ -1,0 +1,7 @@
+<?php require_once($nc_core->INCLUDE_FOLDER."classes/nc_imagetransform.class.php");
+global $path;
+$ignore_sub=$ignore_cc=true;
+$query_where = "a.Slider=1 and LENGTH(a.MainImgPath)>0";
+$br = CBranding::get_object();
+$br->getProjects();
+$br->ExModifyQueryWhere($query_where, $cc_env, $inside_admin, $admin_mode); ?>

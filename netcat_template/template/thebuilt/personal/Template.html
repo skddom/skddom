@@ -1,0 +1,40 @@
+<!-- Header --><?
+$transparentHeader = $template_settings['transparentHeader'];
+$bg = $template_settings['Image']['resultpath'];
+
+if ($bg) $style = "background-image: url('$bg');";
+?>%Header
+<div class="content-block">
+<div class="container-bg <?if($bg) echo "with-bg ";?> with-bgcolor" data-style="<?=$style;?>background-color: #F4F4F4" style="background-color: #F4F4F4">
+	<div class="container-bg-overlay">
+	  <div class="container">
+	    <div class="row">
+	      <div class="col-md-12">
+	        <div class="page-item-title">
+	          <h1><span><?=$f_title?></span></h1>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+    </div>
+      <div class="breadcrumbs-container-wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+<?=s_browse_path($browse_path);?>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div><?
+echo $this->partial('authform');
+?><div class="page-container container">
+    <div class="row">
+      			<div class="col-md-12 entry-content">
+      
+      <article><!-- /Header -->
+
+<!-- Footer --></article>
+</div>
+</div>
+</div></div>%Footer<!-- /Footer -->

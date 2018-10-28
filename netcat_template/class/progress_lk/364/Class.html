@@ -1,0 +1,13 @@
+<!-- FormPrefix --><div class="progress0 text js-wrap  btpl-<?=$classID?>">
+
+    <div class="progress-wide js-ajax-result"><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?if ($f_Option != $old):?>
+<?=s_list_class($f_ID,$f_cID,"&nc_ctpl=365&option=".$f_Option)?>
+    <?$old = $f_Option; endif?><!-- /RecordTemplate -->
+
+<!-- FormSuffix -->    </div>
+
+        
+    </div>
+</div><!-- /FormSuffix -->

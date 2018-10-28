@@ -1,0 +1,68 @@
+<?php
+$house_id = intval($house);
+$data = array("house_id"=>$house_id);
+$data = $db->get_row("select * from Message210 where house_id=".intval($data['house_id']),ARRAY_A);
+
+$br = CBranding::get_object();
+include_once ($DOCUMENT_ROOT.$br->current['Projects']);
+
+if (preg_match('/[a-zA-Z]+/', $house_id)) {
+    echo "ID дома должен быть цифрой<br />";
+    return;
+}
+if (!isset($arrSale[$house_id]) && 0) {
+    echo "Неверный ID дома<br />";
+    return;
+}
+
+$dir = $data['SliderPath'];
+$img = $data['MainImgPath'];
+
+$arPrice = getPriceData($house_id, $rs1);
+
+$nachnets = date("d-m-Y", strtotime("next monday"));
+if($house_id>=200 && $house_id<=254)
+$end = date("d-m-Y", strtotime("+80 day next Monday"));
+else if($house_id>=263 && $house_id<=352)
+$end = date("d-m-Y", strtotime("+90 day next Monday"));
+else if($house_id>=360 && $house_id<=415)
+$end = date("d-m-Y", strtotime("+100 day next Monday"));
+else $end = date("d-m-Y", strtotime("+80 day next Monday"));
+
+$works = $db->get_results("select s.Subdivision_Name as Cycle, a.Name,a.Price, a.Description, a.Text, c.CustomSettings, a.Message_ID as ID
+from Message2275 a
+left join Subdivision s ON a.Subdivision_ID=s.Subdivision_ID
+left join Sub_Class c ON a.Sub_Class_ID=c.Sub_Class_ID
+where a.Checked=1  and c.Checked=1
+order by s.Priority, a.Priority", ARRAY_A);
+$arrCalc = array();
+foreach ($works as $v) {
+    $arrCalc[$v['Cycle']][$v['ID']] = array("Name"=>$v['Name'],"Description"=>$v['Description'],"Text"=>$v['Text']);
+}
+
+$arProject = $db->get_row("select * from Message2276 where house_id=$house_id",ARRAY_A);
+
+$base = unserialize($arProject['base']);
+if ($show == "base") echo "<pre>".print_r($arPrice,1)."</pre>";
+$custom = unserialize($arProject['custom']);
+$arrSale[$house_id]['custom'] = array();
+foreach ($custom as $k=>$v) {
+    $arrSale[$house_id]['custom'][$k] = array($v['choice'], (int)$v['group'], $v['def']);
+}
+$arrSale[$house_id]['base'] = array();
+foreach ($works as $v) {
+    $item = array();
+    $item[] = $arPrice['set1']['items'][$v['ID']]['discount_price'];
+    $item[] = $item[0]?1:0;
+    $item[] = $arPrice['set1']['items'][$v['ID']]['vol'];
+    $item[] = $arPrice['set1']['items'][$v['ID']]['fee'];  
+    $item[] = $arPrice['set2']['items'][$v['ID']]['checked']; 
+    $item[] = $arPrice['set3']['items'][$v['ID']]['checked'];
+    $arrSale[$house_id]['base'][$v['ID']] = $item;
+}
+//$arrSale[$house_id]['c1'] = round($arPrice['set1']['discount_price']);
+//if ($AUTH_USER_ID && $debug) {echo "<pre>"; print_r($arrSale); echo "</pre>";}
+
+
+
+?>

@@ -1,0 +1,11 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+<? //echo $f_AdminButtons; 
+$arr = array("f_Name"=>$f_Name,"f_Not_display"=>$f_Not_display, "f_Type"=>$f_Type, "f_Priority"=>$f_Priority,
+"f_Type_id"=>$f_Type_id, 
+"f_Icon"=>$f_Icon, "f_Room"=>$f_Room, "f_Default_area"=>$f_Default_area, "f_Fix_area"=>$f_Fix_area,
+"f_Flag"=>$f_Flag, "f_No_check"=>$f_No_check, "f_Copy_area"=>$f_Copy_area,"f_Floor"=>$f_Floor,"building_area"=>$f_building_area);
+if ($f_Not_display) $hidden[$f_Floor][] = $arr;
+elseif($f_Type_id==3) $common[$f_Floor][] = $arr;
+else $rs[$f_Floor][$f_toBedroom?$f_toBedroom:$f_Priority][]=$arr;
+?>
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

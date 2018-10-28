@@ -1,0 +1,44 @@
+<!-- FormPrefix --><?= $f_AdminCommon; ?><?
+if ($cc_settings['Name']) {
+?><div class="vc_row wpb_row vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner "><div class="wpb_wrapper"><div class="mgt-header-block clearfix text-left text-black wpb_content_element  mgt-header-block-style-1 mgt-header-texttransform-header "><h2 class="reconlife mgt-header-block-title"><?=$cc_settings['Name']?> </h2><div class="mgt-header-line"></div></div></div></div></div></div><?
+}
+				?><div class="vc_row wpb_row vc_row-fluid"><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?= $f_AdminButtons;
+$classes = explode("\n",$f_Class);
+?>					<div class="wpb_column vc_column_container vc_col-sm-<?=(12/$cc_settings['InRow'])?>">
+						<div class="vc_column-inner">
+							<div class="wpb_wrapper">
+								<style scoped="scoped">
+									.mgt-promo-block-<?=$f_RowID?>.mgt-promo-block.darken .mgt-promo-block-content {
+										background-color: rgba(10, 10, 10, 0.6) !important;
+									}
+
+									.mgt-promo-block-<?=$f_RowID?>.mgt-promo-block.animated:hover .mgt-promo-block-content {
+										background-color: rgba(0, 0, 0, 0.8) !important;
+									}
+								</style>
+								<div class="mgt-promo-block animated white-text cover-image text-size-normal darken mgt-promo-block-<?=$classes[0]?> wpb_content_element wpb_animate_when_almost_visible wpb_appear"
+								 data-style="background-image: url(<?=$f_Image?>);background-repeat: no-repeat;width: 100%; height: 220px;">
+									<div class="mgt-promo-block-content va-top">
+										<div class="mgt-promo-block-content-inside vc_custom_<?=$classes[1]?>"><i class="svg-icon <?=$f_Icon1?>"></i>
+											<h3><?=$f_Name?></h3>
+											<div class="mgt-button-wrapper mgt-button-wrapper-align-left mgt-button-wrapper-display-newline mgt-button-top-margin-disable"><?
+                                            if ($f_Link) {
+												?><a class="btn hvr-default mgt-button mgt-style-bordered mgt-size-normal mgt-align-left mgt-display-inline mgt-text-size-normal mgt-button-icon-position-left mgt-text-transform-none "
+												 href="<?=$f_Link?>"><?=$f_Link_Text?$f_LinkText:'Узнать больше'?><i class="fafa-arrow-right"></i></a><?
+                                            }
+											?></div>
+										</div>
+									</div>
+								</div>
+								<div class="wpb_text_column wpb_content_element wpb_animate_when_almost_visible wpb_left-to-right vc_custom_<?=$classes[2]?>">
+									<div class="wpb_wrapper">
+										<p><?=$f_Text?></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><!-- /RecordTemplate -->
+
+<!-- FormSuffix -->				</div><!-- /FormSuffix -->

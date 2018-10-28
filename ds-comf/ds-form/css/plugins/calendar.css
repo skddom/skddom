@@ -1,0 +1,100 @@
+ 
+.dsform-cal-btn{
+background:  url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAD3SURBVFiF7ZRNDoIwEIXf+MadeiYTV+o9vIZ6RpcaF8Ix0HEB+ENSWkIRF33JpC19bT+azgAeEdxSNKdoRnAd2+8VRTOKWhnTW2y/BGxon+O7Fa1ruvonPoChpU3iWrH/1HXO6DfQBjCr2vz9SbKqM4/gbwcguAQAmO3KTSWTsg+Cq77+98JXynzHRPTkIF9QeO3rr8MJUAbPVTFRAEpwQ+Elnl9NXK+zoUfVhj7aYL8Gbtg1W4L9f52GCeAncj7CZm331f6u87VGv4EEEFoJB9PoN5AAnAB3K+Qz+syL4dgZIJYUejDBfhQA3+GDAoQcDqQ6kACAJ1q0luRTOjZaAAAAAElFTkSuQmCC') no-repeat 50% 50% / 80%;
+height: 20px;
+width: 20px;
+vertical-align: middle;
+display: inline-block;
+border-radius: 2px;
+cursor: pointer;
+}
+.dsform-cal-btn.cal-chosen{
+background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADjSURBVFiF7ZZBCsIwEEUn0qV6JsFV9R6eQ8/oUnFhew6fC6egodNEmtiC+VASOj/JS5iEEQkI2AMt0AB1an9QOlGne2q/i5iQjwHODY751r8IAeRW5RN3Sr1Ta53JT8AEAJbabd9+NxpbjfUHAURko+1BJ220LyKyTeB/CVtnY6dr4JbAD8AQAMAFqIFKvx1wTejHQX92enpoG5u00f5YgGya7zUsAL9SZQX8t91P1rHxTpOfQAEoD1EBMAGcpzFxETmZBGahEPDFxoHjUD2QFSC0eFaAmMUhviLKpvnegr8BeALlvmm00+8QOgAAAABJRU5ErkJggg==') no-repeat 50% 50% / 80%, #999;
+}
+.dsform-cal-wrapper{
+   display: inline;
+   position: relative;
+}
+table.dscalendar-table td {
+  color: #333333;
+  line-height: 1.5em;
+  min-width: 1.5em;
+  padding: 0;
+  text-align: center;
+  vertical-align: middle;
+  background: #fefefe;
+}
+table.dscalendar-table tbody td{
+  box-shadow: 0 0 1px #ccc;
+}
+table.dscalendar-table td.crrnt-day {
+    background: skyblue;
+    color: #FFFFFF;
+}
+table.dscalendar-table tbody td{
+   cursor: default;
+}
+table.dscalendar-table tbody td:not(.nodate):hover{
+   background: #e0eeff;
+   color: black;
+}
+
+table.dscalendar-table td.nodate{
+background: whitesmoke;
+}
+table.dscalendar-table thead td{
+border-bottom: none;
+}
+.dsform-cal-layer{
+    position: absolute;
+    z-index: 999;
+    right: 0;
+    top: 24px;
+}
+table.dscalendar-table {
+    font-family: Helvetica,sans-serif;
+    font-size: 1em;
+    border-collapse: separate;
+    border-spacing: 0px;
+    border: 1px solid silver;
+    float: left;
+}
+table.dscalendar-table td.mth-hdr {
+  padding-left: 25px;
+  padding-right: 25px;
+  position: relative;
+  text-align: center;
+  background: whitesmoke;
+  color: gray;
+}
+table.dscalendar-table thead td.wday {
+  background: silver;
+  color: #FFFFFF;
+  font-family: sans-serif;
+  font-size: 0.75em;
+  font-weight: 700;
+}
+table.dscalendar-table thead td.wday.wda-6 {
+    background: darksalmon;
+}
+
+.month-btn {
+  border: 1px solid #ccc;
+  display: inline-block;
+  height: 12px;
+  width: 12px;
+  cursor: pointer;
+}
+
+.prev-month.month-btn {
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAICAYAAADeM14FAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAABKAAAASgB+3Je1gAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABVSURBVAiZY2BAAjkhIQ2MyBwGBgYrRmQOKyOjPyMyp3/16u9M/xkYvjP8/8/OzMHBxMDAwMDIwMDAkB0SUs74/78XBxeXF4ahzDCBU9euHTDT0lIGALIJGIs0O44OAAAAAElFTkSuQmCC") no-repeat 50% 50% white;
+    left: 5px;
+    position: absolute;
+    top: calc(50% - 7px);
+}
+.next-month.month-btn {
+    background:   url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAICAYAAADeM14FAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAABKAAAASgB+3Je1gAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABtSURBVAiZTY3BCYNAFAXnL4IEtxqxCQ+e1C70kA7cmwVsGy6YGmIHaUVyEHw5RZzjMDCMbTtzw8msHLpuuoTtewNU/9IAxrrOVRSLSR8HkHnvkHJJX3v2/eM4zxfSO6YU3CGtmG0xpQDA/QDwA/8gJpwz8+WLAAAAAElFTkSuQmCC') no-repeat 50% 50% white;    
+    right: 5px;
+    position: absolute;
+    top: calc(50% - 7px);
+}

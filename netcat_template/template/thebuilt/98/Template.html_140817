@@ -1,0 +1,162 @@
+<!-- Header --><?
+//$grid = in_array($classID,array(22,2231,21,23,252,269));
+$bg = $template_settings['Image']['resultpath'];
+
+if ($bg) $style = "background-image: url('$bg');";
+?>%Header
+<div class="content-block">
+<div class="container-bg <?if($bg) echo "with-bg";?> with-bgcolor" data-style="<?=$style;?>background-color: #F4F4F4" style="<?=$style;?>background-color: #F4F4F4">
+	<div class="container-bg-overlay">
+	  <div class="container">
+	    <div class="row">
+	      <div class="col-md-12">
+	        <div class="page-item-title">
+	          <h1>
+								<span><?=$f_title?></span>
+
+	          </h1>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+    </div>
+      <div class="breadcrumbs-container-wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+<?=s_browse_path($browse_path);?>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+<div class="post-container container">
+	<div class="row">
+		<div class="col-md-9"><?
+        if (!$grid) {
+			?><div class="blog-post blog-post-single">
+				<article id="post-<?=$sub?>" class="post type-post status-publish format-standard has-post-thumbnail hentry category-house-renovation">
+							<div class="post-content-wrapper">
+
+								<div class="post-content"><?
+                                if ($current_sub['Icon'] && !$message) {?>
+<!--                                    <div class="blog-post-thumb text-center">
+
+									<img width="1170" height="781" src="<?=$current_sub['Icon']?>" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="<?=$f_title?>" sizes="(max-width: 1170px) 100vw, 1170px">
+
+									</div>
+-->
+                                    <?
+                                }
+        }
+?><!-- /Header -->
+
+<!-- Footer --><?if(!$grid){
+                                ?></div>
+                            </div>
+                </article>
+            </div><?
+}
+         ?></div>
+<div class="col-md-3 main-sidebar sidebar">
+		<ul id="main-sidebar">
+        <?if ($template_settings['SearchOn']) {
+		  ?><li id="search-2" class="widget widget_search">	<form method="get" id="searchform" class="searchform" action="/search/">
+		<input type="search" class="field" name="s" value="" id="s" placeholder="Поиск...">
+		<input type="submit" class="submit btn" id="searchsubmit" value="Найти">
+	</form>
+</li><?
+}
+
+$lvl3 =  $parent_sub_tree[$sub_level_count-1]['Subdivision_ID']==85;
+if ($lvl3) $aside_menu = nc_browse_sub($parent_sub_tree[$sub_level_count-1]['Subdivision_ID'],$browse_aside1)."
+<script>$(function(){
+\$('.accordion').each(function(){
+   \$this = \$(this);
+   if (!\$this.siblings('div').hasClass('toggle-content')) \$this.removeClass('accordion');
+});
+});</script>
+";
+else $aside_menu = s_browse_sub($sub,$browse_aside);
+$header = $parent_sub_tree[$sub_level_count-2]["Subdivision_Name"];
+if (!$aside_menu) {
+    $header = $parent_sub_tree[$sub_level_count-2]["Subdivision_Name"];
+    $aside_menu = s_browse_level($sub_level_count-1,$browse_aside);
+}
+if ($aside_menu) {
+?>
+<li id="nav_menu-8" class="widget widget_nav_menu">
+
+<!--
+< h2 class="widgettitle"><?=$header?></ h2>
+-->
+
+<div class="menu-blog-menu-container"><?
+    echo $aside_menu;
+?></div></li><?
+}
+//$last_news = s_list_class(82,32,"&recNum=4&nc_ctpl=2245");
+$last_news = s_list_class(11,86,"&recNum=15&nc_ctpl=2246");
+if ($last_news) {
+    ?><li id="thebuilt-recent-posts-2" class="widget widget_thebuilt_recent_entries">        <div class="widgettitle">Новые фото</div><?
+        echo $last_news;
+    ?></li><?
+}
+if ($recent_posts) {
+        ?><li id="thebuilt-recent-posts-2" class="widget widget_thebuilt_recent_entries">        <h2 class="widgettitle">Recent Posts</h2>
+        <ul>
+                                    <li class="clearfix">
+                        <div class="widget-post-thumb-wrapper">
+            <a href="http://wp.magnium-themes.com/thebuilt/thebuilt-1/2016/06/01/results-of-annual-general-meeting/">
+            <img width="270" height="152" src="http://wp.magnium-themes.com/thebuilt/thebuilt-1/wp-content/uploads/2016/05/photodune-14944148-secretary-in-office-m-270x152.jpg" class="attachment-thebuilt-blog-thumb-widget size-thebuilt-blog-thumb-widget wp-post-image" alt="photodune-14944148-secretary-in-office-m" srcset="http://wp.magnium-themes.com/thebuilt/thebuilt-1/wp-content/uploads/2016/05/photodune-14944148-secretary-in-office-m-270x152.jpg 270w, http://wp.magnium-themes.com/thebuilt/thebuilt-1/wp-content/uploads/2016/05/photodune-14944148-secretary-in-office-m-1170x660.jpg 1170w" sizes="(max-width: 270px) 100vw, 270px">            </a>
+            </div>
+                        <div class="widget-post-details-wrapper">
+                <div class="post-title"><a href="http://wp.magnium-themes.com/thebuilt/thebuilt-1/2016/06/01/results-of-annual-general-meeting/">Results of Annual General Meeting</a></div>
+                                    <div class="post-date">June 1, 2016</div>
+                            </div>
+            </li><?
+
+
+                            ?></ul><?
+        ?></li><?
+ }
+if ($feedback) {
+?><li id="text-15" class="widget widget_text">			<div class="textwidget"><style scoped="scoped">.mgt-promo-block-79292028663.mgt-promo-block.darken .mgt-promo-block-content {background-color: rgba(255,255,255,0.73)!important;}.mgt-promo-block-79292028663.mgt-promo-block.animated:hover .mgt-promo-block-content {background-color: rgba(255,255,255,0.73)!important;}</style><div class="mgt-promo-block animated black-text cover-image text-size-normal darken mgt-promo-block-79292028663 wpb_content_element" data-style="background-image: url(http://wp.magnium-themes.com/thebuilt/thebuilt-1/wp-content/uploads/2016/03/photodune-5445260-engineer-at-a-construction-site-m-1.jpg);background-repeat: no-repeat;width: 100%; height: 200px;" style="background-image: url(http://wp.magnium-themes.com/thebuilt/thebuilt-1/wp-content/uploads/2016/03/photodune-5445260-engineer-at-a-construction-site-m-1.jpg);background-repeat: no-repeat;width: 100%; height: 200px;"><div class="mgt-promo-block-content va-top"><div class="mgt-promo-block-content-inside">
+
+<h3>Остались вопросы?</h3>
+
+Contact us at the TheBuilt WP office nearest to you or submit a business inquiry online<div class="mgt-button-wrapper mgt-button-wrapper-align-left mgt-button-wrapper-display-newline mgt-button-top-margin-enable"><a class="btn hvr-bounce-to-right mgt-button mgt-style-solid-invert mgt-size-normal mgt-align-left mgt-display-newline mgt-text-size-small mgt-button-icon-position-left mgt-text-transform-uppercase " href="http://wp.magnium-themes.com/thebuilt/thebuilt-1/contact-us-4/">Contact us</a></div></div></div></div></div>
+		</li><?
+ }
+if ($tag_cloud) {
+?><li id="tag_cloud-2" class="widget widget_tag_cloud"><h2 class="widgettitle">Tag Cloud</h2>
+<div class="tagcloud"><a href="http://wp.magnium-themes.com/thebuilt/thebuilt-1/tag/architecture/" class="tag-link-25 tag-link-position-1" title="9 topics" style="font-size: 8pt;">architecture</a>
+<a href="http://wp.magnium-themes.com/thebuilt/thebuilt-1/tag/best/" class="tag-link-28 tag-link-position-2" title="9 topics" style="font-size: 8pt;">best</a>
+<a href="http://wp.magnium-themes.com/thebuilt/thebuilt-1/tag/building/" class="tag-link-26 tag-link-position-3" title="9 topics" style="font-size: 8pt;">building</a>
+<a href="http://wp.magnium-themes.com/thebuilt/thebuilt-1/tag/construction/" class="tag-link-27 tag-link-position-4" title="9 topics" style="font-size: 8pt;">construction</a>
+<a href="http://wp.magnium-themes.com/thebuilt/thebuilt-1/tag/house/" class="tag-link-29 tag-link-position-5" title="9 topics" style="font-size: 8pt;">house</a>
+<a href="http://wp.magnium-themes.com/thebuilt/thebuilt-1/tag/interior/" class="tag-link-24 tag-link-position-6" title="9 topics" style="font-size: 8pt;">interior</a>
+<a href="http://wp.magnium-themes.com/thebuilt/thebuilt-1/tag/renovation/" class="tag-link-30 tag-link-position-7" title="9 topics" style="font-size: 8pt;">renovation</a></div>
+</li><?
+}
+if ($brochures) {
+?><li id="text-13" class="widget widget_text"><h2 class="widgettitle">Our Brochures</h2>
+			<div class="textwidget"><div class="widget-download-link-wrapper">
+<div class="widget-download-icon"><i class="fa fa-file-pdf-o"></i>
+</div>
+<div class="widget-download-details">
+<div class="widget-download-title"><a href="#">Company Brochure</a></div>
+<div class="widget-download-subtitle">2.3 mb, PDF</div>
+</div>
+</div>
+
+</div>
+		</li><?
+}
+?>
+		</ul>
+		</div>
+      </div>
+</div>
+</div>
+%Footer<!-- /Footer -->

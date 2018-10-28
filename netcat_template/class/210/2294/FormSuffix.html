@@ -1,0 +1,22 @@
+                </div>
+<script>(function($){
+	    $(document).ready(function() {
+
+		    $("#portfolio-list").mixItUp({effects:["fade","scale"],easing:"snap"});
+            $(".js-toggle-video").click(function(){
+                    $this = jQuery(this);
+      $parent = $this.parent();
+      $video = $parent.find(".js-video");
+      src = $video.find("iframe").attr('src');
+      $video.find("iframe").attr('src', src + '?rel=0&showinfo=0&autoplay=1');            
+              $(this).closest(".line-wrap").addClass("show-video");
+
+      
+              return false;
+            });
+
+	    });})(jQuery);</script>
+            </div>
+        </div>
+    </div>
+</div><div class="vc_row-full-width"></div>

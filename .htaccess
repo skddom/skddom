@@ -1,0 +1,482 @@
+php_flag display_startup_errors off
+php_flag display_errors off
+php_flag html_errors off
+php_flag log_errors on
+php_flag ignore_repeated_errors off
+php_flag ignore_repeated_source off
+php_flag report_memleaks on
+php_flag track_errors on
+php_value docref_root 0
+php_value docref_ext 0
+php_value error_log /home/s/skddom/new.skd-dom.ru/public_html/PHP_errors.log
+php_value error_reporting 2047
+php_value log_errors_max_len 0
+
+<Files PHP_errors.log>
+    Order allow,deny
+    Deny from all
+    Satisfy All
+</Files>
+Order Allow,Deny
+Allow from all
+Deny from 209.239.120.164
+Deny from 50.30.33.175
+Deny from 50.30.33.177
+Deny from 50.30.41.171
+Deny from 209.239.121.133
+Deny from 50.30.33.179
+
+RewriteEngine On
+
+
+php_value date.timezone 'Europe/Moscow'
+DirectoryIndex index.php
+
+AddDefaultCharset utf-8
+
+# Если NetCat стоит в подпапке, например mysite, то
+# ErrorDocument 404 /mysite/netcat/require/e404.php
+# в противном случае
+ErrorDocument 404 /netcat/require/e404.php
+
+Options -Indexes
+Options +FollowSymLinks
+
+#Redirect 301 /o-kompanii/stati/ http://m.skd-dom.ru/o-kompanii/articles/
+
+
+<IfModule mod_php5.c>
+php_flag magic_quotes_gpc off
+php_flag display_errors on
+php_value error_reporting 0
+php_value arg_separator.output "&amp;"
+php_value mbstring.internal_encoding UTF-8
+</IfModule>
+
+<ifModule mod_rewrite.c>
+RewriteEngine On
+
+
+
+RewriteCond %{HTTPS} !=on
+RewriteRule ^/?(.*) https://www.skd-dom.ru/$1 [R=301,L]
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^netcat_template/template/thebuilt/.*\.[png|jpg|gif|cur|eot|tif|svg] /blank.png [L,QSA]
+
+#4181596
+
+RewriteRule ^catalog/individualnye-proekty/volga/$ - [G,L]
+RewriteRule ^catalog/individualnye-proekty/volga1/page-26/$ - [G,L]
+
+RewriteRule ^o-kompanii/articles/Pravilnoe-razmeschenie-doma.html$ /o-kompanii/articles/pravilnoe-razmeschenie-doma.html [R=301,L]
+RewriteRule ^catalog/individualnye-proekty-gallery/individualnye-proekty_26.html$ /catalog/individualnye-proekty-gallery/dom_pod_istroi.html [R=301,L]
+
+#4181596-end
+
+Redirect 410 /franchising/index_v2.html
+
+#############################
+
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^catalog/proektirovanie/portfolio-int/$ https://www.skd-dom.ru/stroim-dom/proektirovanie/portfolio-int/? [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^catalog/developer/duhanino$ https://www.skd-dom.ru/? [R=301,L]
+
+# RewriteCond %{QUERY_STRING} ^(.*)=$
+# RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+# RewriteRule ^catalog/proektirovanie/portfolio-int/ https://www.skd-dom.ru/stroim-dom/proektirovanie/portfolio-int/? [R=301,L]
+
+#############
+RewriteRule ^uslugi/stroitelstvo/otdelocnie-raboti/$ https://www.skd-dom.ru/uslugi/stroitelstvo/otdelka-doma-iz-kleenogo-brusa/ [R=301,L]
+#RewriteRule ^galereya/dizain-doma-iz-kleenogo-brusa/$ https://www.skd-dom.ru/galereya/interiors/ [R=301,L]
+
+
+RewriteRule ^stroim-dom/stroitelstvo-1/control-kachestva/$ https://www.skd-dom.ru/uslugi/stroitelstvo/control-kachestva/ [R=301,L]
+RewriteRule ^stroim-dom/stroitelstvo-1/garantii/$ https://www.skd-dom.ru/uslugi/stroitelstvo/garantii/ [R=301,L]
+RewriteRule ^stroim-dom/stroitelstvo-1/inzhenernye-i-elektromontazhnye-raboty/$ https://www.skd-dom.ru/uslugi/stroitelstvo/inzhenernye-i-elektromontazhnye-raboty/ [R=301,L]
+RewriteRule ^stroim-dom/stroitelstvo-1/kalkulyator-srokov-stroitelstva/$ https://www.skd-dom.ru/uslugi/stroitelstvo/kalkulyator-srokov-stroitelstva/ [R=301,L]
+RewriteRule ^stroim-dom/stroitelstvo-1/kalkulyator-srokov-stroitelstva/naruzhnye-raboty/$ https://www.skd-dom.ru/uslugi/stroitelstvo/kalkulyator-srokov-stroitelstva/naruzhnye-raboty/ [R=301,L]
+RewriteRule ^stroim-dom/stroitelstvo-1/kalkulyator-srokov-stroitelstva/otdelka/$ https://www.skd-dom.ru/uslugi/stroitelstvo/kalkulyator-srokov-stroitelstva/otdelka/ [R=301,L]
+RewriteRule ^stroim-dom/stroitelstvo-1/kalkulyator-srokov-stroitelstva/teplovoy-kontur/$ https://www.skd-dom.ru/uslugi/stroitelstvo/kalkulyator-srokov-stroitelstva/teplovoy-kontur/ [R=301,L]
+RewriteRule ^stroim-dom/stroitelstvo-1/map-stroy/$ https://www.skd-dom.ru/uslugi/stroitelstvo/map-stroy/ [R=301,L]
+RewriteRule ^stroim-dom/stroitelstvo-1/otdelka/$ https://www.skd-dom.ru/uslugi/stroitelstvo/otdelka/ [R=301,L]
+RewriteRule ^stroim-dom/stroitelstvo-1/pokraska/$ https://www.skd-dom.ru/uslugi/stroitelstvo/pokraska/ [R=301,L]
+RewriteRule ^stroim-dom/stroitelstvo-1/tehniheskoe-obsluzhivanie/$ https://www.skd-dom.ru/uslugi/stroitelstvo/tehniheskoe-obsluzhivanie/ [R=301,L]
+RewriteRule ^stroim-dom/stroitelstvo-1/tekst/$ https://www.skd-dom.ru/uslugi/stroitelstvo/tekst/ [R=301,L]
+RewriteRule ^stroim-dom/stroitelstvo-1/teplovoy-kontur/$ https://www.skd-dom.ru/uslugi/stroitelstvo/teplovoy-kontur/ [R=301,L]
+#############
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^catalog/developer/ZvenigFamiliPark/$   https://www.skd-dom.ru/o-kompanii/developer/ZvenigFamiliPark/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^otvet/faq/faq_27.html$ https://www.skd-dom.ru/o-kompanii/faq/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^otvet/faq/faq_36.html$ https://www.skd-dom.ru/o-kompanii/faq/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^otvet/faq/faq_35.html$ https://www.skd-dom.ru/o-kompanii/faq/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^stroim-dom/otdelka/$   https://www.skd-dom.ru/stroim-dom/stroitelstvo-1/otdelka/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^catalog/developer/$    https://www.skd-dom.ru/o-kompanii/developer/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^stroim-dom/tehniheskoe-obsluzhivanie/$ https://www.skd-dom.ru/stroim-dom/stroitelstvo-1/tehniheskoe-obsluzhivanie/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^catalog/developer/ekopark-novinki/$ https://www.skd-dom.ru/o-kompanii/developer/ekopark-novinki/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^otvet/faq/faq_31.html$ https://www.skd-dom.ru/o-kompanii/faq/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^stroim-dom/control-kachestva/$ https://www.skd-dom.ru/stroim-dom/stroitelstvo-1/control-kachestva/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^catalog/developer/RazGavan/$   https://www.skd-dom.ru/o-kompanii/developer/RazGavan/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^catalog/developer/duhanino/$   https://www.skd-dom.ru/o-kompanii/developer/duhanino/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^catalog/developer/respublika-santoriya/$   https://www.skd-dom.ru/o-kompanii/developer/duhanino/ [R=301,L]
+
+RewriteCond %{QUERY_STRING} ^azGavan/=$
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^galereya/gallery2/page-2/   https://www.skd-dom.ru/galereya/interiors/page-2/?cur_cc=583 [R=301,L]
+
+RewriteCond %{QUERY_STRING} ^.html$
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^galereya/gallery2/page-3/   https://www.skd-dom.ru/galereya/interiors/page-3/? [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^otvet/faq/faq_29.html$ https://www.skd-dom.ru/o-kompanii/faq/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^catalog/developer/ushakovskie-dachi-2/$    https://www.skd-dom.ru/o-kompanii/developer/ushakovskie-dachi-2/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^proizvodstvo/advantages/$  https://www.skd-dom.ru/stroim-dom/proizvodstvo-brusa/syre-dlya-proizvodstva/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^proizvodstvo/info/$    https://www.skd-dom.ru/stroim-dom/proizvodstvo-brusa/info/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^stroim-dom/pokraska/$  https://www.skd-dom.ru/stroim-dom/stroitelstvo-1/pokraska/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^catalog/developer/RuzaFemiliPark/$ https://www.skd-dom.ru/o-kompanii/developer/ZvenigFamiliPark/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^catalog/developer/bolshoe-grishkino/$  https://www.skd-dom.ru/o-kompanii/developer/bolshoe-grishkino [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^catalog/developer/lesnaya-pristan/$    https://www.skd-dom.ru/o-kompanii/developer/lesnaya-pristan/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^catalog/developer/leto/$   https://www.skd-dom.ru/o-kompanii/developer/leto/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^catalog/developer/mezhdureche/$    https://www.skd-dom.ru/o-kompanii/developer/mezhdureche/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^catalog/developer/ozernyy-kray-lyschevo/$  https://www.skd-dom.ru/o-kompanii/developer/ozernyy-kray-lyschevo/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^catalog/gotovye-doma-iz-kleenogo-brusa/dom-400-m-s-garazhom-navesom/$  https://www.skd-dom.ru/price/gotovye-doma-iz-kleenogo-brusa/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^catalog/ind-proekty/$  https://www.skd-dom.ru/catalog/individualnye-proekty-gallery/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^catalog/proektirovanie/portfolio-int/page-2/$  https://www.skd-dom.ru/galereya/interiors/page-2/?cur_cc=583 [R=301,L]
+
+RewriteCond %{QUERY_STRING} ^_html=$
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^catalog/proektirovanie/portfolio-int/page-4/   https://www.skd-dom.ru/galereya/interiors/page-2/? [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^catalog/proektirovanie/portfolio-int/page-5/$  https://www.skd-dom.ru/galereya/interiors/page-3/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^catalog/usadba/$   https://www.skd-dom.ru/galereya/usadba/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^contacts/$ https://www.skd-dom.ru/kontakty/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^galereya/interery-v-domah-iz-kleenogo-brusa/interery-v-domah-iz-kleenogo-brusa_16.html$    https://www.skd-dom.ru/galereya/interiors/interery_16.html [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^map-stroy/$    https://www.skd-dom.ru/stroim-dom/stroitelstvo-1/map-stroy/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^otvet/faq/faq_34.html$ https://www.skd-dom.ru/o-kompanii/faq/ [R=301,L]
+
+RewriteCond %{QUERY_STRING} ^cur_cc=339&curPos=90$
+RewriteCond %{HTTP_HOST} ^skd-dom.ru$
+RewriteRule ^otvet/faq2/ https://www.skd-dom.ru/o-kompanii/faq/? [R=301,L]
+
+
+#############################
+
+RewriteCond %{HTTP_HOST} ^new.skd-dom.ru$ [NC]
+RewriteRule ^(.*)$ https://www.skd-dom.ru/$1 [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^www.new.skd-dom.ru$
+RewriteRule ^(.*)$ https://www.skd-dom.ru/$1 [R=301,L]
+
+
+RewriteCond %{HTTP_HOST} !^www\.
+RewriteCond %{HTTP_HOST} !^m\.
+RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+
+
+RewriteRule ^files/175/s/Duhanino_200_main2.jpg /files/1px.png [L]
+RewriteRule ^files/254/s/СКД254-2.jpg /files/1px.png [L]
+RewriteRule ^files/352/s/СКД-352-01.jpg /files/1px.png [L]
+RewriteRule ^files/310/s/Z4 /files/1px.png [L]
+
+
+RewriteRule ^o-kompanii/stati/fundament-dlya-doma-iz-brusa.html http://m.skd-dom.ru/o-kompanii/articles/fundament-dlya-doma-iz-brusa.html [R=301,L]
+RewriteRule ^o-kompanii/stati/pokrasit-dom-iz-brusa.html http://m.skd-dom.ru/o-kompanii/articles/pokrasit-dom-iz-brusa.html [R=301,L]
+RewriteRule ^o-kompanii/stati/tipovoi_ili_individualnii_poect.html http://m.skd-dom.ru/o-kompanii/articles/tipovoi_ili_individualnii_poect.html [R=301,L]
+RewriteRule ^o-kompanii/stati/Pravilnoe-razmeschenie-doma.html http://m.skd-dom.ru/o-kompanii/articles/Pravilnoe-razmeschenie-doma.html [R=301,L]
+RewriteRule ^o-kompanii/stati/kypit-dom-iz-brusa-deshevo.html http://m.skd-dom.ru/o-kompanii/articles/kypit-dom-iz-brusa-deshevo.html [R=301,L]
+RewriteRule ^o-kompanii/stati/otdelka_vnimanie.html http://m.skd-dom.ru/o-kompanii/articles/otdelka_vnimanie.html [R=301,L]
+RewriteRule ^o-kompanii/stati/vibrat-i-kypit-ychastok.html http://m.skd-dom.ru/o-kompanii/articles/vibrat-i-kypit-ychastok.html [R=301,L]
+RewriteRule ^o-kompanii/stati/iz-kakogo-brusa-stroit-dom.html http://m.skd-dom.ru/o-kompanii/articles/iz-kakogo-brusa-stroit-dom.html [R=301,L]
+RewriteRule ^o-kompanii/stati/xarakteristiki-kleenogo-brusa.html http://m.skd-dom.ru/o-kompanii/articles/xarakteristiki-kleenogo-brusa.html [R=301,L]
+RewriteRule ^o-kompanii/stati/esli-bolshoi-perepad-visot.html http://m.skd-dom.ru/o-kompanii/articles/esli-bolshoi-perepad-visot.html [R=301,L]
+
+#RewriteCond %{HTTP_USER_AGENT} (?i:nokia|j2me|blackberry|symbian|mobi|phone|samsung|HTC|pocket|java|iphone|android) [NC]
+#RewriteCond %{HTTP_HOST} !^m\.
+#RewriteCond %{HTTP_COOKIE} !^.*full_version=Y*$ [NC]
+#RewriteRule ^(.*)$ http://m.skd-dom.ru/$1 [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/catalog/$
+RewriteRule ^(.*)$ https://www.skd-dom.ru/catalog/popular/ [R=301,L]
+RewriteCond %{REQUEST_URI} ^/proizvodstvo/$
+RewriteRule ^(.*)$ https://www.skd-dom.ru/proizvodstvo/info/ [R=301,L]
+
+RewriteRule ^catalog/proektirovanie/porffolio-int$ /catalog/proektirovanie/portfolio-int/ [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/catalog/proektirovanie/porffolio-int$
+RewriteCond %{REQUEST_URI} !^/netcat/admin/(.*)$
+RewriteCond %{REQUEST_URI} !(.*)/$
+RewriteCond %{REQUEST_URI} !\.(.+){2,5}$
+RewriteRule ^(.*)$ /$1/ [R=301,L]
+
+
+RewriteRule ^price/specpredlojeniya/$ /catalog/specpredlojeniya/ [R=301,L]
+# RewriteRule ^catalog/proektirovanie/porffolio-int/$ /galereya/gallery2/ [R=301,L]
+RewriteRule ^gotovye-doma-iz-kleenogo-brusa/$ /catalog/gotovye-doma-iz-kleenogo-brusa/ [R=301,L]
+
+RewriteRule ^o-kompanii/specials/$ /catalog/specials/ [R=301,L]
+RewriteRule ^stroim-dom/stroim-dom-iz-brusa/$ /proizvodstvo/stroim-dom-iz-brusa/ [R=301,L]
+# RewriteRule ^o-kompanii/razresheniya-i-diplomy/$ /galereya/razresheniya-i-diplomy/ [R=301,L]
+RewriteRule ^kontakty/feedback/$ /otvet/feedback/ [R=301,L]
+RewriteRule ^stroim-dom/faq/$ /otvet/faq/ [R=301,L]
+RewriteRule ^galereya/gallery2/$ /catalog/proektirovanie/portfolio-int/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^www.skd-dom.ru
+RewriteCond %{HTTP_HOST} ^skd-dom.ru
+RewriteRule ^catalog/$ /catalog/popular/ [R=301,L]
+
+RewriteRule ^stroim-dom-iz-brusa/$ /stroim-dom/stroitelstvo/ [R=301,L]
+RewriteRule ^stroim-dom-iz-brusa/otdelka/$ /stroim-dom/otdelka/ [R=301,L]
+RewriteRule ^catalog/proektirovanie/$ /stroim-dom/proektirovanie/ [R=301,L]
+
+RewriteRule ^galereya/razresheniya-i-diplomy/$ /o-kompanii/razresheniya-i-diplomy/ [R=301,L]
+
+RewriteRule ^catalog/individualnye-proekty/$ /catalog/individualnye-proekty-gallery/ [R=301,L]
+RewriteRule ^catalog/proektirovanie/porffolio-int/$ /catalog/proektirovanie/portfolio-int/ [R=301,L]
+RewriteRule ^otzyvy/$ /o-kompanii/otzyvy/ [R=301,L]
+RewriteRule ^stroim-dom/faq/faq_35.html$ /otvet/faq/faq_35.html [R=301,L]
+RewriteRule ^stroim-dom/faq/faq_27.html$ /otvet/faq/faq_27.html [R=301,L]
+RewriteRule ^catalog/proektirovanie/porffolio-int/porffolio-int_10.html$ /catalog/proektirovanie/portfolio-int/portfolio-int_10.html [R=301,L]
+RewriteRule ^stroim-dom/faq/faq_36.html$ /otvet/faq/faq_36.html [R=301,L]
+RewriteRule ^catalog/two/6/$ /catalog/popular/ [R=301,L]
+RewriteRule ^proektirovanie/dizain/$ /catalog/proektirovanie/portfolio-int/ [R=301,L]
+RewriteRule ^galereya/indProekt/-223/$ /galereya/stroitelstvo/ [R=301,L]
+RewriteRule ^articles/inresstroyrem.html$ /o-kompanii/articles/ [R=301,L]
+RewriteRule ^catalog/three/$ /catalog/popular/ [R=301,L]
+RewriteRule ^catalog/two/2/$ /catalog/popular/ [R=301,L]
+RewriteRule ^otvet/garant/$ /otvet/faq/faq_26.html [R=301,L]
+RewriteRule ^catalog/two/3/$ /catalog/popular/ [R=301,L]
+RewriteRule ^stroim-dom/faq/faq_31.html$ /otvet/faq/faq_31.html [R=301,L]
+
+# RewriteCond %{HTTP_HOST} !^www\.skd.alaynmedia\.ru$ [NC]
+# RewriteRule ^(.*)$ https://www.skd.alaynmedia.ru/$1 [R=301,L]
+
+#RewriteCond %{REQUEST_URI} ^/2011-06-29-10-03-33
+#RewriteRule ^2011-06-29-10-03-33/(.*)$ https://www.skd.alaynmedia.ru/gotovye-doma-iz-kleenogo-brusa/$1 [R=301,L]
+
+RewriteRule ^otvet/faq/pokraska/$ /stroim-dom/faq/faq_62.html [R=301,L]
+RewriteRule ^otvet/faq/preimuschestva/$ /stroim-dom/faq/faq_63.html [R=301,L]
+RewriteRule ^otvet/faq/terrasy/$ /stroim-dom/faq/faq_64.html [R=301,L]
+RewriteRule ^otvet/faq/usadka/$ /stroim-dom/faq/faq_35.html [R=301,L]
+RewriteRule ^otvet/faq/brus/$ /stroim-dom/faq/faq_29.html [R=301,L]
+RewriteRule ^otvet/faq/cherepica/$ /stroim-dom/faq/faq_32.html [R=301,L]
+RewriteRule ^otvet/faq/krasit/$ /stroim-dom/faq/faq_34.html [R=301,L]
+RewriteRule ^otvet/faq/listvennica/$ /stroim-dom/faq/faq_30.html [R=301,L]
+RewriteRule ^otvet/faq/ekspluataciya/$ /stroim-dom/faq/faq_36.html [R=301,L]
+RewriteRule ^otvet/faq/okna/$ /stroim-dom/faq/faq_28.html [R=301,L]
+RewriteRule ^otvet/faq/sroki/$ /stroim-dom/faq/faq_31.html [R=301,L]
+RewriteRule ^otvet/faq/teplo/$ /stroim-dom/faq/faq_27.html [R=301,L]
+
+RewriteRule ^catalog/individualnye-proekty/istra/$ /catalog/individualnye-proekty-gallery/ [R=301,L]
+RewriteRule ^catalog/individualnye-proekty/kostroma1/$ /catalog/individualnye-proekty-gallery/ [R=301,L]
+RewriteRule ^catalog/individualnye-proekty/altai/$ /catalog/individualnye-proekty-gallery/ [R=301,L]
+RewriteRule ^catalog/individualnye-proekty/dmitrov/$ /catalog/individualnye-proekty-gallery/ [R=301,L]
+RewriteRule ^catalog/individualnye-proekty/vereya/$ /catalog/individualnye-proekty-gallery/ [R=301,L]
+RewriteRule ^catalog/individualnye-proekty/kostroma/$ /catalog/individualnye-proekty-gallery/ [R=301,L]
+RewriteRule ^catalog/individualnye-proekty/korolev/$ /catalog/individualnye-proekty-gallery/ [R=301,L]
+RewriteRule ^catalog/individualnye-proekty/moskva/$ /catalog/individualnye-proekty-gallery/ [R=301,L]
+RewriteRule ^catalog/individualnye-proekty/romashkovo/$ /catalog/individualnye-proekty-gallery/ [R=301,L]
+RewriteRule ^catalog/individualnye-proekty/suzdal/$ /catalog/individualnye-proekty-gallery/ [R=301,L]
+
+RewriteRule ^catalog/individualnye-proekty/duhanino/$ /catalog/developer/duhanino/ [R=301,L]
+
+RewriteRule ^arhive11/articles/dekodom.html$ /otvet/faq2/ [R=301,L]
+RewriteRule ^arhive11/articles/oknadomus.html$ /otvet/faq2/ [R=301,L]
+RewriteRule ^arhive11/articles/holzhouse.html$ /otvet/faq2/ [R=301,L]
+RewriteRule ^arhive11/articles/elitstairs.html$ /otvet/faq2/ [R=301,L]
+RewriteRule ^arhive11/articles/diamirkazan.html$ /otvet/faq2/ [R=301,L]
+RewriteRule ^arhive11/articles/evldk.html$ /otvet/faq2/ [R=301,L]
+RewriteRule ^arhive11/articles/luxeremont.html$ /otvet/faq2/ [R=301,L]
+RewriteRule ^arhive11/articles/atlanticst.html$ /otvet/faq2/ [R=301,L]
+RewriteRule ^arhive11/articles/landfin.html$ /otvet/faq2/ [R=301,L]
+RewriteRule ^arhive11/articles/brusovyjdom.html$ /otvet/faq2/ [R=301,L]
+RewriteRule ^arhive11/articles/sovrstroy.html$ /otvet/faq2/ [R=301,L]
+RewriteRule ^arhive11/articles/remont-okon-pvh.html$ /otvet/faq2/ [R=301,L]
+RewriteRule ^arhive11/articles/architektstroy.html$ /otvet/faq2/ [R=301,L]
+RewriteRule ^articles/vitrearius.html$ /otvet/faq2/ [R=301,L]
+RewriteRule ^articles/stroyorgtrest.html$ /otvet/faq2/ [R=301,L]
+
+RewriteRule ^o-kompanii/articles/articles_98.html$ https://www.skd-dom.ru/o-kompanii/articles/fundament-dlya-doma-iz-brusa.html [R=301,L]
+RewriteRule ^o-kompanii/articles/articles_97.html$ https://www.skd-dom.ru/o-kompanii/articles/pokrasit-dom-iz-brusa.html [R=301,L]
+RewriteRule ^o-kompanii/articles/articles_91.html$ https://www.skd-dom.ru/o-kompanii/articles/tipovoi_ili_individualnii_poect.html [R=301,L]
+RewriteRule ^o-kompanii/articles/articles_89.html$ https://www.skd-dom.ru/o-kompanii/articles/pravilnoe-razmeschenie-doma.html [R=301,L]
+RewriteRule ^o-kompanii/articles/articles_83.html$ https://www.skd-dom.ru/o-kompanii/articles/kypit-dom-iz-brusa-deshevo.html [R=301,L]
+RewriteRule ^o-kompanii/articles/articles_79.html$ https://www.skd-dom.ru/o-kompanii/articles/otdelka_vnimanie.html [R=301,L]
+RewriteRule ^o-kompanii/articles/articles_77.html$ https://www.skd-dom.ru/o-kompanii/articles/vibrat-i-kypit-ychastok.html [R=301,L]
+RewriteRule ^o-kompanii/articles/articles_76.html$ https://www.skd-dom.ru/o-kompanii/articles/iz-kakogo-brusa-stroit-dom.html [R=301,L]
+RewriteRule ^o-kompanii/articles/articles_75.html$ https://www.skd-dom.ru/o-kompanii/articles/xarakteristiki-kleenogo-brusa.html [R=301,L]
+RewriteRule ^o-kompanii/articles/articles_74.html$ https://www.skd-dom.ru/o-kompanii/articles/esli-bolshoi-perepad-visot.html [R=301,L]
+
+RewriteRule ^otvet/$ /otvet/faq2/ [R=301,L]
+
+RewriteRule ^otvet/faq/page-5/$ /otvet/faq/ [R=301,L]
+RewriteCond %{THE_REQUEST} GET\ /otvet/faq/\?curPos=15\ HTTP/ [OR]
+RewriteCond %{THE_REQUEST} GET\ /otvet/faq/\?curPos=65\ HTTP/ [OR]
+RewriteCond %{THE_REQUEST} GET\ /otvet/faq/\?curPos=55\ HTTP/ [OR]
+RewriteCond %{THE_REQUEST} GET\ /otvet/faq/\?curPos=75\ HTTP/ [OR]
+RewriteCond %{THE_REQUEST} GET\ /otvet/faq/\?curPos=50\ HTTP/ [OR]
+RewriteCond %{THE_REQUEST} GET\ /otvet/faq/\?curPos=85\ HTTP/ [OR]
+RewriteCond %{THE_REQUEST} GET\ /otvet/faq/\?curPos=30\ HTTP/ [OR]
+RewriteCond %{THE_REQUEST} GET\ /otvet/faq/\?curPos=25\ HTTP/ [OR]
+RewriteCond %{THE_REQUEST} GET\ /otvet/faq/\?curPos=35\ HTTP/ [OR]
+RewriteCond %{THE_REQUEST} GET\ /otvet/faq/\?curPos=40\ HTTP/ [OR]
+RewriteCond %{THE_REQUEST} GET\ /otvet/faq/\?curPos=20\ HTTP/ [OR]
+RewriteCond %{THE_REQUEST} GET\ /otvet/faq/\?curPos=70\ HTTP/ [OR]
+RewriteCond %{THE_REQUEST} GET\ /otvet/faq/\?curPos=60\ HTTP/
+RewriteRule ^(.+)$ /otvet/faq/? [R=301,L]
+
+RewriteCond %{THE_REQUEST} GET\ /catalog/proektirovanie/portfolio-int/\?curPos=30\ HTTP/ [OR]
+RewriteCond %{THE_REQUEST} GET\ /catalog/proektirovanie/portfolio-int/\?curPos=75\ HTTP/ [OR]
+RewriteCond %{THE_REQUEST} GET\ /catalog/proektirovanie/portfolio-int/\?curPos=60\ HTTP/ [OR]
+RewriteCond %{THE_REQUEST} GET\ /catalog/proektirovanie/portfolio-int/\?curPos=150\ HTTP/ [OR]
+RewriteCond %{THE_REQUEST} GET\ /catalog/proektirovanie/portfolio-int/\?curPos=135\ HTTP/ [OR]
+RewriteCond %{THE_REQUEST} GET\ /catalog/proektirovanie/portfolio-int/\?curPos=165\ HTTP/
+RewriteRule ^(.+)$ /catalog/proektirovanie/portfolio-int/? [R=301,L]
+
+RewriteRule ^Genplan.html$ /catalog/developer/ [R=301,L]
+
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+# Если NetCat стоит в подпапке, например mysite, то
+# RewriteRule ^(.+)$ /mysite/netcat/require/e404.php?REQUEST_URI=$1 [L,QSA]
+# в противном случае
+RewriteRule ^(.+)$ /netcat/require/e404.php?REQUEST_URI=$1 [L,QSA]
+RewriteRule .* - [E=HTTP_IF_MODIFIED_SINCE:%{HTTP:If-Modified-Since}]
+RewriteRule .* - [E=HTTP_IF_NONE_MATCH:%{HTTP:If-None-Match}]
+
+
+</ifModule>
+
+<IfModule mod_headers.c>
+    Header unset ETag
+</IfModule>
+
+<IfModule mod_expires.c>
+    ExpiresActive on
+    ExpiresDefault                                      "access plus 1 week"
+# CSS
+    ExpiresByType text/css                              "access plus 1 week"
+# Data interchange
+    ExpiresByType application/json                      "access plus 0 seconds"
+    ExpiresByType application/ld+json                   "access plus 0 seconds"
+    ExpiresByType application/vnd.geo+json              "access plus 0 seconds"
+    ExpiresByType application/xml                       "access plus 0 seconds"
+    ExpiresByType text/xml                              "access plus 0 seconds"
+# Favicon (cannot be renamed!) and cursor images
+    ExpiresByType image/x-icon                          "access plus 1 week"
+# HTML components (HTCs)
+    ExpiresByType text/x-component                      "access plus 1 week"
+# HTML
+    ExpiresByType text/html                             "access plus 0 seconds"
+# JavaScript
+    ExpiresByType application/javascript                "access plus 1 week"
+# Manifest files
+    ExpiresByType application/manifest+json             "access plus 1 week"
+    ExpiresByType application/x-web-app-manifest+json   "access plus 0 seconds"
+    ExpiresByType text/cache-manifest                   "access plus 0 seconds"
+# Media
+    ExpiresByType audio/ogg                             "access plus 1 week"
+    ExpiresByType image/gif                             "access plus 1 week"
+    ExpiresByType image/jpeg                            "access plus 1 week"
+    ExpiresByType image/jpg                             "access plus 1 week"
+    ExpiresByType image/png                             "access plus 1 week"
+    ExpiresByType video/mp4                             "access plus 1 week"
+    ExpiresByType video/ogg                             "access plus 1 week"
+    ExpiresByType video/webm                            "access plus 1 week"
+# Web feeds
+    ExpiresByType application/atom+xml                  "access plus 1 hour"
+    ExpiresByType application/rss+xml                   "access plus 1 hour"
+# Web fonts
+    ExpiresByType application/font-woff                 "access plus 1 week"
+    ExpiresByType application/vnd.ms-fontobject         "access plus 1 week"
+    ExpiresByType application/x-font-ttf                "access plus 1 week"
+    ExpiresByType font/opentype                         "access plus 1 week"
+    ExpiresByType image/svg+xml                         "access plus 1 week"
+</IfModule>
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/x-javascript application/javascript application/ecmascript
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/xml
+</IfModule>
+
+#AuthName 'Restricted Area'
+#AuthType Basic
+#AuthUserFile /home/c/cr69430/.authfile
+#Require user skd
+
+

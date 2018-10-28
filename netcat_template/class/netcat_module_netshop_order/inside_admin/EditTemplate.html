@@ -1,0 +1,909 @@
+<?php
+
+$netshop = nc_netshop::get_instance($catalogue);
+$order_component_id = $netshop->get_setting('OrderComponentID'); // same as $classID
+$order_component = new nc_component($order_component_id);
+
+$order = $netshop->load_order($message);
+
+$admin_path = $nc_core->SUB_FOLDER . '/netcat/admin/';
+$discount_admin_prefix = $admin_path . '#module.netshop.promotion.discount';
+$mailer_admin_prefix = $admin_path . '#module.netshop.mailer.customer_mail';
+
+$is_duplicate = (isset($is_duplicate) ? $is_duplicate : 0); // это только что созданная копия другого заказа?
+$is_merged = (isset($is_merged) ? $is_merged : 0); // это только что созданный объединённый заказ?
+
+?>
+
+<div class='nc-modal-dialog' data-hidden-tabs='tab-system'>
+    <div class='nc-modal-dialog-header'>
+        <h2><?= NETCAT_MODULE_NETSHOP_ORDERS_NUMBER . ' ' . $message ?></h2>
+    </div>
+    <div class='nc-modal-dialog-body'>
+        <?= ($warnText ? '<div class="warnText">' . $warnText . '</div>' : '') ?>
+        <form method="POST" action="<?= $SUB_FOLDER . $HTTP_ROOT_PATH ?>message.php" id="adminForm" class="nc-netshop-order">
+            <?= $nc_core->token->get_input() ?>
+            <input type="hidden" name="posting" value="1" />
+            <input type="hidden" name="admin_mode" value="1" />
+            <input type="hidden" name="inside_admin" value="1" />
+            <input type="hidden" name="inside_netshop" value="<?= (isset($inside_netshop) && $inside_netshop ? 1 : 0) ?>" />
+            <input type="hidden" name="is_duplicate" value="<?= $is_duplicate ?>" />
+            <input type="hidden" name="is_merged" value="<?= $is_merged ?>" />
+            <input type="hidden" name="catalogue" value="<?= $catalogue ?>" />
+            <input type="hidden" name="cc" value="<?= $cc ?>" />
+            <input type="hidden" name="sub" value="<?= $sub ?>" />
+            <input type="hidden" name="message" value="<?= $message ?>" />
+            <input type="hidden" name="f_Checked" value="<?= $f_Checked ?>" />
+            <input type="hidden" name="curPos" value='<?= $curPos ?>' />
+
+            <!-- Вкладка со свойствами заказа -->
+
+            <div data-tab-caption="Параметры заказа" data-tab-id="netshop-order-properties">
+                <?
+                $special_fields = array('DeliveryMethod', 'DeliveryCost', 'PaymentMethod', 'PaymentCost');
+
+                // «Стандартные» поля
+                foreach ($order_component->get_fields() as $field_info) {
+                    if (in_array($field_info['name'], $special_fields) || $field_info['edit_type'] == 3) {
+                        continue;
+                    }
+
+                    echo '<div style="padding-bottom: 5px">', nc_put_field($field_info['name'], '', $order_component_id, true),
+                         '</div>';
+                }
+                ?>
+            </div>
+
+            <!-- Вкладка с составом заказа -->
+
+            <div data-tab-caption="Состав заказа" data-tab-id="netshop-order-items">
+                <table class="nc-table nc--wide nc-netshop-order-items">
+                    <tr>
+                        <th class="nc--compact"></th>
+                        <th style="width: 50%"><?= NETCAT_MODULE_NETSHOP_ITEM ?></th>
+                        <th><?= NETCAT_MODULE_NETSHOP_ITEM_PRICE ?></th>
+                        <th><?= NETCAT_MODULE_NETSHOP_DISCOUNT ?></th>
+                        <th><?= NETCAT_MODULE_NETSHOP_PRICE_WITH_DISCOUNT_SHORT ?></th>
+                        <th><?= NETCAT_MODULE_NETSHOP_QTY ?></th>
+                        <th><?= NETCAT_MODULE_NETSHOP_COST ?></th>
+                    </tr>
+
+                    <!-- Шаблон для строк с товарами -->
+                    <tr class="nc-netshop-order-items-row nc-netshop-order-items-row-template" style="display: none">
+                        <td><i class="nc-icon-s nc--remove" title="<?= NETCAT_MODULE_NETSHOP_ORDER_REMOVE_ITEM ?>"></i></td>
+                        <td>
+                            <!-- Название -->
+                            <span class="tpl-property-article"></span>
+                            <a href="#" class="tpl-property-full-name" tabindex="-1" target="_blank"></a>
+                        </td>
+                        <td>
+                            <!-- Цена -->
+                            <input type="text" name="items@[OriginalPrice]" class="nc--wide">
+                        </td>
+                        <td class="nc--nowrap">
+                            <!-- Скидка и список применённых скидок -->
+                            <input type="text" name="items@[ItemDiscount]" style="width: 90px">
+                            <div class="nc-netshop-order-tooltip nc-netshop-order-item-discount-info">
+                                <strong class="nc-label nc--blue">?</strong>
+                                <div class="nc-netshop-order-tooltip-content">
+                                    <div class="nc-box nc--light nc-margin-5 tpl-value"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="nc--nowrap">
+                            <!-- Цена со скидкой -->
+                            <input type="text" readonly tabindex="-1" name="items@[ItemPrice]" class="nc--wide">
+                        </td>
+                        <td>
+                            <!-- Количество -->
+                            <input type="text" name="items@[Qty]" min="0" class="tpl-property-qty">
+                            <div class="tpl-property-stock-units nc-popover nc--tl nc--hide">
+                                <?= NETCAT_MODULE_NETSHOP_IMPORT_REMAIN_IN_STORE ?>:
+                                <span class="tpl-value"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <!-- Стоимость -->
+                            <input type="text" readonly tabindex="-1" name="items@[TotalPrice]" class="nc--wide">
+                        </td>
+                    </tr>
+
+                    <?
+
+                    // Добавление товара в заказ ---------------------------------------
+                    echo "<tr class='nc-netshop-order-items-add-row'>",
+                         "<td><i class='nc-icon nc--plus'></i></td><td colspan='7'>";
+
+                    if (!$netshop->get_setting('ItemIndexFields')) {
+                        echo "<em>Добавление товаров в заказ невозможно, поскольку в " .
+                             "<a href='{$nc_core->ADMIN_PATH}#module.netshop.settings.module($catalogue)' target='_blank'>" .
+                             "настройках модуля</a> не указан список полей товаров, используемых для поиска в панели управления</em>";
+                    }
+                    else {
+                        echo "<input type='text' name='new_item_search' value='' autocomplete='off' " .
+                             " style='width: 100% !important' placeholder='" . NETCAT_MODULE_NETSHOP_ORDER_ADD_ITEM . "'>";
+                    }
+
+                    echo "</td></tr>";
+
+                    // Итого по товарам ------------------------------------------------
+                    echo "<tr class='nc--grey'>\n",
+                         "<td colspan='6'>", NETCAT_MODULE_NETSHOP_ITEM_COST, "</td>\n",
+                         "<td>",
+                            "<input tabindex='-1' readonly type='text' name='cart_totals' class='nc--wide'",
+                            " value='", $order->get_item_totals_without_cart_discounts(), "'>",
+                         "</td>\n",
+                         "</tr>\n";
+
+                    // Скидки на корзину -----------------------------------------------
+                    echo "<tr>\n",
+                         "<td colspan='6'>", NETCAT_MODULE_NETSHOP_CART_DISCOUNT, " &nbsp; ";
+
+                    if ($order->get_order_discount_sum()) {
+                        echo "<div class='nc-netshop-order-tooltip'>",
+                             "<strong class='nc-label nc--blue'>?</strong>",
+                             "<div class='nc-netshop-order-tooltip-content'><div class='nc-box nc--light nc-margin-5'>";
+
+                        foreach ($order->get_cart_discounts() as $discount) {
+                            echo "<div>",
+                                 ($discount['id']
+                                     ? "<a target='_blank' href='" . $discount_admin_prefix . ".cart.edit($discount[id])'>" .
+                                       htmlspecialchars($discount['name']) .
+                                       "</a>"
+                                     : htmlspecialchars($discount['name'])
+                                 ),
+                                 "&nbsp;— ",
+                                 $netshop->format_price($discount['sum']),
+                                 "</div>";
+                        }
+
+                        echo "</div></div></div>";
+                    }
+
+                    echo "</td>\n",
+                         "<td>",
+                            "<input type='text' name='cart_discount_sum' class='nc--wide'",
+                            " value='", $order->get_order_discount_sum(), "'>",
+                         "</td>\n",
+                         "</tr>\n";
+
+                    // Доставка --------------------------------------------------------
+                    echo "<tr>\n",
+                         "<td colspan='6' class='tpl-property-delivery-method'>",
+                         "<i class='nc-icon nc--refresh nc-netshop-order-delivery-estimate-refresh'" .
+                         " title='Пересчитать по правилам'></i>",
+                         "<span class='tpl-caption'>", NETCAT_MODULE_NETSHOP_CHECKOUT_DELIVERY_METHOD_SECTION, ":</span>\n",
+                         "<select name='f_DeliveryMethod'>\n",
+                         "<option value=''>" . NETCAT_MODULE_NETSHOP_DELIVERY_METHOD_NO_SERVICE_OPTION . "</option>\n";
+
+                    /** @var nc_netshop_delivery_method $method */
+                    foreach ($netshop->delivery->get_enabled_methods() as $method) {
+                        echo "<option value='{$method->get_id()}'" .
+                             ($f_DeliveryMethod == $method->get_id() ? " selected" : "") .
+                             ">" . htmlspecialchars($method->get('name')) . "</option>\n";
+                    }
+
+                    echo "</select>\n",
+                         "<span class='nc-netshop-order-delivery-estimate-error nc-text-red'></span>",
+                         "</td>\n",
+                         "<td>",
+                            "<input type='text' name='f_DeliveryCost' class='nc--wide'",
+                            " value='", $f_DeliveryCost, "'>",
+                         "</td>\n",
+                         "</tr>\n";
+
+                    // Оплата ----------------------------------------------------------
+                    echo "<tr>\n",
+                         "<td colspan='6' class='tpl-property-payment-method'>",
+                         "<i class='nc-icon nc--refresh nc-netshop-order-payment-estimate-refresh'" .
+                         " title='Пересчитать по правилам'></i>",
+                         "<span class='tpl-caption'>", NETCAT_MODULE_NETSHOP_CHECKOUT_PAYMENT_METHOD_SECTION, ":</span>\n",
+                         "<select name='f_PaymentMethod'>\n",
+                         "<option value=''>" . NETCAT_MODULE_NETSHOP_PAYMENT_METHOD_NO_PAYMENT_SYSTEM_OPTION . "</option>\n";
+
+                    /** @var nc_netshop_payment_method $method */
+                    foreach ($netshop->payment->get_enabled_methods() as $method) {
+                        echo "<option value='{$method->get_id()}'" .
+                             ($f_PaymentMethod == $method->get_id() ? " selected" : "") .
+                             ">" . htmlspecialchars($method->get('name')) . "</option>\n";
+                    }
+
+                    echo "</select>\n",
+                         "</td>\n",
+                         "<td>",
+                            "<input type='text' name='f_PaymentCost' class='nc--wide'",
+                            " value='", $f_PaymentCost, "'>",
+                         "</td>\n",
+                         "</tr>\n";
+
+                    // Общий итог ------------------------------------------------------
+                    echo "<tr class='nc--grey'>",
+                         "<td colspan='6'><strong>" . NETCAT_MODULE_NETSHOP_SUM . "</strong></td>",
+                         "<td>",
+                            "<input tabindex='-1' readonly type='text' name='totals' class='nc--wide'",
+                            " style='font-weight: bold'",
+                            " value='", $order->get_totals(), "'>",
+                         "</td>",
+                         "</tr>\n";
+
+                    ?>
+                </table>
+
+                <div class="nc-netshop-order-hint">
+                    Скидки, стоимость доставки и наценку за способ оплаты можно указать в процентах, например: «5%»
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <div class="nc-modal-dialog-footer">
+        <div class="nc-modal-dialog-footer-text">
+            <? if ($is_duplicate): ?>
+                <!-- Новый заказ, созданный на основе другого заказа -->
+                <? if ($netshop->mailer->is_template_enabled('customer', 'order')): ?>
+                    Клиенту будет выслано письмо о новом заказе.
+                <? else : ?>
+                    Письма клиентам о новых заказах отключены.
+                <? endif; ?>
+                <a href="<?= "$mailer_admin_prefix($catalogue,order)" ?>"
+                   target="_blank">Настройки</a>
+            <? else: ?>
+                <!-- Редактирование существующего заказа -->
+                <? /*
+                    Если есть изменения количества товаров, покажем уведомление
+                    об отправке письма (см. JS-функцию show_change_mail_notice())
+                */ ?>
+                <div class="nc-netshop-order-mail-change-items nc--hide">
+                    <? if ($netshop->mailer->is_template_enabled('customer', 'change_items')): ?>
+                        Клиенту будет выслано письмо об изменении состава заказа.
+                    <? else : ?>
+                        Письма клиентам об изменении состава заказа отключены.
+                    <? endif; ?>
+                    <a href="<?= "$mailer_admin_prefix($catalogue,change_items)" ?>"
+                       target="_blank">Настройки</a>
+                </div>
+            <? endif; ?>
+        </div>
+        <button data-action="submit">Сохранить</button>
+        <button data-action="close">Отмена</button>
+    </div>
+
+    <script>
+    (function() {
+        // --- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ---
+        // форматирование чисел (с округлением)
+        function fnum(num) { return Math.round(new Number(num) * 100) / 100; }
+
+        // извлечение части с ID ("[12][34]") из строки вида "items[12][34][Qty]"
+        function get_row_id(input) {
+            var input_item_match = input.name.match(/items(\[\d+\]\[\d+\])/);
+            return (input_item_match ? input_item_match[1] : null);
+        }
+
+        // вспомогательная функция для получения ширины невидимого на момент вычисления объекта
+        function get_width(obj){
+            var clone = obj.clone();
+            clone.css('visibility', 'hidden');
+            $nc('body').append(clone);
+            var width = clone.outerWidth();
+            clone.remove();
+            return width;
+        }
+
+        // вспомогательная функция для получения значений из формы в виде многомерного объекта
+        function get_form_values() {
+            // собираем значения формы в многомерный объект, эти значения могут учитываться
+            // при выдаче данных при поиске, расчёте стоимости оплаты и доставки
+            var form_values = {};
+            $nc('input, select, textarea', form).each(function () {
+                var parts = this.name.replace(/]/g, '').split('['),
+                    num_parts = parts.length,
+                    i,
+                    target = form_values;
+                for (i = 0; i < num_parts; i++) {
+                    var key = parts[i];
+                    if (i == num_parts - 1) {
+                        target[key] = $nc(this).val();
+                    }
+                    else if (typeof target[key] === 'undefined') {
+                        target[key] = {};
+                    }
+                    target = target[key];
+                }
+            });
+            return form_values;
+        }
+
+        // если 'percent' содержит '%', возвращает sum * percent / 100,
+        // иначе возвращает значение 'percent'
+        function percent(sum, percent) {
+            if (percent.match(/(\-?\d+\.?\d*)\s?%/)) // e.g. discount in percent
+            { return (sum * new Number(RegExp.$1) / 100); }
+            else { return percent; }
+        }
+
+        // --- РАСЧЁТ ВЫЧИСЛЯЕМЫХ ЗНАЧЕНИЙ В СПИСКЕ ЗАКАЗОВ ---
+
+        // обновление вычисляемых сумм в заказе
+        function calc(event) {
+            var row;
+            if (event && event.target) {
+                var input = event.target;
+                input.value = input.value
+                    .replace(',', '.')
+                    .replace(/(\.[^.]*)\..*$/, '$1')
+                    .replace(/[^\d%.]+/, '')
+                    .replace(/^\./, '0.')
+                    .replace(/^%/, '');
+                if (!input.name.match(/Discount|f_DeliveryCost|f_PaymentCost|cart_discount_sum/)) {
+                    input.value = input.value.replace('%', '');
+                }
+                row = get_row_id(input);
+            }
+
+            if (row) { // recalculate row
+                var original_price = form["items" + row + "[OriginalPrice]"].value,
+                    discount = percent(original_price, form["items" + row + "[ItemDiscount]"].value);
+
+                form["items" + row + "[ItemPrice]"].value = fnum(original_price - discount);
+                form["items" + row + "[TotalPrice]"].value = fnum(form["items" + row + "[ItemPrice]"].value * form["items" + row + "[Qty]"].value);
+            }
+
+            // get cart sum (without cart discounts) explicitly
+            var cart_sum = 0;
+            $nc('input[name^="items["][name$="][TotalPrice]"]', form) // inputs where name == 'items[ ... ][TotalPrice]'
+                .each(function() {
+                    cart_sum += new Number(this.value);
+                });
+            form.cart_totals.value = fnum(cart_sum);
+
+            // recalculate other sums
+
+            // minus cart discount, plus delivery and payment costs
+            var fields = {
+                //'cart_discount_sum': -1,
+                f_PaymentCost: 1,
+                f_DeliveryCost: 1
+            };
+
+            var totals = new Number(form.cart_totals.value),
+                cost_w_discount = totals - percent(totals, form.cart_discount_sum.value);
+
+            totals = cost_w_discount;
+
+            for (var i in fields) {
+                totals += fnum(fields[i] * percent(cost_w_discount, form[i].value));
+            }
+
+            form.totals.value = fnum(totals);
+        }
+
+        // скидки на товары: конвертирование процентов в абсолютное значение и форматирование результатов
+        function convert_item_discount(event) {
+            var row = get_row_id(event.target),
+                original_price = form["items" + row + "[OriginalPrice]"].value;
+            event.target.value = fnum(percent(original_price, form["items" + row + "[ItemDiscount]"].value));
+        }
+
+        // скидка на корзину: конвертирование процентов в абсолютное значение и форматирование результатов
+        function convert_cart_discount(event) {
+            var totals = new Number(form.cart_totals.value);
+            event.target.value = fnum(percent(totals, event.target.value));
+        }
+
+
+        // --- ИЗМЕНЕНИЕ СОСТАВА ЗАКАЗА ---
+
+        // удаление строк таблицы
+        function remove_row() {
+            var row = $nc(this).closest('tr'),
+                cells = row.find('td'),
+                item_name = row.find('.tpl-property-full-name').text(),
+                confirm_text = remove_item_confirm.replace('%s', item_name);
+
+            // переспросим
+            if (!confirm(confirm_text)) {
+                return false;
+            }
+
+            // запомним, что были изменения
+            if (row.find('input[name$="][Qty]"]').data('initialQty')) {
+                has_removed_items = true;
+            }
+
+            // немного анимации для наглядности (slideUp не будет работать на tr)
+            cells.wrapInner('<div />').find('div').slideUp(350, 'linear') // NB, multiple objects, simple handler here will be executed several times!
+                .promise().done(function () {
+                    cells.animate({ 'padding-top': 0, 'padding-bottom': 0 }, 150, 'linear').promise().done(
+                        function () {
+                            jQuery.modal.nc_modal_confirm = true; // пометить форму как изменённую
+                            row.remove(); // удалить строку из таблицы
+                            calc(); // пересчитать суммы
+                            show_change_mail_notice(); // обновить статус сообщения о письме об изменении заказа
+                        })
+                });
+
+        }
+
+        // добавление строки с информацией о товаре
+        function add_row(data, is_new) {
+            // TODO: review this for itemsets
+            if ($nc('input[name="items' + data.RowID + '[Qty]"]').length) {
+                return;
+            }
+
+            var template = $nc('.nc-netshop-order-items-row-template', form),
+                row = template.clone()
+                        .removeClass('nc-netshop-order-items-row-template');
+
+            // article, name and link
+            var article = $nc('.tpl-property-article', row);
+            if (data.Article) {
+                article.html(data.Article);
+            }
+            else {
+                article.remove();
+            }
+
+            row.find('.tpl-property-full-name').prop('href', data.URL).html(data.FullName);
+
+            // max qty
+            var stock_units = row.find('.tpl-property-stock-units');
+            if ('StockUnits' in data && data.StockUnits !== null && data.StockUnits !== '') {
+                stock_units.find('.tpl-value').html(
+                    data.StockUnits + ' ' + (data.Units || default_unit)
+                );
+            }
+            else {
+                stock_units.remove();
+            }
+
+            if (!('Qty' in data)) {
+                data.Qty = 1;
+            }
+
+            // inputs values
+            for (var key in data) {
+                row.find('input[name="items@[' + key + ']"]').val(data[key]);
+            }
+
+            // set proper 'name' attribute value for inputs
+            // and attach event handlers
+            row.find('input[name="items@[ItemDiscount]"]').on('blur', convert_item_discount);
+            row.find('input[name="items@[Qty]"]')
+                .data('initialQty', is_new ? 0 : data.Qty)
+                .on(input_event, show_change_mail_notice);
+
+            row.find('input[name^="items@"]').each(function() {
+                this.name = this.name.replace('@', data.RowID);
+
+                var $this = $nc(this);
+                if (!this.readonly) {
+                    $this.on(input_event, calc);
+                }
+            });
+
+            // discounts
+            var discount_tooltip = row.find('.nc-netshop-order-item-discount-info');
+            if (data.Discounts && data.Discounts.length) {
+                var container = discount_tooltip.find('.tpl-value');
+                for (var i = 0; i < data.Discounts.length; i++) {
+                    var discount_info = data.Discounts[i],
+                        info_div = $nc('<div />');
+
+                    if (discount_info.id && discount_info.id != 0) { // ???
+                        info_div.append($nc('<a />', {
+                            href: NETCAT_PATH + 'admin/#module.netshop.promotion.discount.item.edit(' + discount_info.id + ')',
+                            target: '_blank',
+                            html: discount_info.name
+                        }));
+                    }
+                    else {
+                        info_div.html(discount_info.name);
+                    }
+
+                    info_div.html(info_div.html() + '&nbsp;&mdash; ' + discount_info.sum);
+
+                    container.append(info_div);
+                }
+            }
+            else {
+                discount_tooltip.hide();
+            }
+
+            // click on ×
+            row.find('.nc--remove').click(remove_row);
+
+            // insert into DOM
+            row.insertBefore(template).show();
+        }
+
+        // показ оповещения о письме об изменении заказа
+        function show_change_mail_notice() {
+            var dialog = nc.ui.modal_dialog.get_current_dialog(),
+                has_changes = has_removed_items;
+
+            if (!dialog) { return; } // shouldn’t happen
+
+            if (!has_changes) {
+                $nc('input[name$="][Qty]"]', form).each(function() {
+                    var $this = $nc(this);
+                    if ($this.val() != $this.data('initialQty')) {
+                        has_changes = true;
+                        return false;
+                    }
+                });
+            }
+
+            var notice = dialog.find('.nc-netshop-order-mail-change-items');
+            has_changes ? notice.fadeIn() : notice.fadeOut();
+        }
+
+        // добавление товаров: формирование запроса на сервер
+        function autocomplete_make_request(request, response) {
+            // если новое значение отличается только на несущественный символ,
+            // запрос не делаем
+            var filtered_term = request.term.replace(/[ -\/:-@\[-`{-~]+/g, '');
+            if (autocomplete_previous_value == filtered_term) {
+                return;
+            }
+            autocomplete_previous_value = filtered_term;
+
+
+            if (autocomplete_last_request) {
+                autocomplete_last_request.abort();
+            }
+
+            autocomplete_last_request = $nc.ajax({
+                url: NETCAT_PATH + "modules/netshop/admin/itemindex/search.php",
+                method: "post",
+                dataType: "json",
+                data: {
+                    site_id: site_id,
+                    terms: request.term,
+                    limit: 100,
+                    order_data: get_form_values()
+                },
+                success: response
+            }).always(function() {
+                autocomplete_input.removeClass('nc--loading');
+            });
+
+            autocomplete_input.addClass('nc--loading');
+        }
+
+        // добавление товаров: отрисовка строки результата
+        function autocomplete_render_item(ul, item) {
+            ul.addClass("nc-netshop-order-item-search-results");
+
+            var a = $nc('<a />'),
+                stock_units = ('StockUnits' in item && item.StockUnits != null && item.StockUnits != '')
+                    ? item.StockUnits + ' ' + (item.Units || default_unit)
+                    : '',
+                name_span = $nc('<span class="tpl-block-name" />');
+
+            if (item.Article) {
+                name_span.append(search_span('article', item.Article));
+            }
+
+            name_span.append(search_span('full-name', item.FullName));
+
+            a.append(name_span)
+             .append(search_span('stock-units', stock_units))
+             .append(search_span('item-price', item.ItemPriceF));
+
+            return $nc("<li>").append(a).appendTo(ul);
+        }
+
+        // добавление товаров: вспомогательная функция для генерации разметки в результатах
+        function search_span(class_name, html) {
+            return $nc('<span />', {
+                'class': 'tpl-property-' + class_name,
+                html: html
+            });
+        }
+
+        // добавление товаров: инициализация autocomplete (поиск товаров для добавления в заказ)
+        function autocomplete_init() {
+            autocomplete_input.autocomplete({
+                minLength: 1,
+                source: autocomplete_make_request,
+                select: function(event, ui) {
+                    add_row(ui.item, true);
+                    $nc(form['items' + ui.item.RowID + '[Qty]'])
+                        .trigger(input_event) // recalculate
+                        .select();
+                }
+            }).autocomplete('instance')._renderItem = autocomplete_render_item;
+        }
+
+        // --- РАСЧЁТ СТОИМОСТИ ДОСТАВКИ ---
+        var delivery_request;
+        function delivery_estimate() {
+            var input = $nc('input[name=f_DeliveryCost]', form).addClass('nc--loading'),
+                error_span = $nc('.nc-netshop-order-delivery-estimate-error').html('');
+            if (delivery_request) {
+                delivery_request.abort();
+            }
+
+            delivery_request = $nc.ajax({
+                url: NETCAT_PATH + "modules/netshop/admin/?controller=order&action=get_delivery_estimate",
+                method: "post",
+                dataType: "json",
+                data: get_form_values()
+            }).always(function() {
+                input.removeClass('nc--loading');
+            }).success(function(data) {
+                if (!data) {
+                    return;
+                }
+                if (data.error) {
+                    error_span.html(data.error);
+                }
+                else {
+                    input.val(data.price);
+                    calc();
+                }
+            });
+        }
+
+        // --- РАСЧЁТ НАЦЕНКИ ЗА СПОСОБ ОПЛАТЫ ---
+        var payment_request;
+        function payment_estimate() {
+            var input = $nc('input[name=f_PaymentCost]', form).addClass('nc--loading');
+            if (payment_request) {
+                payment_request.abort();
+            }
+
+            payment_request = $nc.ajax({
+                url: NETCAT_PATH + "modules/netshop/admin/?controller=order&action=get_payment_extra_cost",
+                method: "post",
+                dataType: "json",
+                data: get_form_values()
+            }).always(function() {
+                input.removeClass('nc--loading');
+            }).success(function(data) {
+                if (data && 'price' in data) {
+                    input.val(data.price);
+                    calc();
+                }
+            });
+        }
+
+        // --- ИНИЦИАЛИЗАЦИЯ ---
+        <?
+            $items_data = array();
+            $properties = array(
+                'RowID', 'Article', 'FullName', 'URL',
+                'OriginalPrice',  'ItemDiscount', 'Discounts',
+                'ItemPrice', 'Qty', 'Units', 'TotalPrice'
+            );
+
+            if (!$netshop->get_setting('IgnoreStockUnitsValue')) {
+                $properties[] = 'StockUnits';
+            }
+
+            foreach ($order->get_items() as $item) {
+                $row = array();
+                foreach ($properties as $k) {
+                    $row[$k] = $item[$k];
+                }
+                $items_data[] = $row;
+            }
+
+        ?>
+
+        var form = document.getElementById('adminForm'),
+            input_event = ($nc('body').hasClass('nc-ie8') ? 'keyup change' : 'input'),
+            items_data = <?= json_encode($items_data) ?>,
+            default_unit = '<?= NETCAT_MODULE_NETSHOP_PCS ?>',
+            remove_item_confirm = '<?= htmlspecialchars(NETCAT_MODULE_NETSHOP_ORDER_REMOVE_ITEM_CONFIRM, ENT_QUOTES) ?>',
+            has_removed_items = false,
+            site_id = <?= $catalogue ?>,
+            autocomplete_input = $nc(form.new_item_search),
+            autocomplete_previous_value = '',
+            autocomplete_last_request;
+
+        for (var i in items_data) {
+            add_row(items_data[i]);
+        }
+
+        // Обработчики значений для полей скидки на заказ, стоимости доставки и оплаты
+        $nc('.nc-netshop-order-items input[type=text]')
+            .filter('[name=cart_discount_sum], [name=f_DeliveryCost], [name=f_PaymentCost]')
+            .blur(convert_cart_discount)
+            .on(input_event, calc);
+
+        // Инициализация полей «способ оплаты» и «способ доставки»
+        // (1) выравнивание select’ов для красоты
+        var delivery_caption = $nc('.tpl-property-delivery-method .tpl-caption'),
+            payment_caption = $nc('.tpl-property-payment-method .tpl-caption'),
+            max_caption_width = Math.max(get_width(delivery_caption), get_width(payment_caption)),
+            delivery_select = $nc('.tpl-property-delivery-method select'),
+            payment_select = $nc('.tpl-property-payment-method select'),
+            max_select_width = Math.min(400, Math.max(get_width(delivery_select), get_width(payment_select)));
+        delivery_caption.add(payment_caption).width(max_caption_width);
+        delivery_select.add(payment_select).width(max_select_width);
+
+        // (2) обработчики событий для способов оплаты и доставки
+        delivery_select.on('change', delivery_estimate);
+        payment_select.on('change', payment_estimate);
+        $nc('.nc-netshop-order-delivery-estimate-refresh', form).click(delivery_estimate);
+        $nc('.nc-netshop-order-payment-estimate-refresh', form).click(payment_estimate);
+
+        // Добавление товара — нужен jQuery UI Autocomplete widget
+        if (!$nc.ui || !$nc.ui.autocomplete) {
+            nc.load_script(NETCAT_PATH + "admin/js/jquery.ui.autocomplete.min.js")
+                .done(autocomplete_init);
+        }
+        else {
+            autocomplete_init();
+        }
+
+    })();
+    </script>
+
+    <? if ($is_duplicate): ?>
+    <script>
+    // Перезагрузка основного фрейма...
+    (function() {
+        var w = top.mainView.oIframe.contentWindow;
+        w.location = w.location.toString().replace(
+            /(order_id|message)=\d+/,
+            '&$1=<?= $message ?>'
+        );
+    })();
+    </script>
+    <? endif; ?>
+
+    <style>
+        .nc-netshop-order-tooltip {
+            cursor: default;
+            display: inline-block;
+            position: relative;
+            margin-left: 2px;
+        }
+
+        .nc-netshop-order-tooltip-content {
+            display: none;
+            position: absolute;
+            margin-left: -5px;
+            min-width: 300px;
+            z-index: 100;
+            white-space: normal;
+        }
+
+        .nc-netshop-order-tooltip:hover .nc-netshop-order-tooltip-content {
+            display: block;
+        }
+
+
+        .nc-netshop-order-items tr.nc-netshop-order-items-row td {
+            border-bottom: none !important;
+            padding-top: 0;
+        }
+
+        .nc-netshop-order-items tr.nc-netshop-order-items-row:nth-of-type(2) td {
+            padding-top: 20px;
+        }
+
+        .nc-netshop-order-items-add-row td {
+            padding-bottom: 20px;
+        }
+
+        .nc-netshop-order-items .nc--remove {
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+        }
+
+        .nc-netshop-order-items input[type='text'] {
+            width: 70px !important;
+            margin: 0 !important;
+        }
+
+        .nc-netshop-order-items td:last-child input[type='text'] {
+            width: 100% !important;
+        }
+
+        .nc-netshop-order-items input[readonly] {
+            border: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+        }
+
+        .nc-netshop-order-items .tpl-property-article,
+        .nc-netshop-order-item-search-results .tpl-property-article
+        {
+            color: #8D8D8D;
+            margin-right: 15px;
+        }
+
+        .nc-netshop-order-items .tpl-property-stock-units {
+            margin-top: 4px;
+            width: 100px;
+        }
+
+        .nc-netshop-order-items .tpl-property-qty:focus + .tpl-property-stock-units {
+            display: block;
+        }
+
+        /* min Jquery CSS elements for autocomplete (base styles should be already loaded) */
+        .nc-netshop-order-item-search-results {
+            z-index: 5000;
+            background-color: #fff;
+            border: 1px solid #1a87c2;
+            max-height: 200px;
+            overflow-y: scroll;
+        }
+
+        .nc-netshop-order-item-search-results a, .nc-netshop-order-item-search-results a:hover {
+            color: black;
+        }
+
+        .nc-netshop-order-item-search-results a > span {
+            display: inline-block;
+            vertical-align: top;
+            padding-right: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            box-sizing: border-box;
+        }
+
+        .nc-netshop-order-item-search-results .tpl-block-name {
+            width: 70%;
+        }
+
+        .nc-netshop-order-item-search-results .tpl-property-stock-units {
+            text-align: center;
+            width: 15%;
+        }
+
+        .nc-netshop-order-item-search-results .tpl-property-item-price {
+            text-align: right;
+            width: 15%;
+        }
+
+        .nc-netshop-order-item-search-results .ui-state-focus {
+            background: #e7ecf0 !important;
+            border: none !important;
+        }
+
+        .nc-netshop-order .tpl-property-delivery-method .tpl-caption,
+        .nc-netshop-order .tpl-property-payment-method .tpl-caption {
+            display: inline-block;
+            padding-right: 5px;
+        }
+
+        .nc-netshop-order select[name=f_DeliveryMethod] {
+            margin-right: 20px !important;
+        }
+
+        .nc-netshop-order .nc-icon.nc--refresh {
+            float: right;
+            cursor: pointer;
+            opacity: 0.3;
+            margin-top: 10px;
+            transition: opacity 0.3s;
+        }
+
+        .nc-netshop-order .nc-icon.nc--refresh:hover {
+            opacity: 1;
+        }
+
+        .nc-netshop-order-delivery-estimate-error {
+            display: inline-block;
+            font-style: italic;
+        }
+
+        .nc-netshop-order-hint {
+            margin: 10px 0;
+            font-size: 90%;
+            font-style: italic;
+        }
+
+        .dummy {} /* for some reason last line of the stylesheet is lost without this */
+
+    </style>
+
+</div>

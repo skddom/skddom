@@ -1,0 +1,249 @@
+<style type='text/css'>
+    .error {
+        color: red;
+    }
+
+    .order_head .order_body {
+        padding: 5px;
+    }
+
+    .order_body .left {
+        text-align: left;
+        width: 65%;
+        display: inline-block;
+    }
+
+    .order_body .right {
+        text-align: right;
+        width: 30%;
+        display: inline-block;
+    }
+
+    .order_head .num {
+        font-weight: normal;
+        font-size: 150%;
+    }
+
+    #qiwiPhoneD {
+        padding-left: 1px;
+        margin-left: 25px;
+        display: none;
+        padding: 5px;
+    }
+</style>
+<?
+
+$netshop = nc_netshop::get_instance();
+$order = $netshop->load_order($message);
+
+?>
+
+<div style='padding:5px;'>
+    <div class='order_head'>
+        <div class='num'>Заказ №<?= $f_RowID; ?></div>
+        <div>
+            от <?= $f_Created_day . " " . $months[(int)$f_Created_month] . " " . $f_Created_year; ?>
+            года
+        </div>
+    </div>
+
+    <br/>
+
+    <div class='order_body'>
+        <div style='background-color: #CCC; padding: 5px;'>
+            <div class='left' style='padding-bottom: 0px;'><b>Продукт / услуга</b>
+            </div>
+            <div class='right'><b>Стоимость</b></div>
+        </div>
+
+        <div style='padding: 5px;'>
+
+            <? foreach ($order->get_items() as $item): ?>
+                <div class='left'>
+                    <a href='<?= $item['URL'] ?>'><?= $item['Name'] ?></a>
+                </div>
+
+                <div class='right'>
+                    <?= "$item[Qty] &times; $item[ItemPriceF] = <b>$item[TotalPriceF]</b>" ?>
+                </div>
+
+            <? endforeach; ?>
+        </div>
+
+        <?
+
+        $cart_discounts = $order->get_cart_discounts();
+        if ($cart_discounts) {
+            $discounts = null;
+            foreach ($cart_discounts as $cart_discount) {
+                $discounts .= "
+                <div class='left'>{$cart_discount['name']}</div>
+                <div class='right'>
+                    <b>&minus;" . $netshop->format_price($cart_discount['sum']) . "</b>
+                </div>
+                ";
+            }
+            $res .= "<div style='background-color: #EEE; padding: 5px;'>$discounts</div>";
+        }
+
+        $res .= "
+        <div style='padding: 5px;'>
+            <div class='left'>
+                Общая стоимость:
+            </div>
+            <div class='right'>
+                <b>" . $order['TotalItemPriceF'] . "</b>
+            </div>
+        </div>
+        <br/>";
+
+        $res .= "
+        <div style='padding: 5px;'>";
+
+        if ($f_Address) {
+            $res .= "
+            <div>Адрес: $f_Address</div>
+            <br/>";
+        }
+
+        if ($order['DeliveryMethod']) {
+            try {
+                $delivery_method = new nc_netshop_delivery_method($order['DeliveryMethod']);
+                $res .= "<div><div class='left'>Способ доставки: {$delivery_method->get('name')}</div>";
+                $res .= "<div class='right'><b>" . $netshop->format_price($order['DeliveryCost']) . "</b></div>";
+                $res .= "</div>";
+            }
+            catch (nc_record_exception $e) {
+            }
+        }
+        else {
+            $res .= "<div>Способ доставки: не указан</div>";
+        }
+
+        if ($order['PaymentMethod']) {
+            try {
+                $payment_method = new nc_netshop_payment_method($order['PaymentMethod']);
+                $res .= "<div><div class='left'>Способ оплаты: {$payment_method->get('name')}</div>";
+                if ($order['PaymentCost']) {
+                    $res .= "<div class='right'>+<b>" . $netshop->format_price($order['PaymentCost']) . "</b></div>";
+                }
+                $res .= "</div>";
+            }
+            catch (nc_record_exception $e) {
+            }
+        }
+        else {
+            $res .= "<div>Способ оплаты: не указан</div>";
+        }
+
+        /*
+        $isPay = $nc_core->input->fetch_post('act') == 'payment';
+
+        if ($isPay) {
+            $res .= "</div>";
+            $paymentSystemId = $nc_core->input->fetch_post('PaymentSystem_ID');
+
+            $paymentSystem = nc_payment_factory::create($paymentSystemId);
+
+            $paymentSystem->set_params(array(
+                'Amount' => $shop->CartSum(),
+                'OrderId' => $message,
+            ));
+
+            $paySystems = nc_payment_factory::get_available_payment_systems($catalogue);
+            foreach ($paySystems as $paySystem) {
+                if ($paySystem['paymentSystem_ID'] == $f_PaymentMethod) {
+                    $res .= "Вы выбрали способ оплаты:  " . $paySystem['paymentSystem_Name'] . "<br>";
+                    break;
+                }
+            }
+
+            $res .= $paymentSystem->get_request_form();
+        }
+        else {
+            $paySystems = nc_payment_factory::get_available_payment_systems($catalogue);
+
+            if ($f_PaymentMethod && $f_PaymentMethod != 1011) {
+                $res .= "<br>Cпособ оплаты: ";
+                foreach ($paySystems as $paySystem) {
+                    if ($paySystem['paymentSystem_ID'] == $f_PaymentMethod) {
+                        $res .= $paySystem['paymentSystem_Name'];
+                        break;
+                    }
+                }
+            }
+            else {
+                $res .= "<br><div>Cпособ оплаты:</br>";
+
+                foreach ($paySystems as $paySystem) {
+                    $hash = md5($paySystem['paymentSystem_ID'] . $message . $nc_core->get_settings('SecretKey', 'system'));
+                    $res .= "<input type='radio' value='{$paySystem['paymentSystem_ID']}' name='f_PaymentMethod' id='nc_payment_system_{$paySystem['paymentSystem_ID']}' data-nc-hash='{$hash}'>
+                            <label for='nc_payment_system_{$paySystem['paymentSystem_ID']}'>{$paySystem['paymentSystem_Name']}</label>
+                            <br>";
+                }
+
+                $res .= "</div>";
+            }
+
+            $res .= "</div>";
+            ?>
+            <script>
+                $nc(function () {
+                    $nc('#pay').click(function () {
+                        var $paymentMethod = $nc('INPUT[name=f_PaymentMethod]:checked').eq(0);
+                        if ($paymentMethod.length) {
+                            var value = $paymentMethod.val();
+                            var hash = $paymentMethod.attr('data-nc-hash');
+
+                            $nc.post('', 'pm=' + value + '&order_id=<?= $message; ?>&hash=' + hash, function () {
+                                $nc('#nc_payment_form').find('INPUT[name=PaymentSystem_ID]').val(value);
+                                $nc('#nc_payment_form').submit();
+                            });
+                        }
+                    });
+                });
+            </script>
+        <?php
+        }
+        */
+
+        $res .= "</div>";
+
+        echo $res;
+        ?>
+
+        <div style='padding: 5px;'>
+            <div class='left'>
+                Сумма к оплате:
+            </div>
+            <div class='right'>
+                <b><?= $order['TotalPriceF'] ?></b>
+            </div>
+        </div>
+        <br/>
+
+    </div>
+    <br/>
+    <?php
+
+    if (!$isPay && (!$f_PaymentMethod || $f_PaymentMethod == 1011)) { ?>
+        <form action="" method="post" id="nc_payment_form">
+            <input type="hidden" name="act" value="payment"/>
+            <input type="hidden" name="Order_ID" value="<?= $message; ?>"/>
+            <input type="hidden" name="PaymentSystem_ID"/>
+        </form>
+        <div>
+            <input id='pay' type='button' value='Оплатить'>
+        </div>
+    <?php } ?>
+
+</div>
+
+<? if (is_object($perm) && $perm->isSupervisor() && $adm_message[0]) { ?>
+    <br/>
+    <div style="background-color: #EEE; border: 1px solid #999; padding: 5px;">
+        <b>Администратору:</b><br/><br/>Платежные
+        системы <?= join(", ", $adm_message) ?> будут доступны после ввода
+        корректных настроек
+    </div>
+<? } ?>

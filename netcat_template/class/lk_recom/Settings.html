@@ -1,0 +1,59 @@
+<?php
+$demo = $current_user['Login'] == "demo";
+
+if (isset($_POST['project'])) {
+    $_SESSION['project'] = intval($_POST['project']);
+}
+$project = $_SESSION['project'];
+
+if ($project>0 && $admin_mode) {
+    $ignore_parent = true;
+    $project = intval($project);
+    $query_where = "a.Project=$project";
+}
+if ($_POST['fill']) {
+    $rs = $db->get_results("select * from Message$classID where Sub_Class_ID=$cc and Parent_Message_ID=0",ARRAY_A);
+    foreach ($rs as $v) {
+        $v['Parent_Message_ID'] = $v['Message_ID'];
+        unset($v['Message_ID']);
+        unset($v['Image']);
+        unset($v['Created']);
+        unset($v['LastUpdated']);
+        $v['LastUser_ID'] = $AUTH_USER_ID;
+        $v['Project'] = $project;
+        foreach ($v as $key=>$val) $v[$key] = $db->escape($val);
+        $sql = "INSERT INTO Message$classID(`".join("`, `",array_keys($v))."`) VALUES('".join("', '",$v)."')";
+        $db->query($sql);
+    }
+}
+
+
+$lk = new CPersonal($project);
+$pro = new CProgress($lk, 340);
+if (!$admin_mode) {
+    if ($id>0 && $flag) {
+        switch ($flag) {
+            case "skip": $update = "Checked=0"; break;
+            case "done": $update = "Done=1"; break;
+        }
+        if ($update) $db->query("update Message$classID set $update
+            where Message_ID=".intval($id)." and Project=".intval($lk->lk));
+    }
+    $ignore_parent = true;
+    $query_where = "a.Project=".intval($lk->lk)." and Done<>1";
+    $query_join = "left join Message348 b ON (a.Phase=b.Sub_Class_ID and b.Project=a.Project)";
+    $query_select = "DATE_FORMAT(a.Date0,'%d.%m.%Y') as Date1, DATE_FORMAT(DATE_ADD(b.Date2, interval (a.Period*CEIL(ABS((TO_DAYS(CURDATE())-TO_DAYS(b.Date2))/a.Period))) DAY),'%d.%m.%Y') as Date0";
+    $query_limit = "0,100 having Date0>=CURDATE()";
+    $query_order = "DATE_ADD(b.Date2, interval (a.Period*CEIL(ABS((TO_DAYS(CURDATE())-TO_DAYS(b.Date2))/a.Period))) DAY)";
+    if ($set == "notify") {
+        $val = $_POST['notify'] == 1 ? "1" : "NULL";
+        $db->query("Update Message295 Set Send=$val where Message_ID=$lk->lk");
+    }
+} else {
+    $query_join = "left join Message348 b ON (a.Phase=b.Sub_Class_ID and b.Project=a.Project)";
+    $query_select = "DATE_FORMAT(a.Date0,'%d.%m.%Y') as Date1, DATE_FORMAT(DATE_ADD(b.Date2, interval (a.Period*CEIL(ABS((TO_DAYS(CURDATE())-TO_DAYS(b.Date2))/a.Period))) DAY),'%d.%m.%Y') as Date0";
+    $query_limit = "0,100 having Date0>=CURDATE()";
+    $query_order = "DATE_ADD(b.Date2, interval (a.Period*CEIL(ABS((TO_DAYS(CURDATE())-TO_DAYS(b.Date2))/a.Period))) DAY)";
+}
+
+?>

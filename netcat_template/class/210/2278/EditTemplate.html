@@ -1,0 +1,96 @@
+<?=( $warnText ? "<div class='warnText'>$warnText</div>" : NULL )?>
+<form name='adminForm' id='adminForm' class='nc-form' enctype='multipart/form-data' method='post' action='<?= $SUB_FOLDER ?><?= $HTTP_ROOT_PATH ?>message.php'>
+<div id='nc_moderate_form'>
+<div class='nc_clear'></div>
+<input name='admin_mode' type='hidden' value='<?= $admin_mode ?>' />
+<?= $nc_core->token->get_input() ?>
+<input name='catalogue' type='hidden' value='<?= $catalogue ?>' />
+<input name='cc' type='hidden' value='<?= $cc ?>' />
+<input name='sub' type='hidden' value='<?= $sub ?>' /><input name='message' type='hidden' value='<?= $message ?>' />
+<input name='posting' type='hidden' value='1' />
+<input name='curPos' type='hidden' value='<?= $curPos ?>' />
+<input name='f_Parent_Message_ID' type='hidden' value='<?= $f_Parent_Message_ID ?>' />
+<?= nc_form_moderate('change', $admin_mode, 0, $systemTableID, $current_cc, (isset($f_Checked) ? $f_Checked  : null), $f_Priority , $f_Keyword, $f_ncTitle, $f_ncKeywords, $f_ncDescription ) ?>
+</div>
+<div class='nc-field nc-field-type-int'><?= nc_int_field('house_id', "maxlength='12' size='12'", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class='nc-field nc-field-type-string'><?= nc_string_field('Name', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class='nc-field nc-field-type-string'><?= nc_string_field('SliderPath', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class='nc-field nc-field-type-string'><?= nc_string_field('MainImgPath', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class='nc-field nc-field-type-boolean'><?= nc_bool_field('Hit', "", ($class_id ? $class_id : $classID ), 1) ?></div>
+
+<div class='nc-field nc-field-type-boolean'><?= nc_bool_field('Cheap', "", ($class_id ? $class_id : $classID ), 1) ?></div>
+
+<div class='nc-field nc-field-type-boolean'><?= nc_bool_field('Special', "", ($class_id ? $class_id : $classID ), 1) ?></div>
+
+<div class='nc-field nc-field-type-boolean'><?= nc_bool_field('New', "", ($class_id ? $class_id : $classID ), 1) ?></div>
+
+
+
+
+<div class='nc-field nc-field-type-string'><?= nc_string_field('Square', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class='nc-field nc-field-type-string'><?= nc_string_field('h1', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class='nc-field nc-field-type-string'><?= nc_string_field('h2', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class='nc-field nc-field-type-string'><?= nc_string_field('Price1', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
+<div class='nc-field nc-field-type-int'><?= nc_int_field('Srok', "maxlength='12' size='12'", ($class_id ? $class_id : $classID), 1) ?></div>
+<div class='nc-field nc-field-type-text'><?= nc_text_field('Text', "", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<?= $f_Plan->settings->use_name("Название планировки");?>
+<div class='nc-field nc-field-type-multifile'><?= $f_Plan->form() ?></div>
+<div class='nc-field nc-field-type-multifile'><?= $f_PlanRazrez->form() ?></div>
+
+<div class='nc-field nc-field-type-string'><?= nc_string_field('InteriorPath', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
+
+
+<div class='nc-field nc-field-type-multiselect'><?= nc_multilist_field('Cities', "", "", ($class_id ? $class_id : $classID), 1) ?></div>
+
+
+
+
+</BR>
+</BR>
+</BR>
+</BR>
+_________________________________НЕ ИСПОЛЬЗУЮТСЯ____________________________________________________________________________________________________
+</BR>
+</BR>
+
+
+<div class='nc-field nc-field-type-string'><?= nc_string_field('Price', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
+
+
+<div class='nc-field nc-field-type-file'><?= nc_file_field('PlanDoma', "size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
+
+
+<div class='nc-field nc-field-type-text'><?= nc_text_field('banner', "", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class='nc-field nc-field-type-boolean'><?= nc_bool_field('Slider', "", ($class_id ? $class_id : $classID ), 1) ?></div>
+
+<div class='nc-field nc-field-type-file'><?= nc_file_field('Print', "size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class='nc-field nc-field-type-string'><?= nc_string_field('Design', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class='nc-field nc-field-type-string'><?= nc_string_field('Map', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class='nc-field nc-field-type-file'><?= nc_file_field('ResizeImg', "size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class='nc-field nc-field-type-file'><?= nc_file_field('ResizeImgMain', "size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class='nc-field nc-field-type-text'><?= nc_text_field('MobilePlan', "", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class='nc-field nc-field-type-text'><?= nc_text_field('Mobile1', "", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class='nc-field nc-field-type-text'><?= nc_text_field('Mobile2', "", ($class_id ? $class_id : $classID), 1) ?></div>
+
+
+
+
+<div class='nc-hint nc-hint-required-fields'><?= NETCAT_MODERATION_INFO_REQFIELDS ?></div>
+<?= nc_submit_button(NETCAT_MODERATION_BUTTON_CHANGE) ?>
+</form>

@@ -1,0 +1,39 @@
+<?php $result .= "           </ul>&nbsp;
+<style>
+.a.special.ui-link { background-size:contain; }
+.rhino-prev, .rhino-next {
+top: 245px;
+}
+.rhino-toggle {
+top: 445px;
+}
+.rhino-bullets {
+top: 453px;
+}
+#bxslider$sub {  }
+#bxslider$sub img { width:100%; }
+#bxslider$sub li {
+/*height: 604px;*/
+margin-bottom:10px;
+}
+
+.rhino-caption .special { text-indent: -99999px; }
+</style>
+<script>
+$(function(){
+  \$(document).ready(function(){
+    \$('.bxslider').bxSlider({
+        adaptiveHeight: true,
+        pager: false,
+        infiniteLoop: false
+    });
+    $(document).on('pagebeforeshow', 'catalog', function(){       
+      \$('.bxslider').bxSlider({
+          adaptiveHeight: true,
+          pager: false,
+          infiniteLoop: false
+      });
+    });
+  });
+});
+</script> "; ?>

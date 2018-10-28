@@ -1,0 +1,156 @@
+<!-- FormPrefix --><?= $f_AdminCommon; ?><?if (!$totRows):?>Доступ запрещен!<?else:?>
+
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+<div class="tpl-101">
+<?endif?><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><div class="vc_row wpb_row vc_row-fluid mt30">
+	<div class="wpb_column vc_column_container vc_col-sm-12">
+		<div class="vc_column-inner ">
+			<div class="wpb_wrapper">
+				<div class="wpb_text_column wpb_content_element ">
+					<div class="wpb_wrapper"><?
+$text1 = str_replace("%NAME", $f_User_Name, ($f_Text1?$f_Text1:$cc_settings['Text1']));
+$text1 = str_replace("%TITLE", $f_Title1, ($f_Text1?$f_Text1:$cc_settings['Text1']));
+if ($demo) echo "<h2>ДЕМО-ВЕРСИЯ ЛИЧНОГО КАБИНЕТА</h2>";
+if ($text1) echo $text1;
+else {
+
+?>
+<p><?if($f_Title1):?><?=$f_Title1?><?else:?>Уважаемый <?=$f_User_Name?><?endif?>, добро пожаловать в Ваш личный кабинет!</p>
+<p>Здесь Вы можете отслеживать все этапы строительства Вашего дома, 
+а также задавать вопросы Вашему личному менеджеру.</p>
+<? } 
+?>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div data-vc-full-width="true" data-vc-full-width-init="true" data-vc-stretch-content="true" class="tpl-101 vc_row wpb_row vc_row-fluid vc_row-no-padding" style="position: relative; left: -120px; box-sizing: border-box; width: 1440px;">
+	<div class="wpb_column vc_column_container vc_col-sm-12">
+		<div class="vc_column-inner ">
+			<div class="wpb_wrapper">
+				<div class="mgt-promo-block parallax white-text text-size-large darken mgt-promo-block-82145598531 wpb_content_element bgopacity" 
+                    data-style="width: 100%; height: 350px;" 
+                    style="background-image: url(width: 100%; height: 350px;">
+					<div class="mgt-promo-block-content">
+
+
+<div class="text container"><?= $f_AdminButtons; 
+
+for ($i=3; $i<10; $i++) {
+    $f = "f_Person$i";
+    $f = $$f;
+    if ($f) $persons++;
+}
+
+?>
+<div class="row">
+<div class="col-md-6 col-xs-12">
+<?if ($f_Manager || $f_Prorab || $persons):?>
+<div class="wpb_wrapper"><div class="mgt-header-block clearfix text-left text-black wpb_content_element  mgt-header-block-style-1 mgt-header-texttransform-header ">
+    <h2 class="mgt-header-block-title robototitle">Над Вашим проектом работают:</h2>
+    <div class="mgt-header-line"></div>
+</div></div>
+
+<?if ($f_Manager):?>
+    <div class="person ">
+        <div class="row">
+            <div class="col-md-3"><div class="person-photo " style="background-image:url(<?=nc_file_path(294, $f_Manager, 1747)?>);"></div></div>
+            <div class="person-info col-md-9">
+                <h4 class="color2"><span class="m-job">Менеджер проекта</span> <span class="m-name"><?=$f_Manager_Name?></span></h4>
+            </div>
+        </div>
+       
+        <p>Вы можете связаться с менеджером по телефону, либо отправить сообщение через форму обратной связи</p>
+        <div class="row">
+            <div class="person-phone1 col-md-5">
+                <em>Контактные телефоны:</em>
+                <?=$f_Manager_Phone?>
+            </div>
+            <div class="person-feedback1 col-md-7" data-person="Manager">
+                <button data-show='#parent_popup_form_detail_phone' data-href='.js-callback-wrap' class='js-openPopup btn' href="/kabinet/messages/add_messages.html?f_ToPerson=<?=$f_Manager?>">Отправить сообщение менеджеру</button>
+            </div>
+        </div>
+    </div>
+<?endif?>
+<?if ($f_Prorab):?>
+    <div class="person">
+        <div class="person-photo" style="background-image:url(<?=nc_file_path(294, $f_Prorab, 1747)?>);"></div>
+        <div class="person-info">
+            <h4 class="color2">Прораб - <?=$f_Prorab_Name?></h4>
+            <p>Вы можете связаться с прорабом по телефону, либо отправить сообщение через форму обратной связи</p>
+            <div class="person-phone<?=$template==101?1:""?>">
+                <em>Контактные телефоны:</em>
+                <?=$f_Prorab_Phone?>
+            </div>
+            <div class="person-feedback<?=$template==101?1:""?>" data-person="Prorab">
+                <button data-show='#parent_popup_form_detail_phone' data-href='.js-callback-wrap' class='js-openPopup btn' href="/kabinet/messages/add_messages.html?f_ToPerson=<?=$f_Prorab?>">Отправить сообщение прорабу</button>
+            </div>
+        </div>
+    </div>
+<?endif?>
+<?
+for ($i=3; $i<10; $i++) {
+    $f = "f_Person$i";
+    $f = $$f;
+    if (!$f) continue;
+    $person = $db->get_row("select * from Message294 where Message_ID=$f", ARRAY_A);
+    ?>
+    <div class="person">
+        <div class="person-photo" style="background-image:url(<?=nc_file_path(294, $f, 1747)?>);"></div>
+        <div class="person-info">
+            <h4 class="color2"><?=$person['Job']?> - <?=$person['Name']?></h4>
+            <p>Вы можете связаться с прорабом по телефону, либо отправить сообщение через форму обратной связи</p>
+            <div class="person-phone<?=$template==101?1:""?>">
+                <em>Контактные телефоны:</em>
+                <?=$person['Phone']?>
+            </div>
+            <div class="person-feedback<?=$template==101?1:""?>" data-person="<?=$f?>">
+                <button data-show='#parent_popup_form_detail_phone' data-href='.js-callback-wrap' class='js-openPopup btn' href="/kabinet/messages/add_messages.html?f_ToPerson=<?=$f?>">Отправить сообщение</button>
+            </div>
+        </div>
+    </div>    
+    <?
+}
+?>
+<?endif?>
+
+</div>
+<div class="col-md-6 col-xs-12">
+
+<div class="wpb_wrapper"><div class="mgt-header-block clearfix text-left text-black wpb_content_element  mgt-header-block-style-1 mgt-header-texttransform-header ">
+    <h2 class="mgt-header-block-title robototitle">Ваши персональные данные:</h2>
+    <div class="mgt-header-line"></div>
+</div></div>
+
+<div class="personal-data">
+    <div class="personal-info display_inline-block vertical_align-top">
+        <p><span class="color2">Ф.И.О.:</span> <?=$current_user['ForumName']?></p>
+        <p><span class="color2">Email.:</span> <?=$current_user['Email']?></p>        
+    </div>
+    <div class="personal-notice display_inline-block vertical_align-top color2">
+        <?=$cc_settings['Text2']?>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div><div class="vc_row-full-width"></div><!-- /RecordTemplate -->
+
+<!-- FormSuffix --><br></div>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+<script src="/images/design/js/lightbox.js"></script>
+<script src="/images/design/js/lk.js"></script><!-- /FormSuffix -->

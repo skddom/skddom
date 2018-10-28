@@ -1,0 +1,4 @@
+<?
+
+    ob_end_clean();
+?><input id='myfav' type='hidden' value='<?=$db->get_var("select count(Message_ID) from Message$classID where (User='$f_User' or CookieID='$f_CookieID')")?>'><a data-fav="<?=$message?>" href="/favorites/" class="btn add_to_favorite in-fav"><i class="svg-icon svg-favorite"></i>В избранном</a>

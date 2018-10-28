@@ -1,0 +1,19 @@
+<?= $f_AdminButtons; ?>
+<div class="tpl-component-offers">
+    <div class="tpl-block-full">
+      <h3><?= $f_Title; ?></h3>
+      <div class="tpl-property-html"><?= $f_Html ?></div>
+      <div class="tpl-property-description">
+        <img class='tpl-property-image' src='<?=$f_Image?>' alt='<?= $f_Title ?>' />
+        <?= $f_Description; ?>
+      </div>
+      <div class="tpl-block-prices">
+        <div class="tpl-property-price">
+          <span class="tpl-value"><?= $f_Price ?>&nbsp;<span class="rouble">Р</span></span>
+        </div>
+        <div class="tpl-property-old-price">
+          <span class="tpl-value"><?= $f_OldPrice ?>&nbsp;<span class="rouble">Р</span></span>
+        </div>
+      </div>
+    </div>
+</div>

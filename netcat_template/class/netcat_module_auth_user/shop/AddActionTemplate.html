@@ -1,0 +1,54 @@
+<?
+
+if ($_FILES['f_ForumAvatar']['size'] != 0 && $_FILES['f_ForumAvatar']['type'] != '') {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'", "\$data[CustomSettings]"));
+
+    require_once($nc_core->INCLUDE_FOLDER . "classes/nc_imagetransform.class.php");
+
+    $photo_path = $DOCUMENT_ROOT . nc_file_path('User', $message, 'ForumAvatar');
+    if ($photo_path) {
+        nc_ImageTransform::imgResize($photo_path, $photo_path, $CustomSettings['avatar_height'] ? $CustomSettings['avatar_height'] : 32, $CustomSettings['avatar_width'] ? $CustomSettings['avatar_width'] : 32);
+    }
+}
+
+
+$settings = $nc_core->get_settings('', 'auth');
+$mailer = new CMIMEMail();
+
+// подтверждение через почту
+if ($settings['confirm']) {
+    $mailinfo = $nc_auth->get_confirm_mail($message);
+    $mail_body = nc_mail_attachment_attach($mailer, $mailinfo['body'], 'auth_confirm_' . $catalogue);
+    $mailer->mailbody(strip_tags($mail_body), $mailinfo['html'] ? $mail_body : "");
+    try {
+        $mailer->send($f_Email, $system_env['SpamFromEmail'], $system_env['SpamFromEmail'], $mailinfo['subject'], $system_env['SpamFromName']);
+    } catch (Exception $e) {
+    }
+
+    echo "На Ваш почтовый ящик было выслано письмо со ссылкой для подтверждения регистрации.<br/>";
+}
+
+// премодерация администратором
+if ($settings['premoderation']) {
+    echo "Ваша учетная запись будет активирована после проверки администратора.<br/>";
+}
+
+// подтверждение не нужно
+if (!$settings['premoderation'] && !$settings['confirm']) {
+    echo "Регистрация прошла успешно.<br/>";
+    // авторизация после регистрации
+    if ($settings['autoauthorize']) {
+        $nc_core->user->authorize_by_id($message);
+        echo "Сейчас Вы будете перемещены на главную страницу.<br/>";
+        echo "<meta http-equiv='refresh' content='2;url=http://" . $_SERVER['HTTP_HOST'] . "/' />";
+    }
+}
+
+// оповещение администратора
+if ($settings['notify_admin']) {
+    $mailinfo = $nc_auth->get_notify_admin_mail($message);
+    $mail_body = nc_mail_attachment_attach($mailer, $mailinfo['body'], 'auth_notify_' . $catalogue);
+    $mailer->mailbody(strip_tags($mail_body), $mailinfo['html'] ? $mail_body : "");
+    $mailer->send($system_env['SpamFromEmail'], $system_env['SpamFromEmail'], $system_env['SpamFromEmail'], $mailinfo['subject'], $system_env['SpamFromName']);;
+}
+?>

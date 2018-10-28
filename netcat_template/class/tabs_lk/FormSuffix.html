@@ -1,0 +1,18 @@
+</ul><div id="result"><?=$tab?></div>
+<script>
+$(function(){
+    $(document).on({
+        click: function(){
+            $this=$(this);
+            $this.closest("ul").find("a").removeClass("active");
+            $this.addClass("active");
+            
+            $("#result").load($(this).data("load"),function(){
+                top.location.href=$this.attr("href");
+                eval($this.data("eval"));
+            });
+            return false;
+        }
+    },"[data-load]");
+});
+</script>

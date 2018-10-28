@@ -1,0 +1,38 @@
+<?
+function getExtension000($filename) {
+    $path_info = pathinfo($filename);
+    return $path_info['extension'];
+}
+function formatSize000($size) { 
+  $filesizename = array( " Bytes", " KB", " MB", " GB", " TB", " PB", " EB", " ZB", " YB" ); 
+  return $size ? 
+    round($size/pow(1024, ($i = floor(log($size, 1024)))), 2) . $filesizename[$i] :
+    '0 ' . $filesizename[0]; 
+}
+if ($cc_settings['PDF']) {
+    $file = $_SERVER['DOCUMENT_ROOT'].$cc_settings['PDF'];
+    $size = filesize($file);
+    $ext = strtoupper(getExtension000($cc_settings['PDF']));
+    $pdf = "<a class='pdf' href='".$cc_settings['PDF']."' target='_blank'>Каталог проектов CKD<span>".formatSize000($size).",".$ext."</span></a>";
+    $cc_settings['Text2'] = str_replace("<!-- pdf -->",$pdf,$cc_settings['Text2']);
+}
+if ($curPos==0) {
+?><div class="vc_row wpb_row vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner "><div class="wpb_wrapper">
+	<div class="wpb_text_column wpb_content_element ">
+		<div class="wpb_wrapper">
+			<?
+           echo $cc_settings['Text'];
+           ?>
+
+		</div>
+	</div>
+</div></div></div></div><?
+}
+?><div class="vc_row wpb_row vc_row-fluid vc_custom_1438333348452 by-area">
+    <div class="projects wpb_column vc_column_container vc_col-sm-12">
+        <div class="vc_column-inner ">
+            <div class="wpb_wrapper">
+		   
+          
+	
+            	<div class="portfolio-list portfolio-columns-4 portfolio-grid-layout-7  portfolio-with-spaces clearfix" id="portfolio-list">

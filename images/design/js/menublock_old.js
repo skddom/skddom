@@ -1,0 +1,13 @@
+document.write('		<div class="sale_block">');
+document.write('			<div class="title"><a style="text-decoration:none;color:#fff;" href="/catalog/specials/">Акции и скидки</a><span></span></div>');
+document.write('		</div>');
+document.write('		');
+document.write('		<div class="contact">');
+document.write('			<div class="phone1"><span class="phone"><img src="/images/design/images/phone.png" alt="(495) 983-00-39" /></span><span class="free1">без выходных</span></div>');
+document.write('			<div class="minifeedback">');
+document.write('				<a href="/catalog/zakaz/" class="see"><span id="newii2"></span><span>Оставить заявку на показ</span></a>');
+document.write('				<a href="/otvet/feedback/" class="qusn"><span id="newii-q"></span><span>Задать вопрос</span></a>');
+document.write('			</div>');
+document.write('		</div>');
+document.write('		');
+document.write('		<a href="/premiya-nacionalnaya-marka-kachestva/"><img class="premi-logo" src="/netcat_files/premi_logo.jpg" alt="" title="" /></a>');

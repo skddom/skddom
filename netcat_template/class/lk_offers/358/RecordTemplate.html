@@ -1,0 +1,11 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+<?
+if (!$f_Image) {
+    $f_Image = $f_Image_preview_url = nc_file_path($classID, $f_Parent_Message_ID, "Image", false, true);
+}
+if ($project) $active = in_array($f_Phase, $pro->completed);
+else $active=true;
+?><div style="<?if(!$active):?>opacity:0.5;<?endif?>text-align:center; height: 200px;  color: #fff; text-shadow: 1px 1px 1px rgba(0,0,0,0.8); font-size: 20px; line-height: 30px; display: inline-block; width: 260px; margin: 10px 35px 10px 25px; background: url(<?=$f_Image_preview_url?>); background-size: cover;"><?= $f_AdminButtons; ?><?=$f_Name?>
+
+</div>
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

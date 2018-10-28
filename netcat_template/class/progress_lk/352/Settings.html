@@ -1,0 +1,148 @@
+<?
+
+$ignore_sub = $ignore_cc=true;
+if ($_POST['project']) {
+    $_SESSION['project'] = intval($_POST['project']);
+}
+$project = $_SESSION['project'];
+
+
+$lk = new CPersonal($project);
+$pro = new CProgress($lk, 340);
+foreach($pro->rs as $v) {
+    if ($v['ObjectID']>0) continue;
+    $insert = "INSERT INTO Message".CProgress::IB."(Subdivision_ID, Sub_Class_ID,Checked,Project) VALUES({$v['sub']}, {$v['cc']}, 1, {$pro->lk->lk})\n";
+    $db->query($insert);
+    $cnt++;
+}
+if ($cnt) $pro = new CProgress($lk, 340);
+
+
+
+if ($_POST['calc_dates'] && $project) {
+    
+  foreach($pro->rs as $k=>$v) {
+      eval($v['CustomSettings']);
+      $v['CustomSettings']  = $CustomSettings;
+      //echo "<pre>".print_r($v,1)."</pre>";
+      if ($lk->data['Square']>0) $CustomSettings['Days'] = round($CustomSettings['Days'] * ($lk->data['Square']/200));
+      $item = array();
+      
+      if ($v['StatusID'] > 2 || !$v['Auto']) {
+          
+          $time = $v['Time2'] /*+ 86400*$CustomSettings['Days']*/; 
+          continue;
+      }
+      
+      if ($CustomSettings['From']>0) {
+          $StartFrom = $pro->rs[$CustomSettings['From']-1];
+          if ($toChange[$StartFrom['ObjectID']]) $StartFrom = $toChange[$StartFrom['ObjectID']];
+      } else $StartFrom = false;
+      if ($k==0) {
+          
+           $time = $v['Time1']?$v['Time1']:time();
+  
+           if (!$v['Time1']) $v['Time1'] = $item['Time1'] = $time;
+           else $item['Time1'] = $time;
+           
+           if ($v['StatusID']<=2) {
+                $v['Time2'] = $time + 86400*$CustomSettings['Days'];
+                $item['Time2'] = $v['Time2'];
+                //$time += 86400*$CustomSettings['Delay'];
+           } elseif(!$v['Time2']) {
+               $time = $v['Time2'] = $time + $time + 86400*$CustomSettings['Days'];
+           } else $time = $item['Time2'] = $v['Time2'];
+           $time = $item['Time2'];
+           $debug = "$item[Time1] => $item[Time2] => $time<br>";
+      } else {
+          
+           if ($v['StatusID'] <= 0) {
+                if ($StartFrom) $v['Time1'] = $item['Time1'] = $StartFrom['Time2'];
+                else $v['Time1'] = $item['Time1'] = $time;
+                $item['Time2'] = $time + 86400*$CustomSettings['Days'];
+                $time = $time + 86400*$CustomSettings['Days'] + 86400*$CustomSettings['Delay'];
+           }elseif($v['StatusID'] <= 2) {
+                if (!$v['Time1'] || 1) {
+                  if ($StartFrom) $v['Time1'] = $StartFrom['Time2']; 
+                  else $v['Time1'] = $time;
+                  $item['Time1'] = $time;
+                  
+                }
+                $item['Time1'] = $v['Time1'] +=  86400*$CustomSettings['Delay'];
+                //$debug .= "StartFrom=$StartFrom<br>";
+                $v['Time2'] = $v['Time1'] + 86400*$CustomSettings['Days'];
+                $time = $item['Time2'] = $v['Time2'];
+                //$time += 86400*$CustomSettings['Delay'];
+           } else {
+                $time = $v['Time2'] + 86400*$CustomSettings['Delay'];
+           }
+           if ($CustomSettings['Skip1'] && $CustomSettings['Skip2']) {
+               $start = (int)date("m", $item['Time1']);
+               $end = (int)date("m", $item['Time2']);
+               $debug .= "$start-$end ({$CustomSettings['Skip1']}-{$CustomSettings['Skip2']})...<br>";
+               if ( ($start>=$CustomSettings['Skip1'] && $start>=$CustomgSettings['Skip2'])
+                   ||
+                    ($end>=$CustomSettings['Skip1'] && $end>=$CustomgSettings['Skip2']) 
+               ) {
+               $month = (int)$CustomSettings['Skip2']+1;
+               $year = ( $CustomSettings['Skip1']>$CustomSettings['Skip2'] ? (date("Y",$item['Time1'])+1) : date("Y",$item['Time1']) );
+              
+                   $item['Time1'] = mktime(0, 0, 0, $month, 1, $year);
+                   $item['Time2'] = $item['Time1'] + 86400*$CustomSettings['Days'];
+                   $time = $item['Time2'];
+               }
+           }
+          $pro->rs[$k] = array_merge($v, $item);
+      }
+      $debug.= $v['Name'].": ".$v['Status'] ."[".date("d.m.Y",$item['Time1'])."-".date("d.m.Y",$item['Time2'])."]<br>";
+      $toChange[$v['ObjectID']] = $item;
+      $option = $v['Option'];
+      $sub = $v['sub'];
+  }
+  //$debug =  "<pre>". print_r($pro->rs,1)."</pre>";
+  foreach($toChange as $id=>$v) {
+      $forSql="";
+      foreach ($v as $key=>$val) {
+          $forSql .= (strlen($forSql)?",":"") . "`".str_replace("Time","Date",$key)."`= FROM_UNIXTIME($val)";
+      }
+      $update = "update Message".CProgress::IB." set $forSql where Message_ID=$id\n";
+      $db->query($update);
+  }
+  $pro =  new CProgress($lk, 340);
+  foreach($pro->tree as $option=>$v) {
+     /* статус этапа
+        - выполнен, если все подэтапы выполнены
+        - выполняется, если хоть один выполняется
+        - иначе - в ожидании
+     */
+     $end = false;
+     $stat = array();
+     foreach ($v['ITEMS'] as $item) {
+         $stat[$item['StatusID']]++;
+         $end = $item['Time2'];
+     }
+     if ($stat[3] == count($v['ITEMS'])) $status = 3;
+     elseif ($stat[2]>0) $status = 2;
+     else $status = 1;
+     $cc0 = $db->get_var("select Sub_Class_ID from Sub_Class where Subdivision_ID={$v['Subdivision_ID']} and Priority=0");
+     $object = $db->get_var("select Message_ID from Message".CProgress::IB." where Sub_Class_ID=$cc0 and Project=".$pro->lk->lk);
+     if (!$object) {
+        $db->query("insert into Message".CProgress::IB."(Subdivision_ID, Sub_Class_ID, Checked, Project, Date1, Date2, Status, Auto) VALUES({$v['Subdivision_ID']}, $cc0, 1, {$pro->lk->lk}, 
+  FROM_UNIXTIME(".$v['ITEMS'][0]['Time1']."), FROM_UNIXTIME($end),$status, 1)");
+        $object = $db->insert_id;
+     } else {
+         $db->last_error=false;
+         $db->query("update Message".CProgress::IB." set Status=$status, Date1=FROM_UNIXTIME(".$v['ITEMS'][0]['Time1']."), Date2=FROM_UNIXTIME(".$v['ITEMS'][count($v['ITEMS'])-1]['Time2'].") where Message_ID=$object");
+         
+     }
+     //echo "$option; $end; $status; $cc0; $object\n";
+  
+  }
+}
+
+
+$query_where = "cc.Priority>0 and a.Project=".intval($project);
+$query_select = "sub.Subdivision_Name as `Option`, cc.Sub_Class_Name as `Name`, 
+cc.CustomSettings, sub.Subdivision_ID as s1, a.Sub_Class_ID as c1,
+FROM_UNIXTIME(Date1) as Time1, FROM_UNIXTIME(Date2) as Time2";
+?>

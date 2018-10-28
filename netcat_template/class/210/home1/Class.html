@@ -1,0 +1,69 @@
+<!-- FormPrefix -->				<!--LAST PROJECTS START-->
+				<div class="vc_row wpb_row vc_row-fluid vc_custom_1459335800844" data-vc-full-width="true"
+				 data-vc-full-width-init="false">
+					<div class="wpb_column vc_column_container vc_col-sm-12">
+						<div class="vc_column-inner">
+							<div class="wpb_wrapper">
+								<div class="mgt-header-block clearfix text-left text-white wpb_content_element mgt-header-block-style-1 mgt-header-texttransform-header">
+									<p style="    font-size: 24px;" class="h2_block mgt-header-block-title"><?=$cc_env['Sub_Class_Name']?></p>
+									<div class="mgt-header-line"></div>
+									<p><?=$cc_settings['Name']?></p>
+								</div>
+								<div class="portfolio-list portfolio-columns-4 portfolio-grid-layout-3 clearfix"
+								 id="portfolio-list<?=$cc?>"><?
+if ($cc_settings['Video']) {
+    $cnt++;
+
+    $img = $cc_settings['VideoImage']?$cc_settings['VideoImage']['resultpath']:"/netcat_template/template/thebuilt/images/example/last_projects_1.jpg";
+   
+									?><div class="portfolio-item-block portfolio-item-animation-6 mix building"
+									 data-item="<?=$cnt?>" data-name="">
+										<div class="portfolio-item-block-inside">
+											<?=str_replace("#src#",$img,$cc_settings['Video'])?>
+										</div>
+									</div><?
+}                                 
+                                 ?>
+                                 <!-- /FormPrefix -->
+
+<!-- RecordTemplate --><? 
+$cnt++;
+if ($f_SliderPath && $f_MainImgPath) $f_MainImg = (strpos($f_MainImgPath,"files")===false?$f_SliderPath:null).($f_MainImgPath);
+//if (strpos($f_MainImg,"files/")===false) $f_MainImg = $f_SliderPath.$f_MainImg;
+$classes = array("building","consulting","building office","building","consulting");
+if ($f_Novinka) $f_MainImg = $f_Novinka;
+								?><div class="portfolio-item-block portfolio-item-animation-6 mix <?=$classes[$cnt]?>"
+									 data-item="<?=$f_RowNum?>" data-name="<?=$f_Name?>">
+										<div class="portfolio-item-block-inside">
+											<a href="<?=$fullLink?>" target="_self" rel="" title="<?=$f_Name?>">
+												<div class="portfolio-item-image" data-style="background-image: url(<?=$f_MainImg?>);"></div>
+												<div class="portfolio-item-bg"></div>
+												<div class="info">
+													<div class="hh4 title">CKD-<?=$f_house_id?></div>
+													<div class="project-description">Площадь <?=$f_Square?> м<sup>2</sup><br>Цена <?=$f_Price?> руб.</div>
+													<div class="hvr-icon-wobble-horizontal mgt-button mgt-style-textwhite mgt-size-normal mgt-align-left mgt-display-newline mgt-text-size-small mgt-button-icon-position-right mgt-text-transform-uppercase">УЗНАТЬ БОЛЬШЕ<i class="fa fa-arrow-right"></i></div>
+												</div>
+											</a>
+										</div>
+									</div><!-- /RecordTemplate -->
+
+<!-- FormSuffix -->								</div>
+								<script>
+									(function($)
+									{
+										$(document).ready(function()
+										{
+											$("#portfolio-list<?=$cc?>").mixItUp(
+											{
+												effects: ["fade", "scale"],
+												easing: "snap"
+											});
+										});
+									})(jQuery);
+								</script>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="vc_row-full-width"></div>
+				<!--LAST PROJECTS END--><!-- /FormSuffix -->

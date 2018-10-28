@@ -1,0 +1,11 @@
+<?php
+$ignore_all=true;
+global $pro;
+if (!$pro) {
+    $lk = new CPersonal();
+    $pro = new CProgress($lk, 340);
+}
+$option = $option?$option:$current_sub['Subdivision_Name'];
+$nc_data = $pro->tree[$option]['ITEMS'];
+
+?>

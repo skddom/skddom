@@ -1,0 +1,31 @@
+<?php
+$SES = array (
+  'e698afc025c6ece567c1742c9780cdfc' => 
+  array (
+    'cfg' => 
+    array (
+      'charsets' => 'cp1251 utf8 latin1',
+      'lang' => 'ru',
+      'time_web' => '30',
+      'time_cron' => '600',
+      'backup_path' => 'backup/',
+      'backup_url' => 'backup/',
+      'only_create' => 'MRG_MyISAM MERGE HEAP MEMORY',
+      'globstat' => 0,
+      'my_host' => 'u335095.mysql.masterhost.ru',
+      'my_port' => 3306,
+      'my_user' => 'u335095',
+      'my_pass' => 'beric4tomanic',
+      'my_comp' => 0,
+      'my_db' => '',
+      'auth' => 'mysql cfg',
+      'user' => '',
+      'pass' => '',
+      'confirm' => '6',
+      'exitURL' => './',
+    ),
+    'time' => 1412446105,
+    'lng' => 'ru',
+  ),
+);
+?>

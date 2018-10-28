@@ -1,0 +1,35 @@
+<?
+if ($f_Type==2) {
+  switch ($cc_settings['important']) {
+    case 'auth':
+      if (!$AUTH_USER_ID) $disabled[] = 2;
+    break;
+    case 'moders':
+    case 'admins':
+      if ( !( is_object($perm) && $perm->isSubClass($cc, MASK_MODERATE | MASK_ADMIN) ) ) $disabled[] = 2;
+    break;
+  }
+}
+if ($f_Type==3) {
+  switch ($cc_settings['advertisement']) {
+    case 'auth':
+      if (!$AUTH_USER_ID) $f_Type = 1;
+    break;
+    case 'moders':
+    case 'admins':
+      if ( !( is_object($perm) && $perm->isSubClass($cc, MASK_MODERATE | MASK_ADMIN) ) ) $f_Type = 1;
+    break;
+  }
+}
+if ($f_Closed) {
+  switch ($cc_settings['closed']) {
+    case 'auth':
+      if (!$AUTH_USER_ID) $f_Closed = 0;
+    break;
+    case 'moders':
+    case 'admins':
+      if ( !( is_object($perm) && $perm->isSubClass($cc, MASK_MODERATE | MASK_ADMIN) ) ) $f_Closed = 0;
+    break;
+  }
+}
+?>

@@ -1,0 +1,126 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+<?php $result .= ' ';
+
+
+                    $slides = array();
+
+
+$f_Price2 = $f_Price1;
+if (is_array($br->projects[$f_RowID])) extract($br->projects[$f_RowID]);
+unset($br->projects[$f_RowID]['f_Price1']);
+$t=explode("CKD",$f_Name);
+if(count($t)>1) $f_Name="<span class='fs12'>$t[0]</span> CKD$t[1]";
+else {
+    $t=explode("СКД",$f_Name);
+    if(count($t)>1) $f_Name="<span class='fs12'>$t[0]</span> CKD$t[1]";
+}
+/*if($f_SliderPath&&$f_MainImgPath)$f_MainImg=$f_SliderPath.$f_MainImgPath;*/
+$f_MainImg=$f_MainImgPath;
+if (!$f_MainImg) $f_MainImg = $f_ResizeImg;
+
+if(strpos($f_MainImg,"files/")==false) $f_MainImg = $f_SliderPath.$f_MainImgPath;
+
+foreach ($arRange as $v) {
+    if ($f_house_id >= $v['RANGE'][0] && $f_house_id<$v['RANGE'][1]) $id = $v['ID'];
+}
+
+if (!$lineOut[$f_SubID]) {
+    foreach ($arLines as $v) {
+
+        if ($v['id']!=$f_SubID) continue;
+if ($handle = opendir($_SERVER['DOCUMENT_ROOT'].$v['SliderPath'])) {
+    while (false !== ($f = readdir($handle))) {
+            if (is_file($_SERVER['DOCUMENT_ROOT'].$v['SliderPath'].$f)) {
+                $f = ($v['SliderPath'].$f);
+                $slides[]=$f;
+            }
+    }
+}
+        ?><div class="line<?=$v['id']?> line-desc col-md-12 clearfix portfolio-item-animation-2 mix building">
+        <div class="mgt-header-block clearfix text-left text-black wpb_animate_when_almost_visible wpb_top-to-bottom wpb_content_element mgt-header-block-style-2 mgt-header-texttransform-header  wpb_start_animation">
+            <div class="reconlife mgt-header-block-title h2"><?=$v['name']?></div>
+            <div class="mgt-header-line"></div></div>
+            <div class="wpb_text_column wpb_content_element ">
+                <div class="wpb_wrapper"><?
+                if ($v['Video']) {
+                ?><div data-id="<?=$f_RowID?>" class="portfolio-item-block portfolio-item-animation-6 video building" data-item="" data-name="" style="display: inline-block;">
+                                        <div class="portfolio-item-block-inside">
+                                            <a class="js-turn-video" id="video<?=$v['id']?>" href="#" target="_blank" rel="" title="">
+                                                <div class="portfolio-item-image" data-style="background-image: url(<?=$f_MainImg?>);" style="background-image: url(<?=$f_MainImg?>);"></div>
+                                                <div class="portfolio-item-bg"></div>
+                                                <div class="info"><i class="svg-icon svg-video"></i>
+                                                    <div class="hh4 title">Видеообзор линейки “<?=$v['name']?>”</div>
+                                                </div>
+                                            </a><?
+                                            ?><div style="display:none" class="js-video"><?=$v['Video']?></div>
+                                         </div>
+                                    </div><?
+                }
+                    ?><div class="line-description"><?=$v['text']?></div><?
+
+if (count($slides)) {
+                        ?><div class="line-box"><div class="line-slides"><?
+                        ?><div id="vc_images-carousel-1-<?=$v['id']?>" data-ride="vc_carousel" data-wrap="false"  data-interval="0" data-auto-height="yes" data-mode="horizontal" data-partial="false" data-per-view="1" data-hide-on-end="true" class="vc_slide vc_images_carousel">
+                            <!-- Wrapper for slides -->
+                            <div class="vc_carousel-inner">
+                                <div class="vc_carousel-slideline">
+                                    <div class="vc_carousel-slideline-inner"><?
+    foreach($slides as $f) {
+        if (is_file($_SERVER['DOCUMENT_ROOT'].$f)) {
+
+                                        ?><div class="vc_item">
+                                            <div class="vc_inner">
+                                                <a href="<?=$f?>"  rel="lightbox">
+                                                <img width="1170" height="780" src="<?=($f)?>" class="attachment-full" alt="" srcset="<?=$f?> 1170w, <?=$f?> 300w, <?=$f?> 768w, <?=$f?> 1024w" sizes="(max-width: 1170px) 100vw, 1170px" />                                        </a>
+                                            </div>
+                                        </div><?
+            //echo "<img src=\"$f\" alt=\"\" />";
+        }
+    }
+
+                                    ?></div>
+                                </div>
+                            </div>
+                            <!-- Controls -->
+                            <a class="vc_left vc_carousel-control" href="#vc_images-carousel-1-<?=$v['id']?>" data-slide="prev">
+                            <span class="icon-prev"></span>
+                            </a>
+                            <a class="vc_right vc_carousel-control" href="#vc_images-carousel-1-<?=$v['id']?>" data-slide="next">
+                            <span class="icon-next"></span>
+                            </a>
+                        </div></div>
+                        <div class="line-pro-title">Проекты линейки <?=$v['name']?></div>
+                        </div>
+                    <?
+
+}
+                ?></div>
+            </div>
+        </div><?
+    }
+    $lineOut[$f_SubID] = true;
+}
+?>
+<div data-id="<?=$f_RowID?>" data-class="<?=$id?>" class="<?=$id?> line<?=$f_SubID?> portfolio-item-block portfolio-item-animation-2 mix building" data-item="<?=$f_RowNum?>" data-name="<?=strip_tags($f_Name)?>" style="display: inline-block;">
+    <div class="portfolio-item-block-inside">
+      <a href="<?=$fullLink?>" target="_self" rel="" title="<?=strip_tags($f_Name)?>">
+        <div class="portfolio-item-image" data-style="background-image: url('<?=$f_MainImg?>');" style="background-image: url('<?=$f_MainImg?>');"></div>
+        <div class="portfolio-item-bg"></div>
+        <div class="info">
+          <span class="sub-title"></span>
+          <div class="hh4 title">CKD-<?=$f_house_id?></div>
+                  <div class="project-description">
+                      Площадь <?=$f_Square?> кв.м.<br>
+                      Цена <?=$f_Price2?$f_Price2:$f_Price1?> р.
+                  </div>
+<div class="hvr-icon-wobble-horizontal mgt-button mgt-style-textwhite mgt-size-normal mgt-align-left mgt-display-newline mgt-text-size-small mgt-button-icon-position-right mgt-text-transform-uppercase">УЗНАТЬ БОЛЬШЕ<i class="fa fa-arrow-right"></i></div>
+                </div>
+                <div class="labels">
+        <?if($f_Hit):?><div class="label hit">Хит продаж</div><br><?endif?>
+        <?if($f_Special):?><div class="label special">Спецпредложение</div><br><?endif?>
+        <?if($f_Cheap):?><div class="label cheap">Выгодная цена</div><?endif?>
+  </div>
+      </a>
+    </div>
+    </div>
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

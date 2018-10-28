@@ -1,0 +1,25 @@
+<form action='<?= ($admin_mode ? $HTTP_ROOT_PATH.'index.php?' : $SUB_FOLDER.$current_sub['Hidden_URL'].$current_cc['EnglishName'].'.html' ) ?>' method='get' class="lk_search">
+<? if ($admin_mode || $inside_admin) : ?>
+        <input type='hidden' name='admin_mode' value='1' />
+        <input name='catalogue' type='hidden' value='<?= $catalogue ?>' />
+        <input name='cc' type='hidden' value='<?= $cc ?>' />
+        <input name='sub' type='hidden' value='<?= $sub ?>' />
+<? endif; ?>
+<? if ($inside_admin) : ?>
+        <input type='hidden' name='inside_admin' value='1' />
+<? endif; ?>
+<input type='hidden' name='action' value='index' />
+<input type='hidden' name='admin_mode' value='<?= $admin_mode ?>' />
+<div>Логин: <br><input type='text' name='srchPat[0]' size='50' maxlength='255' value=''></div>
+<br>
+<div>Имя пользователя: <br><input type='text' name='srchPat[1]' size='50' maxlength='255' value=''></div>
+<br>
+<div>Аватар пользователя на форуме: <br><input type='text' name='srchPat[2]' size='50' maxlength='255' value=''></div>
+<br>
+<div>Email: <br><input type='text' name='srchPat[3]' size='50' maxlength='255' value=''></div>
+<br>
+<div>Подпись в форуме: <br><input type='text' name='srchPat[4]' size='50' maxlength='255' value=''></div>
+<br>
+
+<input value='<?= NETCAT_SEARCH_FIND_IT ?>' type='submit' />
+</form>

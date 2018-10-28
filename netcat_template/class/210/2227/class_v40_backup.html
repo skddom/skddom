@@ -1,0 +1,719 @@
+<!-- FormPrefix --><div class='robototitle' style='margin-top:30px'>Популярные проекты</div>
+<div class='info'>
+	<div class='inner'>
+		<div class='inner newview newview_home'><!-- /FormPrefix -->
+
+<!-- RecordTemplate -->";if($f_SliderPath&&$f_MainImgPath)$f_MainImg=$f_SliderPath.$f_MainImgPath;
+if (is_array($br->projects[$f_RowID])) extract($br->projects[$f_RowID]);
+
+$cnt++;
+$result.="		
+			<div".($cnt%3==0?" style=\"margin-right:0\"":"")." class=\"special\">
+				<div class=\"pic\"><a href=\"$fullLink\"><img width=\"220\" height=\"165\" alt=\" \" src=\"$f_MainImg\"></a></div>
+				<div class=\"desc\"> <a href=\"$fullLink\">
+				<div class=\"name\">".str_replace("из клееного бруса","",$f_Name)."</div>
+				<div class=\"area\">Площадь дома - $f_Square* кв.м.</div>
+				<div class=\"clr\"></div>
+				<div class=\"cost\"> <span class=\"ico\"></span> <span><span class='fs2'>Цена в базовой комплектации</span>
+					$f_Price1 р.</span> </div>
+				</a> <a href=\"/price/calc/?house=$f_house_id\" class=\"calc\">Другие<br>компл.</a></div>
+			</div><!-- /RecordTemplate -->
+
+<!-- FormSuffix -->			<div class='clr'></div>
+		</div>
+
+	</div>
+</div><!-- /FormSuffix -->
+
+<!-- RecordTemplateFull -->".opt($template==92,"
+<div class=\"good-card\">
+<a class=\"back_link\" href=\"http://www.ruza-gavan.ru/catalog/doma/\">Вернуться к товарам каталога</a>
+<div class=\"clear\"></div>
+")."
+
+
+"; if ($template==920) {
+
+if ($handle = opendir($_SERVER['DOCUMENT_ROOT'].$f_InteriorPath)) {
+	while (false !== ($f = readdir($handle))) { 
+		if (is_file($_SERVER['DOCUMENT_ROOT'].$f_InteriorPath.$f) && strpos($f,"thumb_")===false) {
+			$t = $f_InteriorPath."thumb_".$f;
+			$f = $f_InteriorPath.$f;
+			if (!file_exists($_SERVER['DOCUMENT_ROOT'].$t)) {
+				nc_ImageTransform::imgResize($_SERVER['DOCUMENT_ROOT'].$f,$_SERVER['DOCUMENT_ROOT'].$t,320,240);
+			}
+			if ($f) $interior.="                <li> <a onclick='return hs.expand(this)' class='jg_interoir_photo' href=\"$f\"> <img src=\"".($t?$t:$f)."\" alt=\"\">
+	                  <div class=\"hover\"></div>
+	                  
+	                  </a> </li>";
+		}
+	}
+}
+
+echo "
+
+<div class=\"good-card\">
+<a class=\"back_link\" href=\"http://www.ruza-gavan.ru/catalog/doma/\">Вернуться к товарам каталога</a>
+<div class=\"clear\"></div>
+<div class=\"cat_na\">$f_Name</div>
+<div class=\"image_box\">
+	<div class=\"gimages\" style='width:742px;height:490px;'>
+					<div class=\"images-big\">
+				<a href=\"$f_SliderPath$f_MainImgPath\" style=\"background-size: contain;background-image: url('$f_SliderPath$f_MainImgPath');\" data-preview-big=\"0\"></a>
+			</div>
+
+			</div>
+	<div class=\"clear\"></div>
+<div class=\"slider fullslider\">
+          <ul id=\"slider\">
+";
+if ($handle = opendir($_SERVER['DOCUMENT_ROOT'].$f_SliderPath)) {
+	while (false !== ($f = readdir($handle))) { 
+		if (is_file($_SERVER['DOCUMENT_ROOT'].$f_SliderPath.$f)) {
+			$f = $f_SliderPath.$f;
+			echo "			<li><img src=\"$f\" alt=\"\" />
+		              <div class=\"rhino-caption\">
+		        
+		                <div class=\"price\"> <a href=\"/price/calc/?house=$f_house_id\" class=\"calc\"><span>Другие комплектации - калькулятор</span></a>
+		                  <p> <span>Цена ".opt($f_Price1,"в комплектации <a href=\"/price/calc/?house=$f_house_id\" title=\"Тултип\">С1</a>").": </span> <a href=\"/price/calc/?house=$f_house_id\" class=\"price_a\">".($f_Price1?$f_Price1:$f_Price)."</a> р.</p>
+		                  <p> <span><span title=\"Строительная площадь по осям стен, включая террасы.\">Площадь</span>:</span> $f_Square кв.м.</p>
+		                </div>
+		                ".opt($f_Price1,"<a  class=\"special\">Спецпредложение</a>")." </div>
+		            </li>";		
+		}	
+	}
+} else {
+	$flds=array("MainImg","Dom1","Dom2","Dom3");
+	foreach ($flds as $f) {
+		$f = "f_$f";
+		$f = $$f;
+		if ($f) echo "			<li><img src=\"$f\" alt=\"\" />
+	              <div class=\"rhino-caption\">
+	        
+	                <div class=\"price\"> <a href=\"/price/calc/?house=$f_house_id\" class=\"calc\"><span>Другие комплектации</span></a>
+	                  <p> <span>Цена ".opt($f_Price1,"в комплектации <a href=\"#\" title=\"Тултип\">С1</a>").": </span> ".($f_Price1?$f_Price1:$f_Price)." р.</p>
+	                  <p> <span><a href=\"#\" title=\"Строительная площадь по осям стен, включая террасы.\">Прощадь</a>:</span> $f_Square кв.м.</p>
+	                </div>
+	                ".opt($f_Price1,"<a href=\"#\" class=\"special\">Спецпредложение</a>")." </div>
+	            </li>";
+	}
+}
+echo"
+          </ul>
+        </div>
+
+
+	<div class=\"clear\"></div>
+</div>
+
+<div class=\"ginfo\" style='width:689px; margin:0;'>
+
+<div class=\"projects\">
+".opt($interior,"
+	<div class=\"pr\">
+          <div class=\"robototitle\">ИНТЕРЬЕР: ОТДЕЛКА ВНУТРИ ДОМА</div>
+          <div class=\"jcarousel-wrapper\">
+            <div class=\"jcarousel\">
+              <ul>$interior
+              </ul>
+            </div>
+            <a href=\"#\" class=\"jcarousel-control-prev\">&lsaquo;</a> <a href=\"#\" class=\"jcarousel-control-next\">&rsaquo;</a> </div>
+        </div>")."
+".s_list_class(111,86,"&nc_ctpl=254&recNum=20&house_id=$f_house_id")."
+</div>
+
+<div class=\"descrip\">
+<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"allplans\">
+  <tr class='plan-itm'>
+    <td><a onclick='return hs.expand(this)' class='jg_catelem_photo' href=\"$f_PlanDoma\"><img alt=\"123321\" src=\"$f_PreviewPlan\"></a><br /><br />$f_Plan1
+
+    </td>
+
+    </tr>
+".opt($f_bigDom1,"
+<tr><td>".opt($f_bigDom1,"<img src=\"$f_bigDom1\">")."</td>
+  </tr>")."
+
+    ".opt($f_Plan100,"<tr>
+    <td>$f_Plan1<br /></td>
+</tr>")."
+".opt($f_Plan2,"<tr class='plan-itm'>
+    <td>$f_Plan2<br /></td>
+  </tr>")."
+  
+
+    ".opt($f_Plan3,"<tr class='plan-itm'>
+    <td>$f_Plan3<br /></td></tr>")."
+".opt($f_Plan4,"<tr class='plan-itm'>
+    <td>$f_Plan4<br /></td>
+  </tr>")."
+  
+    ".opt($f_Plan5,"<tr class='plan-itm'>
+    <td>$f_Plan5<br /></td></tr>")."
+".opt($f_Plan6,"<tr class='plan-itm'>
+
+    <td>$f_Plan6<br /></td>
+  </tr>")."
+</table>
+  </div>
+	</div>
+
+</div>
+<script>
+\$(function(){
+  \$('.images-list .item a').unbind('click');
+  \$('.images-list .item a').click(function(){
+		var imageBig = $('.images-big a');
+		var imagesList = $('.images-list .item');
+		var el = \$(this);
+		var elParent = el.parent();
+		var newImage = el.attr('href');
+		var bigImg = el.attr('big_id');
+console.log(el.attr('data-preview-big'));
+		if( imageBig.attr('href') !== newImage ){
+			imageBig.attr('data-preview-big', bigImg);
+			imagesList.removeClass('active');
+			elParent.addClass('active');
+			imageBig.fadeOut(function(){
+				imageBig.attr('href', newImage);
+				imageBig.css('background-image', 'url(\"' + el.attr('data-preview-big') + '\")');
+				imageBig.fadeIn();		
+			});
+		}
+		return false;     
+  });
+});
+</script>
+<style>
+.images-list .item {
+margin-bottom:12px;
+margin-right:12px;
+}
+.images-list .item.active {
+margin-left:-1px;
+margin-top:-1px;
+margin-bottom:11px;
+margin-right:11px;
+}
+</style>
+";
+
+} else {
+
+echo "
+
+
+ ".($print=="Y" ? " <div class='header'>
+<div class='logo'><img src='/netcat_files/tel.png' style='float:right; margin:3% 5% 0 0'><img src=\"/images/design/images/logo.png\">
+
+</div>
+</div>
+<div style='background:#b44319; padding:50px 0 25px 0; color:#fff; font: 22px Times New Roman;
+font-style: italic;'>
+<span style='margin-right:6.5%; padding-left:45%; background:#159a4b;line-height:26px; padding-right:5px;'>проект</span>
+<span>SKD $f_house_id</span>
+</div>
+":"")."
+
+
+      <div class=\"inner\">
+
+".($print=="Y" ? "
+<style>
+body {background:none;}
+#print, #printmini, header , .sidebar, footer, .content h1, .slogan, .contact{ display:none; }
+.mainblock .content { float:none; width:auto;}
+.main { margin:0;width:auto; max-width:690px; }
+.info { border:0; }
+.mainblock { width:auto; max-width:690px; padding-top:0; }
+.header .logo {float:none; margin:0; padding:15px; width:auto; height:auto; }
+ .header {
+width:100%;
+background:#ecceac;
+/*width: 690px;
+height: 193px;
+	background-image: url('data:image/jpg;base64,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');
+background-size:contain;*/
+}
+.inner img { width:100%; }
+.inner .logo img { width:auto; }
+</style>
+": "
+          ".s_browse_path_range(0,$sub_level_count-1,$path)."")."
+		  
+          <h1 style=\"width:550px;\">$f_Name</h1>
+		  ".opt($f_Print,"<a class='print' rel='nofollow' target='_blank' href=\"$f_Print\" id=\"print\"><span class=\"ico\"></span><span>Распечатать</span></a>")."
+		  <div class=\"nobg\">
+";
+if ($print=="Y") {
+echo "<img src=\"$f_SliderPath$f_MainImgPath\" alt=\"123321\" />
+		              
+		        
+		                <div class=\"price\"> <p> <span>Цена ".opt($f_Price1,"в комплектации С1").": </span> ".($f_Price1?$f_Price1:$f_Price)." р.</p>
+		                  <p> <span>Площадь:</span> $f_Square кв.м.</p>
+		                </div>
+		             
+		            ";
+} else {
+echo "
+<div class=\"slider fullslider\">
+          <ul id=\"slider\">
+";
+$suff="";
+if ($template==92) $suff = "&template=92";
+if ($handle = opendir($_SERVER['DOCUMENT_ROOT'].$f_SliderPath)) {
+	while (false !== ($f = readdir($handle))) { 
+		if (is_file($_SERVER['DOCUMENT_ROOT'].$f_SliderPath.$f)) {
+			$f = $f_SliderPath.$f;
+			echo "			<li><img src=\"$f\" alt=\"\" />
+		              <div class=\"rhino-caption\">
+		        
+		                <div class=\"price\"> <a href=\"/price/calc/?house=$f_house_id$suff\" class=\"calc\"><span>Другие комплектации - калькулятор</span></a>
+		                  <p> <span>Цена ".opt($f_Price1,"в комплектации <a href=\"/price/calc/?house=$f_house_id$suff\" title=\"Тултип\">С1</a>").": </span> <a href=\"/price/calc/?house=$f_house_id$suff\" class=\"price_a\">".($f_Price1?$f_Price1:$f_Price)."</a> р.</p>
+		                  <p> <span><span title=\"Строительная площадь по осям стен, включая террасы.\">Площадь</span>:</span> $f_Square кв.м.</p>
+		                </div>
+		                ".opt($f_Price1,"<a  class=\"special\">Спецпредложение</a>")." </div>
+		            </li>";		
+		}	
+	}
+} else {
+	$flds=array("MainImg","Dom1","Dom2","Dom3");
+	foreach ($flds as $f) {
+		$f = "f_$f";
+		$f = $$f;
+		if ($f) echo "			<li><img src=\"$f\" alt=\"\" />
+	              <div class=\"rhino-caption\">
+	        
+	                <div class=\"price\"> <a href=\"/price/calc/?house=$f_house_id\" class=\"calc\"><span>Другие комплектации</span></a>
+	                  <p> <span>Цена ".opt($f_Price1,"в комплектации <a href=\"#\" title=\"Тултип\">С1</a>").": </span> ".($f_Price1?$f_Price1:$f_Price)." р.</p>
+	                  <p> <span><a href=\"#\" title=\"Строительная площадь по осям стен, включая террасы.\">Прощадь</a>:</span> $f_Square кв.м.</p>
+	                </div>
+	                ".opt($f_Price1,"<a href=\"#\" class=\"special\">Спецпредложение</a>")." </div>
+	            </li>";
+	}
+}
+echo"
+          </ul>
+        </div>
+<div class=\"clear\"></div>
+<div class=\"share\">
+<p style=\"float:left;\">
+".$nc_core->widget->generate('twitter_tweetbutton', array('url' => '...', 'button' => 'horizontal', 'text' => '...', 'lang' => '...', 'recommend_1' => '...', 'recommend_2' => '...'))."
+</p>
+<div style=\"float:left;margin-right: 20px;margin-left: -25px\" class=\"fb-like\" data-href=\"$fullLink\" data-layout=\"button_count\" data-action=\"like\" data-show-faces=\"true\" data-share=\"false\"></div>
+<p style=\"float:left;\">".$nc_core->widget->show('vkontakte_link')."
+</p>
+</div>";
+}
+echo "
+
+".opt($f_Special && $print!="Y","
+<a class=\"prize\" ".opt($f_Design,"target='_blank' href=\"$f_Design\"").">
+<span class=\"ico\"></span>
+Готовый дизайн-проект 
+в подарок
+</a>
+")."
+<div class=\"clr\"></div>
+</div>  <div class=\"clear\"></div>
+";
+$flds=array("IteriorMain","Interior1","Interior2");
+
+if ($handle = opendir($_SERVER['DOCUMENT_ROOT'].$f_InteriorPath)) {
+	while (false !== ($f = readdir($handle))) { 
+		if (is_file($_SERVER['DOCUMENT_ROOT'].$f_InteriorPath.$f) && strpos($f,"thumb_")===false) {
+			$t = $f_InteriorPath."thumb_".$f;
+			$f = $f_InteriorPath.$f;
+			if (!file_exists($_SERVER['DOCUMENT_ROOT'].$t)) {
+				nc_ImageTransform::imgResize($_SERVER['DOCUMENT_ROOT'].$f,$_SERVER['DOCUMENT_ROOT'].$t,320,240);
+			}
+			if ($f) $interior.="                <li> <a onclick='return hs.expand(this)' class='jg_interoir_photo' href=\"$f\"> <img src=\"".($t?$t:$f)."\" alt=\"\">
+	                  <div class=\"hover\"></div>
+	                  
+	                  </a> </li>";
+		}
+	}
+}
+if (!$interior) {
+	foreach ($flds as $f) {
+		$f = "f_$f";
+		$t = "f_".$f."Thumb";
+		$t = $$t;
+		$f = $$f;
+		if ($f) $interior.="                <li> <a onclick='return hs.expand(this)' class='jg_catelem_photo' href=\"$f\"> <img src=\"".($t?$t:$f)."\" alt=\"123321\">
+	                  <div class=\"hover\"></div>
+	                  
+	                  </a> </li>";
+	}
+}
+echo"<div class=\"clear\"></div>
+".($print=="Y" ? "<br>": "
+<div class=\"projects\">
+".opt($interior,"
+	<div class=\"pr\">
+          <div class=\"robototitle\">ИНТЕРЬЕР: ОТДЕЛКА ВНУТРИ ДОМА</div>
+          <div class=\"jcarousel-wrapper\">
+            <div class=\"jcarousel\">
+              <ul>$interior
+              </ul>
+            </div>
+            <a href=\"#\" class=\"jcarousel-control-prev\">&lsaquo;</a> <a href=\"#\" class=\"jcarousel-control-next\">&rsaquo;</a> </div>
+        </div>")."
+".s_list_class(111,86,"&nc_ctpl=254&recNum=20&house_id=$f_house_id&name=$f_Name")."
+</div>")."
+      
+
+
+		
+
+
+
+
+
+</div></div>
+
+
+      		   <div class=\"robototitle\">Планы</div>
+
+		<div class=\"info\">
+		<div class=\"inner\">
+
+
+".opt($f_Print0,"<a href=\"$_Print\" rel='nofollow' target='_blank' id=\"printmini\" style=\"right:23px; top:23px;\"><i></i><span>Распечатать все планировки</span></a>")."
+
+
+";
+if ($f_bigDom1) $plan=1;
+for ($i=2;$i<8;$i++) {
+$f = "f_Plan$i";
+if ($$f) {$plan++;$$f = str_replace(array("width:","height:"),array("width:100%; min-width:","min-height:"),$$f);}
+}
+echo "
+".($print=="Y"?null:"
+<script type=\"text/javascript\">
+        \$(document).ready(function(){
+		\$('.allplans tr.plan-itm:gt(0)').hide();
+		
+		    \$('.moreplan').click(function(){
+                 
+				   
+\$('.allplans tr.plan-itm:gt(0)').toggle('fast', function() {
+                        if (\$('.allplans tr.plan-itm:gt(0)').is(\":hidden\"))      
+                            \$('.moreplan').text('Ещё планировки: $plan');
+                        else
+                            \$('.moreplan').text('Скрыть планировки');
+                    });
+			
+                   return false;
+                 });
+
+			
+		});
+		
+</script>")."
+
+
+
+
+<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"allplans\">
+  <tr class='plan-itm'>
+    <td><a onclick='return hs.expand(this)' class='jg_catelem_photo' href=\"$f_PlanDoma\"><img alt=\"123321\"  src=\"$f_PreviewPlan\"></a><br /><br />$f_Plan1".opt($plan,"
+
+    ".($print=="Y"?null:"<a href=\"#\" class=\"moreplan\" style=\"\">Ещё планировки: $plan</a>"))."</td>
+
+    </tr>
+".opt($f_bigDom1,"
+<tr><td>".opt($f_bigDom1,"<img alt=\"123\" src=\"$f_bigDom1\">")."</td>
+  </tr>")."
+
+    ".opt($f_Plan100,"<tr>
+    <td>$f_Plan1<br /></td>
+</tr>")."
+".opt($f_Plan2,"<tr class='plan-itm'>
+    <td>$f_Plan2<br /></td>
+  </tr>")."
+  
+
+    ".opt($f_Plan3,"<tr class='plan-itm'>
+    <td>$f_Plan3<br /></td></tr>")."
+".opt($f_Plan4,"<tr class='plan-itm'>
+    <td>$f_Plan4<br /></td>
+  </tr>")."
+  
+    ".opt($f_Plan5,"<tr class='plan-itm'>
+    <td>$f_Plan5<br /></td></tr>")."
+".opt($f_Plan6,"<tr class='plan-itm'>
+
+    <td>$f_Plan6<br /></td>
+  </tr>")."
+</table>
+
+
+
+
+<div class=\"clr\"></div>
+</div></div>
+
+<style>
+.fullslider #slider {
+height: 553px;
+}
+.rhino-toggle {
+top: 404px;
+}
+.rhino-bullets {
+top: 412px;
+}
+.rhino-prev, .rhino-next {
+top: 244px;
+}
+.fullslider .rhino-caption .price a.calc span {
+padding-top:0;
+}
+.price_a {
+color:#fff;
+}
+.price_a:hover {
+color:#aaa;
+}
+.notes1 { padding:10px 30px;  }
+</style>
+
+
+".($print=="Y"?"
+<p>
+$subHost$fullLink
+</p>
+":"")."
+<div class='notes1'> *Строительная площадь: по осям стен, включая террасы.</div>";
+} echo "
+
+
+".opt($template==92,"</div>")."<!-- /RecordTemplateFull -->
+
+<!-- Settings -->require_once($nc_core->INCLUDE_FOLDER."classes/nc_imagetransform.class.php");
+$ignore_sub=$ignore_cc=true;
+$query_where = "LENGTH(a.MainImgPath)>0";
+global $path;
+$br = CBranding::get_object();
+$br->getProjects();
+$br->ExModifyQueryWhere($query_where, $cc_env, $inside_admin, $admin_mode);
+
+//if ($current_user) print_r($br);<!-- /Settings -->
+
+<!-- AddTemplate --><!-- /AddTemplate -->
+
+<!-- AddCond --><!-- /AddCond -->
+
+<!-- AddActionTemplate -->";
+  require_once($nc_core->INCLUDE_FOLDER."classes/nc_imagetransform.class.php");
+  if ($_FILES[f_PlanDoma][size]!=0 && $_FILES[f_PlanDoma][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('PlanDoma','PreviewPlan',688,900);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'PlanDoma', "");
+$is = @getimagesize($photo_path);
+    //if ($photo_path && $is[0]>688) nc_ImageTransform::imgResize($photo_path,$photo_path,688,900);
+  }
+  if ($_FILES[f_MainImg][size]!=0 && $_FILES[f_MainImg][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('MainImg','MainImgThumb',379,284);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'MainImg', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600);
+  }
+  if ($_FILES[f_Dom1][size]!=0 && $_FILES[f_Dom1][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Dom1','Dom1Thumb',113,85);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Dom1', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600);
+  }
+  if ($_FILES[f_Dom2][size]!=0 && $_FILES[f_Dom2][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Dom2','Dom2Thumb',113,85);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Dom2', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600);
+  }
+  if ($_FILES[f_Dom3][size]!=0 && $_FILES[f_Dom3][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Dom3','Dom3Thumb',113,85);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Dom3', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600); // 618, 900
+  }
+  if ($_FILES[f_IteriorMain][size]!=0 && $_FILES[f_IteriorMain][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('IteriorMain','IteriorMainThumb',236,177);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'IteriorMain', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600); // 618,900
+  }
+  if ($_FILES[f_Interior1][size]!=0 && $_FILES[f_Interior1][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Interior1','Iterior1Thumb',105,78);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Interior1', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600); // 618,900
+  }
+  if ($_FILES[f_Interior2][size]!=0 && $_FILES[f_Interior2][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Interior2','Iterior2Thumb',105,78);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Interior2', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600); // 618,900
+  }
+//------ тест ----------
+  if ($_FILES[f_smallDom1][size]!=0 && $_FILES[f_smallDom1][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'smallDom1', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,200, 150, 3, 'jpg', 100); // 618,900
+  }
+  if ($_FILES[f_bigDom1][size]!=0 && $_FILES[f_bigDom1][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'bigDom1', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path, 1280, 0, 3, 'jpg', 100); // 618,900
+  }
+
+
+
+### default
+if($inside_admin) {
+ ob_end_clean();
+ header("Location: ".$goBackLink."&inside_admin=1");
+ exit;
+}
+else {
+  echo NETCAT_MODERATION_MSG_OBJADD;
+  echo "<br><br>".$goBack;
+}
+echo "<!-- /AddActionTemplate -->
+
+<!-- EditTemplate --><!-- /EditTemplate -->
+
+<!-- EditCond --><!-- /EditCond -->
+
+<!-- EditActionTemplate -->";
+  require_once($nc_core->INCLUDE_FOLDER."classes/nc_imagetransform.class.php");
+  if ($_FILES[f_PlanDoma][size]!=0 && $_FILES[f_PlanDoma][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('PlanDoma','PreviewPlan',688,900);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'PlanDoma', "");
+//$is = @getimagesize($photo_path);
+    //if ($photo_path && $is[0]>688) nc_ImageTransform::imgResize($photo_path,$photo_path,688,900);
+  }
+  if ($_FILES[f_MainImg][size]!=0 && $_FILES[f_MainImg][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('MainImg','MainImgThumb',379,284);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'MainImg', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600);
+  }
+  if ($_FILES[f_Dom1][size]!=0 && $_FILES[f_Dom1][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Dom1','Dom1Thumb',113,85);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Dom1', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600);
+  }
+  if ($_FILES[f_Dom2][size]!=0 && $_FILES[f_Dom2][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Dom2','Dom2Thumb',113,85);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Dom2', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600);
+  }
+  if ($_FILES[f_Dom3][size]!=0 && $_FILES[f_Dom3][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Dom3','Dom3Thumb',113,85);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Dom3', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600); // 618, 900
+  }
+  if ($_FILES[f_IteriorMain][size]!=0 && $_FILES[f_IteriorMain][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('IteriorMain','IteriorMainThumb',236,177);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'IteriorMain', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600); // 618,900
+  }
+  if ($_FILES[f_Interior1][size]!=0 && $_FILES[f_Interior1][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Interior1','Iterior1Thumb',105,78);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Interior1', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600); // 618,900
+  }
+  if ($_FILES[f_Interior2][size]!=0 && $_FILES[f_Interior2][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    nc_ImageTransform::createThumb('Interior2','Iterior2Thumb',105,78);
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'Interior2', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path,800,600); // 618,900
+  }
+
+//------ тест ----------
+  if ($_FILES[f_smallDom1][size]!=0 && $_FILES[f_smallDom1][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'smallDom1', "");
+    if ($photo_path) nc_ImageTransform::imgResize($photo_path,$photo_path, 200, 150, 1, 'jpg', 100);
+  }
+  if ($_FILES[f_bigDom1][size]!=0 && $_FILES[f_bigDom1][type]!='')
+  {
+    eval(listQuery("SELECT CustomSettings FROM Sub_Class WHERE Sub_Class_ID='$cc'","\$data[CustomSettings]"));
+    global $nc_core;
+    $photo_path = $DOCUMENT_ROOT.nc_file_path($classID, $message, 'bigDom1', "");
+    if ($photo_path) {
+	nc_ImageTransform::imgResize($photo_path,$photo_path, 1280, 1024, 0, 'jpg', 100);
+	// nc_ImageTransform::putWatermark_file($photo_path, '/images/copyright.png', 2); // установка водяного знака в правый верхний угл
+    }
+  }
+
+
+### default
+if($inside_admin) {
+ ob_end_clean();
+ header("Location: ".$goBackLink."&inside_admin=1");
+ exit;
+}
+else {
+  echo NETCAT_MODERATION_MSG_OBJADD;
+  echo "<br><br>".$goBack;
+}
+echo "<!-- /EditActionTemplate -->
+
+<!-- CheckActionTemplate --><!-- /CheckActionTemplate -->
+
+<!-- DeleteTemplate --><!-- /DeleteTemplate -->
+
+<!-- DeleteCond --><!-- /DeleteCond -->
+
+<!-- DeleteActionTemplate --><!-- /DeleteActionTemplate -->
+
+<!-- FullSearchTemplate --><!-- /FullSearchTemplate -->
+
+<!-- SearchTemplate --><!-- /SearchTemplate -->

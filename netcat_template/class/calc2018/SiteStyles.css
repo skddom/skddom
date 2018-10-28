@@ -1,0 +1,110 @@
+#rekom .labels {position:absolute;display:none;}
+
+#rekom .h3_block.mgt-header-block-title  {
+    color: #2A2F35;
+    margin-top: 0;
+    font-size: 21px;
+    
+    font-weight: 500;
+    line-height: 1.1;
+    font-family: 'Roboto';
+    text-transform:uppercase;
+}
+#rekom .mgt-header-line {
+    height: 1px;
+    width: 48.8%;
+    background: #b76c00;
+    display: table;
+    margin: 10px 0 -15px 0;
+}
+@media(max-width:415px){
+    div#first_storey_height {position:absolute;bottom:53pt;left:104px;right:15%}
+    div#second_storey_height {position:absolute;bottom:128pt;left:104px;right:15%;}
+    #calculator .result .house_params .house_img .storey .storey_height{font-size:16px;}
+    #calculator .result .house_params .house_img .storey .storey_height .text{line-height:16px;}
+}
+@media(max-width:376px){
+    div#first_storey_height {position:absolute;bottom:45pt;left:90px;right:15%}
+    div#second_storey_height {position:absolute;bottom:117pt;left:90px;right:15%;}
+    #calculator .result .house_params .house_img .storey .storey_height{font-size:13px;}
+    #calculator .result .house_params .house_img .storey .storey_height .text{line-height:14px;}
+}
+@media(max-width:320px){
+    div#first_storey_height {position:absolute;bottom:40pt;left:75px;right:15%}
+    div#second_storey_height {position:absolute;bottom:98pt;left:75px;right:15%;}
+    #calculator .result .house_params .house_img .storey .storey_height{font-size:13px;}
+    #calculator .result .house_params .house_img .storey .storey_height .text{line-height:14px;}
+}
+
+
+@media(max-width:1px){
+    #calculator .result .cols{display:block;}
+    #calculator .result .house_params .params_cols{display:block;}
+    #calculator .result .house_params .house_img{width:auto;margin-right:0;transform:scale(0.8)}
+    #calculator .result .total_price .cols .left_col{width:auto;}
+    #calculator .result .total_price .cols{display:block;}
+    #calculator .result .total_price{width:auto;}
+    #calculator .result .total_price .cols .right_col{width:auto;}
+    #calculator .cols .left_col,#calculator .result .cols{width:auto;}
+    #calculator .cols{display:block;}
+    #calculator .cols .right_col,#calculator .calculator{width:auto;}
+    #calculator .calculator .storey .room .data{/* display: block; */}    
+    #calculator .calculator{width:auto;padding-top: 30px;}
+    #calculator .widget_title{font-size:24px;line-height:28px;}
+    #calculator .instructions{display:block;white-space:nowrap;/* display:none; */background: #fefefe;margin-top: 25px;border-radius: 5px;height: 420px;overflow: hidden;padding: 70px 0 60px;margin-left: 15px;margin-right: 15px;/* background: white; */box-shadow: 0 0px 30px rgba(0,0,0,0.2);}
+    #calculator .instructions .info{display:block;width:100%;float:left;min-height: 400px;}
+    #calculator .instructions .info .text{white-space:normal;font-size:18px;line-height:24px;}
+    #calculator .calculator .storey .room{margin-left:15px;margin-top: 30px;margin-right:15px;clear: both;padding: 10px 10px 10px;position:relative;}
+    #calculator .calculator .storey .room[data-room_preview]{padding-top:70px;}
+    #calculator .calculator .storey .room.active{box-shadow: 0px 0px 30px rgba(0,0,0,0.3);}
+    #calculator .calculator .storey .room .data .icon{width:60px;height: 56px;padding: 4px 0;position: absolute;top: 10px;}
+    #calculator .calculator .storey .room .data .icon .title{letter-spacing: -1px;font-size: 10px;}
+    #calculator .calculator .storey .room .data .icon .icon_img{top: 22px;bottom: 7px;}
+    #calculator .calculator .storey .room .data .slider_wrapper .big_title{position:absolute;top:0;width:100%;text-align:center;left:0;line-height:65px;}
+    #calculator .calculator .storey .room .data .info{position:absolute;top:10px;font-size:17px;right:10px;width:55px;height:55px;line-height:20px;text-align:center;padding:7px 10px 0;}
+    #calculator .calculator .storey .room .data .info span{font-size:20px;display:block;}
+    #calculator .cols{display:block;}
+    #calculator .cols .right_col,#calculator .cols .left_col{width:auto;} 
+    #calculator .calculator .storey .options .col{width:100%;float:none;display: block;}  
+    #calculator .calculator .storey .options .cols{display:block;}
+    #calculator .calculator .storey .room:after{content:"";display:table;clear:both;height:10px;}
+    #calculator .calculator .storey .room .data+.options .col{margin-bottom:10px;}
+    #calculator .calculator .storey .room .data+.options .col+.col{margin-left:0;margin-bottom:10px;}
+    #calculator .calculator .storey .options .bedroom_options .add_room_btn-1{line-height:16px;}
+    #calculator .big_title{text-align:center;font-size:20px;margin-bottom:-15px;}
+    #calculator .result{padding-bottom:1px;padding-top:0;}
+    #calculator .result .total_price{padding:15px}
+    #calculator .result .total_price .cols .left_col{display:block;text-align:center;line-height:18px;}
+    #calculator .result .total_price .cols .left_col .text{line-height:18px;font-size:16px}
+    #calculator .result .total_price .cols .left_col .border{background:none;}
+    #calculator .result .total_price .cols .left_col .price{margin-bottom:25px;}
+    #calculator .result .total_price .bottom_text{font-size:14px;line-height:18px;padding:20px 20px 10px;}
+    #calculator .result .total_price{margin-left:15px;margin-right:15px}
+    #calculator .result .total_price{margin-bottom:0;}
+    #calculator{margin-bottom:-30px;}
+    #calculator .calculator{padding-top:0px;}
+    #calculator .result .house_params .options{width:auto;}
+    #calculator .result .house_params .house_img {transform: scale(0.6);margin: -30px -60px -60px;}
+    #calculator .calculator .storey+.storey{margin-top:20px;}
+	#calculator .calculator .storey .options{margin-top:9px}
+	#calculator .calculator .room_preview{margin-top:30px!important;margin-left:15px;margin-right:15px;}
+	#calculator .result .house_params{padding:15px;margin:15px}
+    #calculator .instructions{position:relative;}
+	#calculator .instructions:before,#calculator .instructions:after{
+    	content:"";
+    	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAABABAMAAADouErfAAAALVBMVEUAAAChoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaE8IbbHAAAAD3RSTlMAI8If4v+/3yAi4OEhRB7XMKzVAAAAyUlEQVR4nK2RIQ7CQBBFp8GUZAWCG3ABgkEjKvAEEhrkWkxDgqxrsgqBQ29Sga0gQaBBcwXOwSYwf75EMGryROd1n8hnspHoDJe6ZUUFuKq/W7/YKzwSbBWe1oAd4APQdWeDN4XxqvBeKhS/gdN0MdC1t5sTPuiaE25Kw/ECHOzTuR3kiy5CjuySc2sYryNuK/+YF+6IN6vAViTLVixbGzZZa5FiIBt1S+EqwmNdqbw88ce/t6P3DYhBLQLCUbeG4EwhlfeAMlH4Bur0R2RHLJXkAAAAAElFTkSuQmCC"); 
+    	width:20px;height:30px;
+    	position:absolute;
+    	top:37.5%;
+	}
+	#calculator .instructions:before{left:20px;}
+	#calculator .instructions:after{
+    	background-position:bottom;
+    	right:0;
+    	top:37.25%;
+    	right:20px;
+	}
+    #calculator .result .cols .left_col{width:auto;}
+	#calculator .result{margin:15px 0;}
+    #calculator .calculator{padding-bottom:0;}
+}

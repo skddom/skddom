@@ -1,0 +1,578 @@
+<!-- FormPrefix --><?
+$url = nc_message_link($data['Message_ID'],210);
+?><div class="calc2" id="ajax"><?= $f_AdminCommon; ?><br>
+<script>
+    var house = <?=$house_id?>; // тип дома
+
+    // Калькуляция
+    $('document').ready(function(){
+        $('input').click(function () {
+            calc();
+        });
+        $('#frmCalc').submit(function () {
+            calc();
+            return false;
+        });
+
+        $('.notice_wrapper').on('click', '.button', function(){
+            $(this).next('.notice_inner').css('display', 'block');
+        }).on('click', '.close_btn', function(){
+            $(this).closest('.notice_inner').css('display', 'none');
+        });
+    });
+    
+    /* 
+     * Расчет калькуляций
+     */
+    function calc() {
+        summa1 = 0; //parseInt($(".js-b1").data("price")) // сумма комплектации 1
+        summa2 = 0 // сумма комплектации 2
+        summa3 = 0 // сумма комплектации 2
+        var formula="";
+        var formula0="";
+            for (i=0; i<=125; i++) {
+                id_price = '#price_' + i;
+                price = $(id_price).val();
+                if ( price !== 'undefined' && (i<35 || i>37)) {
+                    id_chk3 = '#chk3_' + i;
+                    id_chk1 = '#chk1_' + i;
+                    if($(id_chk1).prop("checked"))  {
+                        formula0 = formula0+" + "+price+"("+i+")";
+                        summa1 += price*1;
+                        $(id_chk1).data("price",price);
+                       
+                    } else {
+                        $(id_chk1).data("price","");
+                    }                    
+                    if($(id_chk3).prop("checked"))  {
+                        formula = formula+" + "+price+"("+i+")";
+                        summa3 += price*1;
+                        $(id_chk3).data("price",price);
+                        console.log(i+": "+price);
+                    } else {
+                        $(id_chk3).data("price","");
+                    }
+                }
+            }
+
+///////////////////////////////////////////////////            
+var dostavka = [6,50,52,7,8,26,13,17];
+var dostPrice=0; 
+var dostPrice0=0; 
+var dostVol=0;
+var dostVol0=0;
+$dostEl = $("#price_35");
+var dostFee = parseInt($dostEl.data("price"));
+
+for(i=0;i<dostavka.length;i++) {
+    $price = $('#price_'+dostavka[i]);
+    $tr = $price.closest("tr");
+    if ($tr.find("td:nth-child(3)").find("input").is(":checked")) {
+       
+         dostPrice = dostPrice+parseInt($price.val());
+         dostVol+=parseFloat($price.data("vol"));
+    }
+    if ($tr.find("td:nth-child(2)").find("input").is(":checked")) {
+         dostPrice0 = dostPrice0+parseInt($price.val());
+         dostVol0+=parseFloat($price.data("vol"));
+         
+          <?if ($AUTH_USER_ID && $debug) {
+        ?>
+        $price.css("border","1px solid red");
+        <?
+        }?>
+    }    
+}
+
+dostPrice = Math.ceil(dostVol/35) *dostFee;
+dostPrice0 = Math.ceil(dostVol0/35) *dostFee;
+
+
+
+$dostEl.val(dostPrice0);
+
+$razgEl = $("#price_36");
+razgPrice = dostPrice;
+razgPrice0 = dostPrice0;
+$razgEl.val(razgPrice0);
+
+
+
+var musor = [19,30,51];
+var musPrice = 0;
+var musPrice0 = 0;
+var musVol=0;
+var musVol0=0;
+$musEl = $("#price_37");
+
+for(i=0;i<musor.length;i++) {
+    $price = $('#price_'+musor[i]);
+    $tr = $price.closest("tr");
+    if ($tr.find("td:nth-child(3)").find("input").is(":checked")) {
+         musPrice = musPrice+parseInt($price.val());
+         musVol+=parseFloat($price.data("vol"));
+    }
+    if ($tr.find("td:nth-child(2)").find("input").is(":checked")) {
+         musPrice0 = musPrice0+parseInt($price.val());
+         musVol0+=parseFloat($price.data("vol"));
+    }    
+}
+
+musPrice = Math.ceil(Math.ceil(dostVol/35)/2+musVol/250) * parseFloat($musEl.data("price"));
+musPrice0 = Math.ceil(Math.ceil(dostVol0/35)/2+musVol0/250) * parseFloat($musEl.data("price"));
+$musEl.val(musPrice0 );
+
+
+$("#chk3_35").parent().data("price",dostPrice);
+$("#chk3_36").parent().data("price",razgPrice);
+$("#chk3_37").parent().data("price",musPrice);
+formula0 += " + "+dostPrice0+"+"+razgPrice0+"+"+musPrice0;
+formula += " + "+dostPrice+"+"+razgPrice+"+"+musPrice;
+
+
+///////////////////////////////////////////////
+        summa1 = 0; //parseInt($(".js-b1").data("price")) // сумма комплектации 1
+        summa2 = 0 // сумма комплектации 2
+        summa3 = 0 // сумма комплектации 2
+        var formula="";
+        var formula0="";
+            for (i=0; i<=125; i++) {
+                id_price = '#price_' + i;
+                price = $(id_price).val();
+                if ( price !== 'undefined' && (i<35 || i>37)) {
+                    id_chk3 = '#chk3_' + i;
+                    id_chk1 = '#chk1_' + i;
+                    if($(id_chk1).prop("checked"))  {
+                        formula0 = formula0+" + "+price+"("+i+")";
+                        summa1 += price*1;
+                        $(id_chk1).data("price",price);
+                       
+                    } else {
+                        $(id_chk1).data("price","");
+                    }                    
+                    if($(id_chk3).prop("checked"))  {
+                        formula = formula+" + "+price+"("+i+")";
+                        summa3 += price*1;
+                        $(id_chk3).data("price",price);
+                        console.log(i+": "+price);
+                    } else {
+                        $(id_chk3).data("price","");
+                    }
+                }
+            }
+///////////////////////////////////////////////
+
+
+summa1 = summa1+dostPrice0+razgPrice0+musPrice0;
+summa3 = summa3+dostPrice+razgPrice+musPrice;
+
+            console.log(formula0);
+            console.log(formula);
+
+console.log(summa1+"="+summa3);
+
+//////////////////////////////////////////////////////////
+
+        // $('#c1').html('<b>' + number_format(Math.round(summa1, 0), {decimals: 0, thousands_sep: " "}) + ' pублей</b>');
+        // $('#c2').html('<b>' + number_format(Math.round(summa2, 0), {decimals: 0, thousands_sep: " "}) + ' pублей</b>');
+        $('#ind').html('<b>' + number_format(Math.round(summa3, 0), {decimals: 0, thousands_sep: " "}) + ' pублей</b>');
+        $('.js-b1').html('' + number_format(Math.round(summa1, 0), {decimals: 0, thousands_sep: " "}) + ' руб.');
+        $('.js-b3').html('' + number_format(Math.round(summa3, 0), {decimals: 0, thousands_sep: " "}) + ' руб.');
+    return;
+    }
+    
+    // форматирование чисел по разрядности
+    function number_format(_number, _cfg){
+        function obj_merge(obj_first, obj_second){
+            var obj_return = {};
+            for (key in obj_first){
+                if (typeof obj_second[key] !== 'undefined') obj_return[key] = obj_second[key];
+                else obj_return[key] = obj_first[key];
+            }
+            return obj_return;
+        }
+        function thousands_sep(_num, _sep){
+            if (_num.length <= 3) return _num;
+            var _count = _num.length;
+            var _num_parser = '';
+            var _count_digits = 0;
+            for (var _p = (_count - 1); _p >= 0; _p--){
+                var _num_digit = _num.substr(_p, 1);
+                if (_count_digits % 3 == 0 && _count_digits != 0 && !isNaN(parseFloat(_num_digit))) _num_parser = _sep + _num_parser;
+                _num_parser = _num_digit + _num_parser;
+                _count_digits++;
+            }
+            return _num_parser;
+        }
+        if (typeof _number !== 'number'){
+            _number = parseFloat(_number);
+            if (isNaN(_number)) return false;
+        }
+        var _cfg_default = {
+            before: '',
+            after: '',
+            decimals: 2,
+            dec_point: '.',
+            thousands_sep: ','
+        };
+        if (_cfg && typeof _cfg === 'object'){
+            _cfg = obj_merge(_cfg_default, _cfg);
+        }
+        else _cfg = _cfg_default;
+        _number = _number.toFixed(_cfg.decimals);
+        if(_number.indexOf('.') != -1){
+            var _number_arr = _number.split('.');
+            var _number = thousands_sep(_number_arr[0], _cfg.thousands_sep) + _cfg.dec_point + _number_arr[1];
+        }
+        else var _number = thousands_sep(_number, _cfg.thousands_sep);
+        return _cfg.before + _number + _cfg.after;
+    }    
+</script>
+<div class='row top_project_info'>
+    <div class='col-md-9'>
+        <div class="img"><?
+ $f_SliderPath = $data['SliderPath'];        
+if ($handle = opendir($_SERVER['DOCUMENT_ROOT'].$f_SliderPath)) {
+                        
+						?><div id="vc_images-carousel-1-1494864491" data-ride="vc_carousel" data-wrap="false" style="width: 100%;" data-interval="0" data-auto-height="yes" data-mode="horizontal" data-partial="false" data-per-view="1" data-hide-on-end="true" class="vc_slide vc_images_carousel">
+							<!-- Wrapper for slides -->
+							<div class="vc_carousel-inner">
+								<div class="vc_carousel-slideline">
+									<div class="vc_carousel-slideline-inner"><?
+	//while (false !== ($f = readdir($handle))) { 
+   
+   
+$files = scandir($_SERVER['DOCUMENT_ROOT'].$f_SliderPath);
+sort($files);
+foreach ($files as $f) {    
+		if (is_file($_SERVER['DOCUMENT_ROOT'].$f_SliderPath.$f)) {
+			$f = ($f_SliderPath.$f);
+										?><div class="vc_item">
+											<div class="vc_inner">
+												<a href="<?=$f?>"  rel="lightbox1" data-group="main">
+												<img width="1170" height="780" src="<?=($f)?>" class="attachment-full" alt="" srcset="<?=$f?> 1170w, <?=$f?> 300w, <?=$f?> 768w, <?=$f?> 1024w" sizes="(max-width: 1170px) 100vw, 1170px" />										</a>
+											</div>
+										</div><?          
+			//echo "<img src=\"$f\" alt=\"\" />";		
+		}	
+	}
+
+									?></div>
+								</div>
+							</div>
+							<!-- Controls -->
+							<a class="vc_left vc_carousel-control" href="#vc_images-carousel-1-1494864491" data-slide="prev">
+							<span class="icon-prev"></span>
+							</a>
+							<a class="vc_right vc_carousel-control" href="#vc_images-carousel-1-1494864491" data-slide="next">
+							<span class="icon-next"></span>
+							</a>
+						</div>
+					<?
+    
+} else {        
+            ?><img class='img-responsive' src='<?=$img?>'><?
+}            
+            ?><div class="nachnets"> 
+                <div>Заключая с нами договор на этой неделе - 
+                строительство Вашего дома начнется <span class="text-bold"><?php echo $nachnets?></span> </div>
+                <div>а готов он будет уже <span class="text-normal"><?php echo $end?></span></div>
+            </div>
+        </div>
+    </div>
+    <div class='col-md-3'>
+        <div class='row'>
+            <div class='clue-bottom'>
+              <div class="right_short_project_info">
+                  <div class="col">
+                      <i class="svg-icon svg-cub_meters"></i>
+                      <div class="inner_text">
+                          <div class="title">Площадь</div>
+                          <b><?=intval($house_id)?> М<sup>2</sup></b>
+                      </div>
+                  </div>
+                  <div class="col">
+                      <i class="svg-icon svg-basic_price"></i>
+                      <div class="inner_text">
+                          <div class="title">Тепловой контур</div>
+                          <b><?=number_format($arPrice['set1']['discount_price'],0,' ',' ')?> руб</b>
+                      </div>
+                  </div>
+                  <div class="col">
+                      <i class="svg-icon svg-basic_price"></i>
+                      <div class="inner_text">
+                          <div class="title ">+Инжерные сети</div>
+                          <b><?=number_format($arPrice['set2']['discount_price'],0,' ',' ')?> руб</b>
+                      </div>
+                  </div>
+                  <div class="col">
+                      <i class="svg-icon svg-basic_price"></i>
+                      <div class="inner_text">
+                          <div class="title ">+Черновая отделка</div>
+                          <b><?=number_format($arPrice['set3']['discount_price'],0,' ',' ')?> руб</b>
+                      </div>
+                  </div>  
+                  <div class="col">
+                      <i class="svg-icon svg-basic_price"></i>
+                      <div class="inner_text">
+                          <div class="title yellow_title">Индивидуальная комплектация</div>
+                          <b><span class="js-b3"></span> руб</b>
+                      </div>
+                  </div>                 
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class='col-md-3 project_bottom_buttons'>
+        <div class='row'>
+            <div class='clue-bottom'>
+            <a data-compl="f_Compl" data-data="f_house_id=<?=$house_id?>" data-action="/catalog/send-me/" data-show="#parent_popup_form_detail_phone" data-href=".js-callback-wrap" class="js-openPopup btn btnico1 hvr-bounce-to-top mgt-button mgt-style-bordered mgt-size-normal mgt-align-left mgt-display-inline mgt-text-size-normal mgt-button-icon-position-left mgt-text-transform-uppercase " href="" target=" _blank">Отправить комплектацию <br>мне на email </a>
+            <a data-compl="f_Compl" data-action="/catalog/zakaz-smety/" data-show="#parent_popup_form_detail_phone" data-href=".js-callback-wrap" class="js-openPopup btn btnico2 hvr-bounce-to-top mgt-button mgt-style-bordered mgt-size-normal mgt-align-left mgt-display-inline mgt-text-size-normal mgt-button-icon-position-left mgt-text-transform-uppercase " href="" target=" _blank">Запросить смету </a>
+            <a class="btn mgt-button mgt-style-solid-invert mgt-size-normal mgt-align-left mgt-display-inline mgt-text-size-normal mgt-button-icon-position-left mgt-text-transform-uppercase " href="<?=$url?>" target=" _blank"><i class="fa"></i>Вернуться к описанию </a>
+            </div>
+        </div>
+     </div>
+ </div>  
+ <div class="mgt-header-block clearfix text-left text-black wpb_animate_when_almost_visible wpb_top-to-bottom wpb_content_element  mgt-header-block-style-2 mgt-header-texttransform-header  wpb_start_animation"><h2 class="mgt-header-block-title">Что включено в стоимость</h2><div class="mgt-header-line"></div></div>
+ <div class="row">
+     <div class="col-md-3">
+         <div class="bordered-item with-icon">
+             Изменение проекта БЕСЛАТНО (планировка, световые проемы)
+         </div>
+     </div>
+     <div class="col-md-3">
+         <div class="bordered-item with-icon">
+             <?=$data['h1']?>  - высота потолков 1-го этажа,
+             <?=$data['h2']?>  высота аттиковой стены 2-го этажа
+         </div>
+     </div>
+     <div class="col-md-3">
+         <div class="bordered-item with-icon">
+             Применение при строительстве только сухой строганной доски
+         </div>
+     </div>
+     <div class="col-md-3">
+         <div class="bordered-item with-icon">
+             Два сервисных<br>обслуживания &mdash; <br>БЕСПЛАТНО
+         </div>
+     </div>     
+ </div>
+ <form name="frmCalc" id="frmCalc" action="#" method="post">
+<table class="calc-table">
+    <thead>
+      <tr class="">
+            <!-- <th class="th1" style="width: 250px; padding: 10px 12px !important;" rowspan="3">этап работы</th> -->
+            <th class="th1" style="" rowspan="3">Описание работы</th>
+            <th class="th1" style="width: 160px;text-align:center" rowspan="3"><span class="desktop">БАЗОВАЯ КОМПЛЕКТАЦИЯ<br>«ТЕПЛОВОЙ&nbsp;КОНТУР»</span><span class="mob">баз. компл.<br>«ТЕПЛОВОЙ КОНТУР»</span></th>
+            <th class="th1" style="width: 160px;text-align:center;vertical-align:top;" rowspan="3"><span class="desktop">ИНДИВИДУАЛЬНАЯ КОМПЛЕКТАЦИЯ</span><span class="mob">инд. компл.</span></th>
+            <!--<th class="border-none c1 whitebg">КОМПЛЕКТАЦИЯ</th>
+            <th class="border-none c2 whitebg">КОМПЛЕКТАЦИЯ</th>
+          <th class="border-none c3 whitebg">КОМПЛЕКТАЦИЯ</th>-->
+        </tr>
+       
+        
+    </thead>
+    <tbody>        
+ <!-- /FormPrefix -->
+
+<!-- RecordTemplate --><tr>
+    <td><?=$f_Option1?></td>
+    <td><?=$f_Name?></td>
+    <td></td>
+    <td></td>
+</tr><!-- /RecordTemplate -->
+
+<!-- FormSuffix --><?php
+$i = 1;
+$rows = '';
+$group_id = 0; // id группы для убирания бордюра между ячейками одной группы
+foreach ($arrCalc as $razdel => $arrRazdel) { // перебираем основной массив этапов работ
+    if ($razdel!='Отделка* (прединженерный этап) '){
+    // дополняем данными выбранного дома
+    foreach ($arrRazdel as $key => $arWork) { // создание разделов таблицы
+    $i++;
+    $description = $arWork['Name'];
+    
+    $tooltip1 = "";
+    $tooltip2 = "";
+    if ($arWork['Description'] || $arWork['Text']) {
+        $tooltip1 = '<div class="notices_wrapper"><div class="notices">';
+        if ($arWork['Text']) {
+            $tooltip1 .= '                        <div class="notice_wrapper">
+                            <div class="button">!</div>
+                            <div class="notice_inner">
+                                <span class="close_btn">х</span>
+                                <div class="text">
+                                    <!--<div class="title">'.$description.'</div>-->
+                                   '.$arWork['Text'].'
+                                </div>
+                            </div>
+                        </div>';
+        }
+        if ($arWork['Description']) {
+            $tooltip1 .= '<div class="notice_wrapper"><div class="button button-warn">?</div></div>';
+            $tooltip2 .= '<div class="tooltip_wrapper"><div class="tooltip_inner">'.$arWork['Description'].'</div></div>';
+        }        
+        $tooltip1.='</div></div>';
+    }
+    
+        if($arrSale[$house_id]['base'][$key][0] == 0 and // если нет расчетной части
+                $arrSale[$house_id]['base'][$key][1] == 0 and 
+                $arrSale[$house_id]['base'][$key][2] == 0 and 0) 
+        {
+            # открытие раздела
+            // если все базовые параметры 0, то производим объединение колонок в одну
+            $rows .= "<tr>\n<td>$description</td>\n<td colspan='3' align='center'> \n"; // наименование
+            $rows .= $arrSale[$house_id]['base'][$key][3];    //." key=$key; ".print_r($arrSale[$house_id]['base'][$key],1);
+            $rows .="</td>\n</tr>\n"; // закрытие раздела
+            continue;
+        } else {
+            $rows .= "<tr>\n<td class='tooltiptd'>$tooltip1 $description $tooltip2</td>\n<td align='center'>\n"; // наименование
+        }
+        
+        if ($key == 35) { //
+            $toDost = array(6,50,52,7,8,26,13,17);
+            $dostPrice=0;
+            foreach ($toDost as $key1) {
+                if($rs1['base'][$key1]['set1']) $dostPrice += $arrSale[$house_id]['base'][$key1][0];
+            }
+            $dostPrice = ceil($dostPrice/35);
+            $arrSale[$house_id]['base'][$key][0] = $dostPrice;
+        }
+        if ($key==36) $arrSale[$house_id]['base'][$key][0] = $dostPrice;
+        if ($key==37) {
+            $toDost = array( 19,30,51);
+            $musPrice=0;
+            foreach ($toDost as $key1) {
+                if($rs1['base'][$key1]['set1']) $musPrice += $arrSale[$house_id]['base'][$key1][0];
+            }  
+            $musPrice = ceil($dostPrice/2+$musPrice/250);
+            $arrSale[$house_id]['base'][$key][0] = $musPrice;
+        }
+        
+    $rows .="<input type='".($AUTH_USER_ID && $debug ? "text":"hidden")."' data-set2='".$arrSale[$house_id]['base'][$key][4]."'  data-set3='".$arrSale[$house_id]['base'][$key][5]."' data-price='".$arrSale[$house_id]['base'][$key][3]."' data-vol='".$arrSale[$house_id]['base'][$key][2]."' name='price_$key' id='price_$key' value='".str_replace(",",".",$arrSale[$house_id]['base'][$key][0])."' />\n"; // стоимость
+       // $rows.="<!-- ".print_r($rs1,1)."  -->";
+    // комплектация 1    
+    if ($rs1['base'][$key]['set1'] ) {
+            $rows .=
+                "<div class='chk-on-disabled-c1'>
+                <input type='checkbox' class='chk-none' name='chk1_$key' id='chk1_$key' checked='checked' disabled />
+                <label for='chk1_$key'></label>
+                </div>\n"; // выбрано без возможности изменить
+        } else if ($rs1['custom'][$key]['choice'] == 3 ) {
+            $rows .= "<input type='checkbox' class='chk-none' name='chk1_$key' id='chk1_$key' disabled /><label for='chk1_$key'></label>\n"; // не выбрано без возможности изменить
+        } else {
+            //$rows .= "<input type='radio' class='chk-none' name='chk1_$key' id='chk1_$key' disabled /><label for='chk1_$key'></label>\n"; // не выбрано без возможности изменить
+        }
+    $rows .= "</td>\n";
+
+    /*$rows .= "<td align='center'>\n";
+        
+    // комплектация 2
+    if ($arrSale[$house_id]['base'][$key][2] == 1 ) {
+            $rows .= "<div class='chk-on-disabled-c2'><input type='checkbox' class='chk-none' name='chk2_$key' id='chk2_$key' checked='checked' disabled /></div>\n"; // выбрано без возможности изменить
+        } else {
+            $rows .= "<input type='checkbox' class='chk-none' name='chk2_$key' id='chk2_$key' disabled />\n"; // не выбрано без возможности изменить
+        }
+    $rows .= "</td>\n";*/
+        
+    // Индивидуальная комплектация
+        # блок if для стирания бордера
+        $current_group = $arrSale[$house_id]['custom'][$key][1];
+        if($current_group == 0 and $group_id == 0) {
+            $rows .= "<td align='center' class='border-ind'>\n "; // группы radio нет
+        } else if($current_group !== $group_id and $current_group !== 0){
+            $rows .= "<td align='center' style='border-bottom:none;' class='border-ind'>\n "; // начало новой группы
+            $group_id = $current_group;
+        } else if($current_group == $group_id and $group_id !== 0) {
+            $rows .= "<td align='center' style='border-top:none;' class='border-ind'>\n "; // продолжение группы
+        } else if($current_group == 0 and $group_id !== 0) {
+            $rows .= "<td align='center' class='border-ind'>\n "; // конец группы
+            $group_id = $current_group;
+        } # конец блока
+        
+        $checked = ($arrSale[$house_id]['custom'][$key][2] == 1 ) ? "checked='checked'" : '';
+    if ($arrSale[$house_id]['custom'][$key][0] == 1 ) {
+            $rows .= "<div class='chk-on-disabled-c3'><input type='checkbox' class='chk-none' name='chk3_$key' id='chk3_$key' checked='checked' disabled /><label for='chk3_$key'></label></div>\n"; // выбрано без возможности изменить
+        }
+        if ($arrSale[$house_id]['custom'][$key][0] == 3 ) { // можно выбрать или отменить
+            $rows .= "<input type='checkbox' name='chk3_$key' id='chk3_$key' $checked /><label for='chk3_$key'></label>\n"; // выбрано, возможно изменить
+        }
+        if ($arrSale[$house_id]['custom'][$key][0] == 2 ) { // можно выбрать только 1 вид работ
+            $rows .= "<input type='radio' name='radio3[{$arrSale[$house_id]['custom'][$key][1]}]' id='chk3_$key' value='$key' $checked/><label for='chk3_$key'></label>\n";
+        }
+    
+    $rows .="</td>\n</tr>\n"; // закрытие раздела
+        }
+    echo  "<tr><td class='razdel mob' colspan='3'>$razdel</td></tr><tr>\n<td colspan='3' data-rowspan = '$i' class='razdel'>$razdel</td>\n</tr>\n$rows"; // вывод раздела (этапа)
+    $i = 1;
+    $rows = '';
+    }
+}
+?><?if($common) {?>
+        <tr class="dostavka">
+            <td class="razdel" rowspan="3">Общие расходы</td>
+            <td>Доставка</td>
+            <td class="b1"><span id='dostPrice0'>0</span> руб.</td>
+            <td class="b3"><span id='dostPrice'>0</span> руб.</td>
+        </tr>
+        <tr class="razgruzka">
+            
+            <td>Разгрузка</td>
+            <td class="b1"><span id='razgPrice0'>0</span> руб.</td>
+            <td class="b3"><span id='razgPrice'>0</span> руб.</td>
+        </tr>
+        <tr class="musor">
+         
+            <td>Вывоз мусора</td>
+            <td class="b1"><span id='musPrice0'>0</span> руб.</td>
+            <td class="b3"><span id='musPrice'>0</span> руб.</td>
+        </tr>   
+<? } ?>     
+        <tr class="itogo">
+            <td class="razdel">Стоимость, руб.</td>
+            <!--<td></td>-->
+            <td class="b1 js-b1" data-price="<?=$arPrice['set1']['discount_price']?>"><?=number_format($arPrice['set1']['discount_price'],0,' ',' ')?> руб.</td>
+            <!--<td class="b2"><?php /*echo $arrSale[$house_id]['c2'];*/ ?></td>-->
+            <td class="b3 js-b3"></td>
+        </tr>
+</tbody>
+</table>
+</form>
+<?
+echo $nc_core->template->get_partial("thebuilt", "save_compl", $data);
+?></div>
+
+<script>calc();</script> 
+
+<Script>
+
+
+
+$('.gomanager').click(function(){
+    var vibor = $('input[name=vibor]:checked').val();
+    var price;
+    var nomer;
+    //var chk3_2 = $('input[name=chk3_2]:checked').val();
+    
+    
+    if(vibor=='Комплектация c1')
+    price = $('.b1').text();
+    else if(vibor=='Комплектация c2')
+    price = $('.b2').text();
+    else price = $('.b3').text();
+    nomer = $('.head-calc h2').text();
+
+
+    $.ajax({
+    type: "POST",
+    url: "/test/test.php",
+    data: {vibor:vibor,price:price,nomer:nomer},
+    success: function(msg){
+    //alert(msg);
+    }
+});
+
+});
+ 
+</script><!-- /FormSuffix -->

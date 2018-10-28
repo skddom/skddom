@@ -1,0 +1,4 @@
+<?
+$br = CBranding::get_object();
+$phone =  $br->get('Phone','+7(495) 983-00-39');
+?><a onclick="ga('send','klik-telefon');" class="yp<?=preg_replace('~[^\d]~', '', $phone)?>" href="tel:<?=$phone?>"><?=$phone?></a>

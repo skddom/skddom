@@ -1,0 +1,45 @@
+<div style='margin-bottom:10px; font-weight:bold'>
+	
+	<? if ($rssLink) : ?>
+		<img src='<?= $SUB_FOLDER ?>/images/rss.png' alt='RSS' /><a href='<?= $rssLink ?>'>RSS</a> |
+	<? endif; ?>
+
+   <a href='
+        <?= $addLink ?>
+        <? if ($curPos) : ?>
+            <?= strstr($addLink, "?") ? "&amp;" : "?" ?>
+            curPos= <?= $curPos ?>
+        <? endif; ?>
+   '>Новый топик</a>
+</div>
+<div id='sortables'>
+    <form name='sorting' method='get'>
+    <? if ($inside_admin) : ?>
+        <input type='hidden' name='inside_admin' value='1' />
+        <input type='hidden' name='sub' value='<?= $sub ?>' />
+        <input type='hidden' name='cc' value='<?= $cc ?>' />
+    <? endif; ?>
+    <? if ($curPos) : ?>
+    <input type='hidden' name='curPos' value='<?= $curPos ?>'/>    
+    <? endif; ?>
+		<span style="white-space: nowrap; ">
+    сортировать по 
+    <select name='sort' class='no_special_style'>
+    <option value='updated' <?= $sort=="updated" ? " selected" : "" ?> >дате обновления</option>
+    <option value='created' <?= $sort=="created" ? " selected" : "" ?> >дате создания темы</option>
+    <option value='subject' <?= $sort=="subject" ? " selected" : "" ?> >названию</option>
+    <option value='replies' <?= $sort=="replies" ? " selected" : "" ?> >количеству ответов</option>
+    <option value='views' <?= $sort=="views" ? " selected" : "" ?> >количеству просмотров</option>
+    <option value='author' <?= $sort=="author" ? " selected" : "" ?> >автору темы</option>
+    </select>
+		</span>
+		<span style="white-space: nowrap; ">
+    порядок 
+    <select name='sortDir' class='no_special_style'>
+    <option value='desc' <?= $sortDir=="desc" ? " selected" : "" ?> >по убыванию</option>
+    <option value='asc' <?= $sortDir=="asc" ? " selected" : "" ?> >по возрастанию</option>
+    </select>
+			</span>
+    <input type='submit' value='отобразить'/>
+    </form>    
+</div>

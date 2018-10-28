@@ -1,0 +1,44 @@
+<?
+$posting = 0;
+
+// required fields empty
+if ( !($Keyword && $Name) ) $warnText = NETCAT_MODULE_FORUM2_COMPONENT_FORUM_REQFIELDS;
+
+// get forum object
+$forum_obj = nc_forum2_forum::get_object();
+
+// forum already exist
+if ( !$warnText && $forum_obj->check_existance($sub, $Keyword) ) $warnText = sprintf(NETCAT_MODULE_FORUM2_COMPONENT_FORUM_ERROR_EXIST, $Keyword);
+
+if (!$warnText) {
+  // attempt to create new forum
+  if ($forum_id = $forum_obj->create($sub, $Keyword, $Name, $Checked, $Topic_Keyword, $Topic_Name, $Reply_Keyword, $Reply_Name) ) {
+    // set forum description
+    if ($Description) $forum_obj->set_description($forum_id, $Description);
+    // set forum group
+    if ($Group) $forum_obj->set_group($forum_id, $Group);
+    // subscribe
+    if ( $nc_core->modules->get_by_keyword('subscriber', 0) && $MODULE_VARS['subscriber']['VERSION'] > 1 ) { 
+      try {
+        $nc_subscriber = nc_subscriber::get_object();
+        // default mailer
+        $mailer = $nc_subscriber->get($MODULE_VARS['forum2']['SUBSCRIBER_MAILER_ID']);
+        $topic_cc_id = $forum_obj->get_subclass_id($forum_id);
+        $mailer['Sub_Class_ID'] = $topic_cc_id;
+        $mailer['Active'] = 1;
+        $mailer['Name'] = NETCAT_MODULE_FORUM2.": ".$Name;
+        $nc_subscriber->add($mailer);
+      }
+      catch (Exception $e) {
+        ;
+       }  
+    } 
+    ob_end_clean();
+    header( "Location: ".$goBackLink.($inside_admin ? "&inside_admin=1" : "") );
+    exit;
+  }
+  else {
+    $warnText = NETCAT_MODULE_FORUM2_COMPONENT_FORUM_ERROR_CREATE;
+  }
+}
+?>

@@ -1,0 +1,26 @@
+<!-- FormPrefix --><?php $result .= " <div class='robototitle' style='margin-top:30px'>Популярные проекты</div>
+<div class='info'>
+	<div class='inner'>
+		<div class='inner newview newview_home'> "; ?><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?php $result .= " ";if($f_SliderPath&&$f_MainImgPath)$f_MainImg=$f_SliderPath.$f_MainImgPath;
+if (is_array($br->projects[$f_RowID])) extract($br->projects[$f_RowID]);
+
+$cnt++;
+$result.="		
+			<div".($cnt%3==0?" style=\"margin-right:0\"":"")." class=\"special\">
+				<div class=\"pic\"><a href=\"$fullLink\"><img width=\"220\" height=\"165\" alt=\" \" src=\"$f_MainImg\"></a></div>
+				<div class=\"desc\"> <a href=\"$fullLink\">
+				<div class=\"name\">".str_replace("из клееного бруса","",$f_Name)."</div>
+				<div class=\"area\">Площадь дома - $f_Square* кв.м.</div>
+				<div class=\"clr\"></div>
+				<div class=\"cost\"> <span class=\"ico\"></span> <span><span class='fs2'>Цена в базовой комплектации</span>
+					$f_Price1 р.</span> </div>
+				</a> <a href=\"/price/calc/?house=$f_house_id\" class=\"calc\">Другие<br>компл.</a></div>
+			</div> "; ?><!-- /RecordTemplate -->
+
+<!-- FormSuffix --><?php $result .= " 			<div class='clr'></div>
+		</div>
+
+	</div>
+</div> "; ?><!-- /FormSuffix -->

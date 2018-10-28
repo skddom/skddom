@@ -1,0 +1,18 @@
+
+<style>
+    #<?= $nc_block_id; ?> .tpl-block-page-block .tpl-block-button-group:hover { color: <?= $cc_settings['background_color']; ?>; }
+    #<?= $nc_block_id; ?> .tpl-block-page-block .tpl-block-button-group:active {color: <?= $cc_settings['background_color']; ?>; }
+    #<?= $nc_block_id; ?> .tpl-block-page-block .tpl-block-button-group:hover .tpl-block-button { color: <?= $cc_settings['background_color']; ?>; }
+    #<?= $nc_block_id; ?> .tpl-block-page-block .tpl-component-netcat-module-requests-request .tpl-block-button:not([disabled="disabled"]):hover,
+    #<?= $nc_block_id; ?> .tpl-block-page-block .tpl-component-netcat-module-requests-request .tpl-block-button:not([disabled="disabled"]):active { color: <?= $cc_settings['background_color']; ?>; }
+</style>
+<div class="tpl-block-page-block  <?= $cc_settings['disable_background_pattern'] ? 'tpl-layout-disable-bg-pattern' : ''; ?>" style="background-color: <?= $cc_settings['background_color']; ?>">
+    <div style="height: <?= $cc_settings['padding_top'];?>px;"></div>
+    <?= $f_AdminCommon; ?>
+    <div class="tpl-block-content">
+
+        <? if ($cc_settings['show_text_before_header']): ?>
+            <div class="tpl-block-prefix"><?= nc_infoblock_custom_setting_edit_inline('text_before_header', $cc) ?></div>
+        <? endif; ?>
+
+        <div class="tpl-block-row">

@@ -1,0 +1,95 @@
+<!-- FormPrefix --><div class="vc_row wpb_row vc_row-fluid vc_custom_1459335800844" data-vc-full-width="true"
+				 data-vc-full-width-init="false">
+    <div class="projects wpb_column vc_column_container vc_col-sm-12">
+        <div class="vc_column-inner ">
+								<div class="mgt-header-block clearfix text-left text-white wpb_content_element mgt-header-block-style-1 mgt-header-texttransform-header">
+									<p style="    font-size: 24px;" class="h2_block mgt-header-block-title"><?=$cc_env['Sub_Class_Name']?></p>
+									<div class="mgt-header-line"></div>
+									<p><?=$cc_settings['Name']?></p>
+								</div>
+                                
+            <div class="wpb_wrapper"><?
+            if ($cc_settings['Video']) {
+            $src = "https://img.youtube.com/vi/$code/0.jpg";
+            
+            if ($cc_settings['VideoImg']) $src = $cc_settings['VideoImg']['resultpath'];
+            
+//            print_r($cc_settings['Video']);
+            
+?><div class="line-wrap">
+        <div class="line-video"><a href="#alpinovideo" style="background-image:url(<?=$src?>);background-position:center;background-size:cover;" class="video-review js-toggle-video"><span><?=$cc_settings['VideoText']?></span></a>
+        <div style="display:none;" class="js-video" id="alpinovideo"><?=$cc_settings['Video']?></div>
+        </div>
+        
+        <div class="line-text">
+<?=$cc_settings['Text']?>
+</div>
+    </div><?
+            }    
+                ?><div class="portfolio-list portfolio-columns-4 portfolio-grid-layout-3  portfolio-with-spaces clearfix" id="portfolio-list-2"><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?php $result .= " ";
+unset($br->projects[$f_RowID]['f_Price1']);
+if (is_array($br->projects[$f_RowID])) extract($br->projects[$f_RowID]);
+$t=explode("CKD",$f_Name);
+if(count($t)>1) $f_Name="<span class='fs12'>$t[0]</span> CKD$t[1]";
+else {
+    $t=explode("СКД",$f_Name);
+    if(count($t)>1) $f_Name="<span class='fs12'>$t[0]</span> CKD$t[1]";
+}
+/*if($f_SliderPath&&$f_MainImgPath)$f_MainImg=$f_SliderPath.$f_MainImgPath;*/
+$f_MainImg=$f_MainImgPath;
+if (strpos($f_MainImg,"files/")===false) $f_MainImg = $f_SliderPath.$f_MainImg;
+
+if (!$f_MainImg) $f_MainImg = $f_ResizeImg;
+
+if ($f_Novinka) $f_MainImg = $f_Novinka;
+
+foreach ($arRange as $v) {
+    if ($f_house_id >= $v['RANGE'][0] && $f_house_id<$v['RANGE'][1]) $id = $v['ID'];
+}
+$fullLink = nc_message_link($f_RowID,$classID);
+ ?>
+<div  data-id="<?=$f_RowID?>" data-class="<?=$id?>" class="<?=$id?> portfolio-item-block portfolio-item-animation-6 mix building" data-item="<?=$f_RowNum?>" data-name="<?=$f_Name?>" style="display: inline-block;">
+	<div class="portfolio-item-block-inside">
+	  <a href="<?=$fullLink?>" target="_self" rel="" title="<?=strip_tags($f_Name)?>">
+	    <div class="portfolio-item-image" data-style="background-image: url('<?=$f_MainImg?>');" style="background-image: url('<?=$f_MainImg?>');"></div>
+	    <div class="portfolio-item-bg"></div>
+		
+												<div class="info">
+													<div class="hh4 title">CKD-<?=$f_house_id?></div>
+													<div class="project-description">Площадь <?=$f_Square?> м<sup>2</sup><br>Цена <?=$f_Price1?$f_Price1:$f_Price?> руб.</div>
+													<div class="hvr-icon-wobble-horizontal mgt-button mgt-style-textwhite mgt-size-normal mgt-align-left mgt-display-newline mgt-text-size-small mgt-button-icon-position-right mgt-text-transform-uppercase">УЗНАТЬ БОЛЬШЕ<i class="fa fa-arrow-right"></i></div>
+												</div>
+				
+        <div class="labels">
+	       <?if($f_Hit):?><div class="label hit">Хит продаж</div><br><?endif?>
+           <?if($f_Special):?><div class="label special">Спецпредложение</div><br><?endif?>
+           <?if($f_Cheap):?><div class="label cheap">Выгодная цена</div><?endif?>
+        </div>
+	  </a>
+	</div>
+	</div><!-- /RecordTemplate -->
+
+<!-- FormSuffix -->                </div>
+<script>(function($){
+	    $(document).ready(function() {
+
+		    $("#portfolio-list").mixItUp({effects:["fade","scale"],easing:"snap"});
+            $(".js-toggle-video").click(function(){
+                    $this = jQuery(this);
+      $parent = $this.parent();
+      $video = $parent.find(".js-video");
+      src = $video.find("iframe").attr('src');
+      $video.find("iframe").attr('src', src + '?rel=0&showinfo=0&autoplay=1');            
+              $(this).closest(".line-wrap").addClass("show-video");
+
+      
+              return false;
+            });
+
+	    });})(jQuery);</script>
+            </div>
+        </div>
+    </div>
+</div><div class="vc_row-full-width"></div><!-- /FormSuffix -->

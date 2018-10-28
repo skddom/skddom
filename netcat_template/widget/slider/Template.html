@@ -1,0 +1,65 @@
+<?
+$id = "gallery_42_".uniqid();
+if ($f_Images) echo $f_Images;
+else {
+// get images
+global $current_sub;
+if ($f_Eval) eval ($f_Eval);
+if (!$f_Eval && !$f_Folder) $f_Folder = $current_sub['Image'];
+echo $f_Eval;
+?>
+<div class="mgt-header-block"></div>
+					<div class="mgt-post-list-wrapper">
+						<div class="mgt-post-list wpb_content_element animated" id="<?=$id?>"
+						 style="display: none;"><?
+
+if ($f_Folder) {
+    $images = array();
+    if ($handle = opendir($_SERVER['DOCUMENT_ROOT'].$f_Folder)) {
+        while (false !== ($file = readdir($handle))) { 
+            if (strlen($file)>3)
+            $images[] = array("f_Image"=>$f_Folder."$file","f_Name"=>"","f_Preview"=>"$f_Folder$file");
+        }
+    }
+}
+
+                                            foreach ($images as $v) {
+// get vars
+extract ($v);
+						?><div class='mgt-post normal-blocks'>
+								<a href='<?=$f_Image?>' rel='lightbox'>
+									<div class='mgt-post-image' data-style='background-image: url(<?=$f_Preview?>);'>
+										<div class='mgt-post-image-wrapper'>
+											<div class='mgt-post-wrapper-icon'><i class='fa fa-plus'></i></div>
+										</div>
+									</div>
+								</a>								
+							</div><?												
+                                       }
+						?></div>
+					</div>
+					<script>
+						(function($)
+						{
+							$(document).ready(function()
+							{
+								$('#<?=$id?>').owlCarousel(
+								{
+									items: 3,
+									itemsDesktop: [1024, 1],
+									itemsTablet: [770, 1],
+									itemsMobile: [480, 1],
+									autoPlay: false,
+									navigation: true,
+									navigationText: false,
+									pagination: false,
+									afterInit: function(elem)
+									{
+										$(this).css('display', 'block');
+									}
+								});
+							});
+						})(jQuery);
+					</script><?
+}                    
+?>                    

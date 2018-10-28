@@ -1,0 +1,79 @@
+<!-- FormPrefix --><?= $f_AdminCommon; ?>
+				<!--ABOUT START-->
+				<div class="vc_row wpb_row vc_row-fluid">
+					<div class="wpb_column vc_column_container vc_col-sm-12">
+						<div class="vc_column-inner">
+							<div class="wpb_wrapper">
+								<div class="mgt-header-block clearfix text-left text-black wpb_content_element mgt-header-block-style-1 mgt-header-texttransform-header">
+									<p class="h2_block mgt-header-block-title"><?=$cc_env['Sub_Class_Name']?></p>
+									<div class="mgt-header-line"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="vc_row wpb_row vc_row-fluid vc_custom_1459437352339">
+					<div class="wpb_column vc_column_container vc_col-sm-4">
+						<div class="vc_column-inner vc_custom_1459186986556">
+							<div class="wpb_wrapper">
+								<div class="mgt-promo-block animated white-text cover-image text-size-normal no-darken wpb_content_element"
+								 data-style="background-image: url(<?=($cc_settings['Image']['resultpath'])?>);background-repeat: no-repeat;width: 100%; height: 495px;"></div>
+							</div>
+						</div>
+					</div>
+					<div class="wpb_column vc_column_container vc_col-sm-4">
+						<div class="vc_column-inner vc_custom_1459186959095">
+							<div class="wpb_wrapper">
+								<div class="mgt-promo-block black-text text-size-normal no-darken mgt-promo-block-75700987093 wpb_content_element"
+								 data-style="background-color: #f5f5f5;width: 100%; height: 495px;">
+									<div class="mgt-promo-block-content va-top">
+										<div class="mgt-promo-block-content-inside vc_custom_1460558952530">
+                                        <?=$cc_settings['Text']?>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="wpb_column vc_column_container vc_col-sm-4">
+						<div class="vc_column-inner">
+							<div class="wpb_wrapper">
+								<div class="vc_tta-container" data-vc-action="collapse">
+									<div class="vc_general seo_fblg vc_tta vc_tta-accordion vc_tta-color-black vc_tta-style-classic vc_tta-shape-square vc_tta-o-shape-group vc_tta-controls-align-left">
+										<div class="vc_tta-panels-container">
+											<div class="vc_tta-panels">                                        
+<!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?= $f_AdminButtons; $cnt++; 
+												?><div data-cnt="<?=$cnt?>" class="vc_tta-panel<?if($cnt==1):?> vc_active<?endif?>" id="panel<?=$cc?>_<?=$f_RowID?>"
+												 data-vc-content=".vc_tta-panel-body"><?
+                                                 if ($f_Code) echo $f_Code;
+                                                 else {
+													?><div class="vc_tta-panel-heading">
+														<p class="vc_tta-panel-title vc_tta-controls-icon-position-right">
+															<a href="#panel<?=$cc?>_<?=$f_RowID?>" data-vc-accordion="" data-vc-container=".vc_tta-container">
+																<span class="vc_tta-title-text"><?=$f_Name?></span><span class="vc_tta-controls-icon vc_tta-controls-icon-plus"></span></a>
+														</p>
+													</div>
+													<div class="vc_tta-panel-body">
+														<div class="mgt-icon-box wpb_content_element mgt-icon-box-right mgt-icon-fa mgt-icon-background mgt-icon-background-normal text-black">
+															<div class="mgt-icon-box-icon hvr-icon-push">
+																<div class="mgt-font-icon"><i class="fa fa-users"></i></div>
+															</div>
+															<div class="mgt-icon-box-content"><?=$f_Text?></div>
+															<div class="clearfix"></div>
+														</div>
+													</div><?
+                                                } 
+												?></div><!-- /RecordTemplate -->
+
+<!-- FormSuffix -->											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="vc_row-full-width"></div>
+				<!--ABOUT END--><!-- /FormSuffix -->

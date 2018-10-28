@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<title>Генплан</title>
+
+<script type="text/javascript" src="http://www.nikolskie-ozera.ru/genplan.js"></script>
+	<script type="text/javascript" src="http://www.nikolskie-ozera.ru/js/jquery.nebulaslider.js"></script>
+    <script type="text/javascript" src="http://www.nikolskie-ozera.ru/js/jquery.easing.js"></script>
+    <script type="text/javascript" src="http://www.nikolskie-ozera.ru/js/jquery.fancybox.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$('.l-footer #search').focusin(function() { if ( !$(this).hasClass('focus') ) { $(this).val(''); $(this).addClass('focus'); } });
+			
+			$('.l-footer #search').focusout(function() { if ($(this).val().length === 0) { $(this).removeClass('focus'); $(this).val('Поиск...'); } });
+			
+			$('.fancybox-image').fancybox();
+	                  $('#swf').fancybox({
+	    'padding'           : 0,
+        'autoScale'     	: false,
+        'transitionIn'		: 'none',
+		'transitionOut'		: 'none',
+           'width': 661,
+            'height': 699
+	});
+});
+	</script>
+
+
+<base href="http://www.nikolskie-ozera.ru/" />
+<meta name="Generator" content="Никольские Озера 2011" />
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+ 
+<meta name="description" content="Элитный коттеджный поселок на Калужском шоссе, в 32 км от Москвы. Как недорого купить коттедж и загородный участкок у озера." />
+<meta name="keywords" content="Элитный коттеджный поселок, коттеджи на продажу, земельные участки на Калужском шоссе в Подмосковье, дома у озера" />
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" href="modules/Gallery/templates/css/Fancybox_nik.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" type="text/css" href="http://www.nikolskie-ozera.ru/tmp/cache/stylesheet_50_1311228145.css"/>
+
+</head><body>
+<div id="genplan" style="overflow: auto;"><!-- genplan --></div>
+</body>
+</html>

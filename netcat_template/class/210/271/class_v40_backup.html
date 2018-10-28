@@ -1,0 +1,276 @@
+<!-- FormPrefix -->$f_AdminCommon
+
+          <ul id=\"bxslider$sub\" class=\"bxslider\">
+<!-- /FormPrefix -->
+
+<!-- RecordTemplate -->";if($f_SliderPath&&$f_MainImgPath)$f_MainImg=$f_SliderPath.$f_MainImgPath;
+if (is_array($br->projects[$f_RowID])) extract($br->projects[$f_RowID]);
+$result.="$f_AdminButtons
+
+            <li><a data-type='link' data-ajax='false' href='$fullLink'><img  style='margin-bottom:42px;' src=\"$f_SliderPath$f_MainImgPath\" alt=\"$f_Name\" title=\"$f_Name\" /></a><span class=\"icon\"></span>
+              <div class=\"rhino-caption\" style=\"height:42px;\">
+                <div style=\"line-height:42px;\" class=\"name corbel\"><a style='font-size:16px;' href=\"$fullLink\">".str_replace("Проект дома из клееного бруса ","",$f_Name)."</a>
+                
+                   <span><a data-type='link' data-ajax='false' href=\"$fullLink\">Стоимость</a>: </span> <a data-type='link' data-ajax='false' style='font-size:16px;' href=\"$fullLink\" class=\"cos\">$f_Price р.</a>
+                  
+                </div>
+                <a data-type='link' data-ajax='false' style='width:40px;height:35px;' href=\"$fullLink\" class=\"special\">Спецпредложение</a> </div>
+            </li>
+<!-- /RecordTemplate -->
+
+<!-- FormSuffix -->          </ul>&nbsp;
+<style>
+.a.special.ui-link { background-size:contain; }
+.rhino-prev, .rhino-next {
+top: 245px;
+}
+.rhino-toggle {
+top: 445px;
+}
+.rhino-bullets {
+top: 453px;
+}
+#bxslider$sub {  }
+#bxslider$sub img { width:100%; }
+#bxslider$sub li {
+/*height: 604px;*/
+margin-bottom:10px;
+}
+
+.rhino-caption .special { text-indent: -99999px; }
+</style>
+<script>
+$(function(){
+  \$(document).ready(function(){
+    \$('.bxslider').bxSlider({
+        adaptiveHeight: true,
+        pager: false,
+        infiniteLoop: false
+    });
+    $(document).on('pagebeforeshow', 'catalog', function(){       
+      \$('.bxslider').bxSlider({
+          adaptiveHeight: true,
+          pager: false,
+          infiniteLoop: false
+      });
+    });
+  });
+});
+</script><!-- /FormSuffix -->
+
+<!-- RecordTemplateFull --> <div class=\"inner\">
+
+
+		  
+          <h1>$f_Name</h1>
+		  ".opt($f_P0rint,"<a  rel='nofollow' target='_blank' href=\"$f_Print\" ><span>PDF каталог</span></a>")."
+		  <div class=\"nobg\">
+          <ul id=\"slider\">
+";
+        $suff="";
+      if ($handle = opendir($_SERVER['DOCUMENT_ROOT'].$f_SliderPath)) {
+          while (false !== ($f = readdir($handle))) { 
+              if (is_file($_SERVER['DOCUMENT_ROOT'].$f_SliderPath.$f)) {
+                  $f = $f_SliderPath.$f;
+                  echo "			<li><a target=_blank href='$f'><img src=\"$f\" alt=\"\" style=\"margin-bottom:32px;\" /></a>
+                            <div class=\"rhino-caption\" style='height:32px; font-size:16px;'>
+                      
+                              <div class=\"price\" style='line-height:32px;  font-size:16px;'>
+                                <span style='font-size:12px;'>Стоимость: </span> $f_Price р.
+                     &nbsp;&nbsp;<span style='font-size:12px;'>Площадь </span>  ".str_replace("*","",$f_Square)." м<sup style='font-size:11px;position:relative;top:-3px;'>2</sup>*
+                              </div>
+                              ".opt($f_Price100,"<a  style='width:56px;height:32px;' class=\"special\">Спецпредложение</a>")." </div>
+                          </li>";		
+              }	
+          }
+      } else {
+          $flds=array("MainImg","Dom1","Dom2","Dom3");
+          foreach ($flds as $f) {
+              $f = "f_$f";
+              $f = $$f;
+              if ($f) echo "			<li><a target=_blank href='$f'><img src=\"$f\" alt=\"\" style=\"margin-bottom:32px;\" /></a>
+                        <div class=\"rhino-caption\" style='height:32px;'>
+                  
+                          <div class=\"price\"> 
+                         <span>Цена ".opt($f_Price1,"в комплектации <a href=\"#\" title=\"Тултип\">С1</a>").": </span> ".($f_Price1?$f_Price1:$f_Price)." р.
+                         
+                          </div>
+                          ".opt($f_Price1,"<a style='width:56px;height:32px;' href=\"#\" class=\"special\">Спецпредложение</a>")." </div>
+                      </li>";
+          }
+      }
+echo"
+          </ul><div class=\"clear\"></div>
+        </div><div class=\"clear\"></div>
+";
+$flds=array("IteriorMain","Interior1","Interior2");
+
+if ($handle = opendir($_SERVER['DOCUMENT_ROOT'].$f_InteriorPath)) {
+	while (false !== ($f = readdir($handle))) { 
+		if (is_file($_SERVER['DOCUMENT_ROOT'].$f_InteriorPath.$f) && strpos($f,"thumb_")===false) {
+			$t = $f_InteriorPath."thumb_".$f;
+			$f = $f_InteriorPath.$f;
+			if (!file_exists($_SERVER['DOCUMENT_ROOT'].$t)) {
+				nc_ImageTransform::imgResize($_SERVER['DOCUMENT_ROOT'].$f,$_SERVER['DOCUMENT_ROOT'].$t,320,240);
+			}
+			if ($f) $interior.="                <li> <a target='_blank' class='jg_interoir_photo' href=\"$f\"> <img src=\"".($t?$t:$f)."\" alt=\"\">
+	                  <div class=\"hover\"></div>
+	                  
+	                  </a> </li>";
+		}
+	}
+}
+if (!$interior) {
+	foreach ($flds as $f) {
+		$f = "f_$f";
+		$t = "f_".$f."Thumb";
+		$t = $$t;
+		$f = $$f;
+		if ($f) $interior.="                <li> <a target='_blank' class='jg_catelem_photo' href=\"$f\"> <img src=\"".($t?$t:$f)."\" alt=\"123321\">
+	                  <div class=\"hover\"></div>
+	                  
+	                  </a> </li>";
+	}
+}
+echo"
+
+<div class=\"projects\">
+".opt($interior,"
+	<div class=\"pr\">
+          <div class=\"robototitle\">ИНТЕРЬЕР: ОТДЕЛКА ВНУТРИ ДОМА</div>
+          <ul id='interiorSlider' class='init_bxslider'>$interior</ul>
+    </div>
+    <script>
+    $(function(){
+        $(\".init_bxslider, .jcarousel ul\").bxSlider();
+    });        
+    </script>
+")."
+".s_list_class(111,86,"&nc_ctpl=254&recNum=20&house_id=$f_house_id&name=$f_Name")."
+</div>
+      
+
+
+</div>
+
+<div class=\"robototitle\">Планы</div>
+
+
+<div class=\"inner\">
+
+
+
+
+";
+if ($f_bigDom1) $plan=1;
+for ($i=2; $i<8; $i++) {
+$f = "f_Plan$i";
+if ($$f) {$plan++;$$f = str_replace(array("width:","height:"),array("width:100%; min-width:","min-height:"),$$f);}
+}
+echo "
+
+<script type=\"text/javascript\">
+        \$(document).ready(function(){
+		\$('.allplans tr.plan-itm:gt(0)').hide();
+		
+		    \$('.moreplan').click(function(){
+                 
+				   
+\$('.allplans tr.plan-itm:gt(0)').toggle('fast', function() {
+                        if (\$('.allplans tr.plan-itm:gt(0)').is(\":hidden\"))      
+                            \$('.moreplan').text('Ещё планировки: $plan');
+                        else
+                            \$('.moreplan').text('Скрыть планировки');
+                    });
+			
+                   return false;
+                 });
+
+			
+		});
+		
+</script>
+
+
+
+
+<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"allplans\">
+
+  ".opt(f_MobilePlan,"<tr class='plan-itm'>
+    <td>$f_MobilePlan</td>
+
+    </tr>")."
+".opt($f_Mobile1,"
+<tr><td>$f_Mobile1</td>
+  </tr>")."
+
+    ".opt($f_Mobile2,"<tr>
+    <td>$f_Mobile2<br /></td>
+</tr>")."
+
+  
+
+
+</table>
+
+
+
+
+<div class=\"clr\"></div>
+</div>
+
+<style>
+.inner ul#slider { margin-left:0; }
+.inner ul#interiorSlider { margin-left:0; }
+.inner ul#interiorSlider li { margin-left:0; }
+.inner ul.init_bxslider, .inner .jcarousel ul { margin-left:0; }
+.init_bxslider img, .jcarousel img { width:100%; }
+.jcarousel-control-prev, .jcarousel-control-next { display: none; }
+
+.price_a {
+color:#fff;
+}
+.price_a:hover {
+color:#aaa;
+}
+.notes1 { padding:10px 30px;  }
+</style>
+
+
+<div class='notes1'> *Строительная площадь: по осям стен, включая террасы.</div>
+
+<!-- nocache -->
+".opt($GLOBALS['current_sub']['Canonical']="http://www.skd-dom.ru$fullLink","")."
+<!-- /nocache --><!-- /RecordTemplateFull -->
+
+<!-- Settings -->$ignore_sub=$ignore_cc=$ignore_catalogue=true;
+if ($sub==258) $cc_settings['Source']=$sub;
+$query_where = "a.Slider=1 and LENGTH(a.MainImgPath)>0";
+if ($cc_settings['Source']) $query_where = "a.Sub_Class_ID>0 and a.Subdivision_ID=".$cc_settings['Source']." and LENGTH(a.MainImgPath)>0";
+$br = CBranding::get_object();
+$br->getProjects();
+$br->ExModifyQueryWhere($query_where, $cc_env, $inside_admin, $admin_mode);<!-- /Settings -->
+
+<!-- AddTemplate --><!-- /AddTemplate -->
+
+<!-- AddCond --><!-- /AddCond -->
+
+<!-- AddActionTemplate --><!-- /AddActionTemplate -->
+
+<!-- EditTemplate --><!-- /EditTemplate -->
+
+<!-- EditCond --><!-- /EditCond -->
+
+<!-- EditActionTemplate --><!-- /EditActionTemplate -->
+
+<!-- CheckActionTemplate --><!-- /CheckActionTemplate -->
+
+<!-- DeleteTemplate --><!-- /DeleteTemplate -->
+
+<!-- DeleteCond --><!-- /DeleteCond -->
+
+<!-- DeleteActionTemplate --><!-- /DeleteActionTemplate -->
+
+<!-- FullSearchTemplate --><!-- /FullSearchTemplate -->
+
+<!-- SearchTemplate --><!-- /SearchTemplate -->

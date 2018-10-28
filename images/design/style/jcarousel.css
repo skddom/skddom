@@ -1,0 +1,135 @@
+.jcarousel-wrapper {
+    position: relative;
+}
+
+/** Carousel **/
+
+.jcarousel {
+    position: relative;
+    overflow: hidden;
+    width: 642px;
+/*	height:285px;*/
+	margin:0 auto;
+}
+
+.jcarousel ul {
+    width: 20000em;
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.jcarousel li {
+    width: 320px;
+    float: left;
+	margin-right:1px;
+/*	height:285px;*/
+	position:relative;
+}
+
+
+
+.jcarousel img {
+    display: block;
+    width: 320px;
+
+}
+
+.jcarousel li a {
+text-decoration:none;
+color:#fff;
+}
+
+
+.jcarousel li a .hover {
+background:url(../images/hover.png) repeat 0 0;
+position:absolute;
+width:320px;
+height:100%;
+left:0;
+display:none;
+top:0;
+z-index:1;
+}
+
+.jcarousel li a:hover .hover {
+display:block;
+}
+
+.jcarousel li a:hover .caption, .jcarousel li a:hover .minicaption {
+background:#3C3C3C;
+}
+
+
+/** Carousel Controls **/
+
+.jcarousel-control-prev,
+.jcarousel-control-next {
+    position: absolute;
+    top: 0;
+
+    width: 46px;
+    height: 100%;
+    text-align: center;
+	text-indent:-9999px;
+   
+    color: #fff;
+    text-decoration: none;
+
+}
+
+.jcarousel-control-prev {
+    left: 0px;
+	background:url(../images/sprite-sourse/prev.png) no-repeat 18px 50% #E7D7B8;
+}
+
+.jcarousel-control-next {
+    right: 0px;
+		background:url(../images/sprite-sourse/next.png) no-repeat 10px 50% #E7D7B8;
+}
+
+.jcarousel-control-prev:hover {
+	background:url(../images/sprite-sourse/prev-hover.png) no-repeat 18px 50% #EAC69B;
+}
+
+.jcarousel-control-next:hover {
+		background:url(../images/sprite-sourse/next-hover.png) no-repeat 10px 50% #EAC69B;
+}
+
+.jcarousel li .caption {
+height:100%;
+height:85px;
+background:#545454;
+color:#fff;
+overflow:hidden;
+position:relative;
+z-index:10;
+font-size:11px;
+}
+
+.jcarousel li .minicaption {
+height:100%;
+background:#545454;
+color:#fff;
+overflow:hidden;
+position:relative;
+z-index:10;
+font-size:16px;
+}
+.jcarousel li .minicaption  .inner {
+padding:10px 15px;
+}
+
+.jcarousel li .minicaption p {
+margin:0;
+}
+
+.jcarousel li .caption .inner {
+padding:10px 15px;
+}
+
+.jcarousel li .caption .name {
+font-size:16px;
+margin-bottom:5px;
+}

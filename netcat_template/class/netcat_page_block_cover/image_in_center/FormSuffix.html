@@ -1,0 +1,30 @@
+
+            </div>
+            <? $goods_data = nc_subdivision_goods_data::for_subdivision($sub)->get_first_item(); ?>
+            <? if ($goods_data && $cc_settings['show_price']) { ?>
+                <div class="tpl-block-information<?= ($goods_data && $goods_data['DiscountValue']) ? ' tpl-layout-discount' : '' ?>">
+                    <? if ($goods_data): ?>
+                        <?= nc_subdivision_goods_data::for_subdivision($sub)->get_edit_trigger_overlay(); ?>
+                        <div class="tpl-block-discount"><?= $goods_data['OriginalPrice'] ?> <?= $goods_data['OriginalPriceCurrency'] ?></div>
+                        <div class="tpl-block-price-label">Цена</div>
+                        <div class="tpl-block-price"><?= $goods_data['ItemPrice'] ?> <?= $goods_data['ItemPriceCurrency'] ?></div>
+                        <hr/>
+                        <div class="tpl-block-saving">
+                            Экономия
+                            <span>
+                                <?= $goods_data['DiscountValue'] ?><?= $goods_data['DiscountInPercent'] ? '&thinsp;%' : ' ' . $goods_data['DiscountCurrency'] ?>
+                            </span>
+                        </div>
+                    <? endif; ?>
+                </div>
+                <? } ?>
+        </div>
+
+        <?
+            if (nc_module_check_by_keyword('requests') && $cc_settings['show_form_and_button']) {
+                echo nc_requests::make_form_popup_button($cc);
+            }
+        ?>
+    </div>
+    <div style="height: <?= $cc_settings['padding_bottom'];?>px;"></div>
+</div>

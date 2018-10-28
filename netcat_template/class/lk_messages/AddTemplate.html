@@ -1,0 +1,42 @@
+<?$ajax = $_REQUEST['ajax1'];
+if ($ajax) $show=true;
+?>
+<?if(!$ajax):?><div id='parent_popup_form_detail_phone'><div class='nc_full nc_callback mfeedback phone_form' id='popup_form_detail'>
+
+<a class="close_backcall_detail" title="" onclick="$('#parent_popup_form_detail_phone').hide();"></a>
+
+  <div class='vhod_title'>Отправить сообщение</div>
+  <div class='jsCB-wrap'>
+<?endif?>
+<?=( $warnText ? "<div class='warnText'>$warnText</div>" : NULL )?>
+<form class='js-callback' name='adminForm' id='adminForm' class='nc-form' enctype='multipart/form-data' method='post' action='<?= $SUB_FOLDER ?><?= $HTTP_ROOT_PATH ?>add.php'>
+<div id='nc_moderate_form'>
+<div class='nc_clear'></div>
+<input name='admin_mode' type='hidden' value='<?= $admin_mode ?>' />
+<?= $nc_core->token->get_input() ?>
+<input name='catalogue' type='hidden' value='<?= $catalogue ?>' />
+<input name='cc' type='hidden' value='<?= $cc ?>' />
+<input name='sub' type='hidden' value='<?= $sub ?>' /><input name='posting' type='hidden' value='1' />
+<input name='curPos' type='hidden' value='<?= $curPos ?>' />
+<input name='f_Parent_Message_ID' type='hidden' value='<?= $f_Parent_Message_ID ?>' />
+<?= nc_form_moderate('add', $admin_mode, 0, $systemTableID, $current_cc, (isset($f_Checked) ? $f_Checked  : null), $f_Priority , $f_Keyword, $f_ncTitle, $f_ncKeywords, $f_ncDescription ) ?>
+</div>
+
+<input type="hidden" name="f_Project" value="<?=intval($f_Project)?>">
+<input type="hidden" name="f_ToPerson" value="<?=intval($f_ToPerson)?>">
+<p><?=$db->get_var("select CONCAT('Для <b>',Name,'</b>') from Message294 where Message_ID=".intval($f_ToPerson))?></p>
+<div class='nc-field nc-field-type-text'><?= nc_text_field('Text', "", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class='nc-field nc-field-type-relation'><?= nc_related_field('ToPerson', "") ?></div>
+
+<? if (!$AUTH_USER_ID && $current_cc['UseCaptcha'] && $MODULE_VARS['captcha']) { ?><?= nc_captcha_formfield() ?><br/><br/><?= NETCAT_MODERATION_CAPTCHA ?> (*):<br/><input type='text' name='nc_captcha_code' size='10'><br/><br/><? } ?>
+    <div class='nc_submit'><input value='Отправить' type='submit' /></div>  
+    <div style='clear:both'></div>  
+    <p>
+<font color=\"red\"><span class=\"form-required starrequired\">*</span></font> - Поля, обязательные для заполнения</p>
+</form>
+<?if(!$ajax):?>
+  </div>
+</div></div>
+<?endif?>
+<?if ($show) die();?>

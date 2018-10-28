@@ -1,0 +1,8 @@
+.tpl-component-210.tpl-template-home1 .project-description { font-size:15px!important; }
+.tpl-component-210.tpl-template-home1 .mgt-button.mgt-text-size-small { font-size:14px; }
+.tpl-component-210.tpl-template-home1 .info { border:0 }
+@media(min-width:768px) { 
+.tpl-component-210.tpl-template-home1 .portfolio-item-block:before, .tpl-component-210.tpl-template-home1 .portfolio-item-block:after { content:""; position:absolute; left:0; top:55px; height:80px; width:2px; background:#b76c00; opacity:1; z-index: 1; }
+.tpl-component-210.tpl-template-home1 .portfolio-item-block:after { right:0; left:initial; }
+.tpl-component-210.tpl-template-home1 .portfolio-item-block:first-child:before, .tpl-component-210.tpl-template-home1 .portfolio-item-block:last-child:after { display:none; }
+ }

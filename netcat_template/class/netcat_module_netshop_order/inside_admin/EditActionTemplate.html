@@ -1,0 +1,44 @@
+<?php
+
+/** @var nc_core $nc_core */
+
+$netshop = nc_netshop::get_instance($catalogue);
+$order = $netshop->load_order($message);
+
+$is_duplicate = (isset($is_duplicate) && $is_duplicate);
+$is_merged = (isset($is_merged) && $is_merged);
+
+// Сохранить изменения в списке товаров, если передан массив $items
+$new_item_list = $nc_core->input->fetch_post('items');
+if ($new_item_list) {
+    $items = nc_netshop_item_collection::from_array($new_item_list);
+    $order->save_items($items, !$is_duplicate);
+}
+
+
+// Сохранить изменение скидки на корзину
+$cart_discount_sum = $nc_core->input->fetch_post('cart_discount_sum');
+if (isset($_POST['cart_discount_sum']) && $cart_discount_sum != $order->get_order_discount_sum()) {
+    $order->update_cart_discount($cart_discount_sum);
+}
+
+// Обработать изменение статуса ($previous_status определяется в условии изменения)
+// и создание дубликата заказа
+if ((isset($_REQUEST['f_Status']) && $f_Status != $previous_status) || $is_duplicate || $is_merged) {
+    $netshop->mailer->process_order_status_change($order);
+}
+
+if (isset($do_not_respond)) {
+    exit;
+}
+else if (isset($inside_netshop) && $inside_netshop) {
+    exit;
+}
+else if ($inside_admin && !$isNaked) {
+//    ob_end_clean();
+//    header('Location: ' . $goBackLink . '&inside_admin=1');
+    exit;
+}
+else {
+	  echo NETCAT_MODERATION_MSG_OBJCHANGED, "<br /><br />", $goBack;
+}

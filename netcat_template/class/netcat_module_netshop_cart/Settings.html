@@ -1,0 +1,24 @@
+<?php
+
+$input   = nc_core('input');
+$netshop = nc_modules('netshop');
+$cart    = $netshop->cart;
+
+// Сбрасываем купон
+if ($coupon_clear = $input->fetch_post('coupon_clear')) {
+    $coupons = $netshop->promotion->get_registered_coupons();
+    foreach ($coupons as $i => $coupon) {
+        if ($coupon_clear[$i]) {
+            $netshop->promotion->unregister_coupon_code($coupon['code']);
+        }
+    }
+}
+// Активирум купон
+elseif ($coupon_add = $input->fetch_post('coupon_add')) {
+    if ($netshop->promotion->register_coupon_code($coupon_add)) {
+        ob_end_clean();
+        header("Location: {$_SERVER['HTTP_REFERER']}");
+        exit;
+    }
+
+}

@@ -1,0 +1,16 @@
+<!-- FormPrefix --><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><item>
+  <title>".htmlspecialchars(strip_tags($f_Subject ? $f_Subject : NETCAT_MODULE_FORUM2_FORUM_REPLY), ENT_QUOTES)."</title>
+  ".($topic_url ? "<link>http://".$HTTP_HOST.$topic_url."#reply".$f_RowID."</link>" : "")."
+  <description>
+  <![CDATA[ 
+  ".htmlspecialchars(strip_tags(nc_bbcode($f_Message)), ENT_QUOTES)."
+  ]]>
+  </description>
+  <pubDate>".gmdate("D, d M Y H:i:s", strtotime($f_Created))." GMT</pubDate>
+  ".($topic_url ? "<guid isPermaLink=\"true\">http://".$HTTP_HOST.$topic_url."#reply".$f_RowID."</guid>" : "")."
+  <author>".htmlspecialchars(strip_tags($f_Author), ENT_QUOTES)."</author>
+</item><!-- /RecordTemplate -->
+
+<!-- FormSuffix --><!-- /FormSuffix -->

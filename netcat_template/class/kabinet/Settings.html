@@ -1,0 +1,15 @@
+<?php
+$demo = $current_user['Login'] == "demo";
+if (!$admin_mode) {
+    global $lk;
+    $lk = new CPersonal();
+    $query_where = "a.Owner='{$lk->data['Owner']}'";
+    $query_join = "LEFT JOIN User user ON a.Owner=user.User_ID
+    LEFT JOIN Message294 as m ON a.Manager=m.Message_ID
+    LEFT JOIN Message294 as p ON a.Prorab=p.Message_ID";
+    $query_select  = "user.FullName  as User_Name, user.Email as User_Email, 
+    m.Name as Manager_Name, m.Photo as Manager_Photo, m.Phone as Manager_Phone, m.Email as Manager_Email,
+    p.Name as Prorab_Name, p.Photo as Prorab_Photo, p.Phone as Prorab_Phone, p.Email as Prorab_Email";
+}
+
+?>

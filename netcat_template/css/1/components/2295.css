@@ -1,0 +1,107 @@
+.tpl-component-calc-face.tpl-template-2295 .calc-table td { border-bottom:0 }
+.tpl-component-calc-face.tpl-template-2295 .calc-table input[type=radio]:checked+label:after, .tpl-component-calc-face.tpl-template-2295 .recomm input[type=radio]:checked+label:after { left:11px; }
+.tpl-component-calc-face.tpl-template-2295 .calc-table .notices_wrapper .notices .notice_wrapper .notice_inner { height:auto;z-index:1; }
+.tpl-component-calc-face.tpl-template-2295 .calc-table .notices_wrapper .notices .notice_wrapper { z-index:initial; }
+.tpl-component-calc-face.tpl-template-2295 .calc-table .tooltip_wrapper .tooltip_inner, .tpl-component-calc-face.tpl-template-2295 .recomm .tooltip_wrapper .tooltip_inner { z-index:1; }
+.tpl-component-calc-face.tpl-template-2295 .calc-table .notices_wrapper .notices .notice_wrapper .button, .tpl-component-calc-face.tpl-template-2295 .recomm .notices_wrapper .notices .notice_wrapper .button { z-index:1;margin-right:-10px; }
+.tpl-component-calc-face.tpl-template-2295 td.b3.js-b3 { white-space:nowrap; }
+.tpl-component-calc-face.tpl-template-2295 table.calc-table { margin-top:-10px; }
+.tpl-component-calc-face.tpl-template-2295 .title.yellow_title { color: #b76c00; }
+.tpl-component-calc-face.tpl-template-2295 .calc2 .clue-bottom a.btn.btnico1 { padding-top:14px;padding-bottom:14px; }
+.tpl-component-calc-face.tpl-template-2295 .calc2 .clue-bottom a.btn.btnico2 { padding-top:20px;padding-bottom:20px; }
+.tpl-component-calc-face.tpl-template-2295 .calc2 .clue-bottom a.btn:last-child { padding-top:23px;padding-bottom:23px; }
+.tpl-component-calc-face.tpl-template-2295 .calc2 .clue-bottom a.btn.mgt-button { text-align:left;padding-left:10px; }
+.tpl-component-calc-face.tpl-template-2295 .calc2 .mgt-button i.fa:before { content:"←";font-size:22px;line-height:0px;position:relative;top:3px; }
+.tpl-component-calc-face.tpl-template-2295 .img-responsive { width:100%; }
+.tpl-component-calc-face.tpl-template-2295 table.calc { border-bottom:1px solid #ebebeb; }
+.tpl-component-calc-face.tpl-template-2295 table.calc thead tr { background:none; }
+.tpl-component-calc-face.tpl-template-2295 table.calc thead th { background:none; }
+.tpl-component-calc-face.tpl-template-2295 table.calc thead tr td, .tpl-component-calc-face.tpl-template-2295 table.calc thead th { text-transform:uppercase;color: rgb(105, 105, 105);padding-bottom:10px; }
+.tpl-component-calc-face.tpl-template-2295 table.calc thead tr td:first-child { padding-left:0; }
+.tpl-component-calc-face.tpl-template-2295 table.calc thead tr td:nth-child(3), .tpl-component-calc-face.tpl-template-2295 table.calc thead tr td:nth-child(4) { text-align:center; }
+.tpl-component-calc-face.tpl-template-2295 table.calc tbody tr { background:none; }
+.tpl-component-calc-face.tpl-template-2295 table.calc tbody tr td { border-top:1px solid #ebebeb;border-right:1px solid #ebebeb;color: #8f8f8f;font-size:15px; }
+.tpl-component-calc-face.tpl-template-2295 table.calc tbody tr td.option { border-left:1px solid #ebebeb;color:#272c33;width:20%;font-size: 22px;font-family: Roboto;line-height: 22px;font-weight: bold; }
+.tpl-component-calc-face.tpl-template-2295 table.calc tbody tr td.name { width:50%; }
+.tpl-component-calc-face.tpl-template-2295 .vc_custom_1438786166100 { margin-top: 45px !important; margin-bottom:-60px !important; padding-top: 0px !important; padding-bottom: 0px !important; background-color: #eeeeee !important; }
+.tpl-component-calc-face.tpl-template-2295 .vc_custom_1438786166100 .mgt-cta-block-header:after { content:none; }
+.tpl-component-calc-face.tpl-template-2295 .vc_custom_1438786166100 a.btn { font-size:13px;padding: 12px 30px;line-height: 18px; }
+.tpl-component-calc-face.tpl-template-2295 .vc_custom_1438786166100 a.btn.mgt-style-bordered { font-size:13px;padding: 9px 30px;line-height: 18px;margin-right:10px; }
+.tpl-component-calc-face.tpl-template-2295 .img { position:relative; }
+.tpl-component-calc-face.tpl-template-2295 .nachnets { display:block;position:absolute; left:0; bottom:0;right:0;background:rgba(0,0,0,0.4);color:#fff;font-family:Roboto;font-weight:300; }
+.tpl-component-calc-face.tpl-template-2295 .nachnets p { display:inline-block;padding:0;margin:0;font-size:15px;vertical-align:middle;display:table-cell;padding:10px 20px; }
+.tpl-component-calc-face.tpl-template-2295 .nachnets p:first-child { width:40%; }
+.tpl-component-calc-face.tpl-template-2295 .nachnets { padding:10px 0; }
+.tpl-component-calc-face.tpl-template-2295 .nachnets div { text-align:right;padding:0 20px;line-height:26px;font-size:15px;font-weight:400; }
+.tpl-component-calc-face.tpl-template-2295 .nachnets div span { padding-left:20px;display:inline-block; }
+.tpl-component-calc-face.tpl-template-2295 .nachnets div span.text-bold { font-weight:600; }
+.tpl-component-calc-face.tpl-template-2295 .clue-bottom .btn, .tpl-component-calc-face.tpl-template-2295 .clue-bottom div { width:100%; }
+.tpl-component-calc-face.tpl-template-2295 .clue-bottom .btn { padding:26px 30px;height:auto; }
+.tpl-component-calc-face.tpl-template-2295 .bordered-item.with-icon { padding:0;text-align:left;font-size:14px;color:#232b33;font-weight:400; border:0; line-height:18px; clear:left; margin-bottom: 24px; }
+.tpl-component-calc-face.tpl-template-2295 .bordered-item.with-icon:before { background-image: url("data:image/png;base64,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"); position:static; margin:0 10px 0; float:left; width: 37px; height: 34px; display:inline-block; vertical-align:middle; }
+.tpl-component-calc-face.tpl-template-2295 .bordered-item.with-icon:nth-child(2):before { background-position:0 -36px!important; height:35px; }
+.tpl-component-calc-face.tpl-template-2295 .bordered-item.with-icon:nth-child(3):before { background-position:0 -74px!important; height:35px; }
+.tpl-component-calc-face.tpl-template-2295 .bordered-item.with-icon:nth-child(4):before { background-position:0 -109px!important; height:35px; }
+.tpl-component-calc-face.tpl-template-2295 .bordered-item.with-icon br { display:none; }
+.tpl-component-calc-face.tpl-template-2295 .fieldset { height: 278px; box-sizing: border-box; border: 1px solid #efefef; padding: 35px 20px 20px; position:relative; }
+.tpl-component-calc-face.tpl-template-2295 h2.caption { font-family:roboto; color:#b86d00; font-size:14px; text-transform:uppercase; margin:0; padding:0; position:absolute; left:14px; top:-4px; background:#fff; padding:0 15px; z-index:1; }
+.tpl-component-calc-face.tpl-template-2295 th.th1:first-child { text-align:left;padding-left:0; }
+.tpl-component-calc-face.tpl-template-2295 .row.row-prices { border-bottom:1px solid #efefef;margin-bottom:10px; }
+.tpl-component-calc-face.tpl-template-2295 .row.row-prices .inner_text { padding:15px 0 10px;font-size:18px;color:#232b33;line-height:22px; }
+.tpl-component-calc-face.tpl-template-2295 .row.row-prices .inner_text b { font-weight:500; }
+.tpl-component-calc-face.tpl-template-2295 .row.row-prices .inner_text .title { color:#909090;font-size:14px;text-transform:uppercase; }
+.tpl-component-calc-face.tpl-template-2295 .uppercase { text-transform:uppercase }
+.tpl-component-calc-face.tpl-template-2295 .v123-2 { font-family:Roboto;font-size:14px;line-height:18px; }
+.tpl-component-calc-face.tpl-template-2295 .indcompl { margin-top:9px; }
+.tpl-component-calc-face.tpl-template-2295 .indcompl .title { display:inline-block;width:50%;line-height:18px;vertical-align:middle; }
+.tpl-component-calc-face.tpl-template-2295 .indcompl b { display:inline-block;padding:10px 20px;border:1px solid #efefef; }
+@media(max-width:1000px) { 
+.tpl-component-calc-face.tpl-template-2295 .clue-bottom div.col { width:49%;display:inline-block;vertical-align:top;font-size:10px; }
+.tpl-component-calc-face.tpl-template-2295 .right_short_project_info .col .inner_text b { font-size:12px; }
+.tpl-component-calc-face.tpl-template-2295 i.svg-icon.svg-basic_price { display:none; }
+ }
+@media(max-width:768px) { 
+.tpl-component-calc-face.tpl-template-2295 .clue-bottom div.col { width:49%; font-size: 14px; }
+.tpl-component-calc-face.tpl-template-2295 .project_bottom_buttons { left:0;position:static;margin-top:15px; }
+.tpl-component-calc-face.tpl-template-2295 .clue-bottom { padding:0 15px 0; }
+.tpl-component-calc-face.tpl-template-2295 i.svg-icon.svg-basic_price { display: inline-block;; }
+ }
+@media(max-width:767px) { 
+.tpl-component-calc-face.tpl-template-2295 .project_bottom_buttons { position:static; }
+.tpl-component-calc-face.tpl-template-2295 .calc-table .razdel, .tpl-component-calc-face.tpl-template-2295 .recomm .razdel { font-size:12px;padding:5px!important; }
+.tpl-component-calc-face.tpl-template-2295 .calc-table td, .tpl-component-calc-face.tpl-template-2295 .calc-table th, .tpl-component-calc-face.tpl-template-2295 .recomm td, .tpl-component-calc-face.tpl-template-2295 .recomm th { padding:5px;font-size:12px }
+.tpl-component-calc-face.tpl-template-2295 .calc-table .th1 { width:auto!important;font-size:12px!important;max-width:130px; }
+.tpl-component-calc-face.tpl-template-2295 form#frmCalc
+.tpl-component-calc-face.tpl-template-2295 .calc-table .notices_wrapper .notices, .tpl-component-calc-face.tpl-template-2295 .recomm .notices_wrapper .notices
+.tpl-component-calc-face.tpl-template-2295 .calc-table td.hover_tooltip { padding-right:22px; }
+.tpl-component-calc-face.tpl-template-2295 .calc-table .itogo .b1, .tpl-component-calc-face.tpl-template-2295 .calc-table .itogo .b3, .tpl-component-calc-face.tpl-template-2295 .recomm .itogo .b1, .tpl-component-calc-face.tpl-template-2295 .recomm .itogo .b3 { font-size:12px; }
+.tpl-component-calc-face.tpl-template-2295 .vc_custom_1438786166100 a.btn { display:inline-block; }
+ }
+.tpl-component-calc-face.tpl-template-2295 .mob { display:none; }
+@media(max-width:660px) { 
+.tpl-component-calc-face.tpl-template-2295 .desktop { display:none; }
+.tpl-component-calc-face.tpl-template-2295 .mob { display:table-cell; }
+.tpl-component-calc-face.tpl-template-2295 span.mob { display:inline }
+.tpl-component-calc-face.tpl-template-2295 td.razdel:not(.mob) { display: none; }
+.tpl-component-calc-face.tpl-template-2295 .tpl-component-calc-face .calc-table .th1 { width: auto!important; font-size: 10px!important; max-width: 130px; }
+.tpl-component-calc-face.tpl-template-2295 td.razdel:not(.mob)+td, .tpl-component-calc-face.tpl-template-2295 tr > td:first-child:not(.option) { border-left:1px solid #f0f0f0 }
+.tpl-component-calc-face.tpl-template-2295 thead tr th:first-child { display:none; }
+.tpl-component-calc-face.tpl-template-2295 table.calc thead tr td { font-size:10px;padding:5px; }
+.tpl-component-calc-face.tpl-template-2295 table.calc tbody tr td.name { width:60%; }
+.tpl-component-calc-face.tpl-template-2295 table.calc tbody tr td { font-size:12px;white-space:normal;padding:5px; }
+.tpl-component-calc-face.tpl-template-2295 table.calc tr.-last td:last-child { font-size:14px; }
+.tpl-component-calc-face.tpl-template-2295 .vc_custom_1438786166100 a.btn.mgt-style-bordered { display:block;margin:0; }
+.tpl-component-calc-face.tpl-template-2295 .notices_wrapper { display:none; }
+ }
+@media(max-width:480px) { 
+.tpl-component-calc-face.tpl-template-2295 .vc_custom_1438786166100 .mgt-cta-block.clearfix.black-text.with-text.no-side-paddings.wpb_content_element { position:relative;padding-top:150px; }
+.tpl-component-calc-face.tpl-template-2295 .vc_custom_1438786166100 .mgt-cta-block-header { position:absolute;top:20px;font-size:18px;left:0;right:0; }
+.tpl-component-calc-face.tpl-template-2295 .vc_custom_1438786166100 .mgt-cta-block-header+div { position:absolute;top:50px; }
+.tpl-component-calc-face.tpl-template-2295 .vc_custom_1438786166100 { margin-bottom:10px!important; }
+.tpl-component-calc-face.tpl-template-2295 .vc_custom_1438786166100 a.btn { display:block; }
+.tpl-component-calc-face.tpl-template-2295 .vc_custom_1438786166100 a.btn.mgt-style-bordered:hover { color:#fff; }
+.tpl-component-calc-face.tpl-template-2295 .fieldset { margin:20px 15px 0;height:auto; }
+.tpl-component-calc-face.tpl-template-2295 .row div:nth-child(3) .bordered-item.with-icon:before { margin-top:10px; }
+ }
+.tpl-component-calc-face.tpl-template-2295 .calc-table tr.itogo td { border-bottom:1px solid #ebebeb; }
+.tpl-component-calc-face.tpl-template-2295 .calc-table tr.itogo td:first-child { font-size:0; }

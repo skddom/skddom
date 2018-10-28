@@ -1,0 +1,6 @@
+<?php $line = unserialize(str_replace('\"','"',$line));
+extract($line);
+
+$br = CBranding::get_object();
+$br->getProjects();
+$br->ExModifyQueryWhere($query_where, $cc_env, $inside_admin, $admin_mode); ?>

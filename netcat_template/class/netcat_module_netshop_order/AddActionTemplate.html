@@ -1,0 +1,90 @@
+<?php
+
+$order->set_id($msgID);
+$order->offsetUnset('SignUp');
+$email = $order['Email'];
+$reg_data = array();
+$auth_settings = $nc_core->get_settings('', 'auth', false, $catalogue_id);
+if (!$AUTH_USER_ID) {
+    if (!isset($_SESSION['user_hash'])) {
+        $_SESSION['user_hash'] = md5((mt_rand(1, 1000) * mt_rand(1, 100) + mt_rand(1, 10000)) / mt_rand(1, 10));
+    }
+    $order->set('user_hash', $_SESSION['user_hash']);
+
+    if ($nc_core->input->fetch_post('f_SignUp')) {
+        $user_id = 0;
+
+        if ($nc_core->user->check_login($email) == NC_AUTH_LOGIN_OK) {
+            $alphabet = "abcdefghijklmnopqrstuvwxyz0123456789";
+            $length = strlen($alphabet);
+            $password = '';
+
+            for ($i = 0; $i < 8; $i++) {
+                $password .= $alphabet[mt_rand(0, $length - 1)];
+            }
+
+            $registration_code = $auth_settings['confirm'] ? md5(uniqid('', true)) : '';
+
+            try {
+                $user = array(
+                    'Email' => $email,
+                    'Login' => $email,
+                    'ForumName' => $order['ContactName'],
+                );
+                $user_id = $nc_core->user->add($user, 2, $password, array(
+                    'Checked' => $auth_settings['confirm'] ? 0 : 1,
+                ), $registration_code);
+            } catch (Exception $e) {
+
+            }
+        }
+
+        if ($user_id) {
+            $order->set('User_ID', $user_id);
+            $reg_data = array('user_id' => $user_id, 'password' => $password);
+            if ($auth_settings['autoauthorize']) {
+                $nc_core->user->authorize_by_id($user_id);
+            }
+        }
+    }
+}
+
+setcookie('Order_ContactName', $order['ContactName'], time() + 31536000, '/');
+setcookie('Order_Email', $order['Email'], time() + 31536000, '/');
+setcookie('Order_City', $order['City'], time() + 31536000, '/');
+setcookie('Order_Phone', $order['Phone'], time() + 31536000, '/');
+setcookie('Order_Address', $order['Address'], time() + 31536000, '/');
+setcookie('Order_Zip', $order['Zip'], time() + 31536000, '/');
+
+$netshop->place_order($order, $reg_data);
+
+$payment_method = new nc_netshop_payment_method($order['PaymentMethod']);
+$payment_system_id = $payment_method['handler_id'];
+
+$invoice = null;
+if ($payment_system_id && nc_module_check_by_keyword('payment', false)) {
+    $invoice = new nc_payment_invoice(array(
+        "payment_system_id" => $payment_system_id,
+        "amount" => $order->get_totals(),
+        "description" => "Оплата заказа $msgID",
+        "currency" => $netshop->get_currency_code(),
+        "customer_id" => $AUTH_USER_ID,
+        "customer_name" => (string)$f_ContactName,
+        "customer_email" => (string)$f_Email,
+        "customer_phone" => (string)$f_Phone,
+        "order_source" => 'netshop',
+        "order_id" => $msgID,
+    ));
+    $invoice->save();
+}
+
+while (ob_end_clean()) ;
+
+if ($isNaked) {
+    echo 'OK';
+} else {
+    // Переадресация
+    header("Location: {$nc_core->SUB_FOLDER}/orders/added" . ($invoice ? ("?invoice=" . $invoice->get('id')) : ""));
+}
+
+exit;

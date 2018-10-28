@@ -1,0 +1,128 @@
+<?= ($warnText ? "<div class='warnText'>$warnText</div>" : "") ?>
+
+<? if ($ForumMessagePreview && $f_Message) : ?>
+  <div style='background:#EEE; border:1px solid #CCC; padding:7px 10px'>
+  <?= ($f_Subject ? "<b><?= $f_Subject ?></b><br/><br/>" : "") ?>
+  <?= stripslashes( nc_bbcode( $current_cc['NL2BR'] ? nl2br( $current_cc['AllowTags'] ? $f_Message : strip_tags($f_Message) ) : ( $current_cc['AllowTags'] ? $f_Message : strip_tags($f_Message) ) ) ) ?>
+  </div>
+<br/>
+<? endif; ?>
+
+<form name='adminForm' id='adminForm' enctype='multipart/form-data' method='post' action='<?= $SUB_FOLDER.$HTTP_ROOT_PATH ?>add.php'>
+<div id='nc_moderate_form'>
+<input name='admin_mode' type='hidden' value='<?= $admin_mode ?>'/>
+<input name='catalogue' type='hidden' value='<?= $catalogue ?>'/>
+<input name='cc' type='hidden' value='<?= $cc ?>'/>
+<input name='sub' type='hidden' value='<?= $sub ?>'/>
+<input name='posting' id='DataPostingField' type='hidden' value='1'/>
+<input name='curPos' type='hidden' value='<?= $curPos ?>'/>
+<?= $nc_core->token->get_input() ?>
+<? if ($admin_mode && !$systemTableID) : ?>
+    <? if ($moderationID == 1 && !isset($f_Checked)) : ?> <?=opt($f_Checked = 1, "") ?><? endif; ?>
+<? endif; ?>
+<div id='nc_moderate_settings'>
+  <? if ($admin_mode) : ?>
+  <div class='left'>
+    <?= CONTROL_CONTENT_SUBDIVISION_FUNCS_MAINDATA_KEYWORD ?> <input class='no_special_style' name='f_Keyword' type='text' size='20' maxlength='255' value='<?= $f_Keyword ?>'>
+  </div>
+  <div class='left'>
+    <img src='<?= $SUB_FOLDER.$ADMIN_PATH ?>images/prior.gif' width='16' height='16' align='left' alt='<?= NETCAT_MODERATION_PRIORITY ?>' title='<?= NETCAT_MODERATION_PRIORITY ?>'>
+    <input class='no_special_style' name='f_Priority' type='text' size='3' maxlength='3' value='<?= $f_Priority ?>'>
+  </div>
+  <? endif; ?>
+  <? if (CheckUserRights($current_cc['Sub_Class_ID'], "moderate", $posting)) : ?>
+  <div class='left_checkbox'>
+    <input id='chk' name='f_Checked' type='checkbox' value='1'<?= ($f_Checked ? " checked" : "") ?>/> <label for='chk'><?= NETCAT_MODERATION_TURNON ?></label>
+  </div>
+  <? else : ?>
+  <input id='chk' name='f_Checked' type='hidden' value='<?= ($f_Checked ? 1 : 0) ?>'/>
+
+<? endif ?><div class='nc_clear'></div>
+</div>
+<?= nc_string_field("Subject", "maxlength='255' style='width:100%'", $classID, 1) ?><br/>
+<br/>
+<?= nc_text_field("Message", " rows='10'", $classID, 1) ?>
+<?
+// get topic object
+$nc_forum2_topic = nc_forum2_topic::get_object();
+// quote data
+switch (true) {
+  case $tquote:
+    $quote_message = $db->get_var("SELECT `Message` FROM `Message{$nc_forum2_topic->get_class_id()}` WHERE `Message_ID` = '".intval($rquote)."'");
+  break;
+  case $rquote:
+    $quote_message = $db->get_var("SELECT `Message` FROM `Message{$classID}` WHERE `Message_ID` = '".intval($rquote)."'");
+  break;
+  default:
+    $quote_message = "";
+}
+
+// put quoted message
+if ($quote_message) 
+{
+    $addForm.= "<script type='text/javascript'>document.getElementById('f_Message').innerHTML = '[QUOTE]".nc_text_for_js(htmlspecialchars($quote_message))."[/QUOTE]';</script>";
+}
+
+// get topic object
+$nc_forum2_reply = nc_forum2_reply::get_object();
+
+// topic field
+switch (true) {
+  case $topic:
+  case $tquote:
+  case $f_Topic_ID && !$reply:
+    $addForm.= nc_int_field("Topic_ID", "type='hidden' value='".intval($topic ? $topic : ($f_Topic_ID ? $f_Topic_ID : $tquote))."'", $classID);
+  break;
+  case $reply:
+  case $rquote:
+    $addForm.= nc_int_field("Topic_ID", "type='hidden' value='{$nc_forum2_reply->get_topic_id($reply ? $reply : $rquote)}'", $classID);
+    $addForm.= "<input name='reply' type='hidden' value='$reply'/>";
+  break;
+}
+
+$addForm.= "<br/>
+
+<script type='text/javascript'>
+ function PreviewButtonAction () {
+   document.getElementById('DataPostingField').value = 0;
+   document.getElementById('ForumMessagePreview').value = 1;
+   document.getElementById('adminForm').submit();
+ }
+</script>"
+?>
+<? if (!$AUTH_USER_ID && $current_cc['UseCaptcha'] && $MODULE_VARS['captcha']) : ?>
+    <?= nc_captcha_formfield() ?><br/><br/><?= NETCAT_MODERATION_CAPTCHA ?> (*)
+    <br/><input type='text' name='nc_captcha_code' size='10'/><br/><br/>
+<? endif; ?>
+<br><?= NETCAT_MODERATION_INFO_REQFIELDS ?><br/><br/>
+<input type='hidden' id='ForumMessagePreview' name='ForumMessagePreview' value='0'/>
+<button onclick='PreviewButtonAction()'><?= NETCAT_MODULE_FORUM2_COMPONENT_MESSAGE_PREVIEW ?></button>
+<?= nc_submit_button(NETCAT_MODERATION_BUTTON_ADD) ?>
+</form>
+  
+<?
+//// source data
+switch (true) {
+  case $topic:
+  case $f_Topic_ID && !$reply:
+    // get inherited cc data
+    $source_сс = $nc_core->sub_class->get_by_id($cc_array[0]);
+    $source = $db->get_var("SELECT `Message` FROM `Message".$nc_forum2_topic->get_class_id()."` WHERE `Message_ID` = '".intval($topic ? $topic : $f_Topic_ID)."'");
+  break;
+  case $reply:
+    $source_сс = $current_cc;
+    $source = $db->get_var("SELECT `Message` FROM `Message".$classID."` WHERE `Message_ID` = '".intval($reply)."'");
+  break;
+  default:
+    $source = "";
+}
+
+if ($source) {
+	$addForm.= "<br/>"
+		.NETCAT_MODULE_FORUM2_COMPONENT_REPLIES_SOURCE
+		.":<br/><div style='background:#EEE; border:1px solid #CCC; padding:7px 10px'>"
+		.stripslashes( nc_bbcode( $source_сс['NL2BR'] ? nl2br( $source_сс['AllowTags'] ? $source : strip_tags($source) ) : ( $source_сс['AllowTags'] ? $source : strip_tags($source) ) ) )
+		."</div>";
+}
+?>
+<?= $addForm ?>

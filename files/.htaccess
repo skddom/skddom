@@ -1,0 +1,10 @@
+<FilesMatch ".(flv|gif|jpg|jpeg|png|ico|swf|js|css|pdf)$">
+  Header set Cache-Control "max-age=864000"
+</FilesMatch>
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+
+    #ExpiresByType image/gif "access plus 2 months"
+    #ExpiresByType image/jpeg "access plus 2 months"
+</IfModule>

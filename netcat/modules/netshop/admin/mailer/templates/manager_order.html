@@ -1,0 +1,72 @@
+<html>
+<head>
+    <title>Новый заказ: № {order.Message_ID} от {order.Date}</title>
+</head>
+<body>
+
+<p>Новый заказ: <strong>№ {order.Message_ID} от {order.Date}</strong>.</p>
+
+<p><strong>Данные клиента:</strong></p>
+<p>Фамилия и имя: {order.ContactName}<br/>
+Контактный телефон: {order.Phone}<br/>
+E-mail: {order.Email}<br/>
+Город доставки: {order.City}<br/>
+</p>
+
+<p><b>Примечания к заказу:</b></p>
+<p><pre><? if ($order['Comments']): ?>{order.Comments}<? else: ?>нет<? endif; ?></pre></p>
+
+<p><strong>Состав заказа:</strong></p>
+<table cellpadding="4" cellspacing="2">
+    <tr style="background: #EEE">
+        <th>Артикул</th>
+        <th>Товар</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        <th>Стоимость</th>
+    </tr>
+    <?php foreach ($cart as $item): ?>
+        <tr>
+            <td>{item.Article}</td>
+            <td><a href="{item.URL}">{item.FullName}</a></td>
+            <td style="text-align: right; vertical-align: top; white-space: nowrap">{item.ItemPriceF}</td>
+            <td style="text-align: center; vertical-align: top; white-space: nowrap">{item.Qty} {item.Units}</td>
+            <td style="text-align: right; vertical-align: top; white-space: nowrap">{item.TotalPriceF}</td>
+        </tr>
+    <? endforeach; ?>
+    <tr>
+        <td colspan="4" style="text-align: right;"><strong>Итого&nbsp;</strong>
+        </td>
+        <td style="text-align: right;">{order.TotalItemPriceF}</td>
+    </tr>
+</table>
+
+<? if ($order['DeliveryMethodName']): ?>
+    <p>
+        Способ доставки: {order.DeliveryVariantAndMethodName}<br/>
+        Стоимость доставки: {order.DeliveryPriceF}<br/>
+        Адрес доставки: {order.DeliveryAddress}<br/>
+        <? if ($order['DeliveryDates']): ?>
+            Ожидаемые даты доставки: {order.DeliveryDates}
+        <? endif; ?>
+        Почтовый индекс: {order.Zip}
+    </p>
+<? endif; ?>
+
+<? if ($order['PaymentMethodName']): ?>
+    <p>Способ оплаты: {order.PaymentMethodName}<br/>
+    <? if ($order['PaymentPrice']): ?>
+        Дополнительный сбор за выбранный способ оплаты: {order.PaymentPriceF}</p>
+    <? endif; ?>
+<? endif; ?>
+
+<? if ($order['DiscountSum']): ?>
+    <p>Общая сумма скидки: {order.DiscountSumF}</p>
+<? endif; ?>
+
+<? if ($order['TotalItemPrice'] != $order['TotalPrice']): ?>
+    <p><strong>ИТОГО: {order.TotalPriceF}</strong></p>
+<? endif; ?>
+
+</body>
+</html>

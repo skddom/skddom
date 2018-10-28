@@ -1,0 +1,345 @@
+<?
+$prev = $db->get_row("select *,(Priority*1000+Message_ID) as Pri from Message$classID having Pri<(Priority*1000+$message) order by Pri desc limit 1", ARRAY_A);
+$next = $db->get_row("select *,(Priority*1000+Message_ID) as Pri from Message$classID having Pri>(Priority*1000+$message) order by Pri asc limit 1", ARRAY_A);
+//echo "select *,(Priority*1000+Message_ID) as Pri from Message$classID having Pri<(Priority*1000+Message_ID) order by Pri desc limit 1";
+if ($prev) {
+    
+    $link = nc_message_link($prev['Message_ID'], $classID);
+    $imgs = nc_load_multifield(2110, $prev['Message_ID']);
+    foreach ($imgs->to_array() as $file) {
+        $img0 = $file->Path;
+        break;
+    }
+    $img =  AGLION_RESIZE( $img0 , 100 , 100 , "c");
+    ?><div class="portfolio-navigation-prev" data-name="назад"><?
+      ?><div class="portfolio-navigation-image"><?
+        ?><a href="<?=$link?>" rel="prev"><img 
+            width="100" height="100" 
+            src="<?=$img?>" class="attachment-thebuilt-portfolio-nav size-thebuilt-portfolio-nav wp-post-image" 
+            alt="CKD-<?=$v['house_id']?>" 
+            srcset="<?=$img?> 100w, <?=$img?> 150w, <?=$img?> 40w" sizes="(max-width: 100px) 100vw, 100px"></a> <?
+        ?></div><?
+    ?></div><?
+}
+if ($next) {
+    $imgs = nc_load_multifield(2110, $next['Message_ID']);
+    $link = nc_message_link($next['Message_ID'], $classID);
+    foreach ($imgs->to_array() as $file) {
+        $img0 = $file->Path;
+        break;
+    }
+   
+    $img =  AGLION_RESIZE( $img0 , 100 , 100 , "c");
+    ?><div class="portfolio-navigation-next" data-name="вперед"><?
+      ?><div class="portfolio-navigation-image"><?
+        ?><a href="<?=$link?>" rel="prev"><img 
+            width="100" height="100" 
+            src="<?=$img?>" class="attachment-thebuilt-portfolio-nav size-thebuilt-portfolio-nav wp-post-image" 
+            alt="CKD-<?=$v['house_id']?>" 
+            srcset="<?=$img?> 100w, <?=$img?> 150w, <?=$img?> 40w" sizes="(max-width: 100px) 100vw, 100px"></a> <?
+        ?></div><?
+    ?></div><?
+}        
+        $current_sub['Icon'] = $f_SliderPath.$f_MainImgPath;
+			?><div class="blog-post blog-post-single">
+				<article id="post-<?=$sub?>" class="post type-post status-publish format-standard has-post-thumbnail hentry category-house-renovation">
+							<div class="">
+					
+								<div class="project-content"><?
+				?><div id="vc_images-carousel-1-1493484544" data-ride="vc_carousel" data-wrap="false" style="width: 100%;" data-interval="0" data-auto-height="yes" data-mode="horizontal" data-partial="false" data-navstyle="bullets" data-per-view="1" data-hide-on-end="true" class="vc_slide vc_images_carousel">
+						<!-- Wrapper for slides -->
+			<div class="vc_carousel-inner">
+				<div class="vc_carousel-slideline">
+					<div class="carousel vc_carousel-slideline-inner"><?
+$s =  $f_Images;
+$slides = explode(";", $s);                    
+                    foreach ($slides as $v) {
+                        $v=explode(",",$v);
+                        $img = $v[2];
+							?><div class="vc_item">
+								<div class="vc_inner">
+										<a href="<?=$img?>"  rel="lightbox">
+											<img width="1170" height="775" src="<?=$img?>" class="attachment-full" alt="" srcset="<?=$img?> 1170w, <?=$img?> 300w, <?=$img?> 768w, <?=$img?> 1024w" sizes="(max-width: 1170px) 100vw, 1170px" />
+                                        </a>
+								</div>
+							</div><?                    
+                    }
+                    ?>			</div>
+							<!-- Controls -->
+				<a class="vc_left vc_carousel-control" href="#vc_images-carousel-1-1493484544" data-slide="prev">
+					<span class="icon-prev"></span>
+				</a>
+				<a class="vc_right vc_carousel-control" href="#vc_images-carousel-1-1493484544" data-slide="next">
+					<span class="icon-next"></span>
+				</a><?
+                /*
+  ?><!-- Indicators -->
+  <ol class="carousel-indicators"><?
+  foreach ($slides as $k=>$v) {
+    ?><li data-target="#vc_images-carousel-1-1493484544" data-slide-to="<?=$k?>" class="<?=$k?"":"active"?>"></li><?
+   }
+  ?></ol><?*/
+					?></div>
+	</div>
+</div>
+               <div class="mgt-header-block clearfix text-left text-black wpb_animate_when_almost_visible wpb_top-to-bottom wpb_content_element  mgt-header-block-style-2 mgt-header-texttransform-header  wpb_start_animation"><h2 class="mgt-header-block-title">Описание проекта</h2><div class="mgt-header-line"></div></div>
+ 
+<div class="vc_row wpb_row vc_row-fluid vc_custom_1462525906878">
+
+    <div class="wpb_column vc_column_container vc_col-sm-12 pull-left">
+    <div class="wpb_column vc_column_container vc_col-sm-6 pull-right">
+<div class="vc_column-inner "><div class="wpb_wrapper">
+
+<div class="vc_row wpb_row vc_inner vc_row-fluid">
+
+	<div class="wpb_column vc_column_container vc_col-sm-6">
+		<div class="vc_column-inner ">
+			<div class="wpb_wrapper">
+				<div class="mgt-icon-box wpb_content_element mgt-icon-box-right mgt-icon-fa text-black ">
+					<div class="mgt-icon-box-icon hvr-icon-push">
+						<div class="mgt-font-icon"><i class="fa fa-map-marker"></i></div>
+					</div>
+					<div class="mgt-icon-box-content">
+						<h6>МЕСТОПОЛОЖЕНИЕ</h6>
+						<h5><?=$f_Location?></h5>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="wpb_column vc_column_container vc_col-sm-6">
+		<div class="vc_column-inner ">
+			<div class="wpb_wrapper">
+				<div class="mgt-icon-box wpb_content_element mgt-icon-box-right mgt-icon-fa text-black ">
+					<div class="mgt-icon-box-icon hvr-icon-push">
+						<div class="mgt-font-icon"><i class="fa fa-map-o"></i></div>
+					</div>
+					<div class="mgt-icon-box-content">
+						<h6>ПЛОЩАДЬ</h6>
+						<h5><?=$f_Square?> M2</h5>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="vc_row wpb_row vc_inner vc_row-fluid">
+	<div class="wpb_column vc_column_container vc_col-sm-6">
+		<div class="vc_column-inner ">
+			<div class="wpb_wrapper">
+				<div class="mgt-icon-box wpb_content_element mgt-icon-box-right mgt-icon-fa text-black ">
+					<div class="mgt-icon-box-icon hvr-icon-push">
+						<div class="mgt-font-icon"><i class="fa fa-calendar"></i></div>
+					</div>
+					<div class="mgt-icon-box-content">
+						<h6>ГОД</h6>
+						<h5><?=$f_Year?></h5>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="wpb_column vc_column_container vc_col-sm-6">
+		<div class="vc_column-inner ">
+			<div class="wpb_wrapper">
+				<div class="mgt-icon-box wpb_content_element mgt-icon-box-right mgt-icon-fa text-black ">
+					<div class="mgt-icon-box-icon hvr-icon-push">
+						<div class="mgt-font-icon"><i class="fa fa-pencil"></i></div>
+					</div>
+					<div class="mgt-icon-box-content">
+						<h6>АРХИТЕКТОР</h6>
+						<h5><?=$f_Architect?></h5>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div></div></div>
+        <div class="vc_column-inner ">
+            <div class="wpb_wrapper">
+ 	            <div class="wpb_text_column wpb_content_element ">
+		            <div class="wpb_wrapper">
+			            <?=$f_Text?>
+		            </div>
+	            </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+<?=$f_Plan?>
+										
+<?
+
+
+
+
+
+
+
+$flds=array("IteriorMain","Interior1","Interior2");
+
+if ($handle = opendir($_SERVER['DOCUMENT_ROOT'].$f_InteriorPath)) {
+	while (false !== ($f = readdir($handle))) { 
+		if (is_file($_SERVER['DOCUMENT_ROOT'].$f_InteriorPath.$f) && strpos($f,"thumb_")===false) {
+			$t = $f_InteriorPath."thumb_".$f;
+			$f = $f_InteriorPath.$f;
+            $is = getimagesize($_SERVER['DOCUMENT_ROOT'].$t);
+			if (!file_exists($_SERVER['DOCUMENT_ROOT'].$t) || $is[0]<800) {
+				nc_ImageTransform::imgResize($_SERVER['DOCUMENT_ROOT'].$f,$_SERVER['DOCUMENT_ROOT'].$t,1024,768);
+			}
+            unset($t);
+			if ($f) $interior[]=array($f,($t?$t:$f));
+		}
+	}
+}
+/////////////////// info block ///////////////////
+
+$foto = ( base64_decode(trim(s_list_class(111,86,"&nc_ctpl=2256&recNum=20&house_id=$f_house_id&name=$f_Name"))));
+$foto = unserialize($foto);
+//////////////////////////////////////////////////
+if ($interior || $foto) {
+if($interrior) {
+?><div class="mgt-header-block clearfix text-left text-black wpb_content_element  mgt-header-block-style-1 mgt-header-texttransform-header "><h2 class="mgt-header-block-title">Интерьеры </h2><div class="mgt-header-line"></div></div><?
+?><div class="vc_row wpb_row vc_row-fluid vc_custom_1438176948413">
+   <div class="wpb_column vc_column_container vc_col-sm-12">
+      <div class="vc_column-inner ">
+         <div class="wpb_wrapper">
+            <div class="portfolio-list portfolio-columns-4 portfolio-grid-layout-4 clearfix" id="portfolio-list"><?
+            foreach ($interior as $k=>$v) {
+               ?><div class="portfolio-item-block portfolio-item-animation-0 slide-item " data-item="<?=($k+1)?>" data-name="<?=$f_Name?>">
+                  <div class="portfolio-item-block-inside">
+                     <a rel="lightbox" href="<?=$v[0]?>" target="_self" rel="" title="">
+                        <div class="portfolio-item-image" data-style="background-image: url(<?=$v[1]?>);"></div><?
+                        /*
+                        ?><div class="portfolio-item-bg"></div><?
+                        
+                        ?><div class="info">
+                           <span class="sub-title">Building</span>
+                           <h4 class="title">Modern House</h4>
+                           <div class="project-description">Melbourne, Australia</div>
+                           <div class="view-more btn mgt-button">View more</div>
+                        </div><?
+                        */
+                     ?></a>
+                  </div>
+               </div><?            
+            }
+            ?></div>
+            <script>(function($){
+               $(document).ready(function() {
+               
+                   function initPortfolioCarousel() {
+               
+               $("#portfolio-list").owlCarousel({
+                        items: 3,
+                        itemsDesktop:   [1199,4],
+                        itemsDesktopSmall: [979,1],
+                        itemsTablet: [768,1],
+                        itemsMobile : [479,1],
+                        autoPlay: false,
+                        navigation: true,
+                        navigationText : false,
+                        pagination: false,
+                        afterInit : function(elem){
+                            $(this).css("display", "block");
+                        }
+                    });
+               
+               }
+               
+               setTimeout(initPortfolioCarousel, 1000);
+                   
+               });})(jQuery);
+            </script>
+         </div>
+      </div>
+   </div>
+</div><?
+}
+
+if ($foto['ITEMS']) {
+?><div class="mgt-header-block clearfix text-left text-black wpb_content_element  mgt-header-block-style-1 mgt-header-texttransform-header "><h2 class="mgt-header-block-title"> Фото со строительной площадки </h2><div class="mgt-header-line"></div></div><?
+    ?><div class="vc_row vc_slide"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner "><div class="portfolio-list portfolio-grid-layout-5 portfolio-grid-layout-0  portfolio-with-spaces clearfix" id="foto-list"><?
+    foreach ($foto['ITEMS'] as $k=>$v) {
+    ?><div class="portfolio-item-block portfolio-item-animation-4 mix building" data-item="<?=($k+1)?>" data-name="<?=$v[4]?>" style="display: inline-block;">
+	<div class="portfolio-item-block-inside">
+	  <a href="<?=$v[0]?>" target="_self" rel="lightbox" title="<?=$v[4]?>">
+	    <?if($v[0] && $v[0]!="unknown"):?><div class="portfolio-item-image" data-style="background-image: url(<?=$v[0]?>);" style="background-image: url(<?=$v[0]?>);"></div><?endif?>
+	    <div class="portfolio-item-bg"></div>
+	    <div class="info">
+	      <span class="sub-title"><?=$v[3]?></span>
+	      <h4 class="title"><?=$v[4]?></h4><?/*
+	      	      <div class="project-description">Melbourne, Australia</div>
+	  	  	      	      <div class="view-more btn mgt-button">View more</div>*/
+	  	  	    ?></div><?
+	  ?></a>
+	</div>
+	</div><?      
+    }
+    ?></div></div></div></div><?
+    ?>
+            <script>(function($){
+               $(document).ready(function() {
+               
+                   function initPortfolioCarousel1() {
+               
+               $("#foto-list").owlCarousel({
+                        items: 3,
+                        itemsDesktop:   [1199,4],
+                        itemsDesktopSmall: [979,1],
+                        itemsTablet: [768,1],
+                        itemsMobile : [479,1],
+                        autoPlay: false,
+                        navigation: true,
+                        navigationText : false,
+                        pagination: false,
+                        afterInit : function(elem){
+                            $(this).css("display", "block");
+                        }
+                    });
+               
+               }
+               
+               setTimeout(initPortfolioCarousel1, 700);
+                   
+               });})(jQuery);
+            </script>    
+    <?
+}
+
+
+}
+echo s_list_class(220,496,"&nc_ctpl=2264");
+?><br><br><div class="mgt-cta-block clearfix white-text with-text wpb_content_element cpa1" data-style="background-color: #212c34;" style="background-color: #212c34;"><div class="mgt-button-wrapper mgt-button-wrapper-align-right mgt-button-wrapper-display-newline mgt-button-top-margin-disable"><a class="btn hvr-default mgt-button mgt-style-bordered mgt-size-normal mgt-align-right mgt-display-newline mgt-text-size-large mgt-button-icon-position-left mgt-text-transform-uppercase " href="/uslugi/proektirovanie/"    target=" _blank">
+Перейти в раздел </a></div>
+<h5 data-url="/catalog/zakaz/?f_home=<?=$f_house_id?>" class="mgt-cta-block-header">Подробно об индивидуальном проектировании</h5></div><?
+if(!$grid){
+                                ?></div>
+                            </div>
+                </article>
+            </div><?
+}            
+         ?>
+           <script>(function($){
+      $(document).ready(function() {
+
+        $("#portfolio-list").mixItUp({effects:["fade","scale"],easing:"snap"});
+
+      });})(jQuery);</script>
+      <link rel='stylesheet' id='vc_carousel_css-css'  href='/netcat_template/template/thebuilt/css/vc_carousel.min.css?ver=4.12' type='text/css' media='all' />
+      <script type='text/javascript' src='/netcat_template/template/thebuilt/js/transition.min.js?ver=4.12'></script>
+<script type='text/javascript' src='/netcat_template/template/thebuilt/js/vc_carousel.min.js?ver=4.12'></script>
+      
+      

@@ -1,0 +1,252 @@
+/**
+  * Rhinoslider 1.05
+  * http://rhinoslider.com/
+  *
+  * Copyright 2014: Sebastian Pontow, Rene Maas (http://renemaas.de/)
+  * Dual licensed under the MIT or GPL Version 2 licenses.
+  * http://rhinoslider.com/license/
+  */
+.rhino-btn {
+	background:url(../images/rhinoslider-sprite.png) 0 0 no-repeat;
+	z-index:10;
+
+	display:block;
+	text-indent:-999%;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	user-select:none;
+}
+
+.rhino-prev, .rhino-next { top:285px; 	width:42px;
+	height:62px; }
+/*.fullslider .rhino-prev, .fullslider .rhino-next { top:235px; }*/
+.rhino-prev {
+	left:6px;
+	background:url(../images/sprite-sourse/slider-prev.png);
+	
+}
+
+.rhino-next {
+	right:6px;
+background:url(../images/sprite-sourse/slider-next.png);
+}
+
+.rhino-prev:hover { background:url(../images/sprite-sourse/slider-prev-hover.png); }
+
+.rhino-next:hover { background:url(../images/sprite-sourse/slider-next-hover.png); }
+
+.rhino-toggle {
+	top:485px;
+	left:12px;
+}
+
+/*.fullslider .rhino-toggle {
+	top:385px;
+}*/
+
+.rhino-play {background:url(../images/sprite-sourse/play.png); width:31px;
+height:31px; }
+
+.rhino-play:hover {background:url(../images/sprite-sourse/play-hover.png);}
+
+.rhino-pause {background:url(../images/sprite-sourse/pause.png); width:31px;
+height:31px; }
+
+.rhino-pause:hover {background:url(../images/sprite-sourse/pause-hover.png);}
+
+.rhino-container { position:relative; background-color:#545454; }
+
+.rhino-caption {
+height:104px;
+	position:absolute;
+	background: #545454;
+	left:0;
+	right:0;
+	bottom:0;
+	color:#fff;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	user-select:none;
+}
+
+.fullslider .rhino-caption {
+height:62px;
+}
+
+.rhino-bullets {
+	position: absolute;
+	z-index: 10;
+	padding:0;
+	left:50px;
+	top:493px;
+}
+/*.fullslider .rhino-bullets {
+	top:393px;
+}*/
+
+
+
+.rhino-bullets li {
+	float:left;
+	display:inline;
+}
+
+.rhino-bullets li a.rhino-bullet {
+	display: block;
+	width: 15px;
+	height: 15px;
+	margin-right:3px;
+	cursor: pointer;
+	background:url(../images/sprite-sourse/bullet.png) 0px 0 no-repeat;
+
+	text-indent:-9999px;
+	text-decoration:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	user-select:none;
+}
+
+.rhino-bullets li a.rhino-bullet:hover, .rhino-bullets li a.rhino-bullet:focus {
+background:url(../images/sprite-sourse/bullet-hover.png) 0px 0 no-repeat;
+
+}
+
+.rhino-bullets li a.rhino-bullet.rhino-active-bullet {
+background:url(../images/sprite-sourse/bullet-active.png) 0px 0 no-repeat;
+	width: 15px;
+	height: 15px;
+}
+
+.rhino-caption .name {
+padding-top:15px;
+padding-left:20px;
+padding-bottom:5px;
+}
+
+.rhino-caption .name a {
+font-size:30px;
+color:#fff;
+text-decoration:none;
+border:0;
+}
+
+.rhino-caption .price {
+font-size:16px;
+line-height:18px;
+padding-left:20px;
+color:#fff;
+overflow:hidden;
+}
+
+.fullslider .rhino-caption .price {
+padding-left:85px;
+height:50px;
+padding-top:12px;
+}
+
+
+.rhino-caption .price p {
+margin:0;
+}
+
+.rhino-caption .price span {
+color:#aaa;
+}
+
+.rhino-caption .price span a {
+color:#aaa;
+text-decoration:none;
+border:none;
+}
+
+
+.fullslider .rhino-caption .price span a {
+border-bottom:1px dotted #aaa;
+color:#aaa;
+text-decoration:none;
+}
+
+.fullslider .rhino-caption .price span a:hover {
+border:0;
+}
+
+.rhino-caption .price a.calc {
+display:inline-block;
+float:left;
+width:31px;
+margin-right:8px;
+margin-top:2px;
+text-indent:-9999px;
+height:31px;
+background:url(../images/sprite-sourse/calc.png) 0px 0 no-repeat;
+}
+
+.rhino-caption .price a.calc:hover {
+background:url(../images/sprite-sourse/calc-hover.png) 0px 0 no-repeat;
+}
+
+.fullslider .rhino-caption .price a.calc {
+float:right;
+margin-right:15px;
+position:relative;
+}
+
+.fullslider .rhino-caption .price a.calc span {
+display:block;
+position:absolute;
+color:#fff;
+width:100px;
+left:-110px;
+top:0;
+text-indent:0;
+font-size:12px;
+text-align:right;
+padding-top:3px;
+line-height:12px;
+
+}
+
+.rhino-caption:hover {
+background-color:#3C3C3C;
+}
+
+.rhino-caption .special {
+display:block;
+position:absolute;
+right:0;
+top:0;
+width:140px;
+float:none;
+margin:0;
+height:104px;
+text-decoration:none;
+border:0;
+text-indent:-9999px;
+background:url(../images/sprite-sourse/special.png) 0px 0 no-repeat;
+}
+
+.rhino-caption .special:hover {
+background:url(../images/sprite-sourse/special-hover.png) 0px 0 no-repeat;
+}
+
+
+.fullslider .rhino-caption .special {
+right:auto;
+left:0;
+width:74px;
+height:62px;
+background:url(../images/sprite-sourse/special-full.png) 0px 0 no-repeat;
+}
+
+.fullslider .rhino-caption .special:hover {
+background:url(../images/sprite-sourse/special-full-hover.png) 0px 0 no-repeat;
+}
+
+.colorslider .rhino-toggle {
+display:none !important;
+}
+.colorslider .rhino-bullets {
+top:auto;
+bottom:18px;
+left:18px;
+}

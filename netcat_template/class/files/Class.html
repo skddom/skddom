@@ -1,0 +1,13 @@
+<!-- FormPrefix --><?= $f_AdminCommon; ?><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?= $f_AdminButtons; 
+
+?><div class="widget-download-link-wrapper">
+                <div class="widget-download-icon"><i class="fa fa-file-<?=CFile::getType($f_File_name)?>-o"></i></div>
+                <div class="widget-download-details">
+                    <div class="widget-download-title"><a href="<?=$f_File?>"><?=$f_Name?></a></div>
+                    <div class="widget-download-subtitle"><?=CFile::formatSize($f_File_size)?>, <?=strtoupper(CFile::getExtension($f_File_name))?></div>
+                </div>
+            </div><!-- /RecordTemplate -->
+
+<!-- FormSuffix --><!-- /FormSuffix -->

@@ -1,0 +1,18 @@
+<?php $ignore_sub=$ignore_cc=true;
+$query_where = "LENGTH(a.Price1)>1";
+$query_order = "a.Price1";
+
+$br = CBranding::get_object();
+$br->getProjects();
+$br->ExModifyQueryWhere($query_where, $cc_env, $inside_admin, $admin_mode); 
+
+$PARAMS = explode("\n", $cc_settings['PARAMS']);
+foreach ($PARAMS as $v) {
+    $v = explode(";",$v);
+    if (!$v[1]) $v[1]=$v[0];
+    $range = explode('-', $v[1]);
+    $id = md5($v[0]);
+    $arRange[] = array("ID"=>$id,"NAME"=>$v[0], "RANGE"=>$range);
+}
+
+?>

@@ -1,0 +1,26 @@
+<?php
+
+if (!nc_module_check_by_keyword("netshop")) {
+    die (NETCAT_MODULE_NETSHOP_MODULEUNCHECKED);
+}
+
+$netshop = nc_netshop::get_instance();
+
+$pages_template['prefix'] = "";
+$pages_template['suffix'] = "";
+$pages_template['active'] = "<b class=\"tpl-link-page tpl-state-current\">%PAGE</b>";
+$pages_template['unactive'] = "<a class=\"tpl-link-page\" href=\"%URL\">%PAGE</a>";
+$pages_template['divider'] = " ";
+
+$f_Slider_tpl = array(
+    'prefix' => "<div class='catalogue_full_animate'>",
+    'record' => "<div class='block'><div class='display_table'><div class='display_table_row'><div class='display_table_cell'>
+	         <a href='%Path%'><img src='%Preview%' alt='' /></a>
+	     </div></div></div></div>",
+    'divider' => '',
+    'suffix' => '</div>',
+);
+
+if (nc_module_check_by_keyword("comments")) {
+    $nc_comments = new nc_comments($cc);
+}

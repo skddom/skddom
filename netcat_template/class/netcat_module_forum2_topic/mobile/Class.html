@@ -1,0 +1,93 @@
+<!-- FormPrefix --><div style='margin-bottom:10px; font-weight:bold'>
+	
+	<? if ($rssLink) : ?>
+		<img src='<?= $SUB_FOLDER ?>/images/rss.png' alt='RSS' /><a href='<?= $rssLink ?>'>RSS</a> |
+	<? endif; ?>
+
+   <a href='
+        <?= $addLink ?>
+        <? if ($curPos) : ?>
+            <?= strstr($addLink, "?") ? "&amp;" : "?" ?>
+            curPos= <?= $curPos ?>
+        <? endif; ?>
+   '>Новый топик</a>
+</div>
+<div id='sortables'>
+    <form name='sorting' method='get'>
+    <? if ($inside_admin) : ?>
+        <input type='hidden' name='inside_admin' value='1' />
+        <input type='hidden' name='sub' value='<?= $sub ?>' />
+        <input type='hidden' name='cc' value='<?= $cc ?>' />
+    <? endif; ?>
+    <? if ($curPos) : ?>
+    <input type='hidden' name='curPos' value='<?= $curPos ?>'/>    
+    <? endif; ?>
+		<span style="white-space: nowrap; ">
+    сортировать по 
+    <select name='sort' class='no_special_style'>
+    <option value='updated' <?= $sort=="updated" ? " selected" : "" ?> >дате обновления</option>
+    <option value='created' <?= $sort=="created" ? " selected" : "" ?> >дате создания темы</option>
+    <option value='subject' <?= $sort=="subject" ? " selected" : "" ?> >названию</option>
+    <option value='replies' <?= $sort=="replies" ? " selected" : "" ?> >количеству ответов</option>
+    <option value='views' <?= $sort=="views" ? " selected" : "" ?> >количеству просмотров</option>
+    <option value='author' <?= $sort=="author" ? " selected" : "" ?> >автору темы</option>
+    </select>
+		</span>
+		<span style="white-space: nowrap; ">
+    порядок 
+    <select name='sortDir' class='no_special_style'>
+    <option value='desc' <?= $sortDir=="desc" ? " selected" : "" ?> >по убыванию</option>
+    <option value='asc' <?= $sortDir=="asc" ? " selected" : "" ?> >по возрастанию</option>
+    </select>
+			</span>
+    <input type='submit' value='отобразить'/>
+    </form>    
+</div><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><? echo $f_AdminButtons; ?>
+<table class="nc_topic">
+<thead>
+    <tr>
+        <th class="nc_topic-name">
+		    <img src='<?= $SUB_FOLDER.$HTTP_ROOT_PATH."modules/forum2/images/".($f_Closed ? "closed_" : ( $f_Type_id==2 ? "important_" : "") ) ?>topic.gif' border='0' alt=''>
+			<a href='<?= $fullLink ?>'><?= $f_Subject ?></a>
+				<span class="nc_topic-author">Автор: <a href="#" class="nc_topic-author-name"><?= ($f_Topic_Author ? $f_Topic_Author : NETCAT_MODULE_FORUM2_USER_GUEST) ?></a></span>
+		</th>
+    </tr>
+</thead>
+<? if (!$advertisement && $adv_messages) : ?>
+    <?= s_list_class($sub, $cc, "", 1) ?>
+<? endif; ?>
+<tfoot <?= ($totRows > $f_RowNum ? "style='display:none;'" : "") ?>>
+	<tr><td><?= browse_messages($cc_env, 5) ?></td></tr>
+</tfoot>
+<tbody>
+<? $f_Reply_Message = nc_substr(nc_bbcode_clear($f_Reply_Message_full), 0, 50);
+if (nc_strrpos($f_Reply_Message, " ")) {
+  $f_Reply_Message = nc_substr($f_Reply_Message, 0, nc_strrpos($f_Reply_Message, " "));
+} ?>
+
+<? if ($topicType) : ?>
+    <?= opt($topicType = $f_Type_id, "") ?>
+<? endif; ?>
+
+<? if ($topicType!=$f_Type_id && $totRows!=$f_RowNum) : ?>
+    <tr><td style='background:#EEE; height:5px'></td></tr><?= opt($topicType = $f_Type_id, "") ?>
+<? endif; ?>
+<tr class="nc_topic-post" id="">
+	<td class="nc_topic-count">Просмотров: <?= intval($f_Views) ?> | Ответов: <?= intval($f_Replies) ?></td></tr><tr>
+<td class="nc_topic-last">
+    <? if ($f_Reply_ID) : ?>
+	Последний ответ: <a href=<?= $fullLink ?>
+        <?= $reply_obj->get_curpos_by_topic_id($f_RowID) ? ( strstr($fullLink, "?") ? "&amp;" : "?" )."curPos=".$reply_obj->get_curpos_by_topic_id($f_RowID) : "" ?>
+        #reply<?= $f_Reply_ID ?>'><?= htmlspecialchars(( $f_Reply_Subject ? $f_Reply_Subject : rtrim($f_Reply_Message, ".,;:-_+=?")."..." ), ENT_QUOTES) ?></a>
+		от <b><?= $f_Reply_Author ? $f_Reply_Author : NETCAT_MODULE_FORUM2_USER_GUEST ?></b> (<?= $f_Reply_Date ?>)        
+    <? else : ?>
+		<a href='<?= $fullLink ?>'><?= $f_Subject ?></a> <b><?= $f_Topic_Author ? $f_Topic_Author : NETCAT_MODULE_FORUM2_USER_GUEST ?></b> (<?= $f_Created ?>)
+    <? endif; ?>
+</td>
+</tr>
+</tbody>
+</table><!-- /RecordTemplate -->
+
+<!-- FormSuffix --><!-- /FormSuffix -->

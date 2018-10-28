@@ -1,0 +1,23 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+							<div class="mgt-post normal-blocks">
+								<a href="<?=$f_Link?>">
+									<div class="mgt-post-image" data-style="background-image: url(<?=$f_Image?>);">
+										<div class="mgt-post-image-wrapper">
+											<div class="mgt-post-wrapper-icon"><i class="fa fa-plus"></i></div>
+										</div>
+									</div>
+								</a>
+								<div class="mgt-post-details">
+									<div class="mgt-post-icon format-standard"></div>
+									<div class="mgt-post-title">
+										<a href="<?=$f_Link?>">
+											<p class="upper"><?=$f_Name?></p>
+										</a>
+									</div>
+									<div class="mgt-post-text"><?=$f_Text?></div>
+									<a <?=$f_LinkAttr?>
+									 class="<?=$f_LinkClass?> btn mgt-button hvr-default mgt mgt-align-left mgt-display-inline mgt-text-size-normal mgt-text-transform-uppercase"
+									 href="<?=$f_Link?>"><?=$f_LinkText?$f_LinkText:'Посмотреть'?><span class="fa fa-long-arrow-right"></span></a>
+								</div>
+							</div>
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

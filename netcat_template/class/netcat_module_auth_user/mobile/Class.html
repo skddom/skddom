@@ -1,0 +1,49 @@
+<!-- FormPrefix --><? echo $f_AdminCommon; 
+echo $searchForm;
+?>
+<div class="form"><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><div class="block" style="padding-top: 5px;">
+  <img src='<?= ($f_ForumAvatar ? $f_ForumAvatar : $nc_core->SUB_FOLDER.$cc_settings['NoAvatarImg']) ?>' alt='' />
+  <a href='<?= $fullLink ?>'><?= ($f_ForumName ? $f_ForumName : $f_Login) ?></a> (<?= (nc_auth_is_online($f_RowID) ? "<span class='online'>online</span>" : "<span class='offline'>offline</span>") ?>)
+</div>
+    <?
+    if ($AUTH_USER_ID && $pm_allow) {
+        ?><div class="block"><?= ($f_RowID != $AUTH_USER_ID ? "<a href='".nc_auth_messages_url($f_RowID)."'>Отправить сообщение</a>" : "") ?></div>
+    <?
+    }
+    if ($allow_rel) {
+        ?> <div class="block"> <?
+        if ($AUTH_USER_ID != $f_RowID) {
+            if (in_array($f_RowID, $friends)) {
+                ?>
+                    <a href='<?= nc_auth_drop_rel_url($f_RowID) ?>'>Убрать из друзей</a> <?
+        } else {
+            if (in_array($f_RowID, $banned)) {
+                    ?>
+                        <a href='".nc_auth_drop_rel_url($f_RowID)."'>Убрать из врагов</a><?
+            } else {
+                echo ( $friend_allow ? "<a href='".nc_auth_add_to_friend_url($f_RowID)."'>Добавить в друзья</a><br/>" : "" );
+                echo ( $banned_allow ? "<a href='".nc_auth_add_to_banned_url($f_RowID)."'>Добавить во враги</a>" : "");
+            }
+        }
+        ?>
+    <? } ?> </div>
+<? } ?>
+<div class="tr_last"></div><!-- /RecordTemplate -->
+
+<!-- FormSuffix --></div>
+<br>
+<? if ($totRows > $recNum) { ?>
+    <div class='nc_pagination'>Страницы: <?= browse_messages($cc_env, 5) ?></div><br><? } ?>
+
+<div class='nc_info_block'>
+    <? if ($srch) {
+        ?>Найдено пользователей:<? } else {
+        ?>Всего зарегистрированных пользователей: <b><?= $totRows ?></b><br/>
+    <?
+    }
+    echo nc_auth_users_online("Сейчас на сайте: <b>%ONLINE</b> (зарегистрированных: <b>%REGISTERED</b>, гостей: <b>%GUESTS</b>)<br>");
+    echo nc_auth_users_online($users_online_tpl);
+    ?>
+</div><!-- /FormSuffix -->

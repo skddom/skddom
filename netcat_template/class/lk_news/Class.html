@@ -1,0 +1,37 @@
+<!-- FormPrefix --><?= $f_AdminCommon; ?>
+<div class="lk_photos text js-ajax-result tpl-<?=$classID?>">
+<?
+
+$rs = $db->get_results("select Name, Message_ID from Message295 where Checked=1", ARRAY_A);
+?>
+<?if($inside_admin || $admin_mode):?>
+<form action="" method="post" id="pro">
+    <select name="project" onchange="document.getElementById('pro').submit()">
+        <option value="0">Выбери проект</option>
+        <?foreach($rs as $v) {
+            ?><option <?if($v['Message_ID'] == $project):?>selected <?endif?>value="<?=$v['Message_ID']?>"><?=$v['Name']?></option><?
+        }?>
+    </select>
+    <button>Перейти</button>
+    <?if($project):?><input type="submit" name="fill" value="Заполнить" /><?endif?>
+</form>
+<?else:?>
+    <div class="robototitle"><?=$cc_env['Sub_Class_Name']?></div>
+    <?=str_replace("#TITLE#", $lk->data['Title1'], $cc_settings['Text'])?>
+<?endif?>
+<div><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?= $f_AdminButtons; ?><?
+$files = $f_Photo->to_array();
+?><div  data-callback="initSliders2();" data-target=".js-ajax-result" data-load1-off="<?=$fullLink?>?isNaked=1" class="news-itm">
+    <div class="news-date" style="margin-bottom: 4px; font-size: 14px; color: #d47000; "><?=$f_Date?></div>
+    <div class="option-name" style="font-size: 17px;  margin-bottom: 7px;"><?=$f_Name?></div>
+    <div class="news-text" style="line-height: 18px;">
+    <img src="/images/emp.gif" style="background:url(<?=$files[0]['Preview']?>); background-size: cover; width:88px; height:76px; float: left; margin: 0 10px 0 0">
+    <?=$f_Text?></div>
+    <div style="clear: both">&nbsp;</div>
+</div><!-- /RecordTemplate -->
+
+<!-- FormSuffix --></div><?= str_replace("cur_cc","a",nc_browse_messages($cc_env, 10, $browse_msg)) ?>
+</div>
+<!-- /FormSuffix -->

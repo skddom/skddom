@@ -1,0 +1,32 @@
+<?
+$ignore_cc = 1;
+$ignore_parent = 1;
+
+// get host adress
+$HTTP_HOST = $nc_core->get_variable("HTTP_HOST");
+
+// get objects
+$forum_obj = nc_forum2_forum::get_object();
+
+if ($inside_admin) {
+  nc_print_status( sprintf(NETCAT_MODULE_FORUM2_COMPONENT_INSIDE_ADMIN_RSS, $forum_obj->get_rss_url($sub)), "info" );
+  $ignore_all = true;
+  $ignore_prefix = true;
+  $ignore_suffix = true;
+  return;
+}
+
+// check possibillity, view replies only from topic message
+if (!$inside_admin && !$topic) {
+  header("Location: ".$current_sub['Hidden_URL']);
+}
+
+if ($topic) {
+  // set parent topic
+  $query_where = "`Topic_ID` = '".intval($topic)."'";
+}
+
+$query_select = "usr.`Login` AS `Author`";
+$query_join = "LEFT JOIN `User` AS usr ON a.`User_ID` = usr.`User_ID`";
+$result_vars = '$f_Author';
+?>

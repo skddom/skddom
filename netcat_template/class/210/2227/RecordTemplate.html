@@ -1,0 +1,17 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+<?php $result .= " ";if($f_SliderPath&&$f_MainImgPath)$f_MainImg=$f_SliderPath.$f_MainImgPath;
+if (is_array($br->projects[$f_RowID])) extract($br->projects[$f_RowID]);
+
+$cnt++;
+$result.="		
+			<div".($cnt%3==0?" style=\"margin-right:0\"":"")." class=\"special\">
+				<div class=\"pic\"><a href=\"$fullLink\"><img width=\"220\" height=\"165\" alt=\" \" src=\"$f_MainImg\"></a></div>
+				<div class=\"desc\"> <a href=\"$fullLink\">
+				<div class=\"name\">".str_replace("из клееного бруса","",$f_Name)."</div>
+				<div class=\"area\">Площадь дома - $f_Square* кв.м.</div>
+				<div class=\"clr\"></div>
+				<div class=\"cost\"> <span class=\"ico\"></span> <span><span class='fs2'>Цена в базовой комплектации</span>
+					$f_Price1 р.</span> </div>
+				</a> <a href=\"/price/calc/?house=$f_house_id\" class=\"calc\">Другие<br>компл.</a></div>
+			</div> "; ?>
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

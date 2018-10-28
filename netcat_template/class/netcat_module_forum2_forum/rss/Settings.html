@@ -1,0 +1,45 @@
+<?
+$HTTP_HOST = $nc_core->get_variable("HTTP_HOST");
+
+// get forum object
+$parent_obj = nc_forum2_parent::get_object();
+$forum_obj = nc_forum2_forum::get_object();
+$topic_obj = nc_forum2_topic::get_object();
+$reply_obj = nc_forum2_reply::get_object();
+
+if ($inside_admin) {
+  nc_print_status( sprintf(NETCAT_MODULE_FORUM2_COMPONENT_INSIDE_ADMIN_RSS, $parent_obj->get_rss_url($sub)), "info" );
+  $ignore_all = true;
+  $ignore_prefix = true;
+  $ignore_suffix = true;
+  return;
+}
+
+$UpdatedTopic = $db->get_var("SELECT MAX( UNIX_TIMESTAMP(`LastUpdated`) ) FROM `Message".$topic_obj->get_class_id()."` WHERE `Checked` = 1");
+
+// clear query
+$ignore_all = 1;
+
+$last_topic_link = "CONCAT('".$SUB_FOLDER."',sub.`Hidden_URL`, tcc.`EnglishName`, '_', tpc.`Message_ID`,'.html')";
+$last_reply_topic_link = "CONCAT('".$SUB_FOLDER."',sub.`Hidden_URL`, tcc.`EnglishName`, '_', rpltpc.`Message_ID`,'.html')";
+
+// new main query
+$query_select = "sub.`Subdivision_Name` AS `SubName`, sub.`Hidden_URL` AS `SubLink`, fc.`Last_Topic_ID` AS `Last_Topic_ID`, ".$last_topic_link." AS `Last_Topic_Link`, ".$last_reply_topic_link." AS `Last_Reply_Topic_Link`, usr.`Login` AS `Last_Topic_Author`, UNIX_TIMESTAMP(tpc.`Created`) AS `Last_Topic_Date`, tpc.`Subject` AS `Last_Topic_Subject`, SUBSTRING_INDEX(tpc.`Message`, ' ', '".intval($cc_settings['CropMessage'] ? $cc_settings['CropMessage'] : 25)."') AS `Last_Topic_Message`, fc.`Last_Reply_ID` AS `Last_Reply_ID`, rpl.`Topic_ID` AS `Last_Reply_Topic_ID`, usr2.`Login` AS `Last_Reply_Author`, UNIX_TIMESTAMP(rpl.`Created`) AS `Last_Reply_Date`, rpl.`Subject` AS `Last_Reply_Subject`, SUBSTRING_INDEX(rpl.`Message`, ' ', '".intval($cc_settings['CropMessage'] ? $cc_settings['CropMessage'] : 25)."') AS `Last_Reply_Message`";
+$query_from = "`Subdivision` AS sub";
+$query_join = "LEFT JOIN `Forum_Subdivisions` AS fs ON sub.`Subdivision_ID` = fs.`Subdivision_ID`".
+  " LEFT JOIN `Forum_Groups` AS fg ON fs.`Group_ID` = fg.`ID`".
+  " LEFT JOIN `Sub_Class` AS tcc ON sub.`Subdivision_ID` = tcc.`Subdivision_ID` AND tcc.`Class_ID` = '".$topic_obj->get_class_id()."' AND tcc.`Class_Template_ID` = 0".
+  " LEFT JOIN `Sub_Class` AS rcc ON sub.`Subdivision_ID` = rcc.`Subdivision_ID` AND rcc.`Class_ID` = '".$reply_obj->get_class_id()."' AND rcc.`Class_Template_ID` = 0".
+  " LEFT JOIN `Forum_Count` AS fc ON sub.`Subdivision_ID` = fc.`Subdivision_ID`".
+  " LEFT JOIN `Message".$topic_obj->get_class_id()."` AS tpc ON fc.`Last_Topic_ID` = tpc.`Message_ID`".
+  " LEFT JOIN `Message".$reply_obj->get_class_id()."` AS rpl ON fc.`Last_Reply_ID` = rpl.`Message_ID`".
+  " LEFT JOIN `Message".$topic_obj->get_class_id()."` AS rpltpc ON rpl.`Topic_ID` = rpltpc.`Message_ID`".
+  " LEFT JOIN `User` AS usr ON tpc.`User_ID` = usr.`User_ID`".
+  " LEFT JOIN `User` AS usr2 ON rpl.`User_ID` = usr2.`User_ID`";
+$query_where = "sub.`Parent_Sub_ID` = '".intval($sub)."' AND sub.`Subdivision_ID` = tcc.`Subdivision_ID` AND sub.`Checked` = 1";
+$query_order = "fg.`Priority` DESC";
+$query_limit = $cc_env['RecordsPerPage'] ? intval($curPos).", ".$cc_env['RecordsPerPage'] : "";
+$result_vars = '$SubName, $SubLink, $Last_Topic_ID, $Last_Topic_Link, $Last_Reply_Topic_Link, $Last_Topic_Author, $f_Last_Topic_Date, $f_Last_Topic_Subject, $f_Last_Topic_Message, $f_Last_Reply_ID, $f_Last_Reply_Topic_ID, $f_Last_Reply_Author, $f_Last_Reply_Date, $f_Last_Reply_Subject, $f_Last_Reply_Message';
+
+unset($last_topic_link);
+?>

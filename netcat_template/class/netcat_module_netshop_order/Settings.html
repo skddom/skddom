@@ -1,0 +1,244 @@
+<?
+if (isset($_POST['form_visibility'])) {
+    nc_core()->set_settings('OrderFilterForm', $_POST['form_visibility'] ? 1 : 0, 'netshop');
+    die;
+}
+
+if ($inside_admin) {
+    $maxRows = 50; // записей на странице
+    $query_where = "1";
+    $query_order = "a.`Created` DESC";
+
+    $ignore_sub = 1;
+    $ignore_cc = 1;
+
+
+    /**
+     * text_filter: «поиск»
+     */
+
+    $text_filter = trim($text_filter);
+    if (strlen($text_filter)) {
+
+        $db = nc_db();
+        $query_where_conditions = array(0);
+
+        // (a) Возможно, ID заказа (+игнорировать order_status)
+        if (is_numeric($text_filter)) {
+            $order_table = nc_netshop::get_instance($catalogue)->get_order_table_name();
+            $last_order_status = $db->get_var("SELECT MAX(`Message_ID`) FROM `$order_table`");
+            if ($text_filter <= $last_order_status) {
+                $query_where_conditions[] = "a.`Message_ID` = " . (int)$text_filter;
+                $order_status = -1;
+            }
+        }
+
+// (б) Возможно, номер телефона (начиная с шестизначного)
+        if (strlen($text_filter) > 5 && preg_match('/^[\d\s\-\.\(\)\+]+$/', $text_filter)) {
+            $phone_digits = preg_split('//', preg_replace('/\D/', '', $text_filter));
+            $phone_regexp = join('[^0-9]*', $phone_digits);
+            $query_where_conditions[] = "a.`Phone` REGEXP '$phone_regexp'";
+        }
+
+        $text_filter_escaped = $db->escape($text_filter);
+
+// (в) Email?
+
+        if (strpos($text_filter, "@") !== false) {
+            $query_where_conditions[] = "a.`Email` LIKE '%$text_filter_escaped%'";
+        }
+
+// (г) может, это логин?
+        $auth_by = nc_core('AUTHORIZE_BY');
+        $user_id = $db->get_var("SELECT `User_ID` FROM `User` WHERE `$auth_by` = '$text_filter_escaped'");
+        if ($user_id) {
+            $query_where_conditions[] = "a.`User_ID` = $user_id";
+        }
+
+// (д) имя клиента?
+        if (!is_numeric($text_filter)) {
+            $query_where_conditions[] = "a.`ContactName` LIKE '%$text_filter_escaped%'";
+        }
+
+        $query_where = "(" . join(" OR ", $query_where_conditions) . ")";
+    }
+
+    /*
+    * order_status:
+    *   -1:  любые заказы
+    *   0:   новые заказы
+    *   >0:  ID статуса заказа
+    */
+
+    if (!isset($order_status)) {
+        $order_status = 0; // "NEW"
+    }
+
+    if ($order_status != -1) {
+        if ($order_status > 0) {
+            $query_where .= " AND a.Status = " . (int)$order_status;
+        } else {
+            $query_where .= " AND (a.Status IS NULL OR a.Status = 0)"; // new orders
+        }
+    }
+
+    /*
+    * delivery_method:
+    *   -1:  любые
+    *   >0:  ID метода
+    */
+
+    if (!isset($delivery_method)) {
+        $delivery_method = -1; // "NEW"
+    }
+
+    if ($delivery_method != -1) {
+        if ($delivery_method > 0) {
+            $query_where .= " AND a.DeliveryMethod = " . (int)$delivery_method;
+        } else {
+            $query_where .= " AND (a.DeliveryMethod IS NULL OR a.DeliveryMethod = 0)";
+        }
+    }
+
+    /*
+    * price_from - price_to
+    */
+    $price_from = abs((float)$price_from);
+    $price_to = abs((float)$price_to);
+
+    if ($price_from > $price_to || (!$price_from && !$price_to)) {
+        $price_from = '';
+        $price_to = '';
+    } else {
+        if ($price_from && !$price_to) {
+            $query_where .= " AND a.TotalPrice > {$price_from} ";
+        } else if ($price_to && !$price_from) {
+            $query_where .= " AND a.TotalPrice < {$price_to} ";
+        } else {
+            $query_where .= " AND a.TotalPrice BETWEEN {$price_from} AND {$price_to} ";
+        }
+        $price_from = $price_from ? $price_from : '';
+        $price_to = $price_to ? $price_to : '';
+    }
+
+    /*
+    * date_from - date_to
+    */
+    $date_from_raw = explode('.', $date_from);
+    $date_to_raw = explode('.', $date_to);
+
+    if (count($date_from_raw) == 3) {
+        $date_from_raw = "{$date_from_raw[2]}-{$date_from_raw[1]}-{$date_from_raw[0]}";
+        $date_from_raw = strtotime($date_from_raw);
+        if ($date_from_raw) {
+            $date_from_raw = date('Y-m-d', $date_from_raw);
+        } else {
+            $date_from_raw = '';
+            $date_from = '';
+        }
+    } else {
+        $date_from_raw = '';
+        $date_from = '';
+    }
+
+    if (count($date_to_raw) == 3) {
+        $date_to_raw = "{$date_to_raw[2]}-{$date_to_raw[1]}-{$date_to_raw[0]}";
+        $date_to_raw = strtotime($date_to_raw);
+        if ($date_to_raw) {
+            $date_to_raw = date('Y-m-d', $date_to_raw);
+        } else {
+            $date_to_raw = '';
+            $date_to = '';
+        }
+    } else {
+        $date_to_raw = '';
+        $date_to = '';
+    }
+
+    if ($date_from_raw || $date_to_raw) {
+        if (!$date_from_raw && !$date_to_raw) {
+            $date_from_raw = '';
+            $date_to_raw = '';
+            $date_from = '';
+            $date_to = '';
+        } else {
+            if ($date_from_raw && !$date_to_raw) {
+                $query_where .= " AND a.Created > '{$date_from_raw} 00:00:00' ";
+            } else if ($date_to_raw && !$date_from_raw) {
+                $query_where .= " AND a.Created < '{$date_to_raw} 23:59:59' ";
+            } else {
+                $query_where .= " AND a.Created BETWEEN '{$date_from_raw} 00:00:00' AND '{$date_to_raw} 23:59:59' ";
+            }
+            if (!$date_from_raw) {
+                $date_from = '';
+            }
+            if (!$date_to_raw) {
+                $date_to = '';
+            }
+        }
+    }
+
+    if (!is_object($perm) || !$perm->isSupervisor()) {
+        if ($AUTH_USER_ID) {
+            $query_where .= " AND a.User_ID = {$AUTH_USER_ID} ";
+        } else {
+            $query_where .= " AND 1 = 0";
+        }
+
+    }
+} else {
+    $sql = "SELECT * FROM `Message{$classID}`";
+    $exists = $db->get_results($sql) ? true : false;
+
+    if ($_POST['pm']) {
+        $pm = intval($_POST['pm']);
+        $order = intval($_POST['order_id']);
+        $post_hash = $_POST['hash'];
+        $hash = md5($pm . $order . $nc_core->get_settings('SecretKey', 'system'));
+        if ($hash == $post_hash) {
+            $SQL = "UPDATE Message{$cc_env["Class_ID"]} SET PaymentMethod = $pm WHERE Message_ID = $order";
+            $db->query($SQL);
+        }
+        exit;
+    }
+
+    $ignore_sub = 1;
+    $ignore_cc = 1;
+    $ignore_link = 1;
+
+    $months = explode("/", NETCAT_MODULE_NETSHOP_MONTHS_GENITIVE);
+
+    $query_where = "1";
+
+    $s_status = $_POST['order_status'];
+    if ($s_status == 'new') {
+        $query_where .= " AND (a.Status IS NULL OR a.Status = 0)";
+    } elseif ($s_status = intval($s_status)) {
+        $query_where .= " AND a.Status = " . intval($s_status);
+    }
+
+    if (is_object($perm) && $perm->isSupervisor()) {
+        $ignore_user = 1;
+    } else if ($current_user['User_ID']) {
+        $query_where .= " AND a.User_ID = {$current_user['User_ID']} ";
+    }
+
+    $SQL = "SELECT ShopOrderStatus_ID as ID,
+               ShopOrderStatus_Name as Name
+            FROM Classificator_ShopOrderStatus";
+    $status = $db->get_results($SQL);
+
+    foreach ($status as $row) {
+        $order_status[$row->ID] = ucfirst($row->Name);
+    }
+
+    if (!$current_user['User_ID'] && $_SESSION['user_hash']) {
+        $query_where .= " AND a.user_hash = '" . $db->escape($_SESSION['user_hash']) . "' ";
+    }
+
+// на случай, если в разделе права выставлены неверно
+    if (!$current_user['User_ID'] && !$_SESSION['user_hash']) {
+        $query_where = " 0 ";
+    }
+}
+?>

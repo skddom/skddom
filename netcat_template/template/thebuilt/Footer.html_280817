@@ -1,0 +1,81 @@
+<?
+    if($template_settings['After']) {
+        eval($template_settings['After']);
+    }
+    ?><div class="container-fluid container-fluid-footer">
+        <div class="row">
+            <div class="footer-sidebar-2-wrapper">
+                <div class="footer-sidebar-2 sidebar container footer-container">
+                    <ul class="clearfix" id="footer-sidebar-2">
+                        <li class="widget widget_text" id="text-2">
+                            <div class="textwidget">
+                                <img src="<?= $nc_parent_template_folder_path ?>images/flogo.png">
+                                <br>
+                                <br>
+                                <p><?
+                                echo $this->partial('copy');?></p>
+                            </div>
+                        </li>
+                        <li class="widget widget_nav_menu" id="nav_menu-2">
+                            <div style="color: #fff; font-size: 15px;" class="widgettitle">Информация</div>
+                            <div class="menu-footer-sidebar-menu-container"><?
+                                echo nc_browse_level(0, $browse_footer);
+                            ?></div>
+                        </li>
+                        <li class="widget widget_text" id="text-3">
+                            <div style="color: #fff; font-size: 15px;" class="widgettitle">Контакты</div>
+                            <div class="textwidget">
+<? echo $this->partial('copy1');?>
+                            </div>
+                        </li>
+                        <li class="widget widget_text" id="text-4">
+                            <div style="color: #fff; font-size: 15px;" class="widgettitle">Представительства в регионах</div>
+                            <div class="textwidget">
+                                <img src="<?= $nc_parent_template_folder_path ?>/images/footer_map.png">
+                                <br>
+                                <br>
+                                <? echo $this->partial('copy2');?>
+                                <a href="/policy-personal-data/">Политика обработки персональных данных</a><br>
+                                <a href="/karta-sayta/">Карта сайта</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="st-sidebar-menu st-sidebar-effect-2" id="offcanvas-sidebar-nav">
+        <div class="st-sidebar-menu-close-btn"><i class="fa fa-times"></i></div>
+        <div class="offcanvas-sidebar sidebar">
+            <ul class="clearfix" id="offcanvas-sidebar">
+                <li class="widget widget_nav_menu" id="nav_menu-6">
+                    <div class="widgettitle">Меню</div>
+                    <div class="menu-offcanvas-menu-container"><?
+                    echo nc_browse_level(0, $browse_nav);   
+                    ?></div>
+                </li><?
+                $buttons = $template_settings['NavButtons'];
+                if($buttons) {
+                ?><li class="widget widget_text" id="text-17"><?
+                    echo $buttons;
+                ?></li><?
+                }
+            ?></ul>
+        </div>
+    </nav>
+    <a id="top-link" href="#top"><span>Вверх</span></a>
+    <div class="search-fullscreen-wrapper">
+        <div class="search-fullscreen-form">
+            <div class="search-close-btn"><i class="fa fa-times"></i></div>
+            <form class="searchform" id="searchform_p"
+             method="get" action="">
+                <input class="field" id="s_p" type="search" name="s" value="" placeholder="Type keyword(s) here and hit Enter …">
+                <input class="submit btn" id="searchsubmit_p" type="submit" value="Search">
+            </form>
+        </div>
+    </div>
+    <?= $this->partial('counter2') ?>
+    <script src="/d-goals.js" type="text/javascript"></script>
+    <div id="plashka" style="display:none;"><div class="xy1">Базовая комплектация</div><div class="xy2 b1 js-b1">7 590 349 руб.</div><div class="xy1">Индивидуальная комплектация</div><div class="xy2 b3 js-b3 ">7 531 549 руб.</div></div>    
+</body>
+</html>

@@ -1,0 +1,10 @@
+<?php
+if ($del_fav>0) {
+    $db->query("delete from Message$classID where Message_ID=".intval($del_fav)." and (User='$AUTH_USER_ID' or CookieID='".$_COOKIE['skd_token']."')");
+    $ret = array("class"=> "fa-star-o","text"=>"Добавить в избранное");
+    if ($current_user['Login'] == "developer") $ret['query'] = "";
+    echo json_encode($ret);
+    die();
+}
+
+?>

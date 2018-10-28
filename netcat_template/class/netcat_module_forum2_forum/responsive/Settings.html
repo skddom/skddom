@@ -1,0 +1,60 @@
+<? 
+// get forum object
+$parent_obj = nc_forum2_parent::get_object();
+$forum_obj = nc_forum2_forum::get_object();
+$topic_obj = nc_forum2_topic::get_object();
+$reply_obj = nc_forum2_reply::get_object();
+
+// clear query
+$ignore_all = 1;
+
+$last_topic_link = ($admin_mode ? "CONCAT('".$SUB_FOLDER.$HTTP_ROOT_PATH."full.php?catalogue=', tcc.`Catalogue_ID`, '&sub=', tcc.`Subdivision_ID`,  '&cc=', tcc.`Sub_Class_ID`, '&message=', tpc.`Message_ID`)" : "CONCAT('".$SUB_FOLDER."',sub.`Hidden_URL`, tcc.`EnglishName`, '_', tpc.`Message_ID`,'.html')");
+$last_reply_topic_link = ($admin_mode ? "CONCAT('".$SUB_FOLDER.$HTTP_ROOT_PATH."full.php?catalogue=', rcc.`Catalogue_ID`, '&sub=', rpltpc.`Subdivision_ID`,  '&cc=', rpltpc.`Sub_Class_ID`, '&message=', rpltpc.`Message_ID`)" : "CONCAT('".$SUB_FOLDER."',sub.`Hidden_URL`, tcc.`EnglishName`, '_', rpltpc.`Message_ID`,'.html')");
+
+// new main query
+// new main query
+$query_select = "
+fg.`Name` AS Category, 
+fg.`Description` AS CatDescription, 
+sub.`Subdivision_Name` AS SubName,
+fs.`Description` AS SubDescription, 
+".($admin_mode ? "CONCAT('".$SUB_FOLDER.$HTTP_ROOT_PATH."?catalogue=', 
+cc.`Catalogue_ID`, '&sub=', cc.`Subdivision_ID`, '&cc=', cc.`Sub_Class_ID`)" : "sub.`Hidden_URL`")." AS SubLink, 
+fc.`Topics` AS Topics, 
+fc.`Replies` AS Replies, 
+fc.`Last_Topic_ID` AS Last_Topic_ID, 
+".$last_topic_link." AS Last_Topic_Link, 
+".$last_reply_topic_link." AS Last_Reply_Topic_Link, 
+usr.`Login` AS Last_Topic_Author, 
+tpc.`Created` AS Last_Topic_Date, 
+tpc.`Subject` AS Last_Topic_Subject, 
+tpc.`Message` AS Last_Topic_Message_full, 
+fc.`Last_Reply_ID` AS Last_Reply_ID, 
+rpl.`Topic_ID` AS Last_Reply_Topic_ID, 
+usr2.`Login` AS Last_Reply_Author, 
+rpl.`Created` AS Last_Reply_Date, 
+rpl.`Subject` AS Last_Reply_Subject, 
+rpl.`Message` AS Last_Reply_Message_full";$query_from = "`Subdivision` AS sub";
+$query_join = "LEFT JOIN `Forum_Subdivisions` AS fs ON sub.`Subdivision_ID` = fs.`Subdivision_ID`".
+  " LEFT JOIN `Forum_Groups` AS fg ON fs.`Group_ID` = fg.`ID`".
+  " LEFT JOIN `Sub_Class` AS tcc ON sub.`Subdivision_ID` = tcc.`Subdivision_ID` AND tcc.`Class_ID` = '".$topic_obj->get_class_id()."'".
+  " LEFT JOIN `Sub_Class` AS rcc ON sub.`Subdivision_ID` = rcc.`Subdivision_ID` AND rcc.`Class_ID` = '".$reply_obj->get_class_id()."'".
+  " LEFT JOIN `Forum_Count` AS fc ON sub.`Subdivision_ID` = fc.`Subdivision_ID`".
+  " LEFT JOIN `Message".$topic_obj->get_class_id()."` AS tpc ON fc.`Last_Topic_ID` = tpc.`Message_ID`".
+  " LEFT JOIN `Message".$reply_obj->get_class_id()."` AS rpl ON fc.`Last_Reply_ID` = rpl.`Message_ID`".
+  " LEFT JOIN `Message".$topic_obj->get_class_id()."` AS rpltpc ON rpl.`Topic_ID` = rpltpc.`Message_ID`".
+  " LEFT JOIN `User` AS usr ON tpc.`User_ID` = usr.`User_ID`".
+  " LEFT JOIN `User` AS usr2 ON rpl.`User_ID` = usr2.`User_ID`";
+$query_where = "sub.`Parent_Sub_ID` = '".intval($sub)."' AND sub.`Subdivision_ID` = tcc.`Subdivision_ID` AND sub.`Checked` = 1";
+$query_order = "fg.`Priority` DESC, fg.`ID`, sub.`Priority`";
+$query_limit = $cc_env['RecordsPerPage'] ? intval($curPos).", ".$cc_env['RecordsPerPage'] : "";
+$result_vars = '$Category, $CatDescription, $SubName, $SubDescription, $SubLink, $Topics, $Replies, $Last_Topic_ID, $Last_Topic_Link, $Last_Reply_Topic_Link, $Last_Topic_Author, $Last_Topic_Date, $Last_Topic_Subject, $Last_Topic_Message_full, $Last_Reply_ID, $Last_Reply_Topic_ID, $Last_Reply_Author, $Last_Reply_Date, $Last_Reply_Subject, $Last_Reply_Message_full';
+
+unset($last_topic_link);
+
+// inside admin navigation
+if ($admin_mode) {
+  $query_join.= " LEFT JOIN `Sub_Class` AS cc ON sub.`Subdivision_ID` = cc.`Subdivision_ID` AND cc.`Class_Template_ID` = 0";
+  $query_where.= " AND cc.`Class_ID` = '".$forum_obj->get_class_id()."'";
+}
+?>

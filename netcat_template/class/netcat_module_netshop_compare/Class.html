@@ -1,0 +1,153 @@
+<!-- FormPrefix --><? echo $f_AdminCommon; ?>
+<?
+$netshop = nc_netshop::get_instance();
+$goods = $netshop->goodslist_compare->get_all('ASC', 10);
+
+$classes = array();
+foreach ($goods as $index => $item) {
+    try {
+        $item = nc_netshop_item::by_id($item['Class_ID'], $item['Item_ID']);
+    } catch (Exception $e) {
+        $item = null;
+    }
+    if (!$item || !$item['Sub_Class_ID']) {
+        unset($goods[$index]);
+        continue;
+    }
+
+    $classes[] = $item['Class_ID'];
+    $goods[$index] = $item;
+}
+?>
+<div class="tpl-block-main tpl-block-main--wide">
+    <!-- Хлебные крошки-->
+    <?= s_browse_path($GLOBALS['browse_path']); ?>
+    <div class="tpl-block-sep tpl-block-sep--size_s"></div>
+    <? if ($goods) { ?>
+        <?
+        $same_fields = nc_get_same_fields($classes, array(
+            'SalesNotes',
+            'Name',
+            'VariantName',
+            'Vendor',
+            'Article',
+            'Description',
+            'Details',
+            'Image',
+            'BigImage',
+            'Slider',
+            'Price',
+            'Currency',
+            'PriceMinimum',
+            'CurrencyMinimum',
+            'Units',
+            'StockUnits',
+            'TopSellingMultiplier',
+            'TopSellingAddition',
+            'VAT',
+            'ItemID',
+            'ImportSourceID',
+            'Tag',
+            'Type',
+            'Color',
+            'Size',
+            'SetType',
+            'RateTotal',
+            'RateCount',
+            'ItemSet_ID',
+        ));
+        ?>
+        <div class="tpl-block-comparision">
+            <div class="tpl-block-comparision-original">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>
+                            <div class="tpl-block-comparision-control">
+                                <div class="tpl-block-prevnext">
+                                    <div class="tpl-block-prevnext-button tpl-block-prevnext-button--prev">
+                                        <i class="icon-left-open"></i>
+                                    </div>
+                                    <div class="tpl-block-prevnext-button tpl-block-prevnext-button--next">
+                                        <i class="icon-right-open"></i>
+                                    </div>
+                                </div>
+                                <nobr><?= count($goods) . ' ' . plural_form(count($goods), 'товар', 'товара', 'товаров'); ?></nobr>
+                                в списке сравнения
+                            </div>
+                        </th>
+                        <?php foreach ($goods as $item) { ?>
+                            <td>
+                                <div class="tpl-block-comparision-card">
+                                    <div class="tpl-property-title"><?= $item['Vendor']; ?> <?= $item['Name']; ?></div>
+                                    <div class="tpl-property-image"><img src="<?= $item['Image'] ? $item['Image'] : $item['BigImage'] ?>"></div>
+                                    <div class="tpl-property-item-price"></div>
+                                    <form method="post" action="<?= $netshop->get_add_to_cart_url() ?>">
+                                        <input type="hidden" name="redirect_url" value="<?= $_SERVER['REQUEST_URI']; ?>"/>
+                                        <input type="hidden" name="cart_mode" value="add"/>
+                                        <input type="hidden" name="cart<?= $item["RowID"] ?>" value="1"/>
+
+                                        <div class="tpl-block-comparision-tocart">
+                                            <button class="tpl-link-cart-add" type="submit" title="В корзину">В корзину</button>
+                                        </div>
+                                    </form>
+
+                                    <div class="tpl-block-comparision-remove" onclick="window.location='<?= $netshop->goodslist_compare->get_remove_action_url($item['Message_ID'], $item['Class_ID']); ?>';"><span class="tpl-block-ibtn tpl-block-ibtn--theme_empty"><i class="icon-cancel"></i></span>
+                                    </div>
+                                </div>
+                            </td>
+                        <? } ?>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <? foreach ($same_fields as $field) { ?>
+                        <?
+                        $different = false;
+                        $values = array();
+                        foreach ($goods as $item) {
+                            $field_value = $item[$field['Field_Name']];
+                            switch ($field['TypeOfData_ID']) {
+                                case NC_FIELDTYPE_BOOLEAN:     $values[] = ($field_value ? 'да' : 'нет'); break;
+                                case NC_FIELDTYPE_MULTISELECT: $values[] = join(', ', $field_value); break;
+                                default:                       $values[] = $field_value; break;
+                            }
+                            
+                            if (!$different && count($values) > 1 && $values[0] != $item[$field['Field_Name']]) {
+                                $different = true;
+                            }
+                        }
+                        ?>
+                        <tr class="<?= $different ? 'tpl-state-different' : ''; ?>">
+                            <th><?= $field['Description']; ?></th>
+                            <? foreach ($values as $value) { ?>
+                                <td><?= $value; ?></td>
+                            <? } ?>
+                        </tr>
+                    <? } ?>
+                    <?
+                    $different = false;
+                    $values = array();
+                    foreach ($goods as $item) {
+                        $values[] = $item['ItemPriceF'];
+                        if (count($values) > 1 && !$different && $values[0] != $item['ItemPriceF']) {
+                            $different = true;
+                        }
+                    }
+                    ?>
+                    <tr class="<?= $different ? 'tpl-state-different' : ''; ?>">
+                        <th>Цена</th>
+                        <? foreach ($values as $value) { ?>
+                            <td><?= $value; ?></td>
+                        <? } ?>
+                    </tr>
+                    <!-- tr: +e('th').title: +t('m') Характеристики-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <? } ?>
+</div><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><? echo $f_AdminButtons; ?><!-- /RecordTemplate -->
+
+<!-- FormSuffix --><!-- /FormSuffix -->

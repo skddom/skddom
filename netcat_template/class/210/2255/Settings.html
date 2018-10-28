@@ -1,0 +1,44 @@
+<?php require_once($nc_core->INCLUDE_FOLDER."classes/nc_imagetransform.class.php");
+global $path; 
+
+$ignore_sub=$ignore_cc=true;
+$query_where = "LENGTH(a.Price1)>1";
+$query_join = "LEFT JOIN Message2279 as fav ON (a.Message_ID=fav.ID and(fav.User='$AUTH_USER_ID' or fav.CookieID='".$_COOKIE['skd_token']."'))";
+$query_order = "sub.Priority, a.Priority";
+$query_select = "a.Subdivision_ID as SubID, fav.Message_ID as FavID";
+$result_vars = '$f_SubID, $f_FavID';
+
+$br = CBranding::get_object();
+$br->getProjects();
+$br->ExModifyQueryWhere($query_where, $cc_env, $inside_admin, $admin_mode); 
+$br->ExModifyQueryWhere($query, $cc_env, $inside_admin, $admin_mode);
+$q="select a.Subdivision_ID as id, a.Subdivision_Name as name,a.NotShowCities,
+t.OpisLine as text,t.OpisColor as color,t.MainImgLine,t.LogoLine,t.Video,t.SliderPath
+from Sub_Class c
+left join Subdivision a ON a.Subdivision_ID=c.Subdivision_ID
+left join Message211 t ON (a.Subdivision_ID=t.Subdivision_ID and t.Checked=1)
+where c.Class_ID=210 and a.Parent_Sub_ID=120 and $query
+order by a.Priority ASC";
+$q = str_replace("a.Cities","a.NotShowCities",$q);
+$arLines = $db->get_results($q,ARRAY_A);
+
+$f_Plan_tpl = array(
+    'prefix' => "",
+    'record' => "%i%;%Name%;%Path%;%Preview%",
+    'divider' => "\n",
+    'suffix' => "",
+    'i' => 1
+);
+$f_PlanRazrez_tpl = array(
+    'prefix' => "",
+    'record' => "%i%;%Name%;%Path%;%Preview%",
+    'divider' => "\n",
+    'suffix' => "",
+    'i' => 1
+);
+
+$ref = parse_url($_SERVER['HTTP_REFERER']);
+$ref = $ref['path'];
+
+
+?>

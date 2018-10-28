@@ -1,0 +1,199 @@
+/*  General Shortcodes CSS */
+.full_width,
+.one_half,
+.one_third,
+.two_third,
+.one_fourth,
+.three_fourth,
+.one_fifth,
+.two_fifth,
+.three_fifth,
+.four_fifth,
+.one_sixth,
+.five_sixth {
+	float: left;
+}
+.clear_column {
+	clear:both;
+	display:block;
+	font-size:0; height:0;
+	line-height:0; width:100%;
+	overflow: hidden;
+}
+
+/* Small Margins Template */
+.full_width  {
+	width: 100%;
+}
+
+.one_half {
+	width: 49% !important;
+	margin-right: 2% !important;
+}
+
+.one_half.last_column {
+	width: 49% !important;
+	margin-right: 0px !important;
+}
+
+.one_third {
+	width: 32% !important;
+	margin-right: 2% !important;
+}
+.one_third.last_column {
+	width: 32% !important;
+	margin-right: 0px !important;
+}
+.two_third {
+	width: 66% !important;
+	margin-right: 2% !important;
+}
+.two_third.last_column {
+	width: 66% !important;
+	margin-right: 0px !important;
+}
+.one_fourth {
+	width: 23.5% !important;
+	margin-right: 2% !important;
+}
+.one_fourth.last_column {
+	width: 23.5% !important;
+	margin-right: 0px !important;
+}
+.three_fourth {
+	width: 74.5% !important;
+	margin-right: 2% !important;
+}
+.three_fourth.last_column {
+	width: 74.5% !important;
+	margin-right: 0px !important;
+}
+.one_fifth {
+	width: 18.4% !important;
+	margin-right: 2% !important;
+}
+.one_fifth.last_column {
+	width: 18.4% !important;
+	margin-right: 0px !important;
+}
+.two_fifth {
+	width: 39% !important;
+	margin-right: 2% !important;
+}
+.two_fifth.last_column {
+	width: 39% !important;
+	margin-right: 0px !important;
+}
+.three_fifth {
+	width: 59% !important;
+	margin-right: 2% !important;
+}
+.three_fifth.last_column {
+	width: 59% !important;
+	margin-right: 0px !important;
+}
+.four_fifth {
+	width: 79.6% !important;
+	margin-right: 2% !important;
+}
+.four_fifth.last_column {
+	width: 79.6% !important;
+	margin-right: 0px !important;
+}
+.one_sixth {
+	width: 15% !important;
+	margin-right: 2% !important;
+}
+.one_sixth.last_column {
+	width: 15% !important;
+	margin-right: 0px !important;
+}
+
+/* 
+ * Customizations just for the template; these are not necessary for anything
+ * with disabling the responsiveness.
+ */
+
+/* Account for fixed navbar */
+body {
+  min-width: 1020px;
+}
+
+/* Finesse the page header spacing */
+.page-header {
+  margin-bottom: 30px;
+}
+.page-header .lead {
+  margin-bottom: 10px;
+}
+
+
+/* Non-responsive overrides
+ *
+ * Utilitze the following CSS to disable the responsive-ness of the container,
+ * grid system, and navbar.
+ */
+
+/* Reset the container */
+.container {
+  width: 1020px;
+  max-width: none !important;
+}
+
+/* Demonstrate the grids 
+.col-xs-4 {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #eee;
+  background-color: rgba(86,61,124,.15);
+  border: 1px solid #ddd;
+  border: 1px solid rgba(86,61,124,.2);
+}
+*/
+.container .navbar-header,
+.container .navbar-collapse {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+/* Always float the navbar header */
+.navbar-header {
+  float: left;
+}
+
+/* Undo the collapsing navbar */
+.navbar-collapse {
+  display: block !important;
+  height: auto !important;
+  padding-bottom: 0;
+  overflow: visible !important;
+}
+
+.navbar-toggle {
+  display: none;
+}
+.navbar-collapse {
+  border-top: 0;
+}
+
+.navbar-brand {
+  margin-left: -15px;
+}
+
+/* Always apply the floated nav */
+.navbar-nav {
+  float: left;
+  margin: 0;
+}
+.navbar-nav > li {
+  float: left;
+}
+.navbar-nav > li > a {
+  padding: 15px;
+}
+
+/* Redeclare since we override the float above */
+.navbar-nav.navbar-right {
+  float: right;
+}
+

@@ -1,0 +1,22 @@
+<?= $f_AdminCommon; ?>
+<div class="lk_photos text js-ajax-result tpl-<?=$classID?>">
+<?
+
+$rs = $db->get_results("select Name, Message_ID from Message295 where Checked=1", ARRAY_A);
+?>
+<?if($inside_admin || $admin_mode):?>
+<form action="" method="post" id="pro">
+    <select name="project" onchange="document.getElementById('pro').submit()">
+        <option value="0">Выбери проект</option>
+        <?foreach($rs as $v) {
+            ?><option <?if($v['Message_ID'] == $project):?>selected <?endif?>value="<?=$v['Message_ID']?>"><?=$v['Name']?></option><?
+        }?>
+    </select>
+    <button>Перейти</button>
+    <?if($project):?><input type="submit" name="fill" value="Заполнить" /><?endif?>
+</form>
+<?else:?>
+    <div class="robototitle"><?=$cc_env['Sub_Class_Name']?></div>
+    <?=str_replace("#TITLE#", $lk->data['Title1'], $cc_settings['Text'])?>
+<?endif?>
+<div>

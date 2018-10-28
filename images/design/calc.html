@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Главная</title>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<link rel="shortcut icon" href="favicon.ico">
+<link href="style/reset.css" rel="stylesheet" />
+<link href="style/style.css" rel="stylesheet" />
+<link href="style/calc.css" rel="stylesheet" />
+<link href="style/jcarousel.css" rel="stylesheet">
+<link href="style/rhinoslider-1.05.css" rel="stylesheet" />
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/rhinoslider-1.05.min.js"></script>
+<script src="js/mousewheel.js"></script>
+<script src="js/easing.js"></script>
+<script src="js/jquery.jcarousel.min.js"></script>
+<script src="js/jcarousel.js"></script>
+<script src="js/jquery.sticky.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#slider').rhinoslider({
+		captionsOpacity: 1,
+		controlsMousewheel: false,
+		controlsKeyboard: false,
+		showCaptions: 'always',
+		showBullets: 'always',
+		showControls: 'always'
+	});
+	$('.infoblock').hover(function(){
+		$(".boxcaption", this).stop().animate({top:'0px'},{queue:false,duration:600});
+			}, function() {
+		$(".boxcaption", this).stop().animate({top:'100%'},{queue:false,duration:600});
+	});
+			
+});
+</script>
+<script type="text/javascript">
+function setEqualHeight(columns) {
+	var tallestcolumn = 0;
+	columns.each(function(){
+		currentHeight = $(this).height();
+		if(currentHeight > tallestcolumn) {
+			tallestcolumn = currentHeight;
+		}
+	}
+);
+columns.height(tallestcolumn);
+}
+
+$(document).ready(function(){
+ $(".sticky").sticky({ topSpacing: 0, bottomSpacing: 120 });
+	setEqualHeight($(".overflow .col3 > div"));
+	$(".col3 .block").last().css({ height:"100%"});
+	$(".info .faqblock").last().css({ border:"none"});
+});
+</script>
+<script src="http://cufon.shoqolate.com/js/cufon-yui.js" type="text/javascript"></script>
+<script src="js/corbel.cufonfonts.js" type="text/javascript"></script>
+<!--<script type="text/javascript">
+Cufon.replace('.corbel_bold_italic', { fontFamily: 'Corbel Bold Italic', hover: true }); 
+Cufon.replace('.corbel_italic', { fontFamily: 'Corbel Italic', hover: true }); 
+Cufon.replace('.corbel_bold', { fontFamily: 'Corbel Bold', hover: true }); 
+Cufon.replace('.corbel', { fontFamily: 'Corbel', hover: true }); 
+</script>-->
+</head>
+<body>
+<div class="wrapper">
+  <div class="main">
+    <header>
+      <div class="logo"><a href="#"><img src="images/logo.png" alt="SKD" /></a></div>
+      <div class="slogan"> Дома из клееного бруса — наша специализация </div>
+      <div class="contact">
+        <div class="phone"><img src="images/phone.png" alt="(495) 983-00-39" /><span class="free">без выходных</span></div>
+        <div class="minifeedback"> <a href="#" class="call"><i></i><span>Заказать обратный звонок</span></a> <a href="#" class="see"><i></i><span>Оставить заявку на показ</span></a></div>
+      </div>
+      <div class="clr"></div>
+    </header>
+    <div class="mainblock">
+      <div class="sidebar">
+	  <div class="sticky">
+        <div class="menu">
+          <ul class="reset">
+            <li class="home"><a href="#">Главная</a></li>
+            <li><a href="#">Проекты</a></li>
+            <li><a href="#">Готовые дома</a></li>
+            <li class="active"><a href="#">Цены</a>
+			<ul class="reset">
+                <li class="active"><a href="#">Спецпредложения</a></li>
+                <li><a href="#">Стоимость отделочных работ</a></li>
+              </ul>
+			</li>
+            <li><a href="#">Фото</a></li>
+            <li><a href="#">Технологии производства</a>
+              
+            </li>
+            <li><a href="#">О компании</a></li>
+            <li><a href="#">Контакты</a></li>
+          </ul>
+        </div>
+			
+        <div class="sale_block">
+          <div class="title">Акции и скидки<i></i></div>
+          <div class="txt"> <a href="#"><img src="pic/sale.jpg" alt="Акция" />
+            <div class="hover"></div>
+            </a> </div>
+        </div>
+        <div class="managers">
+          <div class="title">Менеджеры проектов</div>
+          <div class="overflow"> <a class="man" href="mailto:m.gromyko@skd-dom.ru"> <img src="images/sergey.jpg" alt="Сергей" /> <span><b>Сергей Костин</b> <i></i></span> </a> <a class="man" href="mailto:v.semenov@skd-dom.ru"> <img src="images/vyacheslav.jpg" alt="Вечеслав"> <span><b>Вячеслав Семенов</b> <i></i></span> </a> </div>
+        </div>
+		</div>
+      </div>
+      <div class="content">
+        <div class="inner">
+          <div class="category robototitle-dark">Цены</div>
+          <h1>Калькулятор <br>
+спецпредложения</h1>
+<a href="#" id="print"><i></i><span>Распечатать</span></a>
+		  
+		  <div class="spec">
+		  <i></i>
+		  <div class="head-calc">
+		  <h2>СКД-175</h2>
+	<table border="0" width="100%" class="prices">
+		<tbody><tr class="border-bot"><td>Стоимость в комплектации «С1»:</td><td width="30%" align="right"><span id="c1">2 970 000 рублей</span></td></tr>
+		<tr class="border-bot"><td>Стоимость в комплектации «С2»:</td><td width="30%" align="right"><span id="c2">3 600 000 рублей</span></td></tr>
+		<tr><td><b>Стоимость в комплектации «ИНДИВИД»:</b><br>
+<span class="no-trans"> (измените опции в калькуляторе)</span></td><td width="30%" align="right"><span id="ind"><b>3 614 115 pублей</b></span></td></tr>
+	</tbody></table>
+		  </div>
+		  </div>
+		  
+		  
+		  
+          <div class="info">
+            <div class="inner">
+<h3 id="titlecalc" class="robototitle">«ТЕПЛОВОЙ КОНТУР» БАЗОВЫЙ СОСТАВ РАБОТ И МАТЕРИАЛОВ</h3>
+<form method="post" action="#" id="frmCalc" name="frmCalc">
+  <table class="calc-table">
+    <thead>
+      <tr>
+        <th class="th1" style="width: 150px; padding: 10px 12px !important;" rowspan="3">Этап</th>
+        <th class="th1" style="width: 400px;" rowspan="3">Наименование</th>
+        <th class="border-none c1 whitebg">КОМПЛЕКТАЦИЯ
+        <th class="border-none c2 whitebg">КОМПЛЕКТАЦИЯ
+        <th class="border-none c3 whitebg">КОМПЛЕКТАЦИЯ
+        </tr>
+      <tr>
+        <th class="th-c1 border-bold"><a title="Тепловой контур - базовый состав работ" style="display:block; color:#fff;" href="/catalog/c1/">«С1»</a></th>
+        <th class="th-c2 border-bold"><a title="Тепловой контур - базовый состав работ" style="display:block; color:#fff;" href="/catalog/c2/">«С2»</a></th>
+        <th class="th-ind border-bold">«ИНДИВИД»</th>
+      </tr>
+    </thead>
+	
+	
+    <tbody>
+	
+      <tr>
+        <td class="border-bold razdel" rowspan="3">Проектирование</td>
+		
+        <td>Проектирование индивидуальной планировки</td>
+		
+        <td align="center" class="c1 border-bold" rowspan="3"><div class="img-c1-big"></div>
+          Включено<br>
+          в стоимость </td>
+		  
+        <td align="center" class="c2 border-bold" rowspan="3"><div class="img-c2-big"></div>
+          Включено<br>
+          в стоимость </td>
+		  
+        <td align="center" class="c3 border-bold" rowspan="3"><div class="img-c3-big"></div>
+          Включено<br>
+          в стоимость </td>
+      </tr>
+	  
+      <tr>
+        <td>Проектирование канализации «0»</td>
+      </tr>
+	  
+      <tr>
+        <td class="border-bold">Доработка фасадов в части изменения световых проемов, корректировка конфигурации и комплектации светопрозрачных конструкций.</td>
+      </tr>
+	  
+      <tr>
+        <td class="razdel" rowspan="6">Фундамент</td>
+      </tr>
+	  
+      <tr>
+        <td>Буронабивные сваи  h-1800 (шт)</td>
+        <td align="center"><input type="hidden" value="86800" id="price_0" name="price_0">
+            <div class="chk-on-disabled-c1">
+              <input type="checkbox" disabled="" checked="checked" id="chk1_0" name="chk1_0" class="chk-none">
+            </div></td>
+        <td align="center"><div class="chk-on-disabled-c2">
+          <input type="checkbox" disabled="" checked="checked" id="chk2_0" name="chk2_0" class="chk-none">
+        </div></td>
+        <td align="center" class="border-ind"><div class="chk-on-disabled-c3">
+          <input type="checkbox" disabled="" checked="checked" id="chk3_0" name="chk3_0" class="chk-none">
+        </div></td>
+      </tr>
+      <tr>
+        <td>Ростверк  по сваям h-470* (м³)</td>
+        <td align="center"><input type="hidden" value="299467" id="price_1" name="price_1">
+            <div class="chk-on-disabled-c1">
+              <input type="checkbox" disabled="" checked="checked" id="chk1_1" name="chk1_1" class="chk-none">
+            </div></td>
+        <td align="center"><div class="chk-on-disabled-c2">
+          <input type="checkbox" disabled="" checked="checked" id="chk2_1" name="chk2_1" class="chk-none">
+        </div></td>
+        <td align="center" class="border-ind"><div class="chk-on-disabled-c3">
+          <input type="checkbox" disabled="" checked="checked" id="chk3_1" name="chk3_1" class="chk-none">
+        </div></td>
+      </tr>
+      <tr>
+        <td>Устройство песчаных подстилающих слоев с послойной трамбовкой (м³)</td>
+        <td align="center"><input type="hidden" value="55154" id="price_2" name="price_2">
+            <input type="checkbox" disabled="" id="chk1_2" name="chk1_2" class="chk-none">
+        </td>
+        <td align="center"><div class="chk-on-disabled-c2">
+          <input type="checkbox" disabled="" checked="checked" id="chk2_2" name="chk2_2" class="chk-none">
+        </div></td>
+        <td align="center" class="border-ind"><input type="checkbox" checked="checked" id="chk3_2" name="chk3_2">
+        </td>
+      </tr>
+      <tr>
+        <td>Сантехника "0" уровень (м²)</td>
+        <td align="center"><input type="hidden" value="27347" id="price_3" name="price_3">
+            <input type="checkbox" disabled="" id="chk1_3" name="chk1_3" class="chk-none">
+        </td>
+        <td align="center"><div class="chk-on-disabled-c2">
+          <input type="checkbox" disabled="" checked="checked" id="chk2_3" name="chk2_3" class="chk-none">
+        </div></td>
+        <td align="center" class="border-ind"><input type="checkbox" checked="checked" id="chk3_3" name="chk3_3">
+        </td>
+      </tr>
+      <tr>
+        <td>Монолитная ж/б плита h-120, утепление плиты 30 мм (м²)</td>
+        <td align="center"><input type="hidden" value="237276" id="price_4" name="price_4">
+            <input type="checkbox" disabled="" id="chk1_4" name="chk1_4" class="chk-none">
+        </td>
+        <td align="center"><div class="chk-on-disabled-c2">
+          <input type="checkbox" disabled="" checked="checked" id="chk2_4" name="chk2_4" class="chk-none">
+        </div></td>
+        <td align="center" class="border-ind"><input type="checkbox" checked="checked" id="chk3_4" name="chk3_4">
+        </td>
+      </tr>
+      <tr>
+        <td class="razdel" rowspan="11">Возведение стен, перекрытие</td>
+      </tr>
+      <tr>
+        <td>Подвенечный оклад - антисептированная лиственница 150х50, комплектующие, монтаж. (м.п.)</td>
+        <td align="center"><input type="hidden" value="31742" id="price_5" name="price_5">
+            <div class="chk-on-disabled-c1">
+              <input type="checkbox" disabled="" checked="checked" id="chk1_5" name="chk1_5" class="chk-none">
+            </div></td>
+        <td align="center"><div class="chk-on-disabled-c2">
+          <input type="checkbox" disabled="" checked="checked" id="chk2_5" name="chk2_5" class="chk-none">
+        </div></td>
+        <td align="center" class="border-ind"><div class="chk-on-disabled-c3">
+          <input type="checkbox" disabled="" checked="checked" id="chk3_5" name="chk3_5" class="chk-none">
+        </div></td>
+      </tr>
+      <tr>
+        <td>Брус клееный профилированный стеновой (сосна/ель) 200(толщ)х140 (м³)</td>
+        <td align="center"><input type="hidden" value="1846683" id="price_6" name="price_6">
+            <input type="checkbox" disabled="" id="chk1_6" name="chk1_6" class="chk-none">
+        </td>
+        <td align="center"><div class="chk-on-disabled-c2">
+          <input type="checkbox" disabled="" checked="checked" id="chk2_6" name="chk2_6" class="chk-none">
+        </div></td>
+        <td align="center" class="border-ind" style="border-bottom:none;"><input type="radio" checked="checked" value="6" id="chk3_6" name="radio3[10]">
+        </td>
+      </tr>
+      <tr>
+        <td>Брус клееный профилированный стеновой (сосна/ель) 160(толщ)х140 (м³)</td>
+        <td align="center"><input type="hidden" value="1435074" id="price_7" name="price_7">
+            <div class="chk-on-disabled-c1">
+              <input type="checkbox" disabled="" checked="checked" id="chk1_7" name="chk1_7" class="chk-none">
+            </div></td>
+        <td align="center"><input type="checkbox" disabled="" id="chk2_7" name="chk2_7" class="chk-none">
+        </td>
+        <td align="center" class="border-ind" style="border-top:none;"><input type="radio" value="7" id="chk3_7" name="radio3[10]">
+        </td>
+      </tr>
+      <tr>
+        <td>Выполнение проекта разбрусовки, отторцовка и зарезка чашек в соответствии с проектом, антисептирование. (м³)</td>
+        <td align="center"><input type="hidden" value="0" id="price_8" name="price_8">
+            <div class="chk-on-disabled-c1">
+              <input type="checkbox" disabled="" checked="checked" id="chk1_8" name="chk1_8" class="chk-none">
+            </div></td>
+        <td align="center"><div class="chk-on-disabled-c2">
+          <input type="checkbox" disabled="" checked="checked" id="chk2_8" name="chk2_8" class="chk-none">
+        </div></td>
+        <td align="center" class="border-ind"><div class="chk-on-disabled-c3">
+          <input type="checkbox" disabled="" checked="checked" id="chk3_8" name="chk3_8" class="chk-none">
+        </div></td>
+      </tr>
+      <tr>
+        <td>Комплект нагелей, шпилек, анкеров, утепплителя чашек и других комплектующих для сборки. (м³)</td>
+        <td align="center"><input type="hidden" value="0" id="price_9" name="price_9">
+            <div class="chk-on-disabled-c1">
+              <input type="checkbox" disabled="" checked="checked" id="chk1_9" name="chk1_9" class="chk-none">
+            </div></td>
+        <td align="center"><div class="chk-on-disabled-c2">
+          <input type="checkbox" disabled="" checked="checked" id="chk2_9" name="chk2_9" class="chk-none">
+        </div></td>
+        <td align="center" class="border-ind"><div class="chk-on-disabled-c3">
+          <input type="checkbox" disabled="" checked="checked" id="chk3_9" name="chk3_9" class="chk-none">
+        </div></td>
+      </tr>
+      <tr>
+        <td>Клееные столбы 200х185х3500, регулируемые домкраты, монтаж. (шт)</td>
+        <td align="center"><input type="hidden" value="0" id="price_10" name="price_10">
+            <div class="chk-on-disabled-c1">
+              <input type="checkbox" disabled="" checked="checked" id="chk1_10" name="chk1_10" class="chk-none">
+            </div></td>
+        <td align="center"><div class="chk-on-disabled-c2">
+          <input type="checkbox" disabled="" checked="checked" id="chk2_10" name="chk2_10" class="chk-none">
+        </div></td>
+        <td align="center" class="border-ind"><div class="chk-on-disabled-c3">
+          <input type="checkbox" disabled="" checked="checked" id="chk3_10" name="chk3_10" class="chk-none">
+        </div></td>
+      </tr>
+      <tr>
+        <td>Сборка стен с монтажом несущих ригелей, устройством лесов и подмостей (чел/час)</td>
+        <td align="center"><input type="hidden" value="0" id="price_11" name="price_11">
+            <div class="chk-on-disabled-c1">
+              <input type="checkbox" disabled="" checked="checked" id="chk1_11" name="chk1_11" class="chk-none">
+            </div></td>
+        <td align="center"><div class="chk-on-disabled-c2">
+          <input type="checkbox" disabled="" checked="checked" id="chk2_11" name="chk2_11" class="chk-none">
+        </div></td>
+        <td align="center" class="border-ind"><div class="chk-on-disabled-c3">
+          <input type="checkbox" disabled="" checked="checked" id="chk3_11" name="chk3_11" class="chk-none">
+        </div></td>
+      </tr>
+      <tr>
+        <td>Перекрытие 1 этажа: лаги сосна/ель 45х190х6000 (сухая, строганная), доставка, антисептирование, комплектующие, монтаж. (м²)</td>
+        <td align="center"><input type="hidden" value="197260" id="price_12" name="price_12">
+            <div class="chk-on-disabled-c1">
+              <input type="checkbox" disabled="" checked="checked" id="chk1_12" name="chk1_12" class="chk-none">
+            </div></td>
+        <td align="center"><input type="checkbox" disabled="" id="chk2_12" name="chk2_12" class="chk-none">
+        </td>
+        <td align="center" class="border-ind"><input type="checkbox" id="chk3_12" name="chk3_12">
+        </td>
+      </tr>
+      <tr>
+        <td>Перекрытие 2 этажа: лаги сосна/ель 45х190х6000 (сухая, строганная), доставка, антисептирование, комплектующие, монтаж. (м²)</td>
+        <td align="center"><input type="hidden" value="0" id="price_13" name="price_13">
+            <div class="chk-on-disabled-c1">
+              <input type="checkbox" disabled="" checked="checked" id="chk1_13" name="chk1_13" class="chk-none">
+            </div></td>
+        <td align="center"><div class="chk-on-disabled-c2">
+          <input type="checkbox" disabled="" checked="checked" id="chk2_13" name="chk2_13" class="chk-none">
+        </div></td>
+        <td align="center" class="border-ind"><div class="chk-on-disabled-c3">
+          <input type="checkbox" disabled="" checked="checked" id="chk3_13" name="chk3_13" class="chk-none">
+        </div></td>
+      </tr>
+      <tr>
+        <td>Доставка клееного бруса, столбов (до 50 км от МКАД) (м³)</td>
+        <td align="center"><input type="hidden" value="0" id="price_14" name="price_14">
+            <div class="chk-on-disabled-c1">
+              <input type="checkbox" disabled="" checked="checked" id="chk1_14" name="chk1_14" class="chk-none">
+            </div></td>
+        <td align="center"><div class="chk-on-disabled-c2">
+          <input type="checkbox" disabled="" checked="checked" id="chk2_14" name="chk2_14" class="chk-none">
+        </div></td>
+        <td align="center" class="border-ind"><div class="chk-on-disabled-c3">
+          <input type="checkbox" disabled="" checked="checked" id="chk3_14" name="chk3_14" class="chk-none">
+        </div></td>
+      </tr>
+      <tr>
+        <td class="razdel" rowspan="6">Кровля</td>
+      </tr>
+      <tr>
+        <td>Монтаж несущих конструкций стропильной системы: 190х45х6000 (сухая строганная ель/сосна), доставка, антисептирование, скользящий крепеж, уголки, метизы, комплектующие. (м²)</td>
+        <td align="center"><input type="hidden" value="296394" id="price_15" name="price_15">
+            <div class="chk-on-disabled-c1">
+              <input type="checkbox" disabled="" checked="checked" id="chk1_15" name="chk1_15" class="chk-none">
+            </div></td>
+        <td align="center"><div class="chk-on-disabled-c2">
+          <input type="checkbox" disabled="" checked="checked" id="chk2_15" name="chk2_15" class="chk-none">
+        </div></td>
+        <td align="center" class="border-ind"><div class="chk-on-disabled-c3">
+          <input type="checkbox" disabled="" checked="checked" id="chk3_15" name="chk3_15" class="chk-none">
+        </div></td>
+      </tr>
+      <tr>
+        <td>Монтаж кровли: устройство антисептированной обрешетки и контробрешетки (строганная сухая доска, брус), гидроизоляция Tyvek, пароизоляция JUTA,  теплоизоляция Rockwool (200мм), кровельное покрытие (металлочерепица 0,5 мм, покрытие полиэстер 25 мкм, Финляндия), подшивка свесов (сухая строганная сосна/ель). (м²)</td>
+        <td align="center"><input type="hidden" value="338736" id="price_16" name="price_16">
+            <div class="chk-on-disabled-c1">
+              <input type="checkbox" disabled="" checked="checked" id="chk1_16" name="chk1_16" class="chk-none">
+            </div></td>
+        <td align="center"><div class="chk-on-disabled-c2">
+          <input type="checkbox" disabled="" checked="checked" id="chk2_16" name="chk2_16" class="chk-none">
+        </div></td>
+        <td align="center" class="border-ind" style="border-bottom:none;"><input type="radio" value="16" id="chk3_16" name="radio3[20]">
+        </td>
+      </tr>
+      <tr>
+        <td>Монтаж кровли: устройство антисептированной обрешетки и контробрешетки (строганная сухая доска, брус), гидроизоляция Tyvek, пароизоляция JUTA,  теплоизоляция Rockwool (200мм), кровельное покрытие мягкая кровля, подшивка свесов (сухая строганная сосна/ель). (м²)</td>
+        <td align="center"><input type="hidden" value="338736" id="price_17" name="price_17">
+            <input type="checkbox" disabled="" id="chk1_17" name="chk1_17" class="chk-none">
+        </td>
+        <td align="center"><input type="checkbox" disabled="" id="chk2_17" name="chk2_17" class="chk-none">
+        </td>
+        <td align="center" class="border-ind" style="border-top:none;"><input type="radio" checked="checked" value="17" id="chk3_17" name="radio3[20]">
+        </td>
+      </tr>
+      <tr>
+        <td>Устройство водосливной системы (Docke 120/85 мм) (м²)</td>
+        <td align="center"><input type="hidden" value="35285" id="price_18" name="price_18">
+            <div class="chk-on-disabled-c1">
+              <input type="checkbox" disabled="" checked="checked" id="chk1_18" name="chk1_18" class="chk-none">
+            </div></td>
+        <td align="center"><input type="checkbox" disabled="" id="chk2_18" name="chk2_18" class="chk-none">
+        </td>
+        <td align="center" class="border-ind" style="border-bottom:none;"><input type="radio" value="18" id="chk3_18" name="radio3[30]">
+        </td>
+      </tr>
+      <tr>
+        <td>Устройство водосливной системы (металл)  (м²)</td>
+        <td align="center"><input type="hidden" value="49399" id="price_19" name="price_19">
+            <input type="checkbox" disabled="" id="chk1_19" name="chk1_19" class="chk-none">
+        </td>
+        <td align="center"><div class="chk-on-disabled-c2">
+          <input type="checkbox" disabled="" checked="checked" id="chk2_19" name="chk2_19" class="chk-none">
+        </div></td>
+        <td align="center" class="border-ind" style="border-top:none;"><input type="radio" checked="checked" value="19" id="chk3_19" name="radio3[30]">
+        </td>
+      </tr>
+      <tr>
+        <td class="razdel" rowspan="5">Окна</td>
+      </tr>
+      <tr>
+        <td>Окна и двери толщиной 58 мм  2-х камерный стеклопакет толщиной 32 мм, цвет белый, режимы открывания &ndash; согласно проекта. (м²)</td>
+        <td align="center"><input type="hidden" value="193195" id="price_20" name="price_20">
+            <div class="chk-on-disabled-c1">
+              <input type="checkbox" disabled="" checked="checked" id="chk1_20" name="chk1_20" class="chk-none">
+            </div></td>
+        <td align="center"><input type="checkbox" disabled="" id="chk2_20" name="chk2_20" class="chk-none">
+        </td>
+        <td align="center" class="border-ind" style="border-bottom:none;"><input type="radio" value="20" id="chk3_20" name="radio3[40]">
+        </td>
+      </tr>
+      <tr>
+        <td>Окна и двери толщиной 58 мм из высококачественного пластика, 2-х камерный стеклопакет толщиной 32 мм, цвет снаружи “золотой дуб”, изнутри белый, режимы открывания &ndash; согласно проекта. (м²)</td>
+        <td align="center"><input type="hidden" value="220232" id="price_21" name="price_21">
+            <input type="checkbox" disabled="" id="chk1_21" name="chk1_21" class="chk-none">
+        </td>
+        <td align="center"><div class="chk-on-disabled-c2">
+          <input type="checkbox" disabled="" checked="checked" id="chk2_21" name="chk2_21" class="chk-none">
+        </div></td>
+        <td align="center" class="border-ind" style="border-top:none;"><input type="radio" checked="checked" value="21" id="chk3_21" name="radio3[40]">
+        </td>
+      </tr>
+      <tr>
+        <td>Установка внешних оконных и дверных конструкций:  обсадной брус, паропроницаемая лента, пенный утеплитель, пароизоляционная лента  (м²)</td>
+        <td align="center"><input type="hidden" value="84382" id="price_22" name="price_22">
+            <div class="chk-on-disabled-c1">
+              <input type="checkbox" disabled="" checked="checked" id="chk1_22" name="chk1_22" class="chk-none">
+            </div></td>
+        <td align="center"><div class="chk-on-disabled-c2">
+          <input type="checkbox" disabled="" checked="checked" id="chk2_22" name="chk2_22" class="chk-none">
+        </div></td>
+        <td align="center" class="border-ind"><div class="chk-on-disabled-c3">
+          <input type="checkbox" disabled="" checked="checked" id="chk3_22" name="chk3_22" class="chk-none">
+        </div></td>
+      </tr>
+      <tr>
+        <td>Установка внешних наличников: сосна/ель 20*140 (сухая, строганная), антисептирование, без покраски. (м²)</td>
+        <td align="center"><input type="hidden" value="40503" id="price_23" name="price_23">
+            <input type="checkbox" disabled="" id="chk1_23" name="chk1_23" class="chk-none">
+        </td>
+        <td align="center"><div class="chk-on-disabled-c2">
+          <input type="checkbox" disabled="" checked="checked" id="chk2_23" name="chk2_23" class="chk-none">
+        </div></td>
+        <td align="center" class="border-ind"><input type="checkbox" checked="checked" id="chk3_23" name="chk3_23">
+        </td>
+      </tr>
+	  
+	    <tr class="itogo">
+    <td class="b0" colspan="2">Стоимость, руб.</th>
+    <td class="b1">2 950 000</td>
+    <td class="b2">3 500 000</td>
+    <td class="b3">3 500 000</td>
+  </tr>
+    </tbody>
+  </table>
+</form>
+			  
+              
+				
+				
+				<div class="att2">				
+				<h3>Внимание!</h3>
+				Прекращает свое действия АКЦИИ «Комплектация «С2» - мягкая кровля в подарок».
+С 17 марта 2014 года в стоимость комплектации «С2» будет включена кровля из метало черепицы и пластиковая водосточная система.
+            </div>
+              
+              
+              
+              <div class="clr"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clr"></div>
+    </div>
+    <footer>
+      <div class="logo"><a href="#"><img src="images/footer-logo.png" alt="" /></a></div>
+      <div class="copyright"> Компания ООО "СКД дом" ©, все права защищены <span>+7 (495) 983-00-39</span> </div>
+      <div class="socnet"><span>Мы в соцсетях: </span> <a target="_blank" title="FaceBook" href="http://facebook.com/skddom"><img alt="FaceBook" src="images/facebook.png"></a> <a target="_blank" title="Вконтакте" href="http://vk.com/skddom"><img alt="Вконтакте" src="images/vk.png"></a> <a target="_blank" rel="publisher" href="https://plus.google.com/111872370976980686770"><img alt="Google+" src="images/google-plus.png"></a> </div>
+      <div class="clr"> </div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

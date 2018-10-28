@@ -1,0 +1,10 @@
+<?php
+$s = $cc_settings['sub']?$cc_settings['sub']:$sub;
+$ignore_all=true;
+$query_from = "Subdivision as a";
+$query_select = "a.fa,a.Subdivision_ID as ID,IF(a.AlterTitle is not null and LENGTH(a.AlterTitle)>1,a.AlterTitle,a.Subdivision_Name) as Name,Hidden_URL as Link,a.img";
+$query_where = "a.Parent_Sub_ID=$s and a.Checked=1";
+$query_order = "a.Priority";
+$br = CBranding::get_object();
+$query_where .= " and (a.NotShowCities NOT LIKE '%,$br->id,%' or   a.NotShowCities is  null )";
+?>

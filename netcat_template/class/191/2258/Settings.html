@@ -1,0 +1,8 @@
+<?php global $template;
+if ($cc_settings['Source']) {
+    $ignore_cc=$ignore_sub=$ignore_catalogue=true;
+    $query_where = "a.Sub_Class_ID=".$cc_settings['Source'];
+} 
+$data = array("house_id"=>$nc_core->input->fetch_get("house"));
+$data = $db->get_row("select * from Message210 where house_id=".intval($data['house_id']),ARRAY_A);
+?>

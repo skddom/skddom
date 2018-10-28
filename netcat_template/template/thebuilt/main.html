@@ -1,0 +1,3895 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>TheBuilt</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700,700i&amp;amp;subset=cyrillic">
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script type="text/javascript">
+		function revslider_showDoubleJqueryError(sliderID)
+		{
+			var errorMessage =
+				"Revolution Slider Error: You have some jquery.js library include that comes after the revolution files js include.";
+			errorMessage +=
+				"<br> This includes make eliminates the revolution slider libraries, and make it not work.";
+			errorMessage +=
+				"<br><br> To fix it you can:<br>&nbsp;&nbsp;&nbsp; 1. In the Slider Settings -> Troubleshooting set option:  <strong><b>Put JS Includes To Body</b></strong> option to true.";
+			errorMessage +=
+				"<br>&nbsp;&nbsp;&nbsp; 2. Find the double jquery.js include and remove it.";
+			errorMessage = "<span style='font-size:16px;color:#BC0C06;'>" +
+				errorMessage + "</span>";
+			jQuery(sliderID).show().html(errorMessage);
+		}
+
+		var thickboxL10n = {
+			"next": "Next >",
+			"prev": "< Prev",
+			"image": "Image",
+			"of": "of",
+			"close": "Close",
+			"noiframes": "This feature requires inline frames. You have iframes disabled or your browser does not support them.",
+			//"loadingAnimation": "http:\\/\/wp.magnium-themes.com\/thebuilt\/thebuilt-1\/wp-includes\/js\/thickbox\/loadingAnimation.gif"
+		};
+
+		var rlArgs = {
+			"script": "tosrus",
+			"selector": "lightbox",
+			"customEvents": "",
+			"activeGalleries": "1",
+			"effect": "slide",
+			"infinite": "1",
+			"keys": "0",
+			"autoplay": "1",
+			"pauseOnHover": "0",
+			"timeout": "4000",
+			"pagination": "1",
+			"paginationType": "thumbnails"
+		};
+	</script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBKtQuyC-t1nVL0IiNFLqP7L3gruU2w1s&amp;lang=ru"></script>
+	<script type="text/javascript" src="js/script.min.js"></script>
+	<script type="text/javascript" src="js/extensions/revolution.extension.slideanims.min.js"></script>
+	<script type="text/javascript" src="js/extensions/revolution.extension.actions.min.js"></script>
+	<script type="text/javascript" src="js/extensions/revolution.extension.layeranimation.min.js"></script>
+	<script type="text/javascript" src="js/extensions/revolution.extension.navigation.min.js"></script>
+	<script type="text/javascript" src="js/extensions/revolution.extension.parallax.min.js"></script>
+	<style type="text/css" data-type="vc_shortcodes-custom-css">
+		.vc_custom_1464179469571 {
+			margin-top: -100px !important;
+			padding-bottom: 50px !important;
+		}
+
+		.vc_custom_1459162774762 {
+			padding-top: 50px !important;
+			padding-bottom: 50px !important;
+			background-color: #f5f5f5 !important;
+		}
+
+		.vc_custom_1459437352339 {
+			margin-bottom: 50px !important;
+		}
+
+		.vc_custom_1459335800844 {
+			padding-bottom: 60px !important;
+			background-color: #2a2f35 !important;
+		}
+
+		.vc_custom_1465151624441 {
+			padding-top: 20px !important;
+			/*padding-bottom:20px !important;*/
+			background-color: #f7f7f7 !important;
+		}
+
+		.vc_custom_1466422963185 {
+			padding-bottom: 20px !important;
+			/*padding-bottom:20px !important;*/
+			background-color: #f7f7f7 !important;
+		}
+
+		.vc_custom_1466422963185 .mgt-header-block.wpb_content_element {
+			margin-top: 20px;
+		}
+
+		.vc_custom_1466422963189 {
+			padding-bottom: 30px !important;
+			background-color: #f7f7f7 !important;
+		}
+
+		.vc_custom_1466422963189 .text-black.wpb_content_element {
+			margin-top: 30px;
+		}
+
+		.vc_custom_1466422234232 {
+			overflow: visible!important;
+		}
+
+		.vc_custom_1466581415033 {
+			margin-top: 0px!important;
+		}
+
+		.vc_custom_1466501689743 {
+			margin-top: 30px !important;
+			margin-bottom: 20px !important;
+		}
+
+		.vc_custom_1466689686119 {
+			background-color: #1a1f23 !important;
+		}
+
+		.vc_custom_1461317391634 {
+			margin-bottom: 20px !important;
+		}
+
+		.vc_custom_1461317379236 {
+			margin-bottom: 50px !important;
+		}
+
+		.vc_custom_1466614059509 {
+			padding-top: 20px !important;
+			padding-right: 50px !important;
+			padding-bottom: 20px !important;
+			padding-left: 50px !important;
+		}
+
+		.vc_custom_1464598757561 {
+			padding-bottom: 30px !important;
+		}
+
+		.vc_custom_1464684611093 {
+			background-image: url('images/example/reviews_bg.jpg')!important;
+			background-position: center;
+			background-repeat: no-repeat !important;
+			background-size: cover !important;
+		}
+
+		.vc_custom_1459501258600 {
+			padding-top: 30px !important;
+			padding-bottom: 30px !important;
+		}
+
+		.vc_custom_1465207604440 {
+			padding-top: 50px !important;
+			padding-bottom: 50px !important;
+			background-color: #f7f7f7 !important;
+		}
+
+		.vc_custom_1465197248270 {
+			padding-top: 25px !important;
+			padding-right: 25px !important;
+			padding-left: 25px !important;
+		}
+
+		.vc_custom_1465197273348 {
+			padding-top: 25px !important;
+			padding-right: 25px !important;
+			padding-left: 25px !important;
+		}
+
+		.vc_custom_1470040014654 {
+			padding-right: 25px !important;
+			padding-left: 25px !important;
+		}
+
+		.vc_custom_1470040040890 {
+			padding-right: 25px !important;
+			padding-left: 25px !important;
+		}
+
+		.vc_custom_1459186986556 {
+			margin-right: 0px !important;
+			padding-right: 0px !important;
+		}
+
+		.vc_custom_1459186959095 {
+			margin-left: 0px !important;
+			padding-left: 0px !important;
+		}
+
+		.vc_custom_1460558952530 {
+			padding-top: 25px !important;
+			padding-right: 25px !important;
+			padding-left: 25px !important;
+		}
+
+		.vc_custom_1470040092901 {
+			padding-right: 25px !important;
+			padding-left: 25px !important;
+		}
+
+		.vc_custom_1459415178192 {
+			padding-top: 25px !important;
+			padding-right: 25px !important;
+			padding-bottom: 25px !important;
+			padding-left: 25px !important;
+			background-color: #f5f5f5 !important;
+		}
+
+		.vc_custom_1470040110657 {
+			padding-right: 25px !important;
+			padding-left: 25px !important;
+		}
+
+		.vc_custom_1459415137038 {
+			padding-top: 25px !important;
+			padding-right: 25px !important;
+			padding-bottom: 25px !important;
+			padding-left: 25px !important;
+			background-color: #f5f5f5 !important;
+		}
+
+		.vc_custom_1470040129131 {
+			padding-right: 25px !important;
+			padding-left: 25px !important;
+		}
+
+		.vc_custom_1459415187822 {
+			padding-top: 25px !important;
+			padding-right: 25px !important;
+			padding-bottom: 25px !important;
+			padding-left: 25px !important;
+			background-color: #f5f5f5 !important;
+		}
+
+		.vc_custom_1470040147943 {
+			padding-right: 25px !important;
+			padding-left: 25px !important;
+		}
+
+		.vc_custom_1459415207847 {
+			padding-top: 25px !important;
+			padding-right: 25px !important;
+			padding-bottom: 25px !important;
+			padding-left: 25px !important;
+			background-color: #f5f5f5 !important;
+		}
+
+		.vc_custom_1470040161700 {
+			padding-right: 25px !important;
+			padding-left: 25px !important;
+		}
+
+		.vc_custom_1459415347117 {
+			padding-top: 25px !important;
+			padding-right: 25px !important;
+			padding-bottom: 25px !important;
+			padding-left: 25px !important;
+			background-color: #f5f5f5 !important;
+		}
+
+		.vc_custom_1470040177034 {
+			padding-right: 25px !important;
+			padding-left: 25px !important;
+		}
+
+		.vc_custom_1459415359834 {
+			padding-top: 25px !important;
+			padding-right: 25px !important;
+			padding-bottom: 25px !important;
+			padding-left: 25px !important;
+			background-color: #f5f5f5 !important;
+		}
+
+		.vc_custom_1461317657369 {
+			margin-left: 0px !important;
+		}
+
+		.vc_custom_1466181347354 {
+			margin-left: -15px !important;
+			padding-top: 50px !important;
+		}
+
+		.vc_custom_1465197583085 {
+			padding-right: 20px !important;
+			padding-left: 20px !important;
+		}
+
+		.vc_custom_1465197676848 {
+			padding-right: 20px !important;
+			padding-left: 20px !important;
+		}
+
+		.vc_custom_1465197615220 {
+			padding-right: 20px !important;
+			padding-left: 20px !important;
+		}
+
+		.vc_custom_1465197629387 {
+			padding-right: 20px !important;
+			padding-left: 20px !important;
+		}
+	</style>
+	<noscript>
+		<style type="text/css">
+			.wpb_animate_when_almost_visible {
+				opacity: 1;
+			}
+		</style>
+	</noscript>
+</head>
+<body class="home page page-id-11 page-template-default wpb-js-composer vc_responsive js-comp-ver-4.12">
+	<div class="header-menu-bg top-menu-position-default">
+		<div class="header-menu">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="header-info-text">Проектирование, производство и строительство домов из клееного бруса.</div>
+						<div
+						 class="profile">
+							<div class="header-info-text">Личный кабинет</div>
+							<a class="view-more btn mgt-button">Вход</a>
+					</div>
+					<div class="social-icons-top">
+						<ul>
+							<li>
+								<a class="a-facebook" href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+							</li>
+							<li>
+								<a class="a-twitter" href="#" target="_blank"><i class="fa fa-vk"></i></a>
+							</li>
+							<li>
+								<a class="a-twitter" href="#" target="_blank"><i class="fa fa-instagram"></i></a>
+							</li>
+							<li>
+								<a class="a-google-plus" href="#" target="_blank"><i class="fa fa-google-plus"></i></a>
+							</li>
+						</ul>
+					</div>
+					<div class="menu-top-menu-container-toggle"></div>
+					<div class="top-menu-container">
+						<ul class="top-menu menu-item-object-page menu-item-has-children" id="menu-top-menu">
+							<li class="menu-item">
+								<div class="header-info-text">Ваш город:</div>
+							</li>
+							<li class="menu-item menu-item-object-page menu-item-has-children">
+								<a href="#">Москва</a>
+								<ul class="sub-menu">
+									<li class="menu-item menu-item-object-page">
+										<a href="#">Санкт-метербург</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<header class="sticky-header main-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="header-left logo">
+						<a class="logo-link" href="./">
+							<img src="images/logo.png" alt="">
+						</a>
+					</div>
+					<div class="header-center">
+						<div class="header-info-2-text">
+							<div class="header-info-half">
+								<div class="header-info-content-icon"><i class="svg-icon svg-phone"></i></div>
+								<div class="header-info-content-title">Консультации и отдел продаж</div>
+								<div class="header-info-content-text">+7 (495) 983-00-39</div>
+							</div>
+							<div class="header-info-half">
+								<div class="header-info-content-icon"><i class="svg-icon svg-clock"></i></div>
+								<div class="header-info-content-title">Время работы</div>
+								<div class="header-info-content-text">9:00 - 21:00</div>
+							</div>
+						</div>
+					</div>
+					<div class="header-right">
+						<ul class="header-nav">
+							<li class="float-sidebar-toggle">
+								<div id="st-sidebar-trigger-effects">
+									<a class="float-sidebar-toggle-btn" data-effect="st-sidebar-effect-2"><i class="fa fa-bars"></i></a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="mainmenu-belowheader mainmenu-dark menu-uppercase">
+			<div class="navbar navbar-default clearfix mgt-mega-menu" id="navbar">
+				<div class="navbar-inner">
+					<div class="container">
+						<div class="navbar-toggle" data-toggle="collapse" data-target=".collapse">Menu</div>
+						<div class="navbar-collapse collapse">
+							<ul class="nav" id="menu-main-menu-1">
+								<li class="menu-item menu-item-object-page current-menu-item page_item page-item-11 current_page_item current-menu-ancestor current_page_ancestor menu-item-multicolumn">
+									<a href="#">
+										<strong>Домой</strong>
+									</a>
+								</li>
+								<li class="menu-item menu-item-object-page menu-item-multicolumn">
+									<a href="#">
+										<strong>Услуги</strong>
+									</a>
+								</li>
+								<li class="menu-item menu-item-object-page">
+									<a href="#">
+										<strong>Проекты</strong>
+									</a>
+								</li>
+								<li class="menu-item menu-item-type-custom menu-item-object-custom">
+									<a href="#">
+										<strong>Цены</strong>
+									</a>
+								</li>
+								<li class="menu-item menu-item-object-page">
+									<a href="#">
+										<strong>Портфолио</strong>
+									</a>
+								</li>
+								<li class="menu-item menu-item-object-page">
+									<a href="#">
+										<strong>О компании</strong>
+									</a>
+								</li>
+								<li class="menu-item menu-item-object-page mgt-menu-fullwidth-inside menu-item-multicolumn menu-item-multicolumn">
+									<a href="#">
+										<strong>Контакты</strong>
+									</a>
+								</li>
+								<li class="pull-right menu-item">
+									<a href="#">
+										<strong>Перезвонить мне
+											<br>
+											<span class="text-color-theme">Задать вопрос</span>
+										</strong>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div class="content-block stick-to-footer">
+		<div class="page-container container">
+			<div class="row">
+				<div class="col-md-12 entry-content">
+					<article>
+						<!--SLIDER START-->
+						<div class="vc_row wpb_row vc_row-fluid">
+							<div class="wpb_column vc_column_container vc_col-sm-12">
+								<div class="vc_column-inner">
+									<div class="wpb_wrapper">
+										<div class="wpb_revslider_element wpb_content_element">
+											<div class="rev_slider_wrapper fullwidthbanner-container" id="rev_slider_5_1_wrapper"
+											 style="margin:0px auto;background-color:transparent;padding:0px;margin-top:0px;margin-bottom:0px;">
+												<!-- START REVOLUTION SLIDER 5.2.6 fullwidth mode-->
+												<div class="rev_slider fullwidthabanner" id="rev_slider_5_1" style="display:none;"
+												 data-version="5.2.6">
+													<ul>
+														<!-- SLIDE-->
+														<li data-index="rs-9" data-transition="slotslide-horizontal,slidingoverlayleft,scaledownfromtop,cube-horizontal"
+														 data-slotamount="default,default,default,default" data-hideafterloop="0"
+														 data-hideslideonmobile="off" data-easein="default,default,default,default"
+														 data-easeout="default,default,default,default" data-masterspeed="default,default,default,default"
+														 data-thumb="/images/example/slider_1.jpg" data-rotate="0,0,0,0" data-saveperformance="off"
+														 data-title="Quality" data-param1="" data-param2="" data-param3=""
+														 data-param4="" data-param5="" data-param6="" data-param7="" data-param8=""
+														 data-param9="" data-param10="" data-description="">
+															<!-- MAIN IMAGE-->
+															<img class="rev-slidebg" src="/images/example/slider_1.jpg" alt=""
+															 title="15629246-engineer-builder-at-construction-site-m" width="1730"
+															 height="700" data-bgposition="center center" data-bgfit="cover"
+															 data-bgrepeat="no-repeat" data-bgparallax="off" data-no-retina="">
+															<!-- LAYERS-->
+															<!-- LAYER NR. 1-->
+															<div class="tp-caption tp-shape tp-shapewrapper tp-resizeme" id="slide-9-layer-1"
+															 data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+															 data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']"
+															 data-width="full" data-height="full" data-whitespace="nowrap" data-transform_idle="o:1;"
+															 data-transform_in="opacity:0;s:300;e:Power2.easeInOut;" data-transform_out="opacity:0;s:300;"
+															 data-start="0" data-basealign="slide" data-responsive_offset="on"
+															 style="z-index: 5;background-color:rgba(0, 0, 0, 0.40);border-color:rgba(0, 0, 0, 0);"></div>
+															<!-- LAYER NR. 2-->
+															<div class="tp-caption tp-resizeme" id="slide-9-layer-4" data-x="['center','center','center','center']"
+															 data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
+															 data-voffset="['-141','-141','-141','-161']" data-width="none" data-height="none"
+															 data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:500;e:Power3.easeInOut;"
+															 data-transform_out="y:[-100%];s:300;" data-mask_in="x:0px;y:0px;"
+															 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="500"
+															 data-splitin="none" data-splitout="none" data-responsive_offset="on"
+															 style="z-index: 6; white-space: nowrap; font-size: 18px; line-height: 22px; font-weight: 400; color: rgba(251, 190, 63, 1.00);">Акция</div>
+															<!-- LAYER NR. 3-->
+															<div class="tp-caption tp-resizeme" id="slide-9-layer-5" data-x="['center','center','center','center']"
+															 data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
+															 data-voffset="['-86','-86','-86','-66']" data-fontsize="['50','50','50','40']"
+															 data-width="['593','593','593','402']" data-height="none" data-whitespace="normal"
+															 data-transform_idle="o:1;" data-transform_in="x:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:1500;e:Power3.easeInOut;"
+															 data-transform_out="x:[-100%];s:300;e:Power3.easeInOut;" data-mask_in="x:0px;y:0px;"
+															 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="500"
+															 data-splitin="none" data-splitout="none" data-responsive_offset="on"
+															 style="z-index: 7; min-width: 593px; max-width: 593px; white-space: normal; font-size: 50px; line-height: 54px; font-weight: 400; color: rgba(255, 255, 255, 1.00);text-align:center;">Месяц, а приятно!</div>
+															<!-- LAYER NR. 4-->
+															<div class="tp-caption tp-resizeme" id="slide-9-layer-6" data-x="['center','center','center','center']"
+															 data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
+															 data-voffset="['0','0','0','50']" data-width="['568','568','568','372']"
+															 data-height="['76','76','76','78']" data-whitespace="normal" data-transform_idle="o:1;"
+															 data-transform_in="x:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:1500;e:Power3.easeInOut;"
+															 data-transform_out="x:[100%];s:300;e:Power3.easeInOut;" data-mask_in="x:0px;y:0px;"
+															 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="500"
+															 data-splitin="none" data-splitout="none" data-responsive_offset="on"
+															 style="z-index: 8; min-width: 568px; max-width: 568px; max-width: 76px; max-width: 76px; white-space: normal; font-size: 16px; line-height: 22px; font-weight: 400; color: rgba(209, 209, 209, 1.00);text-align:center;">Только с 1 по 30 марта — 10 % на проект СKD-410!</div>
+															<!-- LAYER NR. 5-->
+															<a class="tp-caption rev-btn tp-resizeme" id="slide-9-layer-7" href="#"
+															 target="_self" data-x="['center','center','center','center']" data-hoffset="['-100','-100','-100','-100']"
+															 data-y="['middle','middle','middle','middle']" data-voffset="['70','70','70','140']"
+															 data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;"
+															 data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power1.easeIn;"
+															 data-style_hover="c:rgba(255, 255, 255, 1.00);bg:rgba(42, 47, 53, 1.00);br:3px 30px 3px 30px;"
+															 data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:540;e:Power2.easeInOut;"
+															 data-transform_out="y:[100%];s:300;" data-mask_in="x:0px;y:[100%];"
+															 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="520"
+															 data-splitin="none" data-splitout="none" data-actions="" data-responsive_offset="on"
+															 style="z-index: 9; white-space: nowrap; font-size: 14px; line-height: 14px; font-weight: 400; color: rgba(42, 47, 53, 1.00);background-color:rgba(251, 190, 63, 1.00);padding:15px 30px 15px 30px;border-color:rgba(0, 0, 0, 0);outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;">ПОДРОБНОСТИ</a>
+															<!-- LAYER NR. 6-->
+															<a class="tp-caption rev-btn tp-resizeme" id="slide-9-layer-8" href="#"
+															 target="_self" data-x="['center','center','center','center']" data-hoffset="['100','100','100','100']"
+															 data-y="['middle','middle','middle','middle']" data-voffset="['70','70','70','140']"
+															 data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;"
+															 data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power1.easeIn;"
+															 data-style_hover="c:rgba(42, 47, 53, 1.00);bg:rgba(251, 190, 63, 1.00);br:30px 3px 30px 3px;"
+															 data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:520;e:Power2.easeInOut;"
+															 data-transform_out="y:[100%];s:300;" data-mask_in="x:0px;y:[100%];"
+															 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="520"
+															 data-splitin="none" data-splitout="none" data-actions="" data-responsive_offset="on"
+															 style="z-index: 10; white-space: nowrap; font-size: 14px; line-height: 14px; font-weight: 400; color: rgba(255, 255, 255, 1.00);background-color:rgba(42, 47, 53, 1.00);padding:15px 30px 15px 30px;border-color:rgba(0, 0, 0, 0);outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;">ПОСМОТРЕТЬ КАТАЛОГ</a>
+														</li>
+														<!-- SLIDE-->
+														<li data-index="rs-9" data-transition="slotslide-horizontal,slidingoverlayleft,scaledownfromtop,cube-horizontal"
+														 data-slotamount="default,default,default,default" data-hideafterloop="0"
+														 data-hideslideonmobile="off" data-easein="default,default,default,default"
+														 data-easeout="default,default,default,default" data-masterspeed="default,default,default,default"
+														 data-thumb="/images/example/slider_1.jpg" data-rotate="0,0,0,0" data-saveperformance="off"
+														 data-title="Quality" data-param1="" data-param2="" data-param3=""
+														 data-param4="" data-param5="" data-param6="" data-param7="" data-param8=""
+														 data-param9="" data-param10="" data-description="">
+															<!-- MAIN IMAGE-->
+															<img class="rev-slidebg" src="/images/example/slider_1.jpg" alt=""
+															 title="15629246-engineer-builder-at-construction-site-m" width="1730"
+															 height="700" data-bgposition="center center" data-bgfit="cover"
+															 data-bgrepeat="no-repeat" data-bgparallax="off" data-no-retina="">
+															<!-- LAYERS-->
+															<!-- LAYER NR. 1-->
+															<div class="tp-caption tp-shape tp-shapewrapper tp-resizeme" id="slide-9-layer-1"
+															 data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+															 data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']"
+															 data-width="full" data-height="full" data-whitespace="nowrap" data-transform_idle="o:1;"
+															 data-transform_in="opacity:0;s:300;e:Power2.easeInOut;" data-transform_out="opacity:0;s:300;"
+															 data-start="0" data-basealign="slide" data-responsive_offset="on"
+															 style="z-index: 5;background-color:rgba(0, 0, 0, 0.40);border-color:rgba(0, 0, 0, 0);"></div>
+															<!-- LAYER NR. 2-->
+															<div class="tp-caption tp-resizeme" id="slide-9-layer-4" data-x="['center','center','center','center']"
+															 data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
+															 data-voffset="['-141','-141','-141','-161']" data-width="none" data-height="none"
+															 data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:500;e:Power3.easeInOut;"
+															 data-transform_out="y:[-100%];s:300;" data-mask_in="x:0px;y:0px;"
+															 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="500"
+															 data-splitin="none" data-splitout="none" data-responsive_offset="on"
+															 style="z-index: 6; white-space: nowrap; font-size: 18px; line-height: 22px; font-weight: 400; color: rgba(251, 190, 63, 1.00);">Акция</div>
+															<!-- LAYER NR. 3-->
+															<div class="tp-caption tp-resizeme" id="slide-9-layer-5" data-x="['center','center','center','center']"
+															 data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
+															 data-voffset="['-86','-86','-86','-66']" data-fontsize="['50','50','50','40']"
+															 data-width="['593','593','593','402']" data-height="none" data-whitespace="normal"
+															 data-transform_idle="o:1;" data-transform_in="x:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:1500;e:Power3.easeInOut;"
+															 data-transform_out="x:[-100%];s:300;e:Power3.easeInOut;" data-mask_in="x:0px;y:0px;"
+															 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="500"
+															 data-splitin="none" data-splitout="none" data-responsive_offset="on"
+															 style="z-index: 7; min-width: 593px; max-width: 593px; white-space: normal; font-size: 50px; line-height: 54px; font-weight: 400; color: rgba(255, 255, 255, 1.00);text-align:center;">Месяц, а приятно!</div>
+															<!-- LAYER NR. 4-->
+															<div class="tp-caption tp-resizeme" id="slide-9-layer-6" data-x="['center','center','center','center']"
+															 data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
+															 data-voffset="['0','0','0','50']" data-width="['568','568','568','372']"
+															 data-height="['76','76','76','78']" data-whitespace="normal" data-transform_idle="o:1;"
+															 data-transform_in="x:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:1500;e:Power3.easeInOut;"
+															 data-transform_out="x:[100%];s:300;e:Power3.easeInOut;" data-mask_in="x:0px;y:0px;"
+															 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="500"
+															 data-splitin="none" data-splitout="none" data-responsive_offset="on"
+															 style="z-index: 8; min-width: 568px; max-width: 568px; max-width: 76px; max-width: 76px; white-space: normal; font-size: 16px; line-height: 22px; font-weight: 400; color: rgba(209, 209, 209, 1.00);text-align:center;">Только с 1 по 30 марта — 10 % на проект СKD-410!</div>
+															<!-- LAYER NR. 5-->
+															<a class="tp-caption rev-btn tp-resizeme" id="slide-9-layer-7" href="#"
+															 target="_self" data-x="['center','center','center','center']" data-hoffset="['-100','-100','-100','-100']"
+															 data-y="['middle','middle','middle','middle']" data-voffset="['70','70','70','140']"
+															 data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;"
+															 data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power1.easeIn;"
+															 data-style_hover="c:rgba(255, 255, 255, 1.00);bg:rgba(42, 47, 53, 1.00);br:3px 30px 3px 30px;"
+															 data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:540;e:Power2.easeInOut;"
+															 data-transform_out="y:[100%];s:300;" data-mask_in="x:0px;y:[100%];"
+															 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="520"
+															 data-splitin="none" data-splitout="none" data-actions="" data-responsive_offset="on"
+															 style="z-index: 9; white-space: nowrap; font-size: 14px; line-height: 14px; font-weight: 400; color: rgba(42, 47, 53, 1.00);background-color:rgba(251, 190, 63, 1.00);padding:15px 30px 15px 30px;border-color:rgba(0, 0, 0, 0);outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;">ПОДРОБНОСТИ</a>
+															<!-- LAYER NR. 6-->
+															<a class="tp-caption rev-btn tp-resizeme" id="slide-9-layer-8" href="#"
+															 target="_self" data-x="['center','center','center','center']" data-hoffset="['100','100','100','100']"
+															 data-y="['middle','middle','middle','middle']" data-voffset="['70','70','70','140']"
+															 data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;"
+															 data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power1.easeIn;"
+															 data-style_hover="c:rgba(42, 47, 53, 1.00);bg:rgba(251, 190, 63, 1.00);br:30px 3px 30px 3px;"
+															 data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:520;e:Power2.easeInOut;"
+															 data-transform_out="y:[100%];s:300;" data-mask_in="x:0px;y:[100%];"
+															 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="520"
+															 data-splitin="none" data-splitout="none" data-actions="" data-responsive_offset="on"
+															 style="z-index: 10; white-space: nowrap; font-size: 14px; line-height: 14px; font-weight: 400; color: rgba(255, 255, 255, 1.00);background-color:rgba(42, 47, 53, 1.00);padding:15px 30px 15px 30px;border-color:rgba(0, 0, 0, 0);outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;">ПОСМОТРЕТЬ КАТАЛОГ</a>
+														</li>
+														<!-- SLIDE-->
+														<!-- SLIDE-->
+													</ul>
+													<script>
+														var htmlDiv = document.getElementById(
+															"rs-plugin-settings-inline-css");
+														var htmlDivCss = "";
+														if (htmlDiv)
+														{
+															htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
+														}
+														else
+														{
+															var htmlDiv = document.createElement("div");
+															htmlDiv.innerHTML = "<style>" + htmlDivCss + "</style>";
+															document.getElementsByTagName("head")[0].appendChild(htmlDiv.childNodes[
+																0]);
+														}
+													</script>
+													<div class="tp-bannertimer tp-bottom" style="height: 10px; background-color: rgba(251, 190, 63, 0.90);"></div>
+												</div>
+												<script>
+													var htmlDiv = document.getElementById(
+														"rs-plugin-settings-inline-css");
+													var htmlDivCss = "";
+													if (htmlDiv)
+													{
+														htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
+													}
+													else
+													{
+														var htmlDiv = document.createElement("div");
+														htmlDiv.innerHTML = "<style>" + htmlDivCss + "</style>";
+														document.getElementsByTagName("head")[0].appendChild(htmlDiv.childNodes[
+															0]);
+													}
+
+													var setREVStartSize = function()
+													{
+														try
+														{
+															var e = new Object,
+																i = jQuery(window).width(),
+																t = 9999,
+																r = 0,
+																n = 0,
+																l = 0,
+																f = 0,
+																s = 0,
+																h = 0;
+															e.c = jQuery('#rev_slider_5_1');
+															e.responsiveLevels = [1240, 1024, 778, 480];
+															e.gridwidth = [1240, 1024, 778, 480];
+															e.gridheight = [600, 768, 960, 720];
+															e.sliderLayout = "fullwidth";
+															if (e.responsiveLevels && (jQuery.each(e.responsiveLevels,
+																	function(e, f)
+																	{
+																		f > i && (t = r = f, l = e), i > f && f > r && (r = f, n =
+																			e)
+																	}), t > r && (l = n)), f = e.gridheight[l] || e.gridheight[
+																	0] || e.gridheight, s = e.gridwidth[l] || e.gridwidth[0] ||
+																e.gridwidth, h = i / s, h = h > 1 ? 1 : h, f = Math.round(h *
+																	f), "fullscreen" == e.sliderLayout)
+															{
+																var u = (e.c.width(), jQuery(window).height());
+																if (void 0 != e.fullScreenOffsetContainer)
+																{
+																	var c = e.fullScreenOffsetContainer.split(",");
+																	if (c) jQuery.each(c, function(e, i)
+																		{
+																			u = jQuery(i).length > 0 ? u - jQuery(i).outerHeight(!0) :
+																				u
+																		}), e.fullScreenOffset.split("%").length > 1 && void 0 !=
+																		e.fullScreenOffset && e.fullScreenOffset.length > 0 ? u -=
+																		jQuery(window).height() * parseInt(e.fullScreenOffset, 0) /
+																		100 : void 0 != e.fullScreenOffset && e.fullScreenOffset.length >
+																		0 && (u -= parseInt(e.fullScreenOffset, 0))
+																}
+																f = u
+															}
+															else void 0 != e.minHeight && f < e.minHeight && (f = e.minHeight);
+															e.c.closest(".rev_slider_wrapper").css(
+															{
+																height: f
+															})
+														}
+														catch (d)
+														{
+															console.log("Failure at Presize of Slider:" + d)
+														}
+													};
+													setREVStartSize();
+													var tpj = jQuery;
+													var revapi5;
+													tpj(document).ready(function()
+													{
+														if (tpj("#rev_slider_5_1").revolution == undefined)
+														{
+															revslider_showDoubleJqueryError("#rev_slider_5_1");
+														}
+														else
+														{
+															revapi5 = tpj("#rev_slider_5_1").show().revolution(
+															{
+																sliderType: "standard",
+																jsFileLocation: "/js/",
+																sliderLayout: "fullwidth",
+																dottedOverlay: "none",
+																delay: 9000,
+																navigation:
+																{
+																	keyboardNavigation: "off",
+																	keyboard_direction: "horizontal",
+																	mouseScrollNavigation: "off",
+																	mouseScrollReverse: "default",
+																	onHoverStop: "off",
+																	touch:
+																	{
+																		touchenabled: "on",
+																		swipe_threshold: 75,
+																		swipe_min_touches: 1,
+																		swipe_direction: "horizontal",
+																		drag_block_vertical: false
+																	},
+																	arrows:
+																	{
+																		style: "hermes",
+																		enable: true,
+																		hide_onmobile: true,
+																		hide_under: 780,
+																		hide_onleave: false,
+																		tmp: '<div class="tp-arr-allwrapper">	<div class="tp-arr-imgholder"></div>	<div class="tp-arr-titleholder">{{title}}</div>	</div>',
+																		left:
+																		{
+																			h_align: "left",
+																			v_align: "center",
+																			h_offset: 50,
+																			v_offset: 0
+																		},
+																		right:
+																		{
+																			h_align: "right",
+																			v_align: "center",
+																			h_offset: 50,
+																			v_offset: 0
+																		}
+																	}
+																},
+																responsiveLevels: [1240, 1024, 778, 480],
+																visibilityLevels: [1240, 1024, 778, 480],
+																gridwidth: [1240, 1024, 778, 480],
+																gridheight: [600, 768, 960, 720],
+																lazyType: "none",
+																parallax:
+																{
+																	type: "mouse",
+																	origo: "enterpoint",
+																	speed: 400,
+																	levels: [5, 10, 15, 20, 25, 30, 35, 40, 45, 46, 47, 48,
+																		49, 50, 51, 55
+																	],
+																	type: "mouse",
+																},
+																shadow: 0,
+																spinner: "off",
+																stopLoop: "off",
+																stopAfterLoops: -1,
+																stopAtSlide: -1,
+																shuffle: "off",
+																autoHeight: "off",
+																hideThumbsOnMobile: "off",
+																hideSliderAtLimit: 0,
+																hideCaptionAtLimit: 0,
+																hideAllCaptionAtLilmit: 0,
+																debugMode: false,
+																fallbacks:
+																{
+																	simplifyAll: "off",
+																	nextSlideOnWindowFocus: "off",
+																	disableFocusListener: true,
+																}
+															});
+														}
+													});
+
+													var htmlDivCss = unescape(
+														".hermes.tparrows%20%7B%0A%09cursor%3Apointer%3B%0A%09background%3Argba%280%2C0%2C0%2C0.5%29%3B%0A%09width%3A30px%3B%0A%09height%3A110px%3B%0A%09position%3Aabsolute%3B%0A%09display%3Ablock%3B%0A%09z-index%3A100%3B%0A%7D%0A%0A.hermes.tparrows%3Abefore%20%7B%0A%09font-family%3A%20%22revicons%22%3B%0A%09font-size%3A15px%3B%0A%09color%3Argb%28255%2C%20255%2C%20255%29%3B%0A%09display%3Ablock%3B%0A%09line-height%3A%20110px%3B%0A%09text-align%3A%20center%3B%0A%20%20%20%20transform%3Atranslatex%280px%29%3B%0A%20%20%20%20-webkit-transform%3Atranslatex%280px%29%3B%0A%20%20%20%20transition%3Aall%200.3s%3B%0A%20%20%20%20-webkit-transition%3Aall%200.3s%3B%0A%7D%0A.hermes.tparrows.tp-leftarrow%3Abefore%20%7B%0A%09content%3A%20%22%5Ce824%22%3B%0A%7D%0A.hermes.tparrows.tp-rightarrow%3Abefore%20%7B%0A%09content%3A%20%22%5Ce825%22%3B%0A%7D%0A.hermes.tparrows.tp-leftarrow%3Ahover%3Abefore%20%7B%0A%20%20%20%20transform%3Atranslatex%28-20px%29%3B%0A%20%20%20%20-webkit-transform%3Atranslatex%28-20px%29%3B%0A%20%20%20%20%20opacity%3A0%3B%0A%7D%0A.hermes.tparrows.tp-rightarrow%3Ahover%3Abefore%20%7B%0A%20%20%20%20transform%3Atranslatex%2820px%29%3B%0A%20%20%20%20-webkit-transform%3Atranslatex%2820px%29%3B%0A%20%20%20%20%20opacity%3A0%3B%0A%7D%0A%0A.hermes%20.tp-arr-allwrapper%20%7B%0A%20%20%20%20overflow%3Ahidden%3B%0A%20%20%20%20position%3Aabsolute%3B%0A%09width%3A180px%3B%0A%20%20%20%20height%3A140px%3B%0A%20%20%20%20top%3A0px%3B%0A%20%20%20%20left%3A0px%3B%0A%20%20%20%20visibility%3Ahidden%3B%0A%20%20%20%20%20%20-webkit-transition%3A%20-webkit-transform%200.3s%200.3s%3B%0A%20%20transition%3A%20transform%200.3s%200.3s%3B%0A%20%20-webkit-perspective%3A%201000px%3B%0A%20%20perspective%3A%201000px%3B%0A%20%20%20%20%7D%0A.hermes.tp-rightarrow%20.tp-arr-allwrapper%20%7B%0A%20%20%20right%3A0px%3Bleft%3Aauto%3B%0A%20%20%20%20%20%20%7D%0A.hermes.tparrows%3Ahover%20.tp-arr-allwrapper%20%7B%0A%20%20%20visibility%3Avisible%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%0A.hermes%20.tp-arr-imgholder%20%7B%0A%20%20width%3A180px%3Bposition%3Aabsolute%3B%0A%20%20left%3A0px%3Btop%3A0px%3Bheight%3A110px%3B%0A%20%20transform%3Atranslatex%28-180px%29%3B%0A%20%20-webkit-transform%3Atranslatex%28-180px%29%3B%0A%20%20transition%3Aall%200.3s%3B%0A%20%20transition-delay%3A0.3s%3B%0A%7D%0A.hermes.tp-rightarrow%20.tp-arr-imgholder%7B%0A%20%20%20%20transform%3Atranslatex%28180px%29%3B%0A%20%20-webkit-transform%3Atranslatex%28180px%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%0A.hermes.tparrows%3Ahover%20.tp-arr-imgholder%20%7B%0A%20%20%20transform%3Atranslatex%280px%29%3B%0A%20%20%20-webkit-transform%3Atranslatex%280px%29%3B%20%20%20%20%20%20%20%20%20%20%20%20%0A%7D%0A.hermes%20.tp-arr-titleholder%20%7B%0A%20%20top%3A110px%3B%0A%20%20width%3A180px%3B%0A%20%20text-align%3Aleft%3B%20%0A%20%20display%3Ablock%3B%0A%20%20padding%3A0px%2010px%3B%0A%20%20line-height%3A30px%3B%20background%3A%23000%3B%0A%20%20background%3Argba%280%2C0%2C0%2C0.75%29%3B%0A%20%20color%3Argb%28255%2C%20255%2C%20255%29%3B%0A%20%20font-weight%3A600%3B%20position%3Aabsolute%3B%0A%20%20font-size%3A12px%3B%0A%20%20white-space%3Anowrap%3B%0A%20%20letter-spacing%3A1px%3B%0A%20%20-webkit-transition%3A%20all%200.3s%3B%0A%20%20transition%3A%20all%200.3s%3B%0A%20%20-webkit-transform%3A%20rotatex%28-90deg%29%3B%0A%20%20transform%3A%20rotatex%28-90deg%29%3B%0A%20%20-webkit-transform-origin%3A%2050%25%200%3B%0A%20%20transform-origin%3A%2050%25%200%3B%0A%20%20box-sizing%3Aborder-box%3B%0A%0A%7D%0A.hermes.tparrows%3Ahover%20.tp-arr-titleholder%20%7B%0A%20%20%20%20-webkit-transition-delay%3A%200.6s%3B%0A%20%20transition-delay%3A%200.6s%3B%0A%20%20-webkit-transform%3A%20rotatex%280deg%29%3B%0A%20%20transform%3A%20rotatex%280deg%29%3B%0A%7D%0A%0A"
+													);
+													var htmlDiv = document.getElementById(
+														'rs-plugin-settings-inline-css');
+													if (htmlDiv)
+													{
+														htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
+													}
+													else
+													{
+														var htmlDiv = document.createElement('div');
+														htmlDiv.innerHTML = '<style>' + htmlDivCss + '</style>';
+														document.getElementsByTagName('head')[0].appendChild(htmlDiv.childNodes[
+															0]);
+													}
+												</script>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="vc_row wpb_row vc_row-fluid visible-lg vc_custom_1466422234232"
+						 data-vc-full-width="true" data-vc-full-width-init="false" data-vc-stretch-content="true">
+							<div class="slider_bottom">
+								<div class="container">
+									<div class="vc_col-sm-4">
+										<div class="icon" style="background-image:url('/images/slider_1_img.png');width:68px;height:65px;"></div>
+										<div class="text">Проектирование</div>
+									</div>
+									<div class="vc_col-sm-4">
+										<div class="icon" style="background-image:url('/images/slider_2_img.png');width:69px;height:68px;"></div>
+										<div class="text">Производство
+											<br>клеёного бруса</div>
+									</div>
+									<div class="vc_col-sm-4">
+										<div class="icon" style="background-image:url('/images/slider_3_img.png');width:71px;height:64px;"></div>
+										<div class="text">Строительство
+											<br>"под ключ"</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="vc_row-full-width"></div>
+						<!--SLIDER END-->
+						<!--TOP TEXT START-->
+						<div class="vc_row wpb_row vc_row-fluid">
+							<div class="wpb_column vc_column_container vc_col-sm-9">
+								<div class="vc_column-inner">
+									<div class="wpb_wrapper">
+										<div class="mgt-header-block clearfix text-center text-black wpb_content_element mgt-header-texttransform-header">
+											<p class="mgt-header-block-subtitle">Добро пожаловать!</p>
+											<h2 class="mgt-header-block-title">Компания CKD-дом производит и строит дома
+												<br>из клееного бруса уже более 14 лет</h2>
+											<div class="mgt-header-line"></div>
+											<div class="mgt-cta-block-content">Мы реализуем мечту о собственном доме - долгой здоровой жизни в кругу
+												семьи. Мы стремимся быть лучшими из лучших, поэтому в своей работе
+												используем принцип честности, обязательности и качества.</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--TOP TEXT END-->
+						<!--INFO BLOCKS START-->
+						<div class="vc_row wpb_row vc_row-fluid vc_custom_1459162774762" data-vc-full-width="true"
+						 data-vc-full-width-init="false">
+							<div class="wpb_column vc_column_container vc_col-sm-4">
+								<div class="vc_column-inner">
+									<div class="wpb_wrapper">
+										<style scoped="scoped">
+											.mgt-promo-block-81855614819.mgt-promo-block.animated:hover .mgt-promo-block-content {
+												background-color: rgba(0, 0, 0, 0.5) !important;
+											}
+										</style>
+										<div class="mgt-promo-block animated white-text cover-image text-size-normal no-darken mgt-promo-block-81855614819 wpb_content_element wpb_animate_when_almost_visible wpb_left-to-right"
+										 data-style="background-image: url(images/example/house_1.jpg);background-repeat: no-repeat;width: 100%; height: 250px;">
+											<div class="mgt-promo-block-content mgt-hide-button">
+												<div class="mgt-promo-block-content-inside">
+													<div class="mgt-button-wrapper mgt-button-wrapper-align-center mgt-button-wrapper-display-newline mgt-button-top-margin-disable">
+														<a class="btn hvr-bounce-to-right mgt-button mgt-style-bordered mgt-size-normal mgt-align-center mgt-display-newline mgt-text-size-small mgt-button-icon-position-left mgt-text-transform-uppercase"
+														 href="#">УЗНАТЬ БОЛЬШЕ</a>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="mgt-promo-block white-text text-size-normal no-darken mgt-promo-block-17694366872 wpb_content_element wpb_animate_when_almost_visible wpb_left-to-right"
+										 data-style="background-color: #2a2f35;width: 100%; height: 250px;">
+											<div class="mgt-promo-block-content va-top">
+												<div class="mgt-promo-block-content-inside vc_custom_1465197248270">
+													<h4 style="text-align: left;">ГОТОВЫЕ ПРОЕКТЫ СКD</h4>
+													<p style="text-align: left;">Наши готовые проекты разрабатывались не просто специалистами, а людьми,
+														глубоко влюбленными в свою работу, стремящимися достичь совершенства
+														и сохранить традиции деревянного зодчества.
+														<div class="mgt-button-wrapper mgt-button-wrapper-align-left mgt-button-wrapper-display-newline mgt-button-top-margin-disable">
+															<a class="btn hvr-icon-wobble-horizontal mgt-button mgt-style-textwhite mgt-size-normal mgt-align-left mgt-display-newline mgt-text-size-small mgt-button-icon-position-right mgt-text-transform-uppercase"
+															 href="#">УЗНАТЬ БОЛЬШЕ<i class="fa fa-arrow-right"></i></a>
+														</div>
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="wpb_column vc_column_container vc_col-sm-4">
+								<div class="vc_column-inner">
+									<div class="wpb_wrapper">
+										<style scoped="scoped">
+											.mgt-promo-block-81855614819.mgt-promo-block.animated:hover .mgt-promo-block-content {
+												background-color: rgba(0, 0, 0, 0.5) !important;
+											}
+										</style>
+										<div class="mgt-promo-block animated white-text cover-image text-size-normal no-darken mgt-promo-block-81855614819 wpb_content_element wpb_animate_when_almost_visible wpb_left-to-right"
+										 data-style="background-image: url(images/example/house_2.jpg);background-repeat: no-repeat;width: 100%; height: 250px;">
+											<div class="mgt-promo-block-content mgt-hide-button">
+												<div class="mgt-promo-block-content-inside">
+													<div class="mgt-button-wrapper mgt-button-wrapper-align-center mgt-button-wrapper-display-newline mgt-button-top-margin-disable">
+														<a class="btn hvr-bounce-to-right mgt-button mgt-style-bordered mgt-size-normal mgt-align-center mgt-display-newline mgt-text-size-small mgt-button-icon-position-left mgt-text-transform-uppercase"
+														 href="#">УЗНАТЬ БОЛЬШЕ</a>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="mgt-promo-block white-text text-size-normal no-darken mgt-promo-block-17694366872 wpb_content_element wpb_animate_when_almost_visible wpb_left-to-right"
+										 data-style="background-color: #2a2f35;width: 100%; height: 250px;">
+											<div class="mgt-promo-block-content va-top">
+												<div class="mgt-promo-block-content-inside vc_custom_1465197273348">
+													<h4 style="text-align: left;">ИНДИВИДУАЛЬНЫЕ ПРОЕКТЫ</h4>
+													<p style="text-align: left;">Мы выстраиваем работу так, чтобы заказчик ощущал себя создателем дома.
+														Это больше, чем просто индивидуальный подход! Заказчик превращается
+														в активного участника процесса проектирование и возведения дома.
+														<div
+														 class="mgt-button-wrapper mgt-button-wrapper-align-left mgt-button-wrapper-display-newline mgt-button-top-margin-disable">
+															<a class="btn hvr-icon-wobble-horizontal mgt-button mgt-style-textwhite mgt-size-normal mgt-align-left mgt-display-newline mgt-text-size-small mgt-button-icon-position-right mgt-text-transform-uppercase"
+															 href="#">УЗНАТЬ БОЛЬШЕ<i class="fa fa-arrow-right"></i></a>
+												</div>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="wpb_column vc_column_container vc_col-sm-4">
+							<div class="vc_column-inner">
+								<div class="wpb_wrapper">
+									<style scoped="scoped">
+										.mgt-promo-block-47315338921.mgt-promo-block.darken .mgt-promo-block-content {
+											background-color: rgba(10, 10, 10, 0.6) !important;
+										}
+
+										.mgt-promo-block-47315338921.mgt-promo-block.animated:hover .mgt-promo-block-content {
+											background-color: rgba(0, 0, 0, 0.8) !important;
+										}
+									</style>
+									<div class="mgt-promo-block animated white-text cover-image text-size-normal darken mgt-promo-block-47315338921 wpb_content_element wpb_animate_when_almost_visible wpb_right-to-left"
+									 data-style="background-image: url(images/example/info_bg_1.jpg);background-repeat: no-repeat;width: 100%; height: 260px;">
+										<div class="mgt-promo-block-content va-middle">
+											<div class="mgt-promo-block-content-inside vc_custom_1470040014654"><i class="svg-icon svg-icon_1"></i>
+												<h3>ЦЕНЫ НА ДОМА ИЗ КАТАЛОГА CKD</h3>
+												<div class="mgt-button-wrapper mgt-button-wrapper-align-left mgt-button-wrapper-display-newline mgt-button-top-margin-disable">
+													<a class="btn hvr-icon-wobble-horizontal mgt-button mgt-style-textwhite mgt-size-normal mgt-align-left mgt-display-newline mgt-text-size-small mgt-button-icon-position-right mgt-text-transform-uppercase"
+													 href="#">УЗНАТЬ БОЛЬШЕ<i class="fa fa-arrow-right"></i></a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="vc_empty_space" style="height: 20px;">
+										<span class="vc_empty_space_inner"></span>
+									</div>
+									<div class="vc_row wpb_row vc_inner vc_row-fluid">
+										<div class="wpb_column vc_column_container vc_col-sm-12">
+											<div class="vc_column-inner">
+												<div class="wpb_wrapper">
+													<style scoped="scoped">
+														.mgt-promo-block-48115338664.mgt-promo-block.darken .mgt-promo-block-content {
+															background-color: rgba(10, 10, 10, 0.6) !important;
+														}
+
+														.mgt-promo-block-48115338664.mgt-promo-block.animated:hover .mgt-promo-block-content {
+															background-color: rgba(0, 0, 0, 0.8) !important;
+														}
+													</style>
+													<div class="mgt-promo-block animated white-text cover-image text-size-normal darken mgt-promo-block-48115338664 wpb_content_element wpb_animate_when_almost_visible wpb_right-to-left"
+													 data-style="background-image: url(images/example/info_bg_2.jpg);background-repeat: no-repeat;width: 100%; height: 260px;">
+														<div class="mgt-promo-block-content va-middle">
+															<div class="mgt-promo-block-content-inside vc_custom_1470040040890"><i class="svg-icon svg-icon_2"></i>
+																<h3>ОНЛАЙН КАЛЬКУЛЯТОР СТОИМОСТИ ДОМА</h3>
+																<div class="mgt-button-wrapper mgt-button-wrapper-align-left mgt-button-wrapper-display-newline mgt-button-top-margin-disable">
+																	<a class="btn hvr-icon-wobble-horizontal mgt-button mgt-style-textwhite mgt-size-normal mgt-align-left mgt-display-newline mgt-text-size-small mgt-button-icon-position-right mgt-text-transform-uppercase"
+																	 href="#">УЗНАТЬ БОЛЬШЕ<i class="fa fa-arrow-right"></i></a>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+				<div class="vc_row-full-width"></div>
+				<!--INFO BLOCKS END-->
+				<!--LAST PROJECTS START-->
+				<div class="vc_row wpb_row vc_row-fluid vc_custom_1459335800844" data-vc-full-width="true"
+				 data-vc-full-width-init="false">
+					<div class="wpb_column vc_column_container vc_col-sm-12">
+						<div class="vc_column-inner">
+							<div class="wpb_wrapper">
+								<div class="mgt-header-block clearfix text-left text-white wpb_content_element mgt-header-block-style-1 mgt-header-texttransform-header">
+									<h2 class="mgt-header-block-title">Новинки в каталоге СКD</h2>
+									<div class="mgt-header-line"></div>
+									<p>Линейка “Альпино”</p>
+								</div>
+								<div class="portfolio-list portfolio-columns-4 portfolio-grid-layout-3 clearfix"
+								 id="portfolio-list2">
+									<div class="portfolio-item-block portfolio-item-animation-6 mix building"
+									 data-item="1" data-name="Family house">
+										<div class="portfolio-item-block-inside">
+											<a href="#" target="_self" rel="" title="Family house">
+												<div class="portfolio-item-image" data-style="background-image: url(images/example/last_projects_1.jpg);"></div>
+												<div class="portfolio-item-bg"></div>
+												<div class="info"><i class="svg-icon svg-video"></i>
+													<p class="title">Видеообзор линейки “Альпино”</p>
+												</div>
+											</a>
+										</div>
+									</div>
+									<div class="portfolio-item-block portfolio-item-animation-6 mix consulting"
+									 data-item="2" data-name="Construction consulting">
+										<div class="portfolio-item-block-inside">
+											<a href="#" target="_self" rel="" title="Construction consulting">
+												<div class="portfolio-item-image" data-style="background-image: url(images/example/last_projects_2.jpg);"></div>
+												<div class="portfolio-item-bg"></div>
+												<div class="info">
+													<h4 class="title">Проект дома из клееного бруса</h4>
+													<div class="project-description">CKD-410</div>
+													<div class="hvr-icon-wobble-horizontal mgt-button mgt-style-textwhite mgt-size-normal mgt-align-left mgt-display-newline mgt-text-size-small mgt-button-icon-position-right mgt-text-transform-uppercase">УЗНАТЬ БОЛЬШЕ<i class="fa fa-arrow-right"></i></div>
+												</div>
+											</a>
+										</div>
+									</div>
+									<div class="portfolio-item-block portfolio-item-animation-6 mix building office"
+									 data-item="3" data-name="Office interior">
+										<div class="portfolio-item-block-inside">
+											<a href="#" target="_self" rel="" title="Office interior">
+												<div class="portfolio-item-image" data-style="background-image: url(images/example/last_projects_3.jpg);"></div>
+												<div class="portfolio-item-bg"></div>
+												<div class="info">
+													<h4 class="title">Проект дома из клееного бруса</h4>
+													<div class="project-description">CKD-310</div>
+													<div class="hvr-icon-wobble-horizontal mgt-button mgt-style-textwhite mgt-size-normal mgt-align-left mgt-display-newline mgt-text-size-small mgt-button-icon-position-right mgt-text-transform-uppercase">УЗНАТЬ БОЛЬШЕ<i class="fa fa-arrow-right"></i></div>
+												</div>
+											</a>
+										</div>
+									</div>
+									<div class="portfolio-item-block portfolio-item-animation-6 mix building"
+									 data-item="1" data-name="Green House">
+										<div class="portfolio-item-block-inside">
+											<a href="#" target="_self" rel="" title="Green House">
+												<div class="portfolio-item-image" data-style="background-image: url(images/example/last_projects_4.jpg);"></div>
+												<div class="portfolio-item-bg"></div>
+												<div class="info">
+													<h4 class="title">Проект дома из клееного бруса</h4>
+													<div class="project-description">CKD-240</div>
+													<div class="hvr-icon-wobble-horizontal mgt-button mgt-style-textwhite mgt-size-normal mgt-align-left mgt-display-newline mgt-text-size-small mgt-button-icon-position-right mgt-text-transform-uppercase">УЗНАТЬ БОЛЬШЕ<i class="fa fa-arrow-right"></i></div>
+												</div>
+											</a>
+										</div>
+									</div>
+								</div>
+								<script>
+									(function($)
+									{
+										$(document).ready(function()
+										{
+											$("#portfolio-list2").mixItUp(
+											{
+												effects: ["fade", "scale"],
+												easing: "snap"
+											});
+										});
+									})(jQuery);
+								</script>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="vc_row-full-width"></div>
+				<!--LAST PROJECTS END-->
+				<!--ABOUT START-->
+				<div class="vc_row wpb_row vc_row-fluid">
+					<div class="wpb_column vc_column_container vc_col-sm-12">
+						<div class="vc_column-inner">
+							<div class="wpb_wrapper">
+								<div class="mgt-header-block clearfix text-left text-black wpb_content_element mgt-header-block-style-1 mgt-header-texttransform-header">
+									<h2 class="mgt-header-block-title">О компании</h2>
+									<div class="mgt-header-line"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="vc_row wpb_row vc_row-fluid vc_custom_1459437352339">
+					<div class="wpb_column vc_column_container vc_col-sm-4">
+						<div class="vc_column-inner vc_custom_1459186986556">
+							<div class="wpb_wrapper">
+								<div class="mgt-promo-block animated white-text cover-image text-size-normal no-darken wpb_content_element"
+								 data-style="background-image: url(images/example/about.jpg);background-repeat: no-repeat;width: 100%; height: 495px;"></div>
+							</div>
+						</div>
+					</div>
+					<div class="wpb_column vc_column_container vc_col-sm-4">
+						<div class="vc_column-inner vc_custom_1459186959095">
+							<div class="wpb_wrapper">
+								<div class="mgt-promo-block black-text text-size-normal no-darken mgt-promo-block-75700987093 wpb_content_element"
+								 data-style="background-color: #f5f5f5;width: 100%; height: 495px;">
+									<div class="mgt-promo-block-content va-top">
+										<div class="mgt-promo-block-content-inside vc_custom_1460558952530">
+											<h4 style="text-align: left;">Обращение генерального директора:</h4>
+											<p style="text-align: left;">Мы строим современные дома из клееного бруса в Москве и Подмосковье,
+												коттеджные посёлки и усадьбы, собираем и продаём готовые дома.</p>
+											<p
+											 style="text-align: left;">Приглашаю в любой день посетить нашу демонстрационную площадку, где
+												вы можете посмотреть дома из клееного бруса на разных стадиях постройки,
+												потрогать руками материалы, получить всю информацию о нашей работе
+												и реализованных проектах. Если вы планируете построить загородный дом
+												— клееный брус будет лучшим выбором материала»
+												<br>
+												<br>
+												</p>
+												<h5 style="text-align: right;font-weight:normal;line-height:18px;">
+													<strong>Олег Трунов
+														<br>
+													</strong>Генеральный директор ООО "СКД-дом"</h5>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="wpb_column vc_column_container vc_col-sm-4">
+						<div class="vc_column-inner">
+							<div class="wpb_wrapper">
+								<div class="vc_tta-container" data-vc-action="collapse">
+									<div class="vc_general vc_tta vc_tta-accordion vc_tta-color-black vc_tta-style-classic vc_tta-shape-square vc_tta-o-shape-group vc_tta-controls-align-left">
+										<div class="vc_tta-panels-container">
+											<div class="vc_tta-panels">
+												<div class="vc_tta-panel vc_active" id="1459164386535-056c539a-f4ce"
+												 data-vc-content=".vc_tta-panel-body">
+													<div class="vc_tta-panel-heading">
+														<h4 class="vc_tta-panel-title vc_tta-controls-icon-position-right">
+															<a href="#1459164386535-056c539a-f4ce" data-vc-accordion="" data-vc-container=".vc_tta-container">
+																<span class="vc_tta-title-text">СОБСТВЕННОЕ ПРОИЗВОДСТВО</span><i class="vc_tta-controls-icon vc_tta-controls-icon-plus"></i></a>
+														</h4>
+													</div>
+													<div class="vc_tta-panel-body">
+														<div class="mgt-icon-box wpb_content_element mgt-icon-box-right mgt-icon-fa mgt-icon-background mgt-icon-background-normal text-black">
+															<div class="mgt-icon-box-icon hvr-icon-push">
+																<div class="mgt-font-icon"><i class="fa fa-users"></i></div>
+															</div>
+															<div class="mgt-icon-box-content">Сами производим клееный брус и несём ответственность за его высокое
+																качество и транспортировку. Вы уверены в технологии, в точности
+																обработки заготовок и в бережной доставке.</div>
+															<div class="clearfix"></div>
+														</div>
+													</div>
+												</div>
+												<div class="vc_tta-panel" id="1459238186084-d35c30a3-aeac" data-vc-content=".vc_tta-panel-body">
+													<div class="vc_tta-panel-heading">
+														<h4 class="vc_tta-panel-title vc_tta-controls-icon-position-right">
+															<a href="#1459238186084-d35c30a3-aeac" data-vc-accordion="" data-vc-container=".vc_tta-container">
+																<span class="vc_tta-title-text">САМОБЫТНЫЙ КАТАЛОГ ПРОЕКТОВ</span><i class="vc_tta-controls-icon vc_tta-controls-icon-plus"></i></a>
+														</h4>
+													</div>
+													<div class="vc_tta-panel-body">
+														<div class="wpb_text_column wpb_content_element">
+															<div class="wpb_wrapper">
+																<p>Embedded in our culture of hard work, honesty, and getting the
+																	well done job, our history tells not only much about our past
+																	but also it does our present.е Our record of succeeding, surviving,
+																	and striving to be the best is central to our reputation today.</p>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="vc_tta-panel" id="1459164564259-3e188fa0-cc04" data-vc-content=".vc_tta-panel-body">
+													<div class="vc_tta-panel-heading">
+														<h4 class="vc_tta-panel-title vc_tta-controls-icon-position-right">
+															<a href="#1459164564259-3e188fa0-cc04" data-vc-accordion="" data-vc-container=".vc_tta-container">
+																<span class="vc_tta-title-text"> ЛУЧШИЕ СПЕЦИАЛИСТЫ ОТРАСЛИ</span><i class="vc_tta-controls-icon vc_tta-controls-icon-plus"></i></a>
+														</h4>
+													</div>
+													<div class="vc_tta-panel-body">
+														<div class="vc_chart vc_line-chart wpb_content_element" data-vc-legend="1"
+														 data-vc-tooltips="1" data-vc-animation="easeinOutCubic" data-vc-type="line"
+														 data-vc-values="{&quot;labels&quot;:[&quot;JAN&quot;,&quot; FEB&quot;,&quot; MAR&quot;,&quot; APR&quot;,&quot; MAY&quot;,&quot; JUN&quot;,&quot; JUL&quot;,&quot; AUG&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;One&quot;,&quot;fillColor&quot;:&quot;rgba(84, 114, 210, 0.1)&quot;,&quot;strokeColor&quot;:&quot;#5472d2&quot;,&quot;pointColor&quot;:&quot;#5472d2&quot;,&quot;pointStrokeColor&quot;:&quot;#5472d2&quot;,&quot;highlightFill&quot;:&quot;#3c5ecc&quot;,&quot;highlightStroke&quot;:&quot;#3c5ecc&quot;,&quot;pointHighlightFill&quot;:&quot;#3c5ecc&quot;,&quot;pointHighlightStroke&quot;:&quot;#3c5ecc&quot;,&quot;data&quot;:[&quot;10&quot;,&quot; 15&quot;,&quot; 20&quot;,&quot; 25&quot;,&quot; 27&quot;,&quot; 25&quot;,&quot; 23&quot;,&quot; 25&quot;]},{&quot;label&quot;:&quot;Two&quot;,&quot;fillColor&quot;:&quot;rgba(254, 108, 97, 0.1)&quot;,&quot;strokeColor&quot;:&quot;#fe6c61&quot;,&quot;pointColor&quot;:&quot;#fe6c61&quot;,&quot;pointStrokeColor&quot;:&quot;#fe6c61&quot;,&quot;highlightFill&quot;:&quot;#fe5043&quot;,&quot;highlightStroke&quot;:&quot;#fe5043&quot;,&quot;pointHighlightFill&quot;:&quot;#fe5043&quot;,&quot;pointHighlightStroke&quot;:&quot;#fe5043&quot;,&quot;data&quot;:[&quot;25&quot;,&quot; 18&quot;,&quot; 16&quot;,&quot; 17&quot;,&quot; 20&quot;,&quot; 25&quot;,&quot; 30&quot;,&quot; 35&quot;]}]}">
+															<div class="wpb_wrapper">
+																<div class="vc_chart-with-legend">
+																	<canvas class="vc_line-chart-canvas" width="1" height="1"></canvas>
+																</div>
+																<ul class="vc_chart-legend">
+																	<li>
+																		<span style="background-color:#5472d2;"></span>One</li>
+																	<li>
+																		<span style="background-color:#fe6c61;"></span>Two</li>
+																</ul>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="vc_tta-panel" id="1459164561558-c64a2352-22d2" data-vc-content=".vc_tta-panel-body">
+													<div class="vc_tta-panel-heading">
+														<h4 class="vc_tta-panel-title vc_tta-controls-icon-position-right">
+															<a href="#1459164561558-c64a2352-22d2" data-vc-accordion="" data-vc-container=".vc_tta-container">
+																<span class="vc_tta-title-text">ЧЕСТНОЕ ЦЕНООБРАЗОВАНИЕ</span><i class="vc_tta-controls-icon vc_tta-controls-icon-plus"></i></a>
+														</h4>
+													</div>
+													<div class="vc_tta-panel-body">
+														<div class="wpb_text_column wpb_content_element">
+															<div class="wpb_wrapper">
+																<p>Embedded in our culture of hard work, honesty, and getting the
+																	well done job, our history tells not only much about our past
+																	but also it does our present.е Our record of succeeding, surviving,
+																	and striving to be the best is central to our reputation today.</p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="vc_row-full-width"></div>
+				<!--ABOUT END-->
+				<!--NUMBERS START-->
+				<div class="vc_row wpb_row vc_row-fluid vc_custom_1465151624441" data-vc-full-width="true"
+				 data-vc-full-width-init="false">
+					<div class="wpb_column vc_column_container vc_col-sm-3">
+						<div class="vc_column-inner">
+							<div class="wpb_wrapper">
+								<div class="mgt-counter-wrapper wpb_content_element text-black text-left">
+									<div class="mgt-counter-icon"><i class="svg-icon svg-projects_count"></i></div>
+									<span class="mgt-counter-value"
+									 data-from="0" data-to="346" data-speed="2000">346</span>
+<!--
+									<h5 class="mgt-counter-title">Проектов</h5>
+-->
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="wpb_column vc_column_container vc_col-sm-4">
+						<div class="vc_column-inner">
+							<div class="wpb_wrapper">
+								<div class="mgt-counter-wrapper wpb_content_element text-black text-left">
+									<div class="mgt-counter-icon"><i class="svg-icon svg-peoples_count"></i></div>
+									<span class="mgt-counter-value"
+									 data-from="0" data-to="932" data-speed="2000">932</span>
+									<h5 class="mgt-counter-title">Довольных клиента</h5>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="wpb_column vc_column_container vc_col-sm-4">
+						<div class="vc_column-inner">
+							<div class="wpb_wrapper">
+								<div class="mgt-counter-wrapper wpb_content_element text-black text-left">
+									<div class="mgt-counter-icon"><i class="svg-icon svg-professionals_count"></i></div>
+									<span class="mgt-counter-value"
+									 data-from="0" data-to="325" data-speed="2000">325</span>
+									<h5 class="mgt-counter-title">квалифицированных специалистов</h5>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="vc_row-full-width"></div>
+				<!--NUMBERS END-->
+				<!--SERVICES START-->
+				<div class="vc_row wpb_row vc_row-fluid vc_custom_1466501689743" data-vc-full-width="true"
+				 data-vc-full-width-init="false">
+					<div class="wpb_column vc_column_container vc_col-sm-2">
+						<div class="vc_column-inner">
+							<div class="wpb_wrapper">
+								<div class="mgt-header-block clearfix text-left text-black wpb_content_element mgt-header-texttransform-subheader vc_custom_1466581415033">
+									<p class="mgt-header-block-subtitle">Услуги</p>
+									<h2 class="mgt-header-block-title">Строительство</h2>
+									<div class="mgt-header-line"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="wpb_column vc_column_container vc_col-sm-8">
+						<div class="vc_column-inner">
+							<div class="wpb_wrapper">
+								<div class="wpb_text_column wpb_content_element">
+									<div class="wpb_wrapper">
+										<p style="text-align: left;">Клееный брус - современный и экологичный материал для наружной и внутренней
+											отделки домов и сопутствующих построек, энергосберегающие окна, натуральная
+											кровля, окраска деревянных элементов, а также дизайн интерьеров от лучших
+											специалистов дизайн-бюро "Archdesign" – мы с особой любовью к природе
+											выбрали для вас лучшее.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="wpb_column vc_column_container vc_col-sm-2">
+						<div class="vc_column-inner">
+							<div class="wpb_wrapper">
+								<div class="mgt-button-wrapper mgt-button-wrapper-align-right mgt-button-wrapper-display-newline mgt-button-top-margin-disable">
+									<br>
+									<a class="btn hvr-sweep-to-top mgt-button mgt-style-solid mgt-size-normal mgt-align-right mgt-display-newline mgt-text-size-small mgt-button-icon-position-left mgt-text-transform-uppercase"
+									 href="#">Все услуги</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="vc_row-full-width"></div>
+				<div class="vc_row wpb_row vc_row-fluid">
+					<div class="wpb_column vc_column_container vc_col-sm-4">
+						<div class="vc_column-inner">
+							<div class="wpb_wrapper">
+								<style scoped="scoped">
+									.mgt-promo-block-47329438164.mgt-promo-block.darken .mgt-promo-block-content {
+										background-color: rgba(10, 10, 10, 0.6) !important;
+									}
+
+									.mgt-promo-block-47329438164.mgt-promo-block.animated:hover .mgt-promo-block-content {
+										background-color: rgba(0, 0, 0, 0.8) !important;
+									}
+								</style>
+								<div class="mgt-promo-block animated white-text cover-image text-size-normal darken mgt-promo-block-47329438164 wpb_content_element wpb_animate_when_almost_visible wpb_appear"
+								 data-style="background-image: url(images/example/serivces_info_1.jpg);background-repeat: no-repeat;width: 100%; height: 220px;">
+									<div class="mgt-promo-block-content va-top">
+										<div class="mgt-promo-block-content-inside vc_custom_1470040092901"><i class="svg-icon svg-building_1"></i>
+											<p>СТРОИТЕЛЬСТВО ДОМОВ ИЗ КЛЕЁНОГО БРУСА «ПОД КЛЮЧ»</p>
+											<div class="mgt-button-wrapper mgt-button-wrapper-align-left mgt-button-wrapper-display-newline mgt-button-top-margin-disable">
+												<a class="btn hvr-icon-wobble-horizontal mgt-button mgt-style-textwhite mgt-size-normal mgt-align-left mgt-display-newline mgt-text-size-small mgt-button-icon-position-right mgt-text-transform-uppercase"
+												 href="#">Узнать больше<i class="fa fa-arrow-right"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="wpb_text_column wpb_content_element wpb_animate_when_almost_visible wpb_left-to-right vc_custom_1459415178192">
+									<div class="wpb_wrapper">
+										<p>Строительство домов из клееного бруса «под ключ» можно условно разделить
+											на три этапа: первый — подготовительный, второй — проектирование, третий
+											— собственно этап строительства</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="wpb_column vc_column_container vc_col-sm-4">
+						<div class="vc_column-inner">
+							<div class="wpb_wrapper">
+								<style scoped="scoped">
+									.mgt-promo-block-42115338664.mgt-promo-block.darken .mgt-promo-block-content {
+										background-color: rgba(10, 10, 10, 0.6) !important;
+									}
+
+									.mgt-promo-block-42115338664.mgt-promo-block.animated:hover .mgt-promo-block-content {
+										background-color: rgba(0, 0, 0, 0.8) !important;
+									}
+								</style>
+								<div class="mgt-promo-block animated white-text cover-image text-size-normal darken mgt-promo-block-42115338664 wpb_content_element wpb_animate_when_almost_visible wpb_appear"
+								 data-style="background-image: url(images/example/serivces_info_2.jpg);background-repeat: no-repeat;width: 100%; height: 220px;">
+									<div class="mgt-promo-block-content va-top">
+										<div class="mgt-promo-block-content-inside vc_custom_1470040110657"><i class="svg-icon svg-building_2"><!-- Icon--></i>
+											<h3>ИНЖЕНЕРНЫЕ КОММУНИКАЦИИ И ЭЛЕКТРИКА</h3>
+											<div class="mgt-button-wrapper mgt-button-wrapper-align-left mgt-button-wrapper-display-newline mgt-button-top-margin-disable">
+												<a class="btn hvr-icon-wobble-horizontal mgt-button mgt-style-textwhite mgt-size-normal mgt-align-left mgt-display-newline mgt-text-size-small mgt-button-icon-position-right mgt-text-transform-uppercase"
+												 href="#">Узнать больше<i class="fa fa-arrow-right"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="wpb_text_column wpb_content_element wpb_animate_when_almost_visible wpb_bottom-to-top vc_custom_1459415137038">
+									<div class="wpb_wrapper">
+										<p>КЖ, КД, ЭО, СС, ОВК – особо важная часть проектных работ. Проект может
+											быть красиво оформлен, но если за ним нет опыта, грамотных специалистов
+											и качественных поставщиков - он оставит только уныние от бесполезно
+											потраченных сил и денег.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="wpb_column vc_column_container vc_col-sm-4">
+						<div class="vc_column-inner">
+							<div class="wpb_wrapper">
+								<style scoped="scoped">
+									.mgt-promo-block-47315338424.mgt-promo-block.darken .mgt-promo-block-content {
+										background-color: rgba(10, 10, 10, 0.6) !important;
+									}
+
+									.mgt-promo-block-47315338424.mgt-promo-block.animated:hover .mgt-promo-block-content {
+										background-color: rgba(0, 0, 0, 0.8) !important;
+									}
+								</style>
+								<div class="mgt-promo-block animated white-text cover-image text-size-normal darken mgt-promo-block-47315338424 wpb_content_element wpb_animate_when_almost_visible wpb_appear"
+								 data-style="background-image: url(images/example/serivces_info_3.jpg);background-repeat: no-repeat;width: 100%; height: 220px;">
+									<div class="mgt-promo-block-content va-top">
+										<div class="mgt-promo-block-content-inside vc_custom_1470040129131"><i class="svg-icon svg-building_3"><!-- Icon--></i>
+											<h3>ОТДЕЛОЧНЫЕ
+												<br>РАБОТЫ
+												<br>«ПОД КЛЮЧ»</h3>
+											<div class="mgt-button-wrapper mgt-button-wrapper-align-left mgt-button-wrapper-display-newline mgt-button-top-margin-disable">
+												<a class="btn hvr-icon-wobble-horizontal mgt-button mgt-style-textwhite mgt-size-normal mgt-align-left mgt-display-newline mgt-text-size-small mgt-button-icon-position-right mgt-text-transform-uppercase"
+												 href="#">Узнать больше<i class="fa fa-arrow-right"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="wpb_text_column wpb_content_element wpb_animate_when_almost_visible wpb_right-to-left vc_custom_1459415187822">
+									<div class="wpb_wrapper">
+										<p>В компании СКD-дом работают наилучшие бригады мастеров, у которых есть
+											огромный опыт отделочных работ в коттеджах из клееного профилированного
+											бруса, и мы с уверенностью можем заявить, что современную отделку в
+											деревянном коттедже именно мы сделаем лучше всех.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--SERVICES END-->
+				<!--BIG PROJECTS START-->
+				<div class="vc_row wpb_row vc_row-fluid vc_custom_1466422963185" data-vc-full-width="true"
+				 data-vc-full-width-init="false">
+					<div class="wpb_column vc_column_container vc_col-sm-12">
+						<div class="vc_column-inner">
+							<div class="wpb_wrapper">
+								<div class="mgt-header-block wpb_content_element clearfix text-black mgt-header-texttransform-subheader mgt-header-texttransform-header">
+									<p class="mgt-header-block-subtitle">Проекты</p>
+									<h2 class="mgt-header-block-title">Большие проекты CKD</h2>
+									<div class="mgt-header-line"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="wpb_column vc_column_container vc_col-sm-6">
+						<div class="vc_column-inner">
+							<div class="wpb_wrapper">
+								<div class="portfolio-list portfolio-columns-4 portfolio-grid-layout-4 clearfix"
+								 id="portfolio-list">
+									<div class="portfolio-item-block portfolio-item-animation-6 slide-item building"
+									 data-item="1" data-name="Modern House">
+										<div class="portfolio-item-block-inside">
+											<a href="#" target="_self" rel="" title="Modern House">
+												<div class="portfolio-item-image" data-style="background-image: url(images/example/project_1.jpg);"></div>
+												<div class="portfolio-item-bg"></div>
+												<div class="info">
+													<span class="sub-title">Усадьбы и имения</span>
+													<h4 class="title">Современный дом</h4>
+													<div class="project-description">Россия, г. Кострома</div>
+													<div class="view-more btn mgt-button hvr-sweep-to-top mgt-style-solid">Показать</div>
+												</div>
+											</a>
+										</div>
+									</div>
+								</div>
+								<script>
+									(function($)
+									{
+										$(document).ready(function()
+										{
+											function initPortfolioCarousel()
+											{
+												$("#portfolio-list").owlCarousel(
+												{
+													items: 1,
+													itemsDesktop: [1199, 1],
+													itemsDesktopSmall: [979, 1],
+													itemsTablet: [768, 1],
+													itemsMobile: [479, 1],
+													autoPlay: false,
+													navigation: true,
+													navigationText: false,
+													pagination: false,
+													afterInit: function(elem)
+													{
+														$(this).css("display", "block");
+													}
+												});
+											}
+											setTimeout(initPortfolioCarousel, 1000);
+										});
+									})(jQuery);
+								</script>
+							</div>
+						</div>
+					</div>
+					<div class="wpb_column vc_column_container vc_col-sm-6">
+						<div class="vc_column-inner">
+							<div class="wpb_wrapper">
+								<style scoped="scoped">
+									.mgt-promo-block-10045338664.mgt-promo-block.darken .mgt-promo-block-content {
+										background-color: rgba(35, 43, 51, 0.78)!important;
+										padding: 15px 50px;
+									}
+
+									.mgt-promo-block-10045338664.mgt-promo-block.animated:hover .mgt-promo-block-content {
+										background-color: rgba(35, 43, 51, 0.88)!important;
+									}
+								</style>
+								<div class="mgt-promo-block animated white-text cover-image text-size-normal darken mgt-promo-block-10045338664 wpb_content_element wpb_animate_when_almost_visible wpb_right-to-left"
+								 data-style="background-image: url(images/example/warranty_bg.jpg);background-repeat: no-repeat;width: 100%; height: 230px;">
+									<div class="mgt-promo-block-content va-middle">
+										<div class="mgt-promo-block-content-inside vc_custom_1466504049936">
+											<h2>Наши гарантии</h2>
+											<div class="mgt-button-wrapper mgt-button-wrapper-align-left mgt-button-wrapper-display-newline">
+												<a class="btn hvr-icon-wobble-horizontal mgt-button mgt-style-textwhite mgt-size-normal mgt-align-left mgt-display-newline mgt-text-size-small mgt-button-icon-position-right mgt-text-transform-uppercase"
+												 href="#">Узнать больше<i class="fa fa-arrow-right"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="vc_empty_space" style="height: 20px;">
+									<span class="vc_empty_space_inner"></span>
+								</div>
+								<style scoped="scoped">
+									.mgt-promo-block-10115338612.mgt-promo-block.darken .mgt-promo-block-content {
+										background-color: #b76c00!important;
+									}
+
+									.mgt-promo-block-10115338612.mgt-promo-block.animated:hover .mgt-promo-block-content {
+										background-color: rgba(0, 0, 0, 0.5)!important;
+									}
+								</style>
+								<a class="mgt-promo-block-link" href="#">
+									<div class="mgt-promo-block animated black-text text-color-hover-white cover-image text-size-normal darken mgt-promo-block-10115338612 wpb_content_element wpb_animate_when_almost_visible wpb_right-to-left"
+									 data-style="background-image: url(images/example/project_1.jpg);background-repeat: no-repeat;width: 100%; height: 200px;">
+										<div class="mgt-promo-block-content va-top">
+											<div class="mgt-promo-block-content-inside vc_custom_1466614059509">
+												<p style="text-align: center;">
+													<img class="size-medium wp-image-903" src="images/map.png" alt="world-map"
+													 width="300" height="148">
+												</p>
+												<h2 style="text-align: center;color:#fff;margin-top:26px;">“CKD дом” связаться с нами</h2>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="vc_row-full-width"></div>
+				<!--BIG PROJECTS END-->
+				</article>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="wpb_column vc_column_container vc_col-sm-12">
+			<div class="vc_column-inner">
+				<div class="wpb_wrapper">
+					<div class="mgt-header-block clearfix text-left text-black wpb_content_element mgt-header-block-style-1 mgt-header-texttransform-header">
+						<h2 class="mgt-header-block-title">Наши объекты</h2>
+						<div class="mgt-header-line"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="mapdesc" style="height:auto;">
+		<div class="ll ind-prj">
+			<span class="ico"></span>Индивидуальные проекты</div>
+		<div class="ll skd-prj">
+			<span class="ico"></span>Проекты из каталога СКД</div>
+		<div class="status">На 11.04.2017 завершено
+			<span style="font-weight:bold;">241</span>, ведутся активные работы:
+			<span style="font-weight:bold;">6 объектов</span>
+		</div>
+	</div>
+	<div class="map-wrapper" style=" width:100%;">
+		<div class="map-container js-map-container" id="map" style="height:500px; width:100%;"></div>
+	</div>
+	<script>
+		var infowindow = false;
+		var image = {
+			url: '/images/rangerstation.png',
+			size: new google.maps.Size(32, 32),
+			origin: new google.maps.Point(0, 0),
+			anchor: new google.maps.Point(0, 32)
+		};
+		var image2 = {
+			url: '/images/blue-house.gif',
+			size: new google.maps.Size(24, 29),
+			origin: new google.maps.Point(0, 0),
+			anchor: new google.maps.Point(0, 29)
+		};
+		var map;
+		map = new GMaps(
+		{
+			div: '#map',
+			width: '100%',
+			height: '500px',
+			lat: 55.560838,
+			lng: 37.474244,
+			zoom: 7
+		});
+		map.addMarkers(
+			[
+			{
+				"lat": "55.496501",
+				"lng": "37.137315",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=164'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.894863",
+				"lng": "35.817564",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=163'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.16547",
+				"lng": "35.828583",
+				title: 'СКД 200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=162'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.803736",
+				"lng": "36.276382",
+				title: 'СКД 80',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=161'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.671603",
+				"lng": "37.341667",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=160'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.107985",
+				"lng": "37.278072",
+				title: 'Баня по инд. проекту',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=159'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.907723",
+				"lng": "36.941369",
+				title: 'СКД 80',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=158'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "54.913375",
+				"lng": "36.932059",
+				title: 'СКД 233',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=157'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.604544",
+				"lng": "35.920881",
+				title: 'СКД 215',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=156'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.057675",
+				"lng": "37.359164",
+				title: 'СКД 390',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=155'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "44.946021",
+				"lng": "34.133841",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=154'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.563132",
+				"lng": "37.556018",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=153'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.963686",
+				"lng": "35.429565",
+				title: 'СКД 80',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=152'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.396561",
+				"lng": "37.706959",
+				title: 'CRL 263',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=151'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.075054",
+				"lng": "36.80731",
+				title: 'СКД-415',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-415</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=9999'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.050556",
+				"lng": "37.664044",
+				title: 'СКД-263',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=150'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.96371",
+				"lng": "35.429962",
+				title: 'СКД-390',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=149'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.046393",
+				"lng": "36.734161",
+				title: 'СКД-390',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=148'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.281469",
+				"lng": "37.557275",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=147'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.954581",
+				"lng": "36.380565",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div></div>"
+				}
+			},
+			{
+				"lat": "55.708602",
+				"lng": "36.28061",
+				title: 'СКД-280',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=145'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.631691",
+				"lng": "37.028646",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=144'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.954581",
+				"lng": "36.380565",
+				title: 'СКД-280',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=143'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.07474",
+				"lng": "37.550154",
+				title: 'СКД-215',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=142'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.07474",
+				"lng": "37.550154",
+				title: 'СКД-280',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=141'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.772786",
+				"lng": "36.269516",
+				title: 'СКД-80',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=140'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.723866",
+				"lng": "36.728177",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=139'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.429629",
+				"lng": "37.113303",
+				title: 'СКД-280',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=138'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.107985",
+				"lng": "37.278072",
+				title: 'СКД-390',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=137'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.07474",
+				"lng": "37.550154",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=136'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.746578",
+				"lng": "36.279235",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=135'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.056272",
+				"lng": "35.982719",
+				title: 'СКД-80',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=134'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.056272",
+				"lng": "35.982719",
+				title: 'СКД-280',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=133'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.028535",
+				"lng": "37.632952",
+				title: 'СКД-415',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=132'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.113953",
+				"lng": "36.624449",
+				title: 'СКД-263',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=131'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.537428",
+				"lng": "37.682134",
+				title: 'СКД-200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=130'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.955196",
+				"lng": "36.380673",
+				title: 'СКД 215',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=129'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.530556",
+				"lng": "37.155991",
+				title: 'СКД 280',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=128'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.949677",
+				"lng": "37.858545",
+				title: 'СКД 200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=127'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.892158",
+				"lng": "37.17923",
+				title: 'СКД 233 изм',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=126'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.080452",
+				"lng": "37.647747",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=124'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.281713",
+				"lng": "37.953911",
+				title: 'СКД 80',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=123'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.117803",
+				"lng": "36.659232",
+				title: 'СКД 200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=122'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.947711",
+				"lng": "36.739775",
+				title: 'Баня',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=121'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.724124",
+				"lng": "36.728267",
+				title: 'СКД 200 + баня',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=120'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.064354",
+				"lng": "36.85687",
+				title: 'СКД 263',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=119'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.037477",
+				"lng": "37.670342",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=118'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.961012",
+				"lng": "36.370392",
+				title: 'СКД 215',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div></div>"
+				}
+			},
+			{
+				"lat": "55.650587",
+				"lng": "36.909038",
+				title: 'СКД 175',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=116'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.125635",
+				"lng": "37.055211",
+				title: 'СКД 200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=115'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.125635",
+				"lng": "37.055211",
+				title: 'СКД 200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=114'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.125635",
+				"lng": "37.055211",
+				title: 'СКД 200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=113'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.896948",
+				"lng": "36.729948",
+				title: 'СКД 80',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=112'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.896948",
+				"lng": "36.729948",
+				title: 'СКД 280',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=111'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "54.836032",
+				"lng": "37.934836",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Хозблок</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=110'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.181156",
+				"lng": "37.640856",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Гостевой Дом</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=109'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.85164",
+				"lng": "38.735351",
+				title: 'СКД 200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div></div>"
+				}
+			},
+			{
+				"lat": "55.960354",
+				"lng": "36.371038",
+				title: 'СКД 175',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=107'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.897087",
+				"lng": "36.730023",
+				title: 'СКД 360',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=106'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.738687",
+				"lng": "37.253309",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=105'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.384655",
+				"lng": "34.194531",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=103'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.594965",
+				"lng": "38.189232",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=101'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.360579",
+				"lng": "37.194073",
+				title: 'СКД 200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div></div>"
+				}
+			},
+			{
+				"lat": "56.344662",
+				"lng": "36.596762",
+				title: 'СКД 280',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 280</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=100'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.955687",
+				"lng": "36.383751",
+				title: 'СКД 215',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 215</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=98'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.205587",
+				"lng": "37.667653",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'></div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=97'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.348635",
+				"lng": "37.639145",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Индивидуальный проект</div></div>"
+				}
+			},
+			{
+				"lat": "56.474209",
+				"lng": "38.091714",
+				title: 'СКД-175',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-175</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=89'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.430195",
+				"lng": "37.212345",
+				title: 'СКД-280',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-280</div></div>"
+				}
+			},
+			{
+				"lat": "55.470214",
+				"lng": "37.070244",
+				title: 'СКД 215',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 215</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=87'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.475105",
+				"lng": "37.013438",
+				title: 'СКД 200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 200</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=86'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "57.382190",
+				"lng": "38.162911",
+				title: 'СКД 390',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 390 + Баня</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=85'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.665493",
+				"lng": "38.139681",
+				title: 'СКД-280',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-280</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=84'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.170204",
+				"lng": "37.427177",
+				title: 'СКД-390',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-390</div></div>"
+				}
+			},
+			{
+				"lat": "55.658884",
+				"lng": "36.907659",
+				title: 'СКД-360',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-360</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=81'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.348027",
+				"lng": "37.643429",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Индивидуальный проект</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=80'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.423572",
+				"lng": "37.117439",
+				title: 'СКД -390',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД -390</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=79'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.150145",
+				"lng": "37.425231",
+				title: 'СКД-280',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-280</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=78'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.948010",
+				"lng": "36.748015",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Индивидуальный проект</div></div>"
+				}
+			},
+			{
+				"lat": "55.880354",
+				"lng": "36.572251",
+				title: 'CКД-200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>CКД-200</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=75'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.092849",
+				"lng": "36.729560",
+				title: 'CКД-215',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>CКД-215</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=74'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.250079",
+				"lng": "37.630348",
+				title: 'СКД 280',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 280</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=73'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.669063",
+				"lng": "38.138544",
+				title: 'СКД 280',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 280</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=72'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.313990",
+				"lng": "36.194196",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Индивидуальный проект. Баня</div></div>"
+				}
+			},
+			{
+				"lat": "55.927457",
+				"lng": "37.004649",
+				title: 'СКД-360',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-360</div></div>"
+				}
+			},
+			{
+				"lat": "56.092137",
+				"lng": "36.555959",
+				title: 'СКД-280',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-280</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=69'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.723553",
+				"lng": "36.806905",
+				title: 'СКД-200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-200</div></div>"
+				}
+			},
+			{
+				"lat": "55.358523",
+				"lng": "38.281342",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Индивидуальный проект</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=65'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.880041",
+				"lng": "36.572251",
+				title: 'скд 200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 200</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=64'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.181156",
+				"lng": "37.640856",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Гостевой дом и баня</div></div>"
+				}
+			},
+			{
+				"lat": "56.776861",
+				"lng": "38.262454",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Индивидуальный проект</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=62'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.358624",
+				"lng": "37.23418",
+				title: 'СКД-360',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-360</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=61'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.207152",
+				"lng": "38.526555",
+				title: 'СКД 390',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 390</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=60'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.018544",
+				"lng": "37.016582",
+				title: 'СКД- 263',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД- 263</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=59'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.091534",
+				"lng": "37.737198",
+				title: 'СКД 175',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 175</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=56'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.428989",
+				"lng": "37.215393",
+				title: 'СКД 263',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 263</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=52'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.562379",
+				"lng": "37.472068",
+				title: 'СКД 200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 200</div></div>"
+				}
+			},
+			{
+				"lat": "55.814688",
+				"lng": "37.014151",
+				title: 'СКД 263',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 263</div></div>"
+				}
+			},
+			{
+				"lat": "56.051971",
+				"lng": "36.818884",
+				title: 'СКД 280',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 280</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=46'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.181721",
+				"lng": "37.646555",
+				title: 'СКД-390',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-390</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=44'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.149921",
+				"lng": "37.528917",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Индивидуальный проект + баня</div></div>"
+				}
+			},
+			{
+				"lat": "54.875316",
+				"lng": "37.425072",
+				title: 'СКД-215',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-215</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=42'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "54.919145",
+				"lng": "36.911707",
+				title: 'СКД-215',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-215</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=41'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.140533",
+				"lng": "36.105161",
+				title: 'СКД-200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-200</div></div>"
+				}
+			},
+			{
+				"lat": "56.077219",
+				"lng": "37.590102",
+				title: 'СКД-200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-200</div></div>"
+				}
+			},
+			{
+				"lat": "56.149675",
+				"lng": "37.750908",
+				title: 'СКД-280',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-280</div></div>"
+				}
+			},
+			{
+				"lat": "55.966700",
+				"lng": "36.821047",
+				title: 'СКД-280',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-280</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=36'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.352915",
+				"lng": "37.238043",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Индивидуальный проект</div></div>"
+				}
+			},
+			{
+				"lat": "56.238580",
+				"lng": "37.752053",
+				title: 'СКД-235',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-235</div></div>"
+				}
+			},
+			{
+				"lat": "55.919720",
+				"lng": "37.118535",
+				title: 'СКД-263',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-263 + бассейн</div></div>"
+				}
+			},
+			{
+				"lat": "56.117718",
+				"lng": "38.85416",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Индивидуальный проект</div></div>"
+				}
+			},
+			{
+				"lat": "55.87869",
+				"lng": "37.13781",
+				title: 'СКД-215',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-215</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=24'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.98587",
+				"lng": "36.79883",
+				title: 'СКД-263',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-263</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=21'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.548219",
+				"lng": "37.326586",
+				title: 'СКД-235',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-235</div></div>"
+				}
+			},
+			{
+				"lat": "55.981417",
+				"lng": "36.952017",
+				title: 'СКД-360',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-360</div></div>"
+				}
+			},
+			{
+				"lat": "55.383868",
+				"lng": "37.998667",
+				title: 'СКД-235',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-235</div></div>"
+				}
+			},
+			{
+				"lat": "55.357032",
+				"lng": "38.117947",
+				title: 'СКД-360',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-360</div></div>"
+				}
+			},
+			{
+				"lat": "55.52548",
+				"lng": "37.320607",
+				title: 'СКД-200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-200</div></div>"
+				}
+			},
+			{
+				"lat": "56.209359",
+				"lng": "37.667089",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Баня</div></div>"
+				}
+			},
+			{
+				"lat": "55.532209",
+				"lng": "37.107166",
+				title: 'СКД-360',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-360</div></div>"
+				}
+			},
+			{
+				"lat": "55.359582",
+				"lng": "37.234513",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Индивидуальный проект Дом + баня</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=11'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.181816",
+				"lng": "37.64501",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Индивидуальный проект</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=10'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.063366",
+				"lng": "36.926897",
+				title: 'СКД-200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-200</div></div>"
+				}
+			},
+			{
+				"lat": "55.967612",
+				"lng": "36.8183",
+				title: 'СКД-263',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-263</div></div>"
+				}
+			},
+			{
+				"lat": "55.360579",
+				"lng": "37.194073",
+				title: 'СКД-263',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-263</div></div>"
+				}
+			},
+			{
+				"lat": "56.040127",
+				"lng": "37.824793",
+				title: 'СКД-263',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-263</div></div>"
+				}
+			},
+			{
+				"lat": "55.686137",
+				"lng": "37.248542",
+				title: 'СКД-263',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-263</div></div>"
+				}
+			},
+			{
+				"lat": "56.090202",
+				"lng": "36.738235",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Индивидуальная баня</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=99'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.010444",
+				"lng": "35.974479",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Индивидуальный дом с цокольным этажом</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=96'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.068438",
+				"lng": "36.832516",
+				title: 'СКД 415',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 415</div></div>"
+				}
+			},
+			{
+				"lat": "56.026071",
+				"lng": "37.658827",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Индивидуальный проект</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=66'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.919670",
+				"lng": "37.910472",
+				title: 'СКД-280',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-280</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=53'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.924693",
+				"lng": "37.231747",
+				title: 'СКД-200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-200</div></div>"
+				}
+			},
+			{
+				"lat": "55.722827",
+				"lng": "37.002575",
+				title: 'СКД-215',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-215</div></div>"
+				}
+			},
+			{
+				"lat": "55.506379",
+				"lng": "38.341043",
+				title: 'СКД-175',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-175</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=28'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.679762",
+				"lng": "37.148589",
+				title: 'СКД-263',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-263</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=1'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.955687",
+				"lng": "36.383751",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Индивидуальный проект</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=92'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.950241",
+				"lng": "35.911937",
+				title: 'СКД 280',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 280 + Баня</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=94'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.496441",
+				"lng": "37.623717",
+				title: 'СКД 200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 200</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=95'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.923227",
+				"lng": "36.611678",
+				title: 'СКД-200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-200</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=91'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.943906",
+				"lng": "36.743617",
+				title: 'СКД 263',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 263</div></div>"
+				}
+			},
+			{
+				"lat": "56.068438",
+				"lng": "36.832516",
+				title: 'СКД 80',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Баня СКД 80</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=1000'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.921829",
+				"lng": "36.609089",
+				title: 'СКД-215',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-215</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=90'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.371470",
+				"lng": "37.222872",
+				title: 'СКД 200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 200</div></div>"
+				}
+			},
+			{
+				"lat": "55.959567",
+				"lng": "36.757628",
+				title: 'СКД 215',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 215</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=58'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.881163",
+				"lng": "36.573588",
+				title: 'СКД 215',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 215</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=57'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.436437",
+				"lng": "38.528734",
+				title: 'СКД 360',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 360</div></div>"
+				}
+			},
+			{
+				"lat": "55.982389",
+				"lng": "36.802435",
+				title: 'СКД 200',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 200</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=54'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "54.925755",
+				"lng": "36.913424",
+				title: 'СКД 280',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 290</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=45'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.181721",
+				"lng": "37.646555",
+				title: 'СКД 390',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД 390</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=44'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.59985",
+				"lng": "37.11218",
+				title: 'СКД-360',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-360</div></div>"
+				}
+			},
+			{
+				"lat": "55.668255",
+				"lng": "37.422354",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Индивидуальный проект</div></div>"
+				}
+			},
+			{
+				"lat": "55.595307",
+				"lng": "36.9073",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Индивидуальный проект</div></div>"
+				}
+			},
+			{
+				"lat": "55.358624",
+				"lng": "37.23418",
+				title: 'СКД-390',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-390</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=26'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.359582",
+				"lng": "37.234513",
+				title: 'СКД-360',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-360</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=29'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.019942",
+				"lng": "36.916812",
+				title: 'СКД-215',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-215 + баня</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=32'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "56.253599",
+				"lng": "37.475155",
+				title: 'СКД-215',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-215</div></div>"
+				}
+			},
+			{
+				"lat": "55.400823",
+				"lng": "37.63016",
+				title: 'СКД-235',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-235</div></div>"
+				}
+			},
+			{
+				"lat": "55.928823",
+				"lng": "37.780224",
+				title: 'СКД-360',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-360</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=6'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.516719",
+				"lng": "36.984517",
+				title: 'СКД-263',
+				icon: image,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>СКД-263</div><div class='more-photo'><a data-type='link' data-ajax='false' href='/galereya/stroitelstvo/?object=5'>Фото</a></div></div>"
+				}
+			},
+			{
+				"lat": "55.649698",
+				"lng": "37.210712",
+				title: '',
+				icon: image2,
+				infoWindow:
+				{
+					content: "<div  style='width:260px; min-height:50px;'><div class='robototitle'>Индивидуальный проект</div></div>"
+				}
+			}]
+		);
+	</script>
+	<div class="container vc_custom_1464179469571">
+		<div class="wpb_column vc_column_container vc_col-sm-12">
+			<div class="vc_column-inner">
+				<div class="wpb_wrapper">
+					<div class="mgt-post-list-wrapper">
+						<div class="mgt-post-list wpb_content_element animated">
+							<div class="mgt-post normal-blocks">
+								<a href="#">
+									<div class="mgt-post-image" data-style="background-image: url(images/example/object_1.jpg);">
+										<div class="mgt-post-image-wrapper">
+											<div class="mgt-post-wrapper-icon"><i class="fa fa-plus"></i></div>
+										</div>
+									</div>
+								</a>
+								<div class="mgt-post-details">
+									<div class="mgt-post-icon format-standard"></div>
+									<div class="mgt-post-title">
+										<a href="#">
+											<h5 class="upper">готовыЕ объектЫ</h5>
+										</a>
+									</div>
+									<div class="mgt-post-text">Лучше один раз увидеть, чем сто раз услышать. Приглашаем на нашу демонстрационную
+										площадку, где вы сможете увидеть готовые дома, узнать больше о материалах,
+										которые мы используем в строительстве, и задать вопросы нашим экспертам.</div>
+									<a
+									 class="btn mgt-button hvr-default mgt mgt-align-left mgt-display-inline mgt-text-size-normal mgt-text-transform-uppercase"
+									 href="#">Посмотреть<i class="fa fa-long-arrow-right"></i></a>
+								</div>
+							</div>
+							<div class="mgt-post normal-blocks">
+								<a href="#">
+									<div class="mgt-post-image" data-style="background-image: url(images/example/object_2.jpg">
+										<div class="mgt-post-image-wrapper">
+											<div class="mgt-post-wrapper-icon"><i class="fa fa-plus"></i></div>
+										</div>
+									</div>
+								</a>
+								<div class="mgt-post-details">
+									<div class="mgt-post-icon format-standard"></div>
+									<div class="mgt-post-title">
+										<a href="#">
+											<h5 class="upper">строительные площадоки</h5>
+										</a>
+									</div>
+									<div class="mgt-post-text">Здесь мы регулярно выкладываем фотоотчёт с наших строительных объектов.
+										Вы можете посмотреть весь процесс возведения дома, каким видят его наши
+										заказчики.
+									</div>
+									<a class="btn mgt-button hvr-default mgt mgt-align-left mgt-display-inline mgt-text-size-normal mgt-text-transform-uppercase"
+									 href="#">Посмотреть<i class="fa fa-long-arrow-right"></i></a>
+								</div>
+							</div>
+							<div class="mgt-post normal-blocks">
+								<a href="#">
+									<div class="mgt-post-image" data-style="background-image: url(images/example/object_3.jpg">
+										<div class="mgt-post-image-wrapper">
+											<div class="mgt-post-wrapper-icon"><i class="fa fa-plus"></i></div>
+										</div>
+									</div>
+								</a>
+								<div class="mgt-post-details">
+									<div class="mgt-post-icon format-standard"></div>
+									<div class="mgt-post-title">
+										<a href="#">
+											<h5 class="upper">Контроль качества CKD</h5>
+										</a>
+									</div>
+									<div class="mgt-post-text">Весь процесс контроля качества подогнан под невозможность совершения ошибки.
+										Процесс выверен до мелочей и представляет из себя удобный и быстрый контроль
+										на всех этапах возведения дома, который не повлияет на сроки строительства.</div>
+									<a
+									 class="btn mgt-button hvr-default mgt mgt-align-left mgt-display-inline mgt-text-size-normal mgt-text-transform-uppercase"
+									 href="#">Узнать больше<i class="fa fa-long-arrow-right"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="vc_row wpb_row vc_row-fluid vc_custom_1464684611093 vc_general vc_parallax vc_parallax-content-moving"
+	 data-vc-full-width="true" data-vc-full-width-init="false" data-vc-parallax="1.5">
+		<div class="container">
+			<div class="wpb_column vc_column_container vc_col-sm-12">
+				<div class="vc_column-inner">
+					<div class="wpb_wrapper">
+						<div class="mgt-header-block clearfix text-left text-white wpb_content_element mgt-header-block-style-1 mgt-header-texttransform-header">
+							<h2 class="mgt-header-block-title">Отзывы клиентов</h2>
+							<div class="mgt-header-line"></div>
+						</div>
+						<div class="mgt-client-reviews-wrapper">
+							<div class="mgt-client-reviews wpb_content_element owl-normal-nav" id="mgt-client-reviews-81353"
+							 style="display: none;">
+								<div class="mgt-client-review text-dark reviews-style-box">
+									<div class="mgt-client-review-details">
+										<div class="mgt-client-review-content">Спасибо большое компании СКД, и лично менеджеру Евгению за профессиональную
+											работу. Построили дом и развели все коммуникации по дому (ОВиК, электрика)
+											- качественно, в срок и без каких-либо трудностей и разногласий. Все
+											вопросы решались оперативно.</div>
+										<div class="mgt-client-review-title">
+											<div class="mgt-client-review-image">
+												<img src="images/example/review_author_1.jpg">
+											</div>
+											<h5>Станислав
+												<span>/
+													<span>Основатель КПК</span>
+												</span>
+											</h5>
+										</div>
+									</div>
+									<div class="clear"></div>
+								</div>
+								<div class="mgt-client-review text-dark reviews-style-box">
+									<div class="mgt-client-review-details">
+										<div class="mgt-client-review-content">Very nice and clean, it gives your site a professional impression. The
+											customer support is extremely fast and helpful. Thanks for an awesome
+											theme! Easy to configure, easy to use, fast....perfect! Exceptional
+											theme, possibly the best I've seen. Thanks!</div>
+										<div class="mgt-client-review-title">
+											<div class="mgt-client-review-image">
+												<img src="images/example/review_author_2.jpg">
+											</div>
+											<h5>Adriana Svendsen
+												<span>/
+													<span>Creative Manager</span>
+												</span>
+											</h5>
+										</div>
+									</div>
+									<div class="clear"></div>
+								</div>
+								<div class="mgt-client-review text-dark reviews-style-box">
+									<div class="mgt-client-review-details">
+										<div class="mgt-client-review-content">Every aspect of this theme is incredible. It's easy to use, extremely
+											customizable, and looks amazing. Has to be my favorite theme ever used.
+											So happy with the purchase. Nice, quick and great! and the theme is
+											perfect.</div>
+										<div class="mgt-client-review-title">
+											<div class="mgt-client-review-image">
+												<img src="images/example/review_author_3.jpg">
+											</div>
+											<h5>Amalia Edinson
+												<span>/
+													<span>Founder of CCP</span>
+												</span>
+											</h5>
+										</div>
+									</div>
+									<div class="clear"></div>
+								</div>
+							</div>
+						</div>
+						<script>
+							(function($)
+							{
+								$(document).ready(function()
+								{
+									$("#mgt-client-reviews-81353").owlCarousel(
+									{
+										items: 1,
+										itemsDesktop: [1024, 1],
+										itemsTablet: [770, 1],
+										itemsMobile: [480, 1],
+										autoPlay: true,
+										navigation: false,
+										navigationText: false,
+										pagination: true,
+										afterInit: function(elem)
+										{
+											$(this).css("display", "block");
+										}
+									});
+								});
+							})(jQuery);
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="vc_row-full-width"></div>
+	<!--INTERIERS START-->
+	<div class="related-works">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="mgt-header-block clearfix text-left text-black wpb_content_element mgt-header-block-style-1 mgt-header-texttransform-header">
+						<h2 class="mgt-header-block-title">Интерьеры</h2>
+						<div class="mgt-header-line"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="portfolio-list portfolio-list-related clearfix portfolio-columns-4"
+		 id="portfolio-list3">
+			<div class="portfolio-item-block mix building portfolio-item-animation-2" data-item="1"
+			 data-name="Modern House">
+				<a href="#">
+					<div class="portfolio-item-image" data-style="background-image: url('images/example/big_project_1.jpg')"></div>
+					<div class="portfolio-item-bg"></div>
+					<div class="info">
+						<span class="sub-title">Building</span>
+						<h4 class="title">Modern House</h4>
+					</div>
+				</a>
+			</div>
+			<div class="portfolio-item-block mix building portfolio-item-animation-2" data-item="2"
+			 data-name="House in Florida">
+				<a href="#">
+					<div class="portfolio-item-image" data-style="background-image: url('images/example/big_project_2.jpg')"></div>
+					<div class="portfolio-item-bg"></div>
+					<div class="info">
+						<span class="sub-title">Building</span>
+						<h4 class="title">House in Florida</h4>
+					</div>
+				</a>
+			</div>
+			<div class="portfolio-item-block mix building portfolio-item-animation-2" data-item="3"
+			 data-name="Architecture and Design">
+				<a href="#">
+					<div class="portfolio-item-image" data-style="background-image: url('images/example/big_project_3.jpg')"></div>
+					<div class="portfolio-item-bg"></div>
+					<div class="info">
+						<span class="sub-title">Building</span>
+						<h4 class="title">Architecture and Design</h4>
+					</div>
+				</a>
+			</div>
+			<div class="portfolio-item-block mix consulting portfolio-item-animation-2"
+			 data-item="1" data-name="Construction consulting">
+				<a href="#">
+					<div class="portfolio-item-image" data-style="background-image: url('images/example/big_project_4.jpg')"></div>
+					<div class="portfolio-item-bg"></div>
+					<div class="info">
+						<span class="sub-title">Consulting</span>
+						<h4 class="title">Construction consulting</h4>
+					</div>
+				</a>
+			</div>
+		</div>
+		<script>
+			(function($)
+			{
+				$(document).ready(function()
+				{
+					$("#portfolio-list3").mixItUp(
+					{
+						effects: ["fade", "scale"],
+						easing: "snap"
+					});
+				});
+			})(jQuery);
+		</script>
+	</div>
+	<!--INTERIERS END-->
+	<!--NEWS START-->
+	<div class="container">
+		<div class="wpb_column vc_column_container vc_col-sm-12">
+			<div class="vc_column-inner">
+				<div class="wpb_wrapper">
+					<div class="mgt-header-block clearfix text-left text-black wpb_content_element mgt-header-block-style-1 mgt-header-texttransform-header">
+						<h2 class="mgt-header-block-title">Последние новости</h2>
+						<div class="mgt-header-line"></div>
+					</div>
+					<div class="mgt-post-list-wrapper">
+						<div class="mgt-post-list wpb_content_element animated" id="mgt-post-list-74235"
+						 style="display: none;">
+							<div class="mgt-post normal-blocks">
+								<a href="#">
+									<div class="mgt-post-image" data-style="background-image: url(images/example/news_1.jpg);">
+										<div class="mgt-post-image-wrapper">
+											<div class="mgt-post-wrapper-icon"><i class="fa fa-plus"></i></div>
+										</div>
+									</div>
+								</a>
+								<div class="mgt-post-details">
+									<div class="mgt-post-icon format-standard"></div>
+									<div class="mgt-post-title">
+										<a href="#">
+											<h5>Открытие нашего представительства в г. Тверь. Идём навстречу решениям
+												Минстроя.</h5>
+										</a>
+									</div>
+									<div class="mgt-post-text">15 февраля 2017 года состоялось открытие официального представительства
+										компании «СКД-дом» в г. Тверь! «Вариантов со вторым представительством
+										было мало – конечно же, Тверь! - раскрывает детали коммерческий директор
+										компании Юрий Прудников.</div>
+									<a class="btn mgt-button hvr-default mgt mgt-align-left mgt-display-inline mgt-text-size-normal mgt-text-transform-uppercase"
+									 href="#">Подробнее<i class="fa fa-long-arrow-right"></i></a>
+								</div>
+							</div>
+							<div class="mgt-post normal-blocks">
+								<a href="#">
+									<div class="mgt-post-image" data-style="background-image: url(images/example/news_2.jpg);">
+										<div class="mgt-post-image-wrapper">
+											<div class="mgt-post-wrapper-icon"><i class="fa fa-plus"></i></div>
+										</div>
+									</div>
+								</a>
+								<div class="mgt-post-details">
+									<div class="mgt-post-icon format-standard"></div>
+									<div class="mgt-post-title">
+										<a href="#">
+											<h5>Открытие филиала «СКД дом» в г. Екатеринбурге — наш шаг на восток России!</h5>
+										</a>
+									</div>
+									<div class="mgt-post-text">1 декабря 2016 года свершилось одно из самых значимых событий года, к
+										которому мы так готовились. В первый день декабря компания «СКД-дом»
+										открыла филиал в г. Екатеринбурге! Открытие представительства связано
+										с расширением поля деятельности компании.</div>
+									<a class="btn mgt-button hvr-default mgt mgt-align-left mgt-display-inline mgt-text-size-normal mgt-text-transform-uppercase"
+									 href="#">Подробнее<i class="fa fa-long-arrow-right"></i></a>
+								</div>
+							</div>
+							<div class="mgt-post normal-blocks">
+								<a href="#">
+									<div class="mgt-post-image" data-style="background-image: url(images/example/news_3.jpg);">
+										<div class="mgt-post-image-wrapper">
+											<div class="mgt-post-wrapper-icon"><i class="fa fa-plus"></i></div>
+										</div>
+									</div>
+								</a>
+								<div class="mgt-post-details">
+									<div class="mgt-post-icon format-standard"></div>
+									<div class="mgt-post-title">
+										<a href="#">
+											<h5>Правдой дорожим, лжи не потакаем!</h5>
+										</a>
+									</div>
+									<div class="mgt-post-text">Уважаемые клиенты! Сообщаем вам о том, что компания «СКД-дом» столкнулась
+										с недобросовестной конкуренцией.</div>
+									<a class="btn mgt-button hvr-default mgt mgt-align-left mgt-display-inline mgt-text-size-normal mgt-text-transform-uppercase"
+									 href="#">Подробнее<i class="fa fa-long-arrow-right"></i></a>
+								</div>
+							</div>
+							<div class="mgt-post normal-blocks">
+								<a href="#">
+									<div class="mgt-post-image" data-style="background-image: url(images/example/news_1.jpg);">
+										<div class="mgt-post-image-wrapper">
+											<div class="mgt-post-wrapper-icon"><i class="fa fa-plus"></i></div>
+										</div>
+									</div>
+								</a>
+								<div class="mgt-post-details">
+									<div class="mgt-post-icon format-standard"></div>
+									<div class="mgt-post-title">
+										<a href="#">
+											<h5>Открытие нашего представительства в г. Тверь. Идём навстречу решениям
+												Минстроя.</h5>
+										</a>
+									</div>
+									<div class="mgt-post-text">15 февраля 2017 года состоялось открытие официального представительства
+										компании «СКД-дом» в г. Тверь! «Вариантов со вторым представительством
+										было мало – конечно же, Тверь! - раскрывает детали коммерческий директор
+										компании Юрий Прудников.</div>
+									<a class="btn mgt-button hvr-default mgt mgt-align-left mgt-display-inline mgt-text-size-normal mgt-text-transform-uppercase"
+									 href="#">Подробнее<i class="fa fa-long-arrow-right"></i></a>
+								</div>
+							</div>
+							<div class="mgt-post normal-blocks">
+								<a href="#">
+									<div class="mgt-post-image" data-style="background-image: url(images/example/news_2.jpg);">
+										<div class="mgt-post-image-wrapper">
+											<div class="mgt-post-wrapper-icon"><i class="fa fa-plus"></i></div>
+										</div>
+									</div>
+								</a>
+								<div class="mgt-post-details">
+									<div class="mgt-post-icon format-standard"></div>
+									<div class="mgt-post-title">
+										<a href="#">
+											<h5>Открытие филиала «СКД дом» в г. Екатеринбурге — наш шаг на восток России!</h5>
+										</a>
+									</div>
+									<div class="mgt-post-text">1 декабря 2016 года свершилось одно из самых значимых событий года, к
+										которому мы так готовились. В первый день декабря компания «СКД-дом»
+										открыла филиал в г. Екатеринбурге! Открытие представительства связано
+										с расширением поля деятельности компании.</div>
+									<a class="btn mgt-button hvr-default mgt mgt-align-left mgt-display-inline mgt-text-size-normal mgt-text-transform-uppercase"
+									 href="#">Подробнее<i class="fa fa-long-arrow-right"></i></a>
+								</div>
+							</div>
+							<div class="mgt-post normal-blocks">
+								<a href="#">
+									<div class="mgt-post-image" data-style="background-image: url(images/example/news_3.jpg);">
+										<div class="mgt-post-image-wrapper">
+											<div class="mgt-post-wrapper-icon"><i class="fa fa-plus"></i></div>
+										</div>
+									</div>
+								</a>
+								<div class="mgt-post-details">
+									<div class="mgt-post-icon format-standard"></div>
+									<div class="mgt-post-title">
+										<a href="#">
+											<h5>Правдой дорожим, лжи не потакаем!</h5>
+										</a>
+									</div>
+									<div class="mgt-post-text">Уважаемые клиенты! Сообщаем вам о том, что компания «СКД-дом» столкнулась
+										с недобросовестной конкуренцией.</div>
+									<a class="btn mgt-button hvr-default mgt mgt-align-left mgt-display-inline mgt-text-size-normal mgt-text-transform-uppercase"
+									 href="#">Подробнее<i class="fa fa-long-arrow-right"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<script>
+						(function($)
+						{
+							$(document).ready(function()
+							{
+								$("#mgt-post-list-74235").owlCarousel(
+								{
+									items: 3,
+									itemsDesktop: [1024, 3],
+									itemsTablet: [770, 2],
+									itemsMobile: [480, 1],
+									autoPlay: false,
+									navigation: true,
+									navigationText: false,
+									pagination: false,
+									afterInit: function(elem)
+									{
+										$(this).css("display", "block");
+									}
+								});
+							});
+						})(jQuery);
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--NEWS END-->
+	<!--TEXT START-->
+	<div class="container">
+		<div class="wpb_column vc_column_container vc_col-sm-12">
+			<div class="wpb_wrapper">
+				<div class="mgt-header-block clearfix text-left text-black wpb_animate_when_almost_visible wpb_top-to-bottom wpb_content_element mgt-header-texttransform-header">
+					<h2 class="mgt-header-block-title">преимуществ домов из клееного профилированного бруса от производителя</h2>
+					<div
+					 class="mgt-header-line"></div>
+			</div>
+			<div class="wpb_text_column wpb_content_element" style="color:#909090;">
+				<div class="wpb_wrapper">
+					<p>Большие элементы. Клееный брус позволяет выпускать деревянные конструкции
+						больших размеров. Для дачных домиков это несущественно, но имеет большое
+						значение для тех, кто хочет построить под ключ большой деревянный дом из
+						клееного бруса.
+						<br>Стабильность формы. Брус не подвержен деформациям, свойственным изделиям
+						из массива дерева, он держит стабильную форму (геометрию) в процессе строительства
+						и эксплуатации.
+						<br>Прочность. Клееный брус отличается повышенными прочностными показателями.
+						Предварительное распиливание снимает внутреннее напряжение древесины, склеиваемые
+						ламели располагаются в противоположном направлении относительно распила,
+						а клеевые соединения добавляют прочности и жёсткости.
+						<br>Низкая влажность. Брус отличается низким и равномерным процентом влажности
+						древесины (12-13%) за счёт предварительной сушки каждой ламели до склеивания.
+						За счёт этого дома из профилированного клееного бруса устойчивы к деформации
+						и появлению зазоров.
+						<br>Защита древесины. Специальные современные защитные средства предотвращают
+						проблемы, присущие древесине (гниение, грибок, воздействие ультрафиолета,
+						растрескивание торцов и т.д.), и повышают огнестойкость клееного бруса, не
+						ухудшая его экологичности.
+						<br>Минимальная усадка. Брус даёт минимальную усадку деревянных конструкций (в
+						отличие от домов из обычного профилированного бруса или бревна) — не больше
+						1-2%, что позволяет сразу после сборки стен приступить к отделке. Благодаря
+						этому строительство деревянного дома из клееного бруса под ключ можно закончить
+						в 8-12 месяцев (в зависимости от проекта).</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<!--TEXT END-->
+	<!--SUBSCRIBE START-->
+	<div class="wpb_wrapper">
+		<div class="mgt-signup-block clearfix white-text wpb_content_element" data-style="background-color: #1a1f23;">
+			<div class="mgt-signup-block-header">
+				<h5>Подписаться на новости</h5>
+			</div>
+			<div class="mgt-signup-block-form">
+				<form target="_blank" method="post" action="">
+					<input class="required email" id="mce-EMAIL" type="email" value="" name="EMAIL"
+					 placeholder="Ваш e-mail">
+					<input class="button mgt-button" id="mc-embedded-subscribe" type="submit"
+					 value="Оптравить" name="subscribe">
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--SUBSCRIBE END-->
+	</div>
+	<div class="container-fluid container-fluid-footer">
+		<div class="row">
+			<div class="footer-sidebar-2-wrapper">
+				<div class="footer-sidebar-2 sidebar container footer-container">
+					<ul class="clearfix" id="footer-sidebar-2">
+						<li class="widget widget_text" id="text-2">
+							<div class="textwidget">
+								<img src="images/logo.png">
+								<br>
+								<br>
+								<p>Copyright CKD © 2017
+									<br>Все права защищены
+									<br>
+									<br>Предлагаем готовые и индивидуальные проекты домов из клееного бруса. Все
+									проекты домов разработаны опытными архитекторами и проектировщиками и
+									отражают философию нашей компании – абсолютную безопасность и рациональное
+									использование каждого квадратного метра.</p>
+							</div>
+						</li>
+						<li class="widget widget_nav_menu" id="nav_menu-2">
+							<h2 class="widgettitle">Информация</h2>
+							<div class="menu-footer-sidebar-menu-container">
+								<ul class="menu" id="menu-footer-sidebar-menu">
+									<li class="menu-item menu-item-type-post_type menu-item-object-page">
+										<a href="#">Главная</a>
+									</li>
+									<li class="menu-item menu-item-type-post_type menu-item-object-page">
+										<a href="#">Услуги</a>
+									</li>
+									<li class="menu-item menu-item-type-post_type menu-item-object-page">
+										<a href="#">Проекты</a>
+									</li>
+									<li class="menu-item menu-item-type-post_type menu-item-object-page">
+										<a href="#">Цены</a>
+									</li>
+									<li class="menu-item menu-item-type-post_type menu-item-object-page">
+										<a href="#">Портфолио</a>
+									</li>
+									<li class="menu-item menu-item-type-post_type menu-item-object-page">
+										<a href="#">О компании</a>
+									</li>
+									<li class="menu-item menu-item-type-post_type menu-item-object-page">
+										<a href="#">Контакты</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="widget widget_text" id="text-3">
+							<h2 class="widgettitle">Контакты</h2>
+							<div class="textwidget">
+								<p class="contact_item"><i class="svg-icon svg-footer_earth"></i>Адрес компании<b>г. Москва, ул. любая, дом, номер</b></p>
+								<p
+								 class="contact_item"><i class="svg-icon svg-footer_phone"></i>Консультации и отдела продаж<b>+7 (495) 983-00-39</b></p>
+									<p
+									 class="contact_item"><i class="svg-icon svg-footer_clock"></i>Время работы<b>9:00 - 21:00</b></p>
+							</div>
+						</li>
+						<li class="widget widget_text" id="text-4">
+							<h2 class="widgettitle">Представителям в регионах</h2>
+							<div class="textwidget">
+								<img src="images/footer_map.png">
+								<br>
+								<br>
+								<p><i class="fa fa-map-marker text-color-theme"></i>г. Москва, ул. любая,
+									дом, номер</p>
+								<p><i class="fa fa-map-marker text-color-theme"></i>г. Москва, ул. любая,
+									дом, номер</p>
+								<p><i class="fa fa-map-marker text-color-theme"></i>г. Москва, ул. любая,
+									дом, номер</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<nav class="st-sidebar-menu st-sidebar-effect-2" id="offcanvas-sidebar-nav">
+		<div class="st-sidebar-menu-close-btn"><i class="fa fa-times"></i></div>
+		<div class="offcanvas-sidebar sidebar">
+			<ul class="clearfix" id="offcanvas-sidebar">
+				<li class="widget widget_nav_menu" id="nav_menu-6">
+					<h2 class="widgettitle">Navigation</h2>
+					<div class="menu-offcanvas-menu-container">
+						<ul class="menu" id="menu-offcanvas-menu">
+							<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-11 current_page_item menu-item-2447"
+							 id="menu-item-2447">
+								<a href="#">Homepage</a>
+							</li>
+							<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2438"
+							 id="menu-item-2438">
+								<a href="#">News</a>
+							</li>
+							<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2445"
+							 id="menu-item-2445">
+								<a href="#">Gallery</a>
+							</li>
+							<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2440"
+							 id="menu-item-2440">
+								<a href="#">Portfolio</a>
+							</li>
+							<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2439"
+							 id="menu-item-2439">
+								<a href="#">Our services
+								</a>
+							</li>
+							<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2441"
+							 id="menu-item-2441">
+								<a href="#">About us</a>
+							</li>
+							<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2442"
+							 id="menu-item-2442">
+								<a href="#">Career</a>
+							</li>
+							<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2443"
+							 id="menu-item-2443">
+								<a href="#">Certifications</a>
+							</li>
+							<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2444"
+							 id="menu-item-2444">
+								<a href="#">Contact us</a>
+							</li>
+							<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2446"
+							 id="menu-item-2446">
+								<a href="#">Get a quote</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="widget widget_text" id="text-17">
+					<h2 class="widgettitle">Our Brochures</h2>
+					<div class="textwidget">
+						<div class="widget-download-link-wrapper">
+							<div class="widget-download-icon"><i class="fa fa-file-pdf-o"></i></div>
+							<div class="widget-download-details">
+								<div class="widget-download-title">
+									<a href="#">Company Brochure</a>
+								</div>
+								<div class="widget-download-subtitle">2.3 mb, PDF</div>
+							</div>
+						</div>
+						<div class="widget-download-link-wrapper">
+							<div class="widget-download-icon"><i class="fa fa-file-pdf-o"></i></div>
+							<div class="widget-download-details">
+								<div class="widget-download-title">
+									<a href="#">Price List</a>
+								</div>
+								<div class="widget-download-subtitle">2.3 mb, PDF</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<div class="search-fullscreen-wrapper">
+		<div class="search-fullscreen-form">
+			<div class="search-close-btn"><i class="fa fa-times"></i></div>
+			<form class="searchform" id="searchform_p"
+			 method="get" action="">
+				<input class="field" id="s_p" type="search" name="s" value="" placeholder="Type keyword(s) here and hit Enter …">
+				<input class="submit btn" id="searchsubmit_p" type="submit" value="Search">
+			</form>
+		</div>
+	</div>
+</body>
+</html>

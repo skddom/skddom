@@ -1,0 +1,156 @@
+<!-- FormPrefix --><?
+function getExtension000($filename) {
+    $path_info = pathinfo($filename);
+    return $path_info['extension'];
+}
+function formatSize000($size) { 
+  $filesizename = array( " Bytes", " KB", " MB", " GB", " TB", " PB", " EB", " ZB", " YB" ); 
+  return $size ? 
+    round($size/pow(1024, ($i = floor(log($size, 1024)))), 2) . $filesizename[$i] :
+    '0 ' . $filesizename[0]; 
+}
+if ($cc_settings['PDF']) {
+    $file = $_SERVER['DOCUMENT_ROOT'].$cc_settings['PDF'];
+    $size = filesize($file);
+    $ext = strtoupper(getExtension000($cc_settings['PDF']));
+    $pdf = "<a class='pdf' href='".$cc_settings['PDF']."' target='_blank'>Каталог проектов CKD<span>".formatSize000($size).",".$ext."</span></a>";
+    $cc_settings['Text2'] = str_replace("<!-- pdf -->",$pdf,$cc_settings['Text2']);
+}
+?><div class="vc_row wpb_row vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner "><div class="wpb_wrapper">
+    <div class="wpb_text_column wpb_content_element ">
+        <div class="wpb_wrapper">
+<p>Мечтаете о собственном комфортном коттедже? Компания «СКД-дом» сделает вашу мечту реальной. При строительстве домов из клееного бруса мы применяем пиломатериалы собственного изготовления и предлагаем услуги архитекторов, инженеров, мастеров с многолетним опытом. Качественные материалы, высокий профессионализм и доступность — наши основные преимущества.</p>
+<p>Заказчикам предлагается множество готовых проектов. Клиенты заранее знают окончательную сумму реализации. Если требуется, архитекторы вносят корректировки в типовую документацию и адаптируют её под требования заказчика.</p>
+            <p><?
+           echo $cc_settings['Text2'];
+           ?></p>
+        </div>
+    </div>
+</div></div></div></div>
+<div class="vc_row wpb_row vc_row-fluid vc_custom_1438333348452 by-area">
+    <div class="projects wpb_column vc_column_container vc_col-sm-12">
+        <div class="vc_column-inner ">
+            <div class="wpb_wrapper">
+                <div class="row portfolio-filter filter-left">
+                    <div class="col-md-12">
+                        <a href="/catalog/proekti/" >По линейкам</a><?
+                        if ($cc_settings['Type']==2) {
+                        ?><a href="/catalog/by-area/" class="">По площади</a>
+                        <a class="active">По цене</a><?
+                        } else {
+                        ?><a class="active">По площади</a>
+                        <a href="/price/ceny-na-doma-iz-kleenogo-brusa/">По цене</a><?
+                        }
+                    ?></div>
+                </div><?
+                if($cc_settings['Type']!=2) {
+                ?><div class="area-range"><?
+                    ?><a  data-filter="all" class="filter active">Все</a><?
+                    foreach ($arRange as $v) {
+                        ?><a  data-filter=".<?=$v['ID']?>" class="filter"><?=$v['NAME']?></a><?
+                    } 
+                ?></div><?
+                }
+                ?><div class="portfolio-list portfolio-columns-4 portfolio-grid-layout-6  portfolio-with-spaces clearfix" id="portfolio-list"><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?php $result .= " ";
+unset($br->projects[$f_RowID]['f_Price1']);
+if (is_array($br->projects[$f_RowID])) extract($br->projects[$f_RowID]);
+$t=explode("CKD",$f_Name);
+if(count($t)>1) $f_Name="<span class='fs12'>$t[0]</span> CKD$t[1]";
+else {
+    $t=explode("СКД",$f_Name);
+    if(count($t)>1) $f_Name="<span class='fs12'>$t[0]</span> CKD$t[1]";
+}
+/*if($f_SliderPath&&$f_MainImgPath)$f_MainImg=$f_SliderPath.$f_MainImgPath;*/
+$f_MainImg=$f_MainImgPath;
+if (strpos($f_MainImg,"files/")===false) $f_MainImg = $f_SliderPath.$f_MainImg;
+
+if (!$f_MainImg) $f_MainImg = $f_ResizeImg;
+foreach ($arRange as $v) {
+    if ($f_house_id >= $v['RANGE'][0] && $f_house_id<$v['RANGE'][1]) $id = $v['ID'];
+}
+
+$result0.="              <div class=\"special\">
+                <div class=\"pic\"><a href=\"$fullLink\"><img src=\"$f_ResizeImg\" alt=\" \" class='img2' /></a></div>
+                <div class=\"desc\"> <a href=\"$fullLink\">
+                  <div class=\"name\"><span class='fs12'></span> $f_Name</div>
+                  <div class=\"area\">Площадь дома - $f_Square кв.м.</div>
+                  <div class=\"clr\"></div>
+                  <div class=\"cost\">  <span style='padding-left:0'>Цена в базовой компл.<br>
+                    <span>$f_Price1 р.</span></span> </div>
+                  </a> <a class=\"calc calcnew\" href=\"/price/calc/?house=$f_house_id\">Другие компл.</a> </div>
+              </div> "; ?>
+<div  data-id="<?=$f_RowID?>" data-class="<?=$id?>" class="<?=$id?> portfolio-item-block portfolio-item-animation-2 mix building" data-item="<?=$f_RowNum?>" data-name="<?=$f_Name?>" style="display: inline-block;">
+    <div class="portfolio-item-block-inside">
+      <a href="<?=$fullLink?>" target="_self" rel="" title="<?=strip_tags($f_Name)?>">
+        <div class="portfolio-item-image" data-style="background-image: url('<?=$f_MainImg?>');" style="background-image: url('<?=$f_MainImg?>');"></div>
+        <div class="portfolio-item-bg"></div>
+        
+                                                <div class="info">
+                                                    <div class="hh4 title">CKD-<?=$f_house_id?></div>
+                                                    <div class="project-description">Площадь <?=$f_Square?> м<sup>2</sup><br>Цена <?=$f_Price1?$f_Price1:$f_Price?> руб.</div>
+                                                    <div class="hvr-icon-wobble-horizontal mgt-button mgt-style-textwhite mgt-size-normal mgt-align-left mgt-display-newline mgt-text-size-small mgt-button-icon-position-right mgt-text-transform-uppercase">УЗНАТЬ БОЛЬШЕ<i class="fa fa-arrow-right"></i></div>
+                                                </div>
+                
+        <div class="labels">
+           <?if($f_Hit):?><div class="label hit">Хит продаж</div><br><?endif?>
+           <?if($f_Special):?><div class="label special">Спецпредложение</div><br><?endif?>
+           <?if($f_Cheap):?><div class="label cheap">Выгодная цена</div><?endif?>
+        </div>
+      </a>
+    </div>
+    </div><!-- /RecordTemplate -->
+
+<!-- FormSuffix -->                </div>
+<script>(function($){
+        $(document).ready(function() {
+
+            $("#portfolio-list").mixItUp({effects:["fade","scale"],easing:"snap"});
+
+        });})(jQuery);</script>
+            </div>
+        </div>
+    </div>
+</div>
+<?php echo $cc_settings['Text1'].$cc_settings['Text3']; ?>
+
+</div></article></div></div></div>
+<div class="wpb_wrapper" style='background-color:#F4F4F4;     padding: 45px; margin-bottom: 15px;'>
+<div class="container">
+<p><span style="font-weight:bold">На смету проекта влияют следующие факторы:</span></p>
+<ul>
+    <li>площадь строения;</li>
+    <li>архитектурная сложность;</li>
+    <li>толщина пиломатериала;</li>
+    <li>выбор типового или индивидуального проекта;</li>
+    <li>сроки возведения объекта.</li>
+</ul>
+<h2>Сколько стоит построить дом из клееного бруса? </h2>
+<p>Вначале разрабатывается проектная документация, содержащая все данные о конструкции и финансовых затратах. При планировании расходов обязательно учитывается стоимость:</p>
+<ul>
+<li>проекта (типового или индивидуального);</li>
+<li>фундамента;</li>
+<li>производства и сборки домокомплекта;</li>
+<li>кровельных работ;</li>
+<li>монтажа коммуникаций;</li>
+<li>отделочных работ;</li>
+<li>реализации дизайн-проекта.</li>
+</ul>
+<h2>Почему выгодно сотрудничать с «СКД-дом»?</h2>
+<p>Мы — профессионалы с многолетней практикой. Наши преимущества:</p>
+<ul>
+<li><span style="font-weight:bold">подтверждение качества</span>. При возведении домов используются отборные материалы;</li>
+<li><span style="font-weight:bold">сплоченная командная работа</span>. Над созданием каждого дома трудится команда проектировщиков, конструкторов, архитекторов, дизайнеров, инженеров-технологов и узкопрофильных мастеров;</li>
+<li><span style="font-weight:bold">письменное оформление договора</span>. Все мелочи и нюансы оговариваются заранее в договорной документации. В ней обязательно прописаны сроки, типы материалов, гарантии;</li>
+<li><span style="font-weight:bold">экономически обоснованные решения</span>. Предлагаем несколько проектов и даем рекомендации, опираясь на запланированный бюджет.</li>
+</ul>
+<p>Мы дорожим доверием клиентов, вы не столкнетесь с непредвиденными расходами.</p>
+<p>Чтобы узнать больше, наберите номер +7 (495) 983-00-39 или закажите обратный звонок.</p>
+</div>
+</div>
+
+<div class="page-container container" style="margin-bottom:-30px;">
+    <div class="row">
+            <div class="col-md-12 entry-content">
+                  <article><div class="tpl-block-list tpl-component-210 tpl-template-2255" id="nc-block-6518f0414b183a59eab62d4d9da3fb8b-1"><!-- /FormSuffix -->

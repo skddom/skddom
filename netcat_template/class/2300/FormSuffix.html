@@ -1,0 +1,17 @@
+                </div>
+<script>(function($){
+	    $(document).ready(function() {
+            $(".filter.active").show();
+<?
+    foreach (array_keys($exists) as $v) {
+    ?>$(".filter<?=$v?>").show();<?
+    }
+?>
+		    $("#portfolio-list").mixItUp({effects:["fade","scale"],easing:"snap"});
+
+	    });})(jQuery);</script>
+            </div>
+        </div>
+    </div>
+</div><div class='nc_pagination paginator'><?=browse_messages($cc_env, 5)?></div>
+<?php echo $cc_settings['Text1'].$cc_settings['Text3']; ?>

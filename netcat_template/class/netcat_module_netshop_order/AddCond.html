@@ -1,0 +1,13 @@
+<?php
+
+$nc_core = nc_core::get_object();
+$netshop = nc_netshop::get_instance();
+
+$order = nc_netshop_order::from_post_data($nc_core->input->fetch_post(), $netshop);
+$order_errors = $netshop->check_new_order($order);
+
+if ($order_errors) {
+    $posting = 0;
+    $warnText = (isset($warnText) && strlen($warnText) ? "$warnText<br />\n" : "") .
+                join("<br />\n", $order_errors);
+}

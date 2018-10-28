@@ -1,0 +1,26 @@
+<?php
+if (isset($_POST['project']) && $admin_mode) {
+    $_SESSION['project'] = intval($_POST['project']);
+}
+$project = (int)$_SESSION['project'];
+
+if ($project>-1 && $admin_mode) {
+    $ignore_parent = true;
+    $project = intval($project);
+    $query_where = "a.Project=$project";
+}
+$f_Photo_tpl = array(
+    'prefix' => "<div class='bxslider'>",
+    'record' => "<div><span>%Name%</span><a href='%Path%'><img style='max-height: 400px' src='%Path%' /></a></div>",
+    'divider' => " ",
+    'suffix' => "</div>",
+    'i' => 1
+);
+
+$browse_msg['prefix']   = "<p class='pager'>";
+$browse_msg['suffix']   = "</p>";
+$browse_msg['active']   = "<span>%PAGE</span>";
+$browse_msg['unactive'] = "<a href='' data-callback='initSliders2();' data-target='.js-ajax-result' data-load1='%URL'>%PAGE</a>";
+$browse_msg['divider']  = " ";
+
+?>

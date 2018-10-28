@@ -1,0 +1,17 @@
+<?
+// get topic object
+$nc_forum2_topic = nc_forum2_topic::get_object();
+// determine topic url
+$topic_url = $nc_forum2_topic->get_url($message);
+
+// redirect in back-office or link in front-office mode
+if($inside_admin) {
+  ob_end_clean();
+  header("Location: ".$topic_url."&inside_admin=1");
+  exit;
+}
+else {
+  echo NETCAT_MODULE_FORUM2_COMPONENT_TOPIC_UPDATED;
+  echo "<br/><br/><a href='".$topic_url."'>".NETCAT_MODULE_FORUM2_COMPONENT_RETURN_TO_THE_TOPIC."</a>";
+}
+?>

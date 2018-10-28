@@ -1,0 +1,18 @@
+<?php $ignore_sub=$ignore_cc=true;
+$query_where = "a.New=1";
+$query_order = "a.Priority";
+
+$br = CBranding::get_object();
+$br->getProjects();
+$br->ExModifyQueryWhere($query_where, $cc_env, $inside_admin, $admin_mode); 
+
+$s = $cc_settings['Video'];
+preg_match_all('#src="(.*?)"#si',$s,$out);
+$url = $out[1][0];
+if (strpos($url,"/embed/")!==false) {
+	$code=explode("/embed/",$url);
+	$code = $code[1];
+}
+
+
+?>

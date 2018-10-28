@@ -1,0 +1,27 @@
+<!-- FormPrefix --><?= $f_AdminCommon; ?><div class="text tpl<?=$classID?>">
+<div class="robototitle">Предложения для Вас</div>
+<p>На данной странице Вы можете найти выгодные предложения от наших партнеров для Вашего дома!</p>
+<div><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?
+if (!$f_Image) {
+    $f_Image = $f_Image_preview_url = nc_file_path($classID, $f_Parent_Message_ID, "Image", false, true);
+}
+?>
+<div class="text"><div class="offer_img" style="width: 250px; height: 250px; float: left; margin: 0 10px 5px 0; background-image: url(<?=$f_Image_preview_url?>); "></div>
+  <div class="robototitle"><?=$f_Name?></div>
+  <div class="offer-text">
+  <?=str_replace("#TITLE#", $lk->data['Title1'],$f_Text)?>
+  </div>
+  
+  
+  <?if($f_Certificate):?>
+  <p href="<?=$fullLink?>?do=download" class="offer2u-btn" align="left"><a class="btn hvr-bounce-to-top mgt-button mgt-style-bordered mgt-size-normal mgt-align-left mgt-display-inline mgt-text-size-normal mgt-button-icon-position-left mgt-text-transform-uppercase"  rel="lightbox" data-lightbox="lightbox" href="<?=$f_Certificate?>">Предложение для Вас</a></p>
+  <?endif?>
+  <div style="clear:both"></div>
+</div><!-- /RecordTemplate -->
+
+<!-- FormSuffix --><?if(!$totRows):?>
+<p>К сожалению, на текущий момент у нас нет для Вас индивидуальных предложений. Следите за обновлениями!</p>
+<?endif?>
+</div></div><!-- /FormSuffix -->

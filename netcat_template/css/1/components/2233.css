@@ -1,0 +1,8 @@
+@media(max-width:480px) { 
+.tpl-component-rev-slider .banner-img { height:280px!important; }
+.tpl-component-rev-slider .rev_slider_wrapper, .tpl-component-rev-slider .forcefullwidth_wrapper_tp_banner, .tpl-component-rev-slider .fullwidthbanner-container .fullwidthabanner { max-height:297px!important; }
+ }
+@media(max-width:360px) { 
+.tpl-component-rev-slider .banner-img { height:182px!important;Í }
+ }
+.tpl-component-rev-slider .mobile span.line1 { position:absolute; color:#fff; text-align:center; left:0; right:0; top:50%; margin-top:-20px; font-family:Roboto; font-size:20px; line-height:24px; text-shadow:2px 1px 1px rgba(0,0,0,0.5); }

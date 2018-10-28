@@ -1,0 +1,60 @@
+<?ob_start();?><?=( $warnText ? "<div class='warnText'>$warnText</div>" : NULL )?>
+<form name='adminForm' id='adminForm' class="js-sendCalcForm js-callback"  enctype='multipart/form-data' method='post' action='<?= $SUB_FOLDER ?><?= $HTTP_ROOT_PATH ?>add.php'>
+<div id='nc_moderate_form'>
+<div class='nc_clear'></div>
+<input name='admin_mode' type='hidden' value='<?= $admin_mode ?>' />
+<?= $nc_core->token->get_input() ?>
+<input name='catalogue' type='hidden' value='<?= $catalogue ?>' />
+<input name='cc' type='hidden' value='<?= $cc ?>' />
+<input name='show' type='hidden' value='<?= $show ?>' />
+<input name='sub' type='hidden' value='<?= $sub ?>' /><input name='posting' type='hidden' value='1' />
+<input name='curPos' type='hidden' value='<?= $curPos ?>' />
+<input name='f_Parent_Message_ID' type='hidden' value='<?= $f_Parent_Message_ID ?>' />
+<?= nc_form_moderate('add', $admin_mode, 0, $systemTableID, $current_cc, (isset($f_Checked) ? $f_Checked  : null), $f_Priority , $f_Keyword, $f_ncTitle, $f_ncKeywords, $f_ncDescription ) ?>
+</div>
+<div class='nc-field nc-field-type-string'><?= nc_string_field('Name', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class='nc-field nc-field-type-string'><?= nc_string_field('Email', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class='nc-field nc-field-type-string'><?= nc_string_field('Phone', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
+
+
+
+<? if (!$AUTH_USER_ID && $current_cc['UseCaptcha'] && $MODULE_VARS['captcha']) { ?><?= nc_captcha_formfield() ?><br/><br/><?= NETCAT_MODERATION_CAPTCHA ?> (*):<br/><input type='text' name='nc_captcha_code' size='10'><br/><br/><? } ?>
+    <p style='    font-size: 14px;'>Нажимая на кнопку "Отправить", Вы соглашаетесь с <a href="/policy-personal-data/">правилами обработки персональных данных.</a></p>
+    <p style='    font-size: 12px;'><font color="red"><span class="form-required starrequired">*</span></font> - Поля, обязательные для заполнения</p>
+    <div class='nc_submit2'><input value='Отправить' type='submit' /></div>  
+   
+</form><?
+$content = ob_get_contents();
+if ($show || $ajax1) {
+    ob_clean();
+    if (!$ajax1) {
+?><div id='parent_popup_form_detail_phone'><div class='nc_full nc_callback mfeedback phone_form' id='popup_form_detail'>
+
+<a class="close_backcall_detail" title="" onclick="jQuery('#parent_popup_form_detail_phone').hide();"></a>
+<div class='modal-inner'>
+  <div class='vhod_title'>Отправить комплектацию</div>
+  <div class='jsCB-wrap'>
+  
+<? 
+    }
+  ?><script>
+  //ga('send','klik-na-perezvon'); 
+  jQuery('form[name="adminForm"] input[name="f_Phone"]').mask("+7(999)999-99-99");</script>
+  <p>
+</p><?    
+    echo $content;
+    if (!$ajax1) {
+   ?></div>
+</div></div></div><style>
+.warnText {
+    font-size:12px; line-height:14px;
+    display:block;padding:5px;border:1px solid #b76b25; margin:10px 0;
+    color:red;
+}
+</style><?
+    }
+    die();
+}
+?>

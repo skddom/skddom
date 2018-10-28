@@ -1,0 +1,66 @@
+.tpl-component-kabinet tr.recomm_text td p { text-align:left; }
+.tpl-component-kabinet .progress { height:auto; }
+.tpl-component-kabinet .container-bg h1 { padding:0; }
+.tpl-component-kabinet .bgopacity.mgt-promo-block .mgt-promo-block-content p, .tpl-component-kabinet .person-phone1 { color:#91908c; }
+.tpl-component-kabinet .bgopacity.mgt-promo-block.darken .mgt-promo-block-content { background:none; }
+.tpl-component-kabinet .person-phone1 em { display:block;font-style:normal; }
+.tpl-component-kabinet .display_inline-block { display: inline-block; }
+.tpl-component-kabinet .bgopacity { position:relative; }
+.tpl-component-kabinet .bgopacity:before { content:""; display:block; position:absolute; z-index:-1; top:0;right:0;bottom:0;left:0; background-image:url('/netcat_files/219/220/6_2_2013_AR_Osnovnoy_dom_2_0.jpg'); background-size:cover; background-position: center; opacity:0.1; }
+.tpl-component-kabinet .bgopacity.mgt-promo-block .mgt-promo-block-content h2 { color:#292e35; }
+.tpl-component-kabinet .bgopacity.mgt-promo-block .mgt-promo-block-content h4 { color:#91908c; }
+.tpl-component-kabinet .vertical_align-top { vertical-align: top; }
+.tpl-component-kabinet .text { padding: 10px; font-size: 14px; }
+.tpl-component-kabinet .person { margin-bottom: 10px; }
+.tpl-component-kabinet .person-photo { width: 175px; height: 175px; border-radius: 175px; background-size: cover; display: inline-block; background-position: center; border: 2px solid #F4EAD3; margin: 10px 30px 10px 20px; }
+.tpl-component-kabinet .color2 { color:#d47000; }
+.tpl-component-kabinet .person-info { display: inline-block; vertical-align: top; margin: 20px 0 0 0; }
+.tpl-component-kabinet .person-info h4 { font-size: 17px; }
+.tpl-component-kabinet .person-phone { font-size: 22px; color: #3CB049; text-align: center; margin: 10px 0 20px; font-weight: bold; }
+.tpl-component-kabinet .person-phone em { margin-bottom: 2px; display: block; color: #000; font-size: 17px; }
+.tpl-component-kabinet .person-feedback { text-align: center; }
+.tpl-component-kabinet .person-feedback button { font-family: 'Roboto Condensed', Arial, Helvetica, sans-serif; background-color: #FB953C; color: #fff; border: 0; padding: 0px 15px; text-transform: uppercase; font-size: 16px; line-height: 34px; font-weight: bold; border-bottom: 3px solid rgba(178, 90, 17, 0.74); box-shadow: 3px 3px 3px rgba(0,0,0,0.2); cursor: pointer; }
+.tpl-component-kabinet .personal-data { font-size: 15px; }
+.tpl-component-kabinet .personal-notice { margin-left: 50px; font-style: italic; }
+.tpl-component-kabinet .personal-info p { margin: 0; line-height: 20px; }
+.tpl-component-kabinet .bigger { font-size: 120%; }
+.tpl-component-kabinet .tpl-101 .person-photo { width: 95px; height: 95px; border-radius:95px; margin:0; }
+.tpl-component-kabinet .tpl-101 .person { border:1px solid #b76c00; padding:30px 40px 20px; }
+.tpl-component-kabinet .tpl-101 .person-feedback1 .btn { margin-left:-40px; }
+.tpl-component-kabinet .mgt-promo-block .mgt-promo-block-content span.m-job { display:block;font-weight:100;line-height:30px; }
+.tpl-component-kabinet .person div:first-child { margin-bottom:5px; }
+.tpl-component-kabinet .tpl-101 .personal-data { border:1px solid #ccc; padding: 30px 40px; min-height: 275px; }
+.tpl-component-kabinet .tpl-101 .personal-info span { display:block; color:#91908c; font-weight:100; font-family:Roboto; }
+.tpl-component-kabinet .tpl-101 .personal-info p { margin-bottom:10px; }
+.tpl-component-kabinet .tpl-101 .personal-notice { position:absolute; bottom:5px;left:40px;right:40px;padding:20px 0 0 10px;margin:0;font-style:normal;font-family:Roboto;line-height:22px; }
+.tpl-component-kabinet .tpl-101 .mgt-promo-block .mgt-promo-block-content a:not(.btn) { color:#91908c;font-size:15px; }
+.tpl-component-kabinet .mobile { display:none; }
+@media(max-width:1000px) { 
+.tpl-component-kabinet .tpl-101 .person-feedback1 .btn { white-space: normal; height: auto; line-height: normal; }
+ }
+@media(min-width:769px) and (max-width:1000px) { 
+.tpl-component-kabinet .tpl-101 .personal-data { min-height:298px; }
+ }
+@media(max-width:480px) { 
+.tpl-component-kabinet div#portfolio-list.portfolio-list.portfolio-grid-layout-2 .portfolio-item-block, .tpl-component-kabinet .portfolio-list.portfolio-grid-layout-2 .portfolio-item-block:nth-of-type(n) { width:100%!important; padding-bottom:70%!important; height:auto!important; }
+.tpl-component-kabinet .portfolio-item-block.portfolio-item-animation-1:hover .portfolio-item-bg { opacity: 0.5; top: 0; }
+.tpl-component-kabinet .tpl-101 .person .col-md-3 { display:inline-block; }
+.tpl-component-kabinet .mgt-promo-block .mgt-promo-block-content { padding:0; }
+.tpl-component-kabinet .tpl-101 .person { padding:25px 30px 20px; }
+.tpl-component-kabinet .tpl-101 .personal-data { padding:25px 30px; }
+.tpl-component-kabinet .tpl-101 .person-phone1 { display:inline-block;width:44%;box-sizing:border-box;vertical-align:bottom; }
+.tpl-component-kabinet .tpl-101 .person-feedback1 { display:inline-block;width:55%;box-sizing:border-box;vertical-align:bottom; }
+.tpl-component-kabinet .tpl-101 .person-feedback1 .btn { margin:0;font-weight:100;white-space:normal;height:auto;line-height:20px;padding:10px 15px; }
+.tpl-component-kabinet .option-sub .title-status { width:38%;text-align:right; }
+.tpl-component-kabinet .option-sub .title-status .EtapStatus_Name { font-size:12px;white-space:nowrap; }
+.tpl-component-kabinet .btpl-348 p.date-notice { margin-right:30%;font-size:15px;line-height:normal;margin-bottom:10px; }
+.tpl-component-kabinet table.recomm tr td:nth-child(1) { width:20%; }
+.tpl-component-kabinet table.recomm tr td:nth-child(2), .tpl-component-kabinet table.recomm tr th:nth-child(2), .tpl-component-kabinet table.recomm tr td:nth-child(4), .tpl-component-kabinet table.recomm tr th:nth-child(5) { display:none; }
+.tpl-component-kabinet .expand_prorab { display:none; }
+ }
+@media(max-width:360px) { 
+.tpl-component-kabinet .col-xs-6 { width:100% }
+.tpl-component-kabinet .tpl-101 .person { padding: 15px 10px 10px; }
+.tpl-component-kabinet .tpl-101 .person-feedback1 { width: 54%; }
+.tpl-component-kabinet .tpl-101 .personal-notice { position:static; padding:0; }
+ }

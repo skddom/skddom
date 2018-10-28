@@ -1,0 +1,29 @@
+<div class="vc_row wpb_row vc_row-fluid vc_custom_1459335800844" data-vc-full-width="true"
+				 data-vc-full-width-init="false">
+    <div class="projects wpb_column vc_column_container vc_col-sm-12">
+        <div class="vc_column-inner ">
+								<div class="mgt-header-block clearfix text-left text-white wpb_content_element mgt-header-block-style-1 mgt-header-texttransform-header">
+									<p style="    font-size: 24px;" class="h2_block mgt-header-block-title"><?=$cc_env['Sub_Class_Name']?></p>
+									<div class="mgt-header-line"></div>
+									<p><?=$cc_settings['Name']?></p>
+								</div>
+                                
+            <div class="wpb_wrapper"><?
+            if ($cc_settings['Video']) {
+            $src = "https://img.youtube.com/vi/$code/0.jpg";
+            
+            if ($cc_settings['VideoImg']) $src = $cc_settings['VideoImg']['resultpath'];
+            
+//            print_r($cc_settings['Video']);
+            
+?><div class="line-wrap">
+        <div class="line-video"><a href="#alpinovideo" style="background-image:url(<?=$src?>);background-position:center;background-size:cover;" class="video-review js-toggle-video"><span><?=$cc_settings['VideoText']?></span></a>
+        <div style="display:none;" class="js-video" id="alpinovideo"><?=$cc_settings['Video']?></div>
+        </div>
+        
+        <div class="line-text">
+<?=$cc_settings['Text']?>
+</div>
+    </div><?
+            }    
+                ?><div class="portfolio-list portfolio-columns-4 portfolio-grid-layout-3  portfolio-with-spaces clearfix" id="portfolio-list-2">

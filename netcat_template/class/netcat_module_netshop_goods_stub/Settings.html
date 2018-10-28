@@ -1,0 +1,92 @@
+<?php
+
+if (!nc_module_check_by_keyword("netshop")) {
+    die (NETCAT_MODULE_NETSHOP_MODULEUNCHECKED);
+}
+
+$netshop = nc_netshop::get_instance();
+
+// Параметр request_type установлен, если страница запрошена скриптом переключения варианта товара
+$request_type = $nc_core->input->fetch_get_post('request_type');
+
+// Максимальная длина строки, формируемой из полного описания (Details) при отсутствии краткого описания (Description)
+$tpl_description_length = 500;
+
+// Страница сравнения
+$compare_url = $nc_core->SUB_FOLDER . '/compare/';
+
+// Страница добавления заказа
+$add_order_url = $nc_core->SUB_FOLDER . '/orders/add_order.html';
+
+// Показывать в списке отключенные товары, если у них имеются включенные варианты:
+$ignore_check = true;
+$query_where = "(a.`Checked` = 1 OR (a.`Checked` = 0 AND (" .
+                   "SELECT `Message_ID` FROM `Message$classID` as `child` " .
+                   " WHERE `child`.`Parent_Message_ID` = a.`Message_ID` AND `child`.`Checked` = 1 " .
+                   " LIMIT 1" .
+               ")))";
+
+$filter_fields = array(
+    'Vendor',
+    'Price',
+);
+
+// Инициализация и применение фильтра (кроме страницы объекта)
+$netshop->filter->init_fields($filter_fields);
+$netshop->filter->options('list_field', 'checkbox');
+if ($action != 'full') {
+    $netshop->filter->query_where($query_where);    
+}
+
+// Поля, которые отличают варианты друг от друга
+$variant_fields = array(
+);
+// Строка, которая выводится вместо кнопки «В корзину», когда не выбран вариант товара
+$select_variant_notification = "Выберите вариант товара, чтобы добавить товар в корзину.";
+
+// ID компонента аксессуаров
+$accessories_component_id = null;
+
+// Сортировка результатов
+$sort_by = (string)$nc_core->input->fetch_get('sortBy');
+$sort_dir = $nc_core->input->fetch_get('sortDesc')? 'DESC' : 'ASC';
+
+$price_column = "Price";
+$sorting_methods = array(
+    '' => array('query_order' => "`Vendor` $sort_dir, `Name` $sort_dir", 
+                'title' => 'По алфавиту', 
+                'query_select' => ''),
+    'price' => array('query_order' => "`__PriceRange` $sort_dir", 
+                     'title' => 'По цене',
+                     'query_select' => "(IF(`Price` = 0 OR `$price_column` IS NULL," .
+                                            "(SELECT MIN(`$price_column`) FROM `Message$classID` AS pr WHERE pr.`Parent_Message_ID` = a.`Message_ID`), " .
+                                            "`Price`)) AS `__PriceRange`"),
+);
+
+if (isset($sorting_methods[$sort_by])) {
+    $query_order = $sorting_methods[$sort_by]['query_order'];
+    $query_select .= $sorting_methods[$sort_by]['query_select'];
+}
+
+// способ отображения товаров в списке (плитка/список)
+$list_layout_cookie = $nc_core->input->fetch_cookie('tpl_default_list_layout');
+$list_layout_class = $list_layout_cookie == 'list' ? 'tpl-layout-list' : 'tpl-layout-tiles';
+
+if (!function_exists('current_link')) {
+    function current_link($params, $val = null) {
+        if (!is_array($params)) {
+            $params = array($params => ($val == '' ? null : $val));
+        }
+        if ($get = nc_core('input')->fetch_get()) {
+            $params = array_merge($get, $params);
+        }
+        
+        global $cc_array, $cc, $sub;
+        if (sizeof($cc_array) == 1 || $cc_array[0] == $cc) {
+            return nc_folder_path($sub, null, $params);
+        }
+        else {
+            return nc_infoblock_path($cc, 'index', 'html', null, $params);
+        }
+    }
+}

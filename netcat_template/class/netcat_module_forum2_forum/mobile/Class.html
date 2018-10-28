@@ -1,0 +1,30 @@
+<!-- FormPrefix --><? echo $f_AdminCommon; ?><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><table class="nc_forum forum_mobile">
+<thead>
+<tr>
+    <th class="nc_forum-name">
+		<a href='<?= $SUB_FOLDER ?><?= $f_SubLink ?>'><?= $f_SubName ?></a>
+		<? if ($f_SubDescription) : ?>
+			<div class="nc_forum-description"><?= $f_SubDescription ?></div>
+		<? endif; ?>
+	</th>
+</tr>
+</thead>
+<tfoot <?= ($totRows > $f_RowNum ? "style='display:none;'" : "") ?>>
+	<tr><td><?= browse_messages($cc_env, 5) ?></td></tr>
+</tfoot>
+<tbody>
+<tr class="nc_forum-post" id="">
+	<td class="nc_forum-count">Топиков: <?= intval($f_Topics) ?> | Ответов: <?= intval($f_Replies) ?></td>
+</tr>
+<tr>
+	<td class="nc_forum-last"> Последний ответ: 
+<a title="last" href="#"><?= strtotime($f_Last_Reply_Date) > strtotime($f_Last_Topic_Date)
+    ? ($f_Last_Reply_ID ? "<a href='".$f_Last_Reply_Topic_Link.($reply_obj->get_curpos_by_topic_id($f_Last_Reply_Topic_ID) ? ( strstr($f_Last_Reply_Topic_Link, "?") ? "&amp;" : "?" )."curPos=".$reply_obj->get_curpos_by_topic_id($f_Last_Reply_Topic_ID) : "")."#reply".$f_Last_Reply_ID."'>".htmlspecialchars(( $f_Last_Reply_Subject ? $f_Last_Reply_Subject : rtrim($f_Last_Reply_Message, ".,;:-_+=?")."..." ), ENT_QUOTES)."</a> от "."<b>".($f_Last_Reply_Author ? $f_Last_Reply_Author : NETCAT_MODULE_FORUM2_USER_GUEST)."</b> (".$f_Last_Reply_Date.")" : "<center>—</center>")
+    : ($f_Last_Topic_ID ? "<a href='".$f_Last_Topic_Link."'>".htmlspecialchars(( $f_Last_Topic_Subject ? $f_Last_Topic_Subject : rtrim($f_Last_Topic_Message, ".,;:-_+=?")."..." ), ENT_QUOTES)."</a> от <b>".($f_Last_Topic_Author ? $f_Last_Topic_Author : NETCAT_MODULE_FORUM2_USER_GUEST)."</b> (".$f_Last_Topic_Date.")" : "—") ?></a>
+</td>
+</tr>
+</table><!-- /RecordTemplate -->
+
+<!-- FormSuffix --><!-- /FormSuffix -->

@@ -1,0 +1,8 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+<?echo  $f_AdminButtons;
+$tabs[$f_RowID] = array("f_Name"=>$f_Name,"f_Address"=>$f_Address,"f_Contacts"=>$f_Contacts,"f_Map"=>$f_Map,"f_Time"=>$f_Time,
+"f_Address2"=>$f_Address2,"f_Contacts2"=>$f_Contacts2,"f_Map2"=>$f_Map2,"f_Time2"=>$f_Time2,"f_Time0"=>$f_Time0,
+"f_Projects"=>$f_Projects,
+"f_PersonEmail"=>$f_PersonEmail,"f_PersonImage"=>$f_PersonImage_preview_url,"f_PersonJob"=>$f_PersonJob,"f_PersonName"=>$f_PersonName,"f_PersonTel"=>$f_PersonTel);
+?><li class="vc_tta-tab<?if($f_RowID==1) echo " vc_active";?>" data-vc-tab><a href="#cont-<?=$f_RowID?>" data-vc-tabs data-vc-container=".vc_tta"><span class="vc_tta-title-text"><?=$f_Name?></span></a></li>
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

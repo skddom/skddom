@@ -1,0 +1,61 @@
+<?= opt($topic_obj->update_views($current_cc, $message), "") ?>
+<div style='margin-bottom:10px; font-weight:bold'> 
+    <? if ($fullRSSLink) : ?>
+        <img src='<?= $SUB_FOLDER ?>/images/rss.png' alt='RSS' /><a href='<?= $fullRSSLink ?>'>RSS</a>
+    <? endif; ?>
+        
+    <? if ($subscribe_link_word) : ?>
+    | <a href='<?= $subscribeMessageLink ?>'><?= $subscribe_link_word ?></a>
+    <? endif; ?>    
+</div>
+<table cellpadding='5' cellspacing='1' border='0' style='width:100%; background:#CCC'>
+<? if (!$curPos) : ?>
+<tr valign='top'>
+  <td style='width:20%; background:#EEE'>
+  <img src='<?= $SUB_FOLDER.$HTTP_ROOT_PATH ?>modules/forum2/images/<?= $f_Closed ? "closed_" : ( $f_Type_id==2 ? "important_" : ($f_Type_id==3 ? "advertisement_" : "") ) ?>topic.gif' border='0' alt=''></td>
+  <td style='background:#EEE'>Добавлено: <?= $f_Created ?> Заголовок: <?= $f_Subject ?></td>
+</tr>
+<tr valign='top'>
+  <td rowspan='2' style='background:#EEE'>
+    <b>
+    <? if ($f_Topic_Author) {
+         if ($m_auth && $AUTH_USER_ID && $AUTH_USER_ID != $f_UserID) {
+            echo "<a href='".nc_auth_profile_url($f_UserID)."'>".$f_Topic_Author."</a>";
+         } else {
+           echo $f_Topic_Author;
+         }
+    } else {
+            echo NETCAT_MODULE_FORUM2_USER_GUEST;
+    } ?>
+    </b>
+      <br/>
+        <? if ($MODULE_VARS['forum2']['FORUM_AVATAR_FIELD'] && ( $user_avt = nc_file_path("User", $f_Topic_Author_ID, $MODULE_VARS['forum2']['FORUM_AVATAR_FIELD'], "h_"))) : ?>
+        <img src='<?= $user_avt ?>' alt='<?= $f_Topic_Author ?>' style='margin:10px 0;'/>
+        <? endif; ?>
+      <br/>
+      <? if ($f_UserID) : ?>
+        Зарегистрирован: <?= date("d.m.Y", $f_Topic_Author_Regdate) ?><br/><br/>
+        Сообщений: <?= $forum_obj->count_user_messages($f_UserID) ?> <?= $materials_url ?" ( <a href='".$SUB_FOLDER.$materials_url.$f_UserID."'>просмотреть</a> )" : "" ?>
+      <? endif; ?>
+     <?= $pw_allow && $f_UserID &&  $f_UserID != $AUTH_USER_ID ? "<div class='nc_forum_pm'><img src='$SUB_FOLDER/images/pm.jpg' alt='' /><span><a href='".nc_auth_messages_url($f_UserID)."'>Написать сообщение</a></span></div>" : ""  ?>
+  </td>
+  <td style='background:#EEE'><?= $f_AdminButtons ?>
+    <?= nc_bbcode($f_Message) ?><br/><br/>
+    <?= $f_Topic_Author_Signature ? "—————————————————————————<br/>".$f_Topic_Author_Signature : "" ?>
+  </td>
+</tr>
+<tr>
+  <td style='height:1%; text-align:right; background:#EEE'>
+  <? if (!$f_Closed) : ?>
+    <a href='<?= !$admin_mode ? $subLink."add_".$replies_cc_name.".html?topic=".$message : $SUB_FOLDER.$HTTP_ROOT_PATH."add.php?catalogue=".$catalogue."&sub=".$sub."&cc=".intval($replies_cc_id)."&topic=".$message."&curPos=".$curPos ?>'>Ответить</a>
+     | <a href='<?= !$admin_mode ? $subLink."add_".$replies_cc_name.".html?tquote=".$f_RowID : $SUB_FOLDER.$HTTP_ROOT_PATH."add.php?catalogue=".$catalogue."&sub=".$sub."&cc=".intval($replies_cc_id)."&quote=topic&curPos=".$curPos ?>'>Цитировать</a>
+ <? endif; ?>
+ <? if ($editRight || ( ($cc_env['Edit_Access_ID']==1 || $cc_env['Edit_Access_ID']==2) && $f_UserID==$current_user['User_ID'])) : ?> | <a href='<?= $editLink ?>'>Редактировать</a> <? endif; ?>
+ <? if ($deleteRight || ( ($cc_env['Delete_Access_ID']==1 || $cc_env['Delete_Access_ID']==2) && $f_UserID==$current_user['User_ID'])) : ?> | <a href='<?=$deleteLink ?>'>Удалить</a> <? endif; ?>
+  </td>
+</tr>
+<? endif; ?>
+
+<?= nc_objects_list($sub, $replies_cc_id, "topic=".$message.($f_Closed ? "&topic_closed=".$f_Closed : "").($curPos ? "&curPos=".$curPos : ""), 1) ?>
+
+</table>

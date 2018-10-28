@@ -1,0 +1,22 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+<? 
+$cnt++;
+if ($f_SliderPath && $f_MainImgPath) $f_MainImg = (strpos($f_MainImgPath,"files")===false?$f_SliderPath:null).($f_MainImgPath);
+//if (strpos($f_MainImg,"files/")===false) $f_MainImg = $f_SliderPath.$f_MainImg;
+$classes = array("building","consulting","building office","building","consulting");
+if ($f_Novinka) $f_MainImg = $f_Novinka;
+								?><div class="portfolio-item-block portfolio-item-animation-6 mix <?=$classes[$cnt]?>"
+									 data-item="<?=$f_RowNum?>" data-name="<?=$f_Name?>">
+										<div class="portfolio-item-block-inside">
+											<a href="<?=$fullLink?>" target="_self" rel="" title="<?=$f_Name?>">
+												<div class="portfolio-item-image" data-style="background-image: url(<?=$f_MainImg?>);"></div>
+												<div class="portfolio-item-bg"></div>
+												<div class="info">
+													<div class="hh4 title">CKD-<?=$f_house_id?></div>
+													<div class="project-description">Площадь <?=$f_Square?> м<sup>2</sup><br>Цена <?=$f_Price?> руб.</div>
+													<div class="hvr-icon-wobble-horizontal mgt-button mgt-style-textwhite mgt-size-normal mgt-align-left mgt-display-newline mgt-text-size-small mgt-button-icon-position-right mgt-text-transform-uppercase">УЗНАТЬ БОЛЬШЕ<i class="fa fa-arrow-right"></i></div>
+												</div>
+											</a>
+										</div>
+									</div>
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

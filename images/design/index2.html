@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Главная</title>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<link rel="shortcut icon" href="favicon.ico">
+<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&subset=latin,cyrillic,cyrillic-ext' rel='stylesheet' type='text/css'>
+<link href="style/reset.css" rel="stylesheet" />
+<link href="style/style.css" rel="stylesheet" />
+<link href="style/jcarousel.css" rel="stylesheet">
+<link href="style/rhinoslider-1.05.css" rel="stylesheet" />
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/rhinoslider-1.05.min.js"></script>
+<script src="js/mousewheel.js"></script>
+<script src="js/easing.js"></script>
+<script src="js/jquery.jcarousel.min.js"></script>
+<script src="js/jcarousel.js"></script>
+<script src="js/jquery.sticky.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#slider').rhinoslider({
+		captionsOpacity: 1,
+		controlsMousewheel: false,
+		controlsKeyboard: false,
+		showCaptions: 'always',
+		showBullets: 'always',
+		showControls: 'always'
+	});
+	$('.infoblock').hover(function(){
+		$(".boxcaption", this).stop().animate({top:'0px'},{queue:false,duration:600});
+			}, function() {
+		$(".boxcaption", this).stop().animate({top:'100%'},{queue:false,duration:600});
+	});
+			
+});
+</script>
+
+<script type="text/javascript">
+function setEqualHeight(columns) {
+	var tallestcolumn = 0;
+	columns.each(function(){
+		currentHeight = $(this).height();
+		if(currentHeight > tallestcolumn) {
+			tallestcolumn = currentHeight;
+		}
+	}
+);
+columns.height(tallestcolumn);
+}
+
+$(document).ready(function(){
+ $(".sticky").sticky({ topSpacing: 0, bottomSpacing: 120 });
+	setEqualHeight($(".overflow .col3 > div"));
+	$(".col3 .block:last-child").css({ height:"100%"});
+});
+</script>
+
+<script src="http://cufon.shoqolate.com/js/cufon-yui.js" type="text/javascript"></script>
+<script src="js/corbel.cufonfonts.js" type="text/javascript"></script>
+<!--<script type="text/javascript">
+Cufon.replace('.corbel_bold_italic', { fontFamily: 'Corbel Bold Italic', hover: true }); 
+Cufon.replace('.corbel_italic', { fontFamily: 'Corbel Italic', hover: true }); 
+Cufon.replace('.corbel_bold', { fontFamily: 'Corbel Bold', hover: true }); 
+Cufon.replace('.corbel', { fontFamily: 'Corbel', hover: true }); 
+</script>-->
+</head>
+<body>
+<div class="wrapper">
+  <div class="main">
+    <header>
+      <div class="logo"><a href="#"><img src="images/logo.png" alt="SKD" /></a></div>
+      <div class="slogan"> Дома из клееного бруса — наша специализация </div>
+      <div class="contact">
+        <div class="phone"><img src="images/phone.png" alt="(495) 983-00-39" /><span class="free">без выходных</span></div>
+        <div class="minifeedback"> <a href="#" class="call"><i></i><span>Заказать обратный звонок</span></a> <a href="#" class="see"><i></i><span>Оставить заявку на показ</span></a></div>
+      </div>
+      <div class="clr"></div>
+    </header>
+    <div class="mainblock">
+      <div class="sidebar">
+	  <div class="sticky">
+        <div class="menu">
+          <ul class="reset">
+            <li class="home"><a href="#">Главная</a></li>
+            <li><a href="#">Проекты</a></li>
+            <li><a href="#">Готовые дома</a></li>
+            <li><a href="#">Цены</a></li>
+            <li><a href="#">Фото</a></li>
+            <li><a href="#">Технологии производства</a>
+	
+            </li>
+            <li class="active"><a href="#">О компании</a>
+					
+              <ul class="reset">
+                <li><a href="news.html">Новости</a></li>
+                <li><a href="#">ЗАО «СК Девелопмент»</a></li>
+                <li><a href="#">Разрешения и дипломы</a></li>
+              </ul>
+			  </li>
+            <li><a href="#">Контакты</a></li>
+          </ul>
+        </div>
+	
+        <div class="sale_block">
+          <div class="title">Акции и скидки<i></i></div>
+          <div class="txt"> <a href="#"><img src="pic/sale.jpg" alt="Акция" />
+            <div class="hover"></div>
+            </a> </div>
+        </div>
+        <div class="managers">
+          <div class="title">Менеджеры проектов</div>
+          <div class="overflow"> <a class="man" href="mailto:m.gromyko@skd-dom.ru"> <img src="images/sergey.jpg" alt="Сергей" /> <span><b>Сергей Костин</b> <i></i></span> </a> <a class="man" href="mailto:v.semenov@skd-dom.ru"> <img src="images/vyacheslav.jpg" alt="Вечеслав"> <span><b>Вячеслав Семенов</b> <i></i></span> </a> </div>
+        </div>
+		</div>
+      </div>
+      <div class="content">
+        <div class="slider">
+          <ul id="slider">
+            <li><img src="pic/01.jpg" alt="" />
+              <div class="rhino-caption">
+                <div class="name corbel"><a href="#">Проект дома из клееного бруса CKD-200</a></div>
+                <div class="price"> <a href="#" class="calc"></a>
+                  <p> <span>Стоимость: </span> 3 850 000 р.</p>
+                  <p> <span>Прощадь:</span> 215 кв.м.</p>
+                </div>
+                <a href="#" class="special">Спецпредложение</a> </div>
+            </li>
+            <li><img src="pic/02.jpg" alt="" />
+              <div class="rhino-caption">
+                <div class="name corbel"><a href="#">Проект дома из клееного бруса CKD-222</a></div>
+                <div class="price"> <a href="#" class="calc"></a>
+                  <p> <span>Стоимость: </span> 3 850 000 р.</p>
+                  <p> <span>Прощадь:</span> 215 кв.м.</p>
+                </div>
+                <a href="#" class="special">Спецпредложение</a> </div>
+            </li>
+            <li><img src="pic/01.jpg" alt="" />
+              <div class="rhino-caption">
+                <div class="name corbel"><a href="#">Проект дома из клееного бруса CKD-233</a></div>
+                <div class="price"> <a href="#" class="calc"></a>
+                  <p> <span>Стоимость: </span> 3 850 000 р.</p>
+                  <p> <span>Прощадь:</span> 215 кв.м.</p>
+                </div>
+                <a href="#" class="special">Спецпредложение</a> </div>
+            </li>
+            <li><img src="pic/02.jpg" alt="" />
+              <div class="rhino-caption">
+                <div class="name corbel"><a href="#">Проект дома из клееного бруса CKD-175</a></div>
+                <div class="price"> <a href="#" class="calc"></a>
+                  <p> <span>Стоимость: </span> 3 850 000 р.</p>
+                  <p> <span>Прощадь:</span> 215 кв.м.</p>
+                </div>
+                <a href="#" class="special">Спецпредложение</a> </div>
+            </li>
+          </ul>
+        </div>
+        <div class="infoblocks">
+          <div class="infoblock b1">
+            <div class="pic"> <img src="pic/b1.jpg" /> <span class="roboto">ЗАРЕЧЬЕ. <br>
+              НОВАЯ ЛИНЕЙКА ПРОЕКТОВ</span> </div>
+            <div class="boxcaption">
+              <div class="inner">
+                <div class="roboto">ЗАРЕЧЬЕ. <br>
+                  НОВАЯ ЛИНЕЙКА ПРОЕКТОВ</div>
+                <p>Вы хотите иметь дом у реки? Концепцию Дома у реки компания СКД видит в новой линейки проектов «Заречье». Совершенно новый взгляд на современный дом из клееного бруса...</p>
+                <a href="#" class="more">Подробнее...</a> </div>
+            </div>
+          </div>
+          <div class="infoblock b2">
+            <div class="pic"> <img src="pic/b2.jpg" /> <span class="roboto">НАШИ<br>
+              ЭТИЧЕСКИЕ ПРИНЦИПЫ</span> </div>
+            <div class="boxcaption">
+              <div class="inner">
+                <div class="roboto">НАШИ<br>
+                  ЭТИЧЕСКИЕ ПРИНЦИПЫ</div>
+                <p>Персональный подход, понимание потребностей каждого клиента помноженные на профессионализм, опыт и креативность, позволяют студии гордиться своими проектами... </p>
+                <a href="#" class="more">Подробнее...</a> </div>
+            </div>
+          </div>
+          <div class="infoblock b3">
+            <div class="pic"> <img src="pic/b3.jpg" /> <span class="roboto">КАТАЛОГ<br>
+              ИНТЕРЬЕРОВ</span> </div>
+            <div class="boxcaption">
+              <div class="inner">
+                <div class="roboto">КАТАЛОГ<br>
+                  ИНТЕРЬЕРОВ</div>
+                <p>Опыт и креативность, позволяют студии гордиться своими проектами, а заказчикам наслаждаться уютом и комфортом своего дома.
+                  Специалисты IND Archdesign тщательно следят за качеством работ не только в области творческой реализации, но и в области коммуникаций с клиентами — на каждом этапе заказчикам представлена исчерпывающая проектная документация, архитекторы открыты для консультаций, решения принимаются оперативно... </p>
+                <a href="#" class="more">Подробнее...</a> </div>
+            </div>
+          </div>
+          <div class="infoblock b4">
+            <div class="pic"> <img src="pic/b4.jpg" /> <span class="roboto">ЭТАПЫ СТРОИТЕЛЬСТВА</span> </div>
+            <div class="boxcaption">
+              <div class="inner">
+                <div class="roboto">ЭТАПЫ СТРОИТЕЛЬСТВА</div>
+                <p>В России во все века при строительстве жилья отдавалось предпочтение натуральному дереву: это приятный натуральный запах,  солнечный цвет, естественная атмосфера. В деревянном доме настроение улучшается, легче дышится и люди меньше болеют. Поскольку ритм жизни в современных условиях гораздо стремительнее, чем был раньше, то, решив построить свой дом, будущий хозяин резонно хочет получить сжатые сроки без ущерба для качества...</p>
+                <a href="#" class="more">Подробнее...</a> </div>
+            </div>
+          </div>
+        </div>
+        <div class="overflow">
+          <div class="map">
+            <div class="robototitle"><a href="#">Карта строительства</a></div>
+            <div id="map"> <img src="pic/map.jpg" /> </div>
+            <div class="ll ind-prj"><i></i>Индивидуальные проекты</div>
+            <div class="ll skd-prj"><i></i>Проекты из каталога СКД </div>
+          </div>
+          <div class="photos">
+            <div class="robototitle"><a href="#">ФОТО СО СТРОИТЕЛЬНЫХ ПЛОЩАДОК</a></div>
+            <div class="photo"> <a href="#"><img src="pic/photo.jpg" alt=" " width="175" height="131" border="0" ></a>
+              <div class="date">22.03.2014</div>
+            </div>
+            <div class="photo" style="margin-right:0;"> <a href="#"><img src="pic/photo.jpg" alt=" " width="175" height="131" border="0" ></a>
+              <div class="date">22.03.2014</div>
+            </div>
+            <div class="photo"> <a href="#"><img src="pic/photo.jpg" alt=" " width="175" height="131" border="0" ></a>
+              <div class="date">22.03.2014</div>
+            </div>
+            <div class="photo" style="margin-right:0;"> <a href="#"><img src="pic/photo.jpg" alt=" " width="175" height="131" border="0" ></a>
+              <div class="date">22.03.2014</div>
+            </div>
+            <a class="more" href="#">Смотреть все »</a> </div>
+        </div>
+        <div class="projects">
+          <div class="robototitle"><a href="#">ИНДИВИДУАЛЬНЫЕ ПРОЕКТЫ</a></div>
+          <div class="jcarousel-wrapper">
+            <div class="jcarousel">
+              <ul>
+                <li> <a href="#"> <img src="pic/project.jpg" alt="Image 1">
+                  <div class="hover"></div>
+                  <div class="caption">
+                    <div class="inner">
+                      <p class="name">Проект дома в Завидово</p>
+                      <p>Площадь дома - 325 кв.м.</p>
+                      <p>Материал - брус</p>
+                      <p>Кухня - 13 кв.м.</p>
+                      <p>Гостиная - 31 кв.м.</p>
+                    </div>
+                  </div>
+                  </a> </li>
+                <li> <a href="#"> <img src="pic/project.jpg" alt="Image 1">
+                  <div class="hover"></div>
+                  <div class="caption">
+                    <div class="inner">
+                      <p class="name">Проект дома в Завидово</p>
+                      <p>Площадь дома - 325 кв.м.</p>
+                      <p>Материал - брус</p>
+                      <p>Кухня - 13 кв.м.</p>
+                      <p>Гостиная - 31 кв.м.</p>
+                    </div>
+                  </div>
+                  </a> </li>
+                <li> <a href="#"> <img src="pic/project.jpg" alt="Image 1">
+                  <div class="hover"></div>
+                  <div class="caption">
+                    <div class="inner">
+                      <p class="name">Проект дома в Завидово</p>
+                      <p>Площадь дома - 325 кв.м.</p>
+                      <p>Материал - брус</p>
+                      <p>Кухня - 13 кв.м.</p>
+                      <p>Гостиная - 31 кв.м.</p>
+                    </div>
+                  </div>
+                  </a> </li>
+                <li> <a href="#"> <img src="pic/project.jpg" alt="Image 1">
+                  <div class="hover"></div>
+                  <div class="caption">
+                    <div class="inner">
+                      <p class="name">Проект дома в Завидово</p>
+                      <p>Площадь дома - 325 кв.м.</p>
+                      <p>Материал - брус</p>
+                      <p>Кухня - 13 кв.м.</p>
+                      <p>Гостиная - 31 кв.м.</p>
+                    </div>
+                  </div>
+                  </a> </li>
+                <li> <a href="#"> <img src="pic/project.jpg" alt="Image 1">
+                  <div class="hover"></div>
+                  <div class="caption">
+                    <div class="inner">
+                      <p class="name">Проект дома в Завидово</p>
+                      <p>Площадь дома - 325 кв.м.</p>
+                      <p>Материал - брус</p>
+                      <p>Кухня - 13 кв.м.</p>
+                      <p>Гостиная - 31 кв.м.</p>
+                    </div>
+                  </div>
+                  </a> </li>
+                <li> <a href="#"> <img src="pic/project.jpg" alt="Image 1">
+                  <div class="hover"></div>
+                  <div class="caption">
+                    <div class="inner">
+                      <p class="name">Проект дома в Завидово</p>
+                      <p>Площадь дома - 325 кв.м.</p>
+                      <p>Материал - брус</p>
+                      <p>Кухня - 13 кв.м.</p>
+                      <p>Гостиная - 31 кв.м.</p>
+                    </div>
+                  </div>
+                  </a> </li>
+                <li> <a href="#"> <img src="pic/project.jpg" alt="Image 1">
+                  <div class="hover"></div>
+                  <div class="caption">
+                    <div class="inner">
+                      <p class="name">Проект дома в Завидово</p>
+                      <p>Площадь дома - 325 кв.м.</p>
+                      <p>Материал - брус</p>
+                      <p>Кухня - 13 кв.м.</p>
+                      <p>Гостиная - 31 кв.м.</p>
+                    </div>
+                  </div>
+                  </a> </li>
+              </ul>
+            </div>
+            <a href="#" class="jcarousel-control-prev">&lsaquo;</a> <a href="#" class="jcarousel-control-next">&rsaquo;</a> </div>
+        </div>
+        <div class="overflow">
+          <div class="col3">
+            <div class="news">
+              <div class="robototitle"><a href="#">Новости</a></div>
+              <div class="block">
+                <div class="date"><i></i>31.10.2013</div>
+                <div class="name">Международная выставка «Красивые дома 2013» </div>
+                <div class="nws">Компания “СКД дом” совместно с архитектурным бюро IND Architects приглашает всех наших друзей, коллег и партнеров посетить Международную выставку “КРАСИВЫЕ ДОМА”. Выставка будет проходить с 31 октября по 3 ноября 2013 в МВЦ “Крокус Экспо”, Павильон 3, зал 15, наш стенд А 6-1.</div>
+                <a href="#" class="more">Подробнее...</a> </div>
+              <div class="block">
+                <div class="date"><i></i>31.10.2013</div>
+                <div class="name">Международная выставка «Красивые дома 2013» </div>
+                <div class="nws">Компания “СКД дом” совместно с архитектурным бюро IND Architects приглашает всех наших друзей, коллег и партнеров посетить Международную выставку “КРАСИВЫЕ ДОМА”. Выставка будет проходить с 31 октября по 3 ноября 2013 в МВЦ “Крокус Экспо”, Павильон 3, зал 15, наш стенд А 6-1.</div>
+                <a href="#" class="more">Подробнее...</a> </div>
+              <div class="block">
+                <div class="date"><i></i>31.10.2013</div>
+                <div class="name">Международная выставка «Красивые дома 2013» </div>
+                <div class="nws">Компания “СКД дом” совместно с архитектурным бюро IND Architects приглашает всех наших друзей, коллег и партнеров посетить Международную выставку “КРАСИВЫЕ ДОМА”. Выставка будет проходить с 31 октября по 3 ноября 2013 в МВЦ “Крокус Экспо”, Павильон 3, зал 15, наш стенд А 6-1.</div>
+                <a href="#" class="more">Подробнее...</a> </div>
+              <div class="block">
+                <div class="date"><i></i>31.10.2013</div>
+                <div class="name">Международная выставка «Красивые дома 2013» </div>
+                <div class="nws">Компания “СКД дом” совместно с архитектурным бюро IND Architects приглашает всех наших друзей, коллег и партнеров посетить Международную выставку “КРАСИВЫЕ ДОМА”. Выставка будет проходить с 31 октября по 3 ноября 2013 в МВЦ “Крокус Экспо”, Павильон 3, зал 15, наш стенд А 6-1.</div>
+                <a href="#" class="more">Подробнее...</a> 
+				<a href="#" class="all">Все новости</a>
+				</div>
+            </div>
+          </div>
+          <div class="col3">
+            <div class="faq">
+              <div class="robototitle"><a href="#">Вопрос-ответ</a></div>
+              <div class="block">
+                <div class="question"><i></i>
+                  <p>Почему на рынке так сильно отличаются цены на дома из клееного бруса?</p>
+                </div>
+                <div class="answer"><i></i>
+                  <p>Действительно цены на дома из клееного бруса очень сильно отличаются, и иногда это не поддается никакой логике, но в основном все закономерно.</p>
+                  <a href="#" class="more">Далее...</a> </div>
+              </div>
+              <div class="block">
+                <div class="question"><i></i>
+                  <p>Почему на рынке так сильно отличаются цены на дома из клееного бруса?</p>
+                </div>
+                <div class="answer"><i></i>
+                  <p>Действительно цены на дома из клееного бруса очень сильно отличаются, и иногда это не поддается никакой логике, но в основном все закономерно.</p>
+                  <a href="#" class="more">Далее...</a> </div>
+              </div>
+              <div class="block">
+                <div class="question"><i></i>
+                  <p>Почему на рынке так сильно отличаются цены на дома из клееного бруса?</p>
+                </div>
+                <div class="answer"><i></i>
+                  <p>Действительно цены на дома из клееного бруса очень сильно отличаются, и иногда это не поддается никакой логике, но в основном все закономерно.</p>
+                  <a href="#" class="more">Далее...</a> </div>
+              </div>
+              <div class="block">
+                <div class="question"><i></i>
+                  <p>Почему на рынке так сильно отличаются цены на дома из клееного бруса?</p>
+                </div>
+                <div class="answer"><i></i>
+                  <p>Действительно цены на дома из клееного бруса очень сильно отличаются, и иногда это не поддается никакой логике, но в основном все закономерно.</p>
+                  <a href="#" class="more">Далее...</a> </div>
+				  
+				  <a href="#" class="all">Все вопросы и ответы</a>
+              </div>
+            </div>
+          </div>
+          <div class="col3">
+            <div class="reviews">
+              <div class="robototitle"><a href="#">Отзывы</a></div>
+              <div class="block">
+                <div class="author"><i></i>Олег<br>
+                  Дом в Ромашкино </div>
+                <div class="txt">
+                  <p><img src="pic/reviews.jpg" alt="" /></p>
+                  <p>Компания “СКД дом” совместно с архитектурным бюро IND Architects приглашает всех наших друзей, коллег и партнеров посетить Международную выставку “КРАСИВЫЕ ДОМА”. Выставка будет проходить с 31 октября по 3 ноября 2013 в МВЦ “Крокус Экспо”, Павильон 3, зал 15, наш стенд А 6-1.</p>
+                </div>
+                <a href="#" class="more">Далее...</a> </div>
+              <div class="block">
+                <div class="author"><i></i>Олег<br>
+                  Дом в Ромашкино </div>
+                <div class="txt">
+                  <p>Компания “СКД дом” совместно с архитектурным бюро IND Architects приглашает всех наших друзей, коллег и партнеров посетить Международную выставку “КРАСИВЫЕ ДОМА”. Выставка будет проходить с 31 октября по 3 ноября 2013 в МВЦ “Крокус Экспо”, Павильон 3, зал 15, наш стенд А 6-1.</p>
+                </div>
+                <a href="#" class="more">Далее...</a> </div>
+              <div class="block">
+                <div class="author"><i></i>Олег<br>
+                  Дом в Ромашкино </div>
+                <div class="txt">
+                  <p>Компания “СКД дом” совместно с архитектурным бюро IND Architects приглашает всех наших друзей, коллег и партнеров посетить Международную выставку “КРАСИВЫЕ ДОМА”. Выставка будет проходить с 31 октября по 3 ноября 2013 в МВЦ “Крокус Экспо”, Павильон 3, зал 15, наш стенд А 6-1.</p>
+                </div>
+                <a href="#" class="more">Далее...</a>
+				<a href="#" class="all">Все отзывы</a>
+				 </div>
+            </div>
+          </div>
+        </div>
+      </div>
+	  <div class="clr"></div>
+    </div>
+	
+	
+	<footer>
+
+	<div class="logo"><a href="#"><img src="images/footer-logo.png" alt="" /></a></div>
+	<div class="copyright">
+	Компания ООО "СКД дом" ©, все права защищены
+	<span>+7 (495) 983-00-39</span>
+	</div>
+
+	<div class="socnet"><span>Мы в соцсетях: </span>
+			<a target="_blank" title="FaceBook" href="http://facebook.com/skddom"><img alt="FaceBook" src="images/facebook.png"></a>
+			<a target="_blank" title="Вконтакте" href="http://vk.com/skddom"><img alt="Вконтакте" src="images/vk.png"></a>
+			<a target="_blank" rel="publisher" href="https://plus.google.com/111872370976980686770"><img alt="Google+" src="images/google-plus.png"></a>
+		</div>
+	
+	<div class="clr">
+	</div>
+	</footer>
+  </div>
+</div>
+</body>
+</html>

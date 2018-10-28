@@ -1,0 +1,17 @@
+<?php
+$ignore_all=true;
+global $pro;
+if (!$pro) {
+    $lk = new CPersonal();
+    $pro = new CProgress($lk, 340);
+}
+$option = $option?$option:$current_sub['Subdivision_Name'];
+$nc_data = $pro->tree[$option]['ITEMS'];
+foreach ($nc_data as $v) {
+    $statuses[$v['StatusID']]++;
+}
+if ($statuses[3] == count($nc_data)) $status = 3;
+elseif($statuses[2]>0) $status = 2;
+else $status = 1;
+//echo "<pre>"; print_r($nc_data); echo "</pre>";
+?>

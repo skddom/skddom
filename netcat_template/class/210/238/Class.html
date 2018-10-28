@@ -1,0 +1,39 @@
+<!-- FormPrefix --><?php $result .= "         <div class=\"inner site{$current_catalogue[Catalogue_ID]}\">
+          <div class=\"category robototitle-dark\">".$parent_sub_tree[$sub_level_count-1]['Subdivision_Name']."</div>
+          <h1>".$current_sub['Subdivision_Name']."</h1>
+".opt($cc_settings['Text1'],"
+          <div class=\"vvod\">
+            ".$cc_settings['Text1']."
+          </div>")."
+          <div class=\"info\">
+            <div class=\"inner\">
+".opt( $cc_settings['Text2'],"
+              <div class=\"att\">
+                ".$cc_settings['Text2']."
+</div>
+              <br />")." "; ?><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?php $result .= " ";
+if (is_array($br->projects[$f_RowID])) extract($br->projects[$f_RowID]);
+$fullLink = nc_message_link($f_RowID, $classID);
+if($f_SliderPath&&$f_MainImgPath)$f_MainImg=$f_SliderPath.$f_MainImgPath;$result.="              <div class=\"special\"".opt(($f_RowNum+1)%3==0," style=\"margin-right:0;\"").">
+                <div class=\"pic\"><a data-type='link' data-ajax='false' href=\"$fullLink\"><img src=\"$f_MainImg\" alt=\" \" width=\"220\" height=\"165\" /></a></div>
+                <div class=\"desc\">
+				<a data-type='link' data-ajax='false' href=\"$fullLink\">
+                  <div class=\"name\">".($mobile?str_replace("Проект дома из клееного бруса ","",$f_Name):$f_Name)."</div>
+                  ".($mobile?null:"<div class=\"area\">Площадь дома - $f_Square кв.м.</div>")."
+                  <div class=\"clr\"></div>
+                  ".($mobile?"<div class=\"cost\"> <span class=\"ico\"></span> <span>Стоимость<br>
+                    $f_Price р.</span>  </div>":"
+                  <div class=\"cost\"> <span class=\"ico\"></span> <span>Цена ".opt($f_Price1,"в компл.С1")."<br>
+                    ".($f_Price1?$f_Price1:$f_Price)." р.</span>  </div>")."
+					</a>
+					".($current_catalogue['Catalogue_ID']==2?null:"<a data-type='link' data-ajax-'false' class=\"calc\" href=\"/price/calc/?house=$f_house_id\">Калькулятор</a>")."
+                </div>
+              </div> "; ?><!-- /RecordTemplate -->
+
+<!-- FormSuffix --><?php $result .= "               <div class=\"clr\"></div>
+              <p>*Строительная прощадь по осям стен, включая террасы</p>
+            </div>
+          </div>
+        </div> "; ?><!-- /FormSuffix -->

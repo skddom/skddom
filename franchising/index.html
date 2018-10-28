@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>«СКД дом» — производственно-строительная компания</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+
+<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/fixed.css">
+<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="css/flaticon.css">
+<link rel="stylesheet" type="text/css" href="css/animate.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>');</script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.js"></script>
+  
+<script>
+$(function() {
+function number_format( number, decimals, dec_point, thousands_sep ) {	// Format a number with grouped thousands
+	// 
+	// +   original by: Jonas Raoni Soares Silva (http://www.jsfromhell.com)
+	// +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+	// +	 bugfix by: Michael White (http://crestidg.com)
+
+	var i, j, kw, kd, km;
+
+	// input sanitation & defaults
+	if( isNaN(decimals = Math.abs(decimals)) ){
+		decimals = 2;
+	}
+	if( dec_point == undefined ){
+		dec_point = ",";
+	}
+	if( thousands_sep == undefined ){
+		thousands_sep = ".";
+	}
+
+	i = parseInt(number = (+number || 0).toFixed(decimals)) + "";
+
+	if( (j = i.length) > 3 ){
+		j = j % 3;
+	} else{
+		j = 0;
+	}
+
+	km = (j ? i.substr(0, j) + thousands_sep : "");
+	kw = i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands_sep);
+	//kd = (decimals ? dec_point + Math.abs(number - i).toFixed(decimals).slice(2) : "");
+	kd = (decimals ? dec_point + Math.abs(number - i).toFixed(decimals).replace(/-/, 0).slice(2) : "");
+
+
+	return km + kw + kd;
+}
+
+	$( "#slider" ).slider({
+	  value:0,
+	  min: 0,
+	  max: 20000000,
+	  step: 4000000,
+	  slide: function( event, ui ) {
+	  console.log(event);
+	  var previousVal = parseInt($(this).data("value"));                 
+      $(this).data({"value":parseInt(ui.value)});
+	  
+	 if (previousVal >= parseInt(ui.value))  {
+		$( "#amount" ).val(new Number($( "#amount" ).val()) - 4000000);
+		$( "#amount2" ).val(new Number($( "#amount2" ).val()) - 1000000);
+	  } else {
+		$( "#amount" ).val(new Number($( "#amount" ).val()) + 4000000);
+		$( "#amount2" ).val(new Number($( "#amount2" ).val()) + 1000000);
+	  }
+	  }
+	});
+	
+	$( "#amount" ).val($( "#slider" ).slider( "value" ));
+	
+	$( "#slider2" ).slider({
+	  value:0,
+	  min: 0,
+	  max:6850000,
+	  step: 1370000,
+	  slide: function( event, ui ) {
+	  console.log(event);
+	  var previousVal = parseInt($(this).data("value"));                 
+      $(this).data({"value":parseInt(ui.value)});
+	  
+	 if (previousVal >= parseInt(ui.value))  {
+		$( "#amount" ).val(new Number($("#amount").val()) - 5500000);
+		$( "#amount2" ).val(new Number($( "#amount2" ).val()) - 1370000);
+	  } else {
+		$( "#amount2" ).val(new Number($( "#amount2" ).val()) + 1370000);
+		$( "#amount" ).val(new Number($("#amount").val()) + 5500000);
+	  }
+	  }
+	});
+	
+	$( "#amount2" ).val($( "#slider2" ).slider( "value" ));
+	});
+</script>
+
+<script>
+    $(document).ready(function () {
+	
+    $('#myCarousel').carousel({
+		interval: 4000  	
+	});
+  
+       $('#сarousel').carousel({
+		pause: true,
+        interval: 5000
+       })
+		
+        if (($(window).height() + 100) < $(document).height()) {
+            $('#top-link-block').removeClass('hidden').affix({
+                // how far to scroll down before link "slides" into view
+                offset: {top: 100}
+            });
+        }
+    
+	$('.navigation-bar').onePageNav({
+        changeHash: true,
+        scrollSpeed: 750,
+        scrollThreshold: 0.5,
+        easing: 'swing'
+    });	
+	$('.logo').on("click",function(e){
+		
+		//e.preventDefault();
+		//$('html,body').animate({scrollTop: 0}, 'slow');
+	})
+	
+    });
+</script>
+
+<script type="text/javascript" src="js/jquery.scrollTo.js"></script>
+<script type="text/javascript" src="js/wow.min.js"></script>
+<script type="text/javascript" src="js/inputmask.js"></script>
+<script type="text/javascript" src="js/jquery.inputmask.js"></script>
+<script type="text/javascript" src="js/jquery.nav.js"></script>
+<script type="text/javascript" src="js/popup.js"></script>
+
+<!--[if lt IE 9]>
+	<script src="js/html5shiv.min.js"></script>
+	<script src="js/respond.min.js"></script>
+<![endif]-->
+</head>
+<body id="page-top">
+<!-- header -->
+<nav>
+    <div class="nav-fixed">
+        <div class="navigation">
+            <div class="container">
+                <div id="logo" class="logo">
+                    <a href="http://skd-dom.ru"><img src="images/logo.png" alt="«СКД дом»" /></a>
+                </div>
+                
+                <ul class="navigation-bar">
+                    <li><a href="#company">О компании</a></li>
+                    <li><a href="#franchise">О франшизе</a></li>
+                    <li><a href="#calculation-profits">Расчет прибыли</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                    <li class="phone">+7 (495) 983-00-39</li>
+                </ul>
+                
+                <div class="social-list">
+                    <ul>
+                        <li><a target="_blank" href="https://plus.google.com/+Skd-domRu/about"><i class="fa fa-google-plus-official" aria-hidden="true"></i></a></li>
+                        <li><a target="_blank" href="https://www.instagram.com/skd_dom/"><i class="glyph-icon flaticon-instagram-symbol"></i></a></li><br />
+                        <li><a target="_blank" href="https://www.facebook.com/skddom/?fref=ts"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a target="_blank" href="https://vk.com/skddom"><i class="fa fa-vk" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- header end -->
+
+<section id="calculation-profits" class="header-slider">
+	<div class="container">
+        <div class="row">
+            <div class="col-xs-9">
+            	<div class="carousel-box">
+                	<div class="slogan-top franklin-gothic-demi-cond">
+                    	<h2>Франшиза строительства</h2>
+                        <p>Дома из клееного бруса — наша специализация!</p>
+                    </div>
+                    <div id="myCarousel" class="carousel slide">
+                        <!-- Dot Indicators 
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                        </ol>
+                        -->
+                        <div class="carousel-inner">
+                            <div class="active item">
+                                <img src="images/slider-1.jpg" class="img-responsive" alt="" />                            </div>
+                            <div class="item">
+                                <img src="images/slider-2.jpg" class="img-responsive" alt="" />                            </div>
+                            <div class="item">
+                                <img src="images/slider-3.jpg" class="img-responsive" alt="" />                            </div>
+                            <div class="item">
+                                <img src="images/slider-4.jpg" class="img-responsive" alt="" />                            </div>
+                            <div class="item">
+                                <img src="images/slider-5.jpg" class="img-responsive" alt="" />                            </div>
+                            <div class="item">
+                                <img src="images/slider-6.jpg" class="img-responsive" alt="" />                            </div>
+                        </div>
+                        
+                        <!-- Navigation -->
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                            <span class="chevron-left"></span>                        </a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                            <span class="chevron-right"></span>                        </a>                    </div>
+                    <div class="slogan-bottom franklin-gothic-demi-cond">
+                        <h2>Зарабатывайте на уникальных технологиях<br />
+                            строительства вместе с успешной компанией!</h2>
+                    </div>
+                </div>
+       	  </div>
+            <div class="col-xs-3">
+            	
+                <div class="header-form">
+                	<div class="header-form-title franklin-gothic-demi-cond">
+                    	<h2>Рассчет ежемесячной<br />
+ 							прибыли вместе с<br />
+ 							франшизой СКД-ДОМ</h2>
+                    </div>
+
+                    <form action="" method="post">
+                    	<div class="runner">
+                        	<label class="title">Количество заказов на строительство домов </label> 
+                        	<div class="slider-bg">
+                            	<span class="zero">0</span>
+                                <span class="five">5</span>
+                            	<div class="runner-slider" id="slider"></div>
+                            </div>
+                            
+							<label class="title">Количество домов с отделкой</label>
+                        	<div class="slider-bg last">
+                            	<span class="zero">0</span>
+                                <span class="five">5</span>
+                            	<div class="runner-slider" id="slider2"></div>
+                            </div>
+                            
+                            <label class="title">Средний оборот</label>
+                            <div class="form-group">
+                                <input type="text" id="amount" class="form-control" readonly />
+                                <span class="rub"><i class="fa fa-rub" aria-hidden="true"></i></span>                            </div>
+                             
+                             <label class="title">Средняя прибыль</label>
+                             <div class="form-group">
+                                <input type="text" id="amount2" class="form-control" readonly />
+                                <span class="rub"><i class="fa fa-rub" aria-hidden="true"></i></span>                            </div>
+                        </div>
+                
+                        <div class="input-submit">
+                            <a data-toggle="modal" data-target="#BusinessPlan" class="btn btn-brown btn-block">Получить бизнес-план<br />на мой город</a>                        </div>
+                    </form>
+                </div>
+            
+          </div>
+            
+      	</div>
+    </div>
+
+</section>
+
+<section id="company" class="about">
+	<div class="container">
+    	<div class="row">
+  			<div class="col-xs-8">
+            	<div class="title">
+                	<h2 class="franklin-gothic-demi-cond">О компании</h2>
+                </div>
+                <p><strong>«СКД дом»</strong> — производственно-строительная компания, сопровождающая проект от этапа проектирования до сдачи готового дома заказчику «под ключ». Исключён риск привлечения непрофессиональных или непорядочных субподрядчиков. Мы сами производим клееный брус, и сами несём ответственность за стабильно высокое качество.</p> 
+                
+                <p>Мы уверены в технологии, в точности обработки заготовок, в ответственной доставке. Мы ведём индивидуальную работу с любыми заказчиками и проектами, выполняя доработки, консультируя, помогая заказчику во всех сложных ситуациях.</p> 
+                
+                <p>Мы предлагаем готовые решения с твёрдой ценой — деревянные коттеджи из бруса, дачные дома и сопутствующие постройки. Стоимость строительства останется неизменной на всех этапах производства работ. В проектировании участвуют архитекторы и инженеры-проектировщики самого высокого уровня.</p> 
+                
+                <p>Мы реализуем мечту о собственном доме — долгой здоровой жизни в кругу семьи. Мы стремимся быть лучшими из лучших, поэтому в своей работе используем принцип: честность, обязательность, качество.</p>
+                
+            	<div class="title">
+                	<h2 class="franklin-gothic-demi-cond">О домах</h2>
+                </div>
+                <p>Дом из клееного бруса является экологически чистым строением. В таком доме мы дышим особым воздухом, наполненным природой. Главное преимущество, которым обладает клееный брус, если сравнивать его с обычным массивом древесины, — это прочность и прогнозируемое, лучшее «поведение» готового бруса. В частности, за счёт того, что на стадии сортировки отсеивается большой объём дефектных и некондиционных пиломатериалов.</p>
+                
+                <p>Строительство загородных коттеджей именно из профилированного бруса отличается:<br />
+                <strong>ВО-ПЕРВЫХ</strong> — абсолютной экологической чистотой, так как материал состоит из натуральной природной древесины и особого экологически чистого конструкционного клея.</p>
+                
+                <p><strong>ВО-ВТОРЫХ</strong> — на выходе изделие не требует дополнительной отделки, что существенно экономит средства заказчика, и не деформируется с течением времени. Таким образом, жилье не теряет с течением времени привлекательного внешнего вида, не коробится, не чернеет и не покрывается трещинами.</p>
+                
+                <p><strong>В-ТРЕТЬИХ</strong> — такое жилье не дает усадку, то есть после его возведения можно сразу вставлять окна и двери без страха, что их со временем заклинит, и тут же приступать к внутренним отделочным работам.</p>
+                
+                <p><strong>В-ЧЕТВЕРТЫХ</strong> — дом более прочный, чем построенный из массивного бруса, не подвержен деформации стенового материала, который жестко фиксируется в стене по длине пазами и гребнями и не пропускают влагу, откуда и отличные теплоизоляционные характеристики в сравнении с обычным массивом.</p>
+                
+                <p><strong>В-ПЯТЫХ</strong> — жилье обладает невероятной долговечностью за счет неподверженности к гниению, устойчивости к вредителям, микроорганизмам и грибкам.</p>
+                 
+                <p><strong>Компания «СКД»</strong> занимается только клееным брусом — от производства материала до чистовой отделки дома. Мы знаем все нюансы и тонкости, мы даем реальные гарантии. Коттеджи из бревна, каркасные, щитовые — у каждой технологии есть свои плюсы, но мы строим только из клееного бруса, эта технология — лидер в загородном домостроении.</p>
+                
+            </div>
+            <div class="col-xs-4">
+            	<div class="leader">
+                	<div class="leader-img">
+                    	<img src="images/photo_trunov_circle.jpg" class="img-responsive circle" alt="Трунов Олег Борисович" />
+                    </div>
+                	<h4>Трунов Олег Борисович</h4>
+                    <p class="position">Генеральный директор</p>
+                    <p>«Мы занимаемся производством домов из клееного профилированного бруса «под ключ» с 2003 года. Нашу стратегию можно обозначить пятью словами: знание, опыт, порядочность, ответственность, надёжность.</p>
+                    
+                    <p>Мы строим современные дома из клееного бруса в Москве и Подмосковье, коттеджные посёлки и усадьбы, собираем и продаём готовые дома. Наши специалисты обладают большим опытом в возведении загородного деревянного жилья (коттеджей, дачных домиков и др.), сочетающего традиции русского домостроения и современные технологии.
+                    Приглашаю в любой день посетить нашу демонстрационную площадку, где вы можете посмотреть дома из клееного бруса на разных стадиях постройки, потрогать руками материалы, получить всю информацию о нашей работе и реализованных проектах. Если вы планируете построить загородный дом — клееный брус будет лучшим выбором материала».</p>
+                    
+                
+                </div>
+            
+            </div>
+    	</div>
+   	</div> 
+</section>
+
+<section id="" class="gallery">
+    <div class="set-title text-center franklin-gothic-demi-cond">
+        <h2>Проекты наших домов</h2>
+    </div>
+	<div class="container">
+    	<div class="row">
+  			<div class="col-xs-12">
+
+
+                <div id="carousel" class="carousel slide">
+                 
+                <!--            
+                <ol class="carousel-indicators">
+                    <li data-target="#Carousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#Carousel" data-slide-to="1"></li>
+                    <li data-target="#Carousel" data-slide-to="2"></li>
+                </ol> 
+               	-->
+                 
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+                    
+                <div class="item active">
+                    <div class="item-img"><img src="images/project-1.jpg" alt="" /></div>
+                    <div class="item-img"><img src="images/project-2.jpg" alt="" /></div>
+                    <div class="item-img"><img src="images/project-3.jpg" alt="" /></div>
+                    <div class="item-img last"><img src="images/project-4.jpg" alt="" /></div>
+                    <br clear="left">
+                    <div class="item-img"><img src="images/project-5.jpg" alt="" /></div>
+                    <div class="item-img"><img src="images/project-6.jpg" alt="" /></div>
+                    <div class="item-img"><img src="images/project-7.jpg" alt="" /></div>
+                    <div class="item-img last"><img src="images/project-8.jpg" alt="" /></div>
+                </div>
+                 
+                <div class="item">
+                    <div class="item-img"><img src="images/project-1.jpg" alt="" /></div>
+                    <div class="item-img"><img src="images/project-2.jpg" alt="" /></div>
+                    <div class="item-img"><img src="images/project-3.jpg" alt="" /></div>
+                    <div class="item-img last"><img src="images/project-4.jpg" alt="" /></div>
+                    <br clear="left">
+                    <div class="item-img"><img src="images/project-5.jpg" alt="" /></div>
+                    <div class="item-img"><img src="images/project-6.jpg" alt="" /></div>
+                    <div class="item-img"><img src="images/project-7.jpg" alt="" /></div>
+                    <div class="item-img last"><img src="images/project-8.jpg" alt="" /></div>
+                </div>
+                 
+                <div class="item">
+                    <div class="item-img"><img src="images/project-1.jpg" alt="" /></div>
+                    <div class="item-img"><img src="images/project-2.jpg" alt="" /></div>
+                    <div class="item-img"><img src="images/project-3.jpg" alt="" /></div>
+                    <div class="item-img last"><img src="images/project-4.jpg" alt="" /></div>
+                    <br clear="left">
+                    <div class="item-img"><img src="images/project-5.jpg" alt="" /></div>
+                    <div class="item-img"><img src="images/project-6.jpg" alt="" /></div>
+                    <div class="item-img"><img src="images/project-7.jpg" alt="" /></div>
+                    <div class="item-img last"><img src="images/project-8.jpg" alt="" /></div>
+                </div>
+                 
+                </div>
+                <!-- end carousel-inner-->
+                  	<a data-slide="prev" href="#carousel" class="left carousel-control"><i class="glyph-icon flaticon-chevron-pointing-to-the-left"></i></a>
+                  	<a data-slide="next" href="#carousel" class="right carousel-control"><i class="glyph-icon flaticon-right-chevron"></i></a>
+                </div>
+                <!-- end Carousel-->
+
+                
+            </div>
+    	</div>
+   	</div> 
+</section>
+
+
+<section id="franchise" class="tabs-business">
+	<div class="container">
+    	<div class="row">
+  			<div class="col-xs-12">
+
+              <div class="business-tab">
+                    <ul class="nav nav-tabs" id="myTab">
+                      <li class="one active"><a data-toggle="tab" href="#about-franchise">Описание<br /> франшизы</a></li>
+                      <li class="two"><a data-toggle="tab" href="#financial-results">Расчет<br /> прибыли</a></li>
+                      <li class="three"><a data-toggle="tab" href="#benefit-franchisee">Форматы<br /></a></li>
+                      <li class="four"><a data-toggle="tab" href="#partner-requirements">Требования<br /> к франчайзи</a></li>
+                    </ul>
+                    
+                  <div class="tab-content">
+                   	  <span class="px"></span>
+                    
+                      <div id="about-franchise" class="tab-pane active fade in">
+                        
+                        	<div class="one_half">
+                                <h3 class="franklin-gothic-demi-cond">Описание франшизы</h3>
+                                
+                                <p>В первую очередь, франшиза строительства деревянных домов «СКД дом» будет интересна тем, кто уже владеет строительными компаниями и хочет предложить своим клиентам качественные деревянные дома из клееного бруса.</p> 
+                                
+                                <p class="last"><strong>Мы готовы полностью поделиться своей бизнес-моделью, а также предоставить в распоряжение нашим франчайзи:</strong></p> 
+                                <ul>
+                                    <li>Эксклюзив на город/регион</li>
+                                    <li>Наших архитекторов и сметчиков</li>
+                                    <li>Нашу собственную базу дизайн-проектов коттеджей</li>
+                                    <li>Поставку клееного бруса с нашего производства в России</li>
+                                </ul>
+                                
+                                <div class="description-img">  
+                                	<img src="images/description-franchise-1.jpg" alt="Описание франшизы" />
+                                </div>
+								<br />
+                                <h3 class="franklin-gothic-demi-cond">Франчайзинговое предложение</h3>
+                                <p>Мы предлагаем Вам открыть (или расширить текущий) бизнес в своем регионе по строительству быстровозводимых домов из клееного бруса под торговой маркой <strong>«СКД дом»</strong>.</p>
+                                
+                                <p>Мы имеем систему по привлечению клиентов, продажам, проектированию, строительству и отделке, которая вырабатывалась и модернизировалась на протяжении 13 лет. Вы будете строить дома, коттеджи, бани и, что самое главное, они будут поставляться полностью готовыми домокомплектами с одного предприятия.</p>
+                                
+                                <p>Вам не нужны технические знания, умения читать чертежи, считать сметы и т.д. Мы вас всему научим, а много просто сделаем за вас. На первых этапах для Вас будут работать наши архитекторы, проектировщики, прорабы, сметчики.</p>
+                                
+                                <p>Даже не имея представления о строительном бизнесе, с нами Вы без проблем сможете создать успешную, приносящую прибыль, строительную компанию всего через 3 месяца.</p>
+
+                            </div>
+                            
+                            <div class="half-last">
+                                <div class="description-img">
+                                	<img src="images/description-franchise-2.jpg" alt=">Франчайзинговое предложение" />
+                                </div>
+								<br />
+                                <h3 class="franklin-gothic-demi-cond">Преимущества франшизы</h3>
+                                
+                                <ul>
+                                    <li>Опыт проектирования и строительства домов их клееного бруса с 2003 года</li>
+                                    <li>Подключение к единому сайту — источнику заявок</li>
+                                    <li>Собственное производство клееного бруса</li>
+                                    <li>Эксклюзив на регион </li>
+                                    <li>Готовые, запатентованные, постоянно пополняемые коллекции проектов домов</li>
+                                    <li>Обучим: как продавать, как строить, как вести документооборот!</li>
+                                    <li>Техническая поддержка на всех этапах — архитектура, проектирование, строительство</li>
+                                    <li>Передача готовых клиентов (всех клиентов из вашего региона, которые обращаются к нам на сайт или на выставках, мы передаем вам)</li>
+                                    <li>Уникальная система мотивации менеджеров проектов с привязкой к бизнес-целям</li>
+                                </ul>
+                                <div class="business-wrapper">
+                                    <div class="business-form" id="form1">
+                                    
+                                        <form action="" method="post">
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <div class="form-group">
+                                                        <input name="email" id="email2" type="text" class="form-control" required placeholder="Ваш телефон или эл. почта" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <textarea name="text" id="text2" required class="form-control h-75" placeholder="Добрый день!"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <div class="text-center">
+                                                        <div class="text">
+                                                            вы можете позвонить<br /> нам по телефону:
+                                                        </div>
+                                                        <div class="phone">+7 (495) 983-00-39 </div>
+                                                    </div>
+                                                    
+                                                    <div class="input-submit">
+                                                        <input type="submit" id="submit2" value="Отправить запрос"  class="btn btn-green" name="submit" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    
+                                        </form> 
+                                    </div>
+									<div class="message-box" id="message1" style="display: none;">
+										<p>Спасибо за доверие, мы свяжемся с вами в самые кратчайшие сроки!</p>
+									</div>
+                                </div>
+                                
+                            </div>
+							
+                    </div>
+                        
+                        <div id="financial-results" class="tab-pane fade">
+                        
+                        	<div class="one_half">
+                            	<h3 class="franklin-gothic-demi-cond">Расчет прибыли</h3>
+                                <p><strong>Стартовые инвестиции:</strong> от <span>900 000 рублей</span></p>
+                                
+                                <p>Общие инвестиции в бизнес по строительству домов из бруса от компании <strong>«СКД-дом»</strong> составляют от <strong>900 000 рублей</strong> в зависимости от города и пакета.</p>
+                                
+                                <p class="last"><strong>В стоимость пакета «Standart» входит:</strong></p> 
+                                <ul>
+                                    <li>Паушальный взнос — <strong>500 000 рублей</strong>
+                                    <li>Затраты на аренду и оборудование офиса, тренинг одного продавца и одного сборщика — около <strong>400 000 рублей</strong></li>
+                                    <li>Срок окупаемости: от <strong>3 месяцев</strong></li>
+                                    <li>Оборот в месяц: от <strong>1 500 000 рублей</strong></li>
+                                    <li>Роялти: <strong>5%</strong></li>
+                                    <li>Паушальный взнос: <strong>500 000 рублей</strong></li>
+                                </ul>
+                                <p class="last"><strong>В паушальный взнос входит:</strong></p> 
+                                <ul>
+                                    <li>Право пользоваться брендом</li>
+                                    <li>Право использовать архитекторов и сметчиков компании</li>
+                                    <li>Права на использование, ежегодно пополняемых проектов домов СКД</li>
+                                    
+                                </ul>
+                            </div>
+                            
+                            <div class="half-last">
+                                <ul>
+                                    <li>Шеф-монтаж одного дома (проезд и проживание франчайзи оплачивает отдельно)</li>
+                                    <li>Промо материалы, буклеты, визитки, постеры</li>
+                                    <li>Размещение на сайте компании информации о франчайзи, SEO оптимизация по ключевым словам в городе/регионе</li>
+                                    <li>Настройка и запуск кампании по контекстной и медийно-баннерной рекламе</li>
+                                </ul>
+                                 
+
+                                <p>Более подробный бизнес-план мы готовы предоставить вам лично!</p>
+                            
+                            	<div class="business-wrapper">
+                                    <div class="business-form" id="form2">
+    
+                                            <form action="" method="post">
+                                                <div class="row">
+                                                    <div class="col-xs-6">
+                                                        <div class="form-group">
+                                                            <input name="email" id="email3" type="text" class="form-control" required placeholder="Ваш телефон или эл. почта" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <textarea name="text" id="text3" required class="form-control h-75" placeholder="Добрый день!"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div class="text-center">
+                                                            <div class="text">
+                                                                вы можете позвонить<br /> нам по телефону:
+                                                            </div>
+                                                            <div class="phone">+7 (495) 983-00-39 </div>
+                                                        </div>
+                                                        
+                                                        <div class="input-submit">
+                                                            <input type="submit" id="submit3" value="Отправить запрос"  class="btn btn-green" name="submit" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+    
+                                            </form> 
+                                        </div>
+										<div class="message-box" id="message2" style="display: none;">
+											<p>Спасибо за доверие, мы свяжемся с вами в самые кратчайшие сроки!</p>
+										</div>
+                                   </div>     
+                            </div>
+                              
+                        </div>
+                
+                        <div id="benefit-franchisee" class="tab-pane fade">
+  
+                          	<div class="one_half">
+                            	<h3 class="franklin-gothic-demi-cond">Пакет «Standart»</h3>
+                                <p><strong>Стоимостью от</strong> <span>900 000 руб.,</span><br /> в зависимости от города.</p>
+                                
+                                <p>Формат офиса, или дополнительного направления бизнеса для существующих строительных компаний.</p>
+                                <p><strong>Срок окупаемости:</strong> от 3 месяцев. </p>
+                                
+                                <p class="last"><strong>Стартовые инвестиции включают:</strong></p> 
+                                <ul>
+                                    <li>Запуск — около 400 тысяч рублей</li>
+                                    <li>Обучение менеджера по продажам </li>
+                                    <li>Аренда офиса</li>
+                                    <li>Оформление офиса, мебель, оргтехника</li>
+                                    <li>Запуск рекламы</li>
+                                </ul>
+								<p class="last"><strong>Паушальный взнос — 500 000 руб.</strong></p>
+                                <ul>
+                                    <li>Право пользоваться брендом</li>
+                                    <li>Право использовать архитекторов и сметчиков компании</li>
+                                    <li>Право на использование проектов домов СКД</li>
+                                    <li>Шеф-монтаж одного дома (без проезда и проживания)</li>
+                                    <li>Промо-материалы, буклеты, визитки, постеры</li>
+                                    <li>Размещение на сайте информации о франчайзи, SEO оптимизация по ключевым словам в городе/регионе</li>
+                                    <li>Настройка и запуск  контекстной и медийно-баннерной рекламы на ваш регион</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="half-last">   
+								<h3 class="franklin-gothic-demi-cond">Пакет «Premium»</h3>
+								<p><strong>Стоимость от</strong> <span>7,5 млн. руб.</span></p>
+								<p><strong>Включает в себя: Пакет «Standart»</strong> + строительство демонстрационного дома (он же офис продаж) в согласованной с франчайзером локации в Вашем регионе.</p>
+								<p class="last"><strong>Рекомендованные параметры локации:</strong></p> 
+                                <ul>
+                                    <li>Поселки бизнес-класса застроенные не менее чем на 30%</li>
+                                    <li>Архитектура поселков — в том числе деревянные дома</li>
+                                    <li>Близость к водоемам</li>
+                                </ul>
+
+								<p><strong>Срок окупаемости:</strong> от 12 месяцев.</p>
+                                
+                                <div class="business-wrapper">
+                                    <div class="business-form" id="form3">
+
+                                        <form action="" method="post">
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <div class="form-group">
+                                                        <input name="email" id="email4" type="text" class="form-control" required placeholder="Ваш телефон или эл. почта" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <textarea name="text" id="text4" required class="form-control h-75" placeholder="Добрый день!"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <div class="text-center">
+                                                        <div class="text">
+                                                            вы можете позвонить<br /> нам по телефону:
+                                                        </div>
+                                                        <div class="phone">+7 (495) 983-00-39 </div>
+                                                    </div>
+                                                    
+                                                    <div class="input-submit">
+                                                        <input type="submit" id="submit4" value="Отправить запрос"  class="btn btn-green" name="submit" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form> 
+                                    </div>
+									<div class="message-box" id="message3" style="display: none;">
+										<p>Спасибо за доверие, мы свяжемся с вами в самые кратчайшие сроки!</p>
+									</div>
+                               </div>     
+                                    
+                            </div>
+                            
+                        </div>
+              			
+                        <div id="partner-requirements" class="tab-pane fade">
+                        
+                          	<div class="one_half">
+                            	<h3 class="franklin-gothic-demi-cond">Требования к франчайзи</h3>
+                                <ul>
+                                    <li>Опыт успешной предпринимательской деятельности</li>
+                                    <li>Наличие действующего строительного бизнеса как большой плюс</li>
+                                    <li>Желательно строительное образование</li>
+                                    <li>Девелоперы коттеджных поселков бизнес-класса</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="half-last">
+                            
+                                <div class="business-wrapper">
+                                    <div class="business-form last" id="form4">
+
+                                        <form action="" method="post">
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <div class="form-group">
+                                                        <input name="email" id="email5" type="text" class="form-control" required placeholder="Ваш телефон или эл. почта" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <textarea name="text" id="text5" required class="form-control h-75" placeholder="Добрый день!"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <div class="text-center">
+                                                        <div class="text">
+                                                            вы можете позвонить<br /> нам по телефону:
+                                                        </div>
+                                                        <div class="phone">+7 (495) 983-00-39 </div>
+                                                    </div>
+                                                    
+                                                    <div class="input-submit">
+                                                        <input type="submit" id="submit5" value="Отправить запрос"  class="btn btn-green" name="submit" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form> 
+                                    </div>
+									<div class="message-box" id="message4" style="display: none;">
+										<p>Спасибо за доверие, мы свяжемся с вами в самые кратчайшие сроки!</p>
+									</div>
+                              	</div>
+                                      
+                            </div>
+                              
+                        </div>
+                        
+                    </div>
+              </div>
+                
+            </div>
+    	</div>
+   	</div> 
+</section>
+
+
+<section id="contacts" class="earn">
+	<div class="container">
+    	<div class="row">
+		
+        	<div class="col-xs-8">
+                <div class="director">
+                	<div class="photo-img">
+                    	<img src="images/photo-prudnikov.jpg" alt="" />
+                    </div>
+                	<h4>Юрий Прудников</h4>
+                    <p class="position">Директор по франчайзингу</p>
+                    <div class="phone">+7 (495) 983-00-39 </div>
+                </div>
+                
+                <div class="earn-text">
+                	<h2 class="franklin-gothic-demi-cond">Зарабатывайте с нами!</h2>
+					<p>«На выставках нас часто спрашивали: «Есть ли у вас франшиза?». И именно это побудило нас ее сделать и теперь предложить вам! Есть много причин, почему наша франшиза в строительстве наиболее привлекательна на рынке, – это и высокое качество наших домов и многолетний опыт, и отсутствие негативных отзывов от наших клиентов.</p>
+
+					<p>Но самое главное, на наш взгляд, это абсолютно понятная модель бизнеса и совершенно небольшие вложения в такой надежый и весьма прибыльный бизнес! Приезжайте к нам в офис недалеко от г. Истра, посмотрите как мы работаем, на нашу команду и на наши дома, и вы поймете - мы надежный партнер!»</p>
+                </div>
+                
+            </div>
+            
+  			<div class="col-xs-4">
+            	<div class="business-wrapper">
+                
+                    <div class="earn-form" id="form5">
+
+						<form action="" method="post">
+
+                            <div class="form-group">
+                                <input name="email" id="email6" type="text" class="form-control" required placeholder="Ваш телефон или эл. почта" />
+                            </div>
+                            <div class="form-group">
+                                <textarea name="text" id="text6" required class="form-control h-150" placeholder="Добрый день!"></textarea>
+                            </div>
+
+                            
+                            
+                            <div class="input-submit">
+                                <input type="submit" id="submit6" value="Отправить запрос"  class="btn btn-block btn-white" name="submit" />
+                            </div>
+						</form>
+
+                    </div>
+					<div class="message-box-2" id="message5" style="display: none;">
+						<p>Спасибо за доверие, мы свяжемся с вами в самые кратчайшие сроки!</p>
+					</div>
+            
+                </div>
+            </div>
+    	</div>
+   	</div> 
+</section>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-2">
+            	<div class="logo">
+                	<img src="images/logo-footer.png" alt="" />
+                </div>
+            </div>
+            
+            <div class="col-xs-4">
+            	<div class="phone">
+            		Телефон в Москве: +7 (495) 983-00-39
+				</div>
+            	<div class="copy">
+                	<p>&copy; 2016 ООО «СКД дом»</p>
+                </div>
+            </div>
+            
+            <div class="col-xs-6">
+            	<div class="social-list">
+                    <ul>
+                        <li><a target="_blank" href="https://plus.google.com/+Skd-domRu/about"><i class="fa fa-google-plus-official" aria-hidden="true"></i></a></li>
+                        <li><a target="_blank" href="https://www.instagram.com/skd_dom/"><i class="glyph-icon flaticon-instagram-symbol"></i></a></li><br />
+                        <li><a target="_blank" href="https://www.facebook.com/skddom/?fref=ts"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a target="_blank" href="https://vk.com/skddom"><i class="fa fa-vk" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+                <div class="foot-menu">
+                	<ul>
+                    <li><a target="_blank" href="http://www.skd-dom.ru/">Основной сайт</a></li>
+					<li><a target="_blank" href="http://www.skd-dom.ru/o-kompanii/otzyvy/">Отзывы клиентов</a></li>
+					<li><a target="_blank" href="http://www.skd-dom.ru/catalog/popular/">Каталог домов</a></li>
+                    </ul>
+                </div>
+            </div>
+      	</div>
+    </div>
+</footer>
+
+
+<span id="top-link-block" class="hidden">
+    <a href="#top" onClick="$('html,body').animate({scrollTop: 0}, 'slow'); return false;">
+        <i class="fa fa-chevron-up fa-lg"></i>
+    </a>
+</span>
+
+
+<div class="modal business-plan fade" id="BusinessPlan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  	<div class="modal-dialog">
+    	<form action="" method="post" role="form">
+            <div class="modal-content">
+                <div class="modal-body">
+				<!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
+				<div class="form-group">
+					<input type="text" name="email" id="email1" required class="form-control" placeholder="Ваш телефон или эл. почта" />
+				</div>
+				<div class="form-group">
+					<textarea name="text" id="text1" required class="form-control h-150" placeholder="Добрый день!"></textarea>
+				</div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <div class="input-submit">
+                        <button type="submit" id="submit1" class="btn btn-brown btn-block" name="submit">Получить бизнес-план<br />на мой город</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+  	</div>
+</div>
+
+
+</body>
+</html>

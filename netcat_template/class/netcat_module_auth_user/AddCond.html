@@ -1,0 +1,23 @@
+<?
+if ($f_ForumName) {
+  if ( !nc_preg_match("/^[а-яa-z 0-9_,.-]+$/i", $f_ForumName) ) {
+    $warnText = "неверный формат поля \"Имя пользователя\", используйте буквы, цифры, знак подчёркивания, дефис или пробел.<br><br>";
+    $posting = 0;
+  } elseif ($db->get_var("SELECT User_ID FROM User WHERE '$f_ForumName' IN ($AUTHORIZE_BY, ForumName)")) {
+    $warnText = "Имя пользователя <b>$f_ForumName</b> занят другим пользователем<br><br>";
+    $posting = 0;
+  }
+}
+if ($f_ForumSignature) {
+  if ( !nc_preg_match("/^[а-яa-z 0-9_,.-]+$/i", $f_ForumSignature) ) {
+    $warnText = "неверный формат поля \"Подпись в форуме\", используйте буквы, цифры, знак подчёркивания, дефис или пробел.<br><br>";
+    $posting = 0;
+  }
+}
+if ($f_Email) {
+  if ($db->get_var("SELECT User_ID FROM User WHERE Email = '$f_Email'")) {
+    $warnText = "Пользователь с таким email адресом уже зарегистрирован!<br><br>";
+    $posting = 0;
+  }
+}
+?>

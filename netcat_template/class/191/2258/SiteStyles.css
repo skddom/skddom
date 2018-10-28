@@ -1,0 +1,27 @@
+.img-responsive{width:100%;}
+table.calc {border-bottom:1px solid #ebebeb;}
+table.calc thead tr {background:none;}
+table.calc thead th {background:none;}
+table.calc thead tr td, table.calc thead  th {text-transform:uppercase;color: rgb(105, 105, 105);padding-bottom:10px;}
+table.calc thead tr td:first-child {padding-left:0;}
+table.calc thead tr td:nth-child(3),table.calc thead tr td:nth-child(4) {text-align:center;}
+table.calc tbody tr {background:none;}
+table.calc tbody tr td {border-top:1px solid #ebebeb;border-right:1px solid #ebebeb;color: #8f8f8f;font-size:15px;}
+table.calc tbody tr td.option{border-left:1px solid #ebebeb;color:#272c33;width:20%;font-size: 22px;font-family: Roboto;line-height: 22px;font-weight: bold;}
+table.calc tbody tr td.name{width:50%;}
+.vc_custom_1438786166100 {
+    margin-top: 45px !important;
+    margin-bottom:-60px !important;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    background-color: #eeeeee !important;
+}
+.vc_custom_1438786166100 .mgt-cta-block-header:after{content:none;}
+.vc_custom_1438786166100 a.btn {font-size:13px;padding: 12px 30px;line-height: 18px;}
+.vc_custom_1438786166100 a.btn.mgt-style-bordered {font-size:13px;padding: 9px 30px;line-height: 18px;margin-right:10px;}
+.img {position:relative;}
+.nachnets {display:table;position:absolute; left:0; bottom:0;right:0;background:rgba(0,0,0,0.4);color:#fff;font-family:Roboto;font-weight:300;}
+.nachnets p {display:inline-block;padding:0;margin:0;font-size:15px;vertical-align:middle;display:table-cell;padding:10px 20px;}
+.nachnets p:first-child{width:40%;}
+.clue-bottom .btn,.clue-bottom div{width:100%;}
+.clue-bottom .btn{padding:26px 30px;height:auto;}

@@ -1,0 +1,16 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+<?php $result .= " ";if($f_SliderPath&&$f_MainImgPath)$f_MainImg=$f_SliderPath.$f_MainImgPath;
+if (is_array($br->projects[$f_RowID])) extract($br->projects[$f_RowID]);
+$result.="$f_AdminButtons
+
+            <li><a href='$fullLink'><img src=\"$f_SliderPath$f_MainImgPath\" alt=\"$f_Name\" title=\"$f_Name\" /></a><span class=\"icon\"></span>
+              <div class=\"rhino-caption\">
+                <div class=\"name corbel\"><a href=\"$fullLink\">$f_Name</a></div>
+                <div class=\"price\"> <a href=\"/price/calc/?house=$f_house_id\" class=\"calc\"></a>
+                  <p> <span><a href=\"$fullLink\">Стоимость</a>: </span> <a href=\"$fullLink\" class=\"cos\">$f_Price р.</a></p>
+                  <p> <span><a href=\"$fullLink\">Прощадь</a>:</span> <a href=\"$fullLink\" class=\"cos\">$f_Square кв.м.</a></p>
+                </div>
+                <a href=\"$fullLink\" class=\"special\">Спецпредложение</a> </div>
+            </li>
+ "; ?>
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

@@ -1,0 +1,163 @@
+<!--noindex-->
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter4312879 = new Ya.Metrika({
+                    id:4312879,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true,
+                    triggerEvent:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName('script')[0],
+            s = d.createElement('script'),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'https://mc.yandex.ru/metrika/watch.js';
+
+        if (w.opera == '[object Opera]') {
+            d.addEventListener('DOMContentLoaded', f, false);
+        } else { f(); }
+    })(document, window, 'yandex_metrika_callbacks');
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/4312879" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<!-- calltouch code -->
+<script type="text/javascript">
+(function (w, d, nv, ls, yac){
+    var lwait = function (w, on, trf, dly, ma, orf, osf) { var pfx = "ct_await_", sfx = "_completed";  if(!w[pfx + on + sfx]) { var ci = clearInterval, si = setInterval, st = setTimeout , cmld = function () { if (!w[pfx + on + sfx]) {  w[pfx + on + sfx] = true; if ((w[pfx + on] && (w[pfx + on].timer))) { ci(w[pfx + on].timer);  w[pfx + on] = null;   }  orf(w[on]);  } };if (!w[on] || !osf) { if (trf(w[on])) { cmld();  } else { if (!w[pfx + on]) { w[pfx + on] = {  timer: si(function () { if (trf(w[on]) || ma < ++w[pfx + on].attempt) { cmld(); } }, dly), attempt: 0 }; } } }   else { if (trf(w[on])) { cmld();  } else { osf(cmld); st(function () { lwait(w, on, trf, dly, ma, orf); }, 0); } }}};
+    var ct = function (w, d, e, c, n){ var a = 'all', b = 'tou', src = b + 'c' + 'h';  src = 'm' + 'o' + 'd.c' + a + src; var jsHost = "https://" + src, s = [{"sp":"1","sc":d.createElement(e)},{"sp":"2","sc":d.createElement(e)},{"sp":"3","sc":d.createElement(e)}]; var jsf = function (w, d, s, h, c, n, yc) { if (yc !== null) { lwait(w, 'yaCounter'+yc, function(obj) { return (obj && obj.getClientID ? true : false); }, 50, 100, function(yaCounter) { s.forEach(function(el) { el.sc.async = 1; el.sc.src = jsHost + "." + "r" + "u/d_client.js?param;specific_id"+el.sp+";" + (yaCounter  && yaCounter.getClientID ? "ya_client_id" + yaCounter.getClientID() + ";" : "") + (c ? "client_id" + c + ";" : "") + "ref" + escape(d.referrer) + ";url" + escape(d.URL) + ";cook" + escape(d.cookie) + ";attrs" + escape("{\"attrh\":" + n + ",\"ver\":171110}") + ";"; p = d.getElementsByTagName(e)[0]; p.parentNode.insertBefore(el.sc, p); }); }, function (f) { if(w.jQuery) { w.jQuery(d).on('yacounter' + yc + 'inited', f ); }}); } else { s.forEach(function(el) { el.sc.async = 1; el.sc.src = jsHost + "." + "r" + "u/d_client.js?param;specific_id"+el.sp+";" + (c ? "client_id" + c + ";" : "") + "ref" + escape(d.referrer) + ";url" + escape(d.URL) + ";cook" + escape(d.cookie) + ";attrs" + escape("{\"attrh\":" + n + ",\"ver\":171110}") + ";"; p = d.getElementsByTagName(e)[0]; p.parentNode.insertBefore(el.sc, p); }); } };if (!w.jQuery) { var jq = d.createElement(e); jq.src = jsHost + "." + "r" + 'u/js/jquery-1.7.min.js'; jq.onload = function () { lwait(w, 'jQuery', function(obj) { return (obj ? true : false); }, 30, 100, function () { jsf(w, d, s, jsHost, c, n, yac);  }); }; p = d.getElementsByTagName(e)[0]; p.parentNode.insertBefore(jq, p); } else { jsf(w, d, s, jsHost, c, n, yac); } };
+    var gaid = function (w, d, o, ct, n) { if (!!o) { lwait(w, o, function (obj) {  return (obj && obj.getAll ? true : false); }, 200, (nv.userAgent.match(/Opera|OPR\//) ? 10 : 20), function (gaCounter) { var clId = null; try {  var cnt = gaCounter && gaCounter.getAll ? gaCounter.getAll() : null; clId = cnt && cnt.length > 0 && !!cnt[0] && cnt[0].get ? cnt[0].get('clientId') : null; } catch (e) { console.warn("Unable to get clientId, Error: " + e.message); } ct(w, d, 'script', clId, n); }, function (f) { w[o](function () {  f(w[o]); })});} else{ ct(w, d, 'script', null, n); }};
+    var cid  = function () { try { var m1 = d.cookie.match('(?:^|;)\\s*_ga=([^;]*)');if (!(m1 && m1.length > 1)) return null; var m2 = decodeURIComponent(m1[1]).match(/(\d+\.\d+)$/); if (!(m2 && m2.length > 1)) return null; return m2[1]} catch (err) {}}();
+    if (cid === null && !!w.GoogleAnalyticsObject){
+        if (w.GoogleAnalyticsObject=='ga_ckpr') w.ct_ga='ga'; else w.ct_ga = w.GoogleAnalyticsObject;
+        if (typeof Promise !== "undefined" && Promise.toString().indexOf("[native code]") !== -1){new Promise(function (resolve) {var db, on = function () {  resolve(true)  }, off = function () {  resolve(false)}, tryls = function tryls() { try { ls && ls.length ? off() : (ls.x = 1, ls.removeItem("x"), off());} catch (e) { nv.cookieEnabled ? on() : off(); }};w.webkitRequestFileSystem ? webkitRequestFileSystem(0, 0, off, on) : "MozAppearance" in d.documentElement.style ? (db = indexedDB.open("test"), db.onerror = on, db.onsuccess = off) : /constructor/i.test(w.HTMLElement) ? tryls() : !w.indexedDB && (w.PointerEvent || w.MSPointerEvent) ? on() : off();}).then(function (pm){
+            if (pm){gaid(w, d, w.ct_ga, ct, 2);}else{gaid(w, d, w.ct_ga, ct, 3);}})}else{gaid(w, d, w.ct_ga, ct, 4);}
+    }else{ct(w, d, 'script', cid, 1);}})
+(window, document, navigator, localStorage, "4312879");
+</script>
+<script>
+jQuery(document).on('click','form.js-callback input[type="submit"]',function() { 
+var m = jQuery(this).closest('form'); 
+var fio = m.find('input[name="f_Name"]').val(); 
+var phone = m.find('input[name="f_Phone"]').val();
+var sub = 'Заказать звонок';
+var ct_site_id = 20774;
+var sessionId = '';
+if(!!window.call_value_1){ct_site_id = '20774'; sessionId = window.call_value_1;}
+if(!!window.call_value_2){ct_site_id = '20835'; sessionId = window.call_value_2;}
+if(!!window.call_value_3){ct_site_id = '20836'; sessionId = window.call_value_3;}
+if (jQuery('.js-ch-city').text().indexOf('Москва') > -1) {
+    ct_site_id = 20774;
+}
+if (jQuery('.js-ch-city').text().indexOf('Екатеринбург') > -1) {
+    ct_site_id = 20836;
+}
+if (jQuery('.js-ch-city').text().indexOf('Санкт-Петербург') > -1) {
+    ct_site_id = 20835;
+}
+var ct_data = {             
+fio: fio,
+phoneNumber: phone,
+subject: sub,
+sessionId: sessionId 
+};
+if (!!phone && !!fio){
+jQuery.ajax({  
+  url: 'https://api-node7.calltouch.ru/calls-service/RestAPI/requests/' + ct_site_id + '/register/',      
+  dataType: 'json',         
+  type: 'POST',          
+  data: ct_data,
+  async: false
+}); 
+}
+});
+</script>
+<script>
+jQuery(document).on('click','form#dsorder-form input[type="submit"]',function() { 
+var m = jQuery(this).closest('form'); 
+var fio = m.find('input[name="name"]').val(); 
+var phone = m.find('input[name="field-name238580"]').val();
+var mail = m.find('input[name="email"]').val();
+var sub = 'Заказать строительство';
+var ct_site_id = 20774;
+if (jQuery('.js-ch-city').text().indexOf('Москва') > -1) {
+    ct_site_id = 20774;
+}
+if (jQuery('.js-ch-city').text().indexOf('Екатеринбург') > -1) {
+    ct_site_id = 20836;
+}
+if (jQuery('.js-ch-city').text().indexOf('Санкт-Петербург') > -1) {
+    ct_site_id = 20835;
+}
+var sessionId = '';
+if(!!window.call_value_1){ct_site_id = '20774'; sessionId = window.call_value_1;}
+if(!!window.call_value_2){ct_site_id = '20835'; sessionId = window.call_value_2;}
+if(!!window.call_value_3){ct_site_id = '20836'; sessionId = window.call_value_3;}
+var ct_data = {             
+fio: fio,
+phoneNumber: phone,
+email: mail,
+subject: sub,
+sessionId: sessionId 
+};
+if (!!phone && !!fio){
+jQuery.ajax({  
+  url: 'https://api-node7.calltouch.ru/calls-service/RestAPI/requests/' + ct_site_id + '/register/',      
+  dataType: 'json',         
+  type: 'POST',          
+  data: ct_data,
+  async: false
+}); 
+}
+});
+</script>
+<script>
+jQuery(document).on('click','#feedback- form input[type="submit"]',function() { 
+var m = jQuery(this).closest('form'); 
+var fio = m.find('input[name="f_Name"]').val(); 
+var mail = m.find('input[name="f_Email"]').val();
+var theme = m.find('input[name="f_Subject"]').val();
+var comment = m.find('textarea[name="f_Text"]').val();
+var sub = 'Обратная связь';
+var ct_site_id = 20774;
+var sessionId = '';
+if(!!window.call_value_1){ct_site_id = '20774'; sessionId = window.call_value_1;}
+if(!!window.call_value_2){ct_site_id = '20835'; sessionId = window.call_value_2;}
+if(!!window.call_value_3){ct_site_id = '20836'; sessionId = window.call_value_3;}
+if (jQuery('.js-ch-city').text().indexOf('Москва') > -1) {
+    ct_site_id = 20774;
+}
+if (jQuery('.js-ch-city').text().indexOf('Екатеринбург') > -1) {
+    ct_site_id = 20836;
+}
+if (jQuery('.js-ch-city').text().indexOf('Санкт-Петербург') > -1) {
+    ct_site_id = 20835;
+}
+var ct_data = {             
+fio: fio,
+email: mail,
+subject: sub,
+sessionId: sessionId 
+};
+if (!!mail && !!fio && !!theme && !!comment){
+jQuery.ajax({  
+  url: 'https://api-node7.calltouch.ru/calls-service/RestAPI/requests/' + ct_site_id + '/register/',      
+  dataType: 'json',         
+  type: 'POST',          
+  data: ct_data,
+  async: false
+}); 
+}
+});
+</script>
+<!-- /calltouch code -->
+<!--/noindex-->	

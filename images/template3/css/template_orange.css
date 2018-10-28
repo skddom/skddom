@@ -1,0 +1,8 @@
+a {color: #FF9900;}
+
+.top_menu  {background: #FF9900 url('../i/templates/orange/top_menu_gradient.gif') repeat-x left top;}
+.top_menu .top_menu_bg1 {background: transparent url('../i/templates/orange/top_menu_bg1.gif') no-repeat left top;}
+.top_menu .top_menu_bg2 {background: transparent url('../i/templates/orange/top_menu_bg2.gif') no-repeat right top;}
+.nc_subdivision_list .nc_menu_item a {background: transparent url('../i/templates/orange/arrow.gif') no-repeat right center;}
+.top_menu a {border-right: 1px solid #FF6600;}
+.orange_border {background: #FF9900;}

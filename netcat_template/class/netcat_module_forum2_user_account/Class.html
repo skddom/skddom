@@ -1,0 +1,29 @@
+<!-- FormPrefix --><? echo $f_AdminCommon; ?>
+
+<?= s_browse_cc($browse_tabs) ?>
+<h2><?= $PageTitle ?></h2>
+<? if (!$totRows) : ?>
+	<div style='margin-top: 10px;'>Нет записей.</div>
+<? endif; ?>
+<table cellpadding='5' cellspacing='1' border='0' style='width:100%; background:#CCC; margin-top: 10px;'><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><? echo $f_AdminButtons; ?>
+<tr class='title' id='reply<?= $f_RowID ?>'>
+  <td style='width: 15%;background:<?= is_even($f_RowNum) ? "#EEE" : "#FFF" ?>'> <?= $f_Created ?>
+  </td>
+  <td style='background:<?= is_even($f_RowNum) ? "#EEE" : "#FFF" ?>'> 
+     <a href='<?= $f_Hidden_URL ?>'><?= $f_Subdivision_Name ?></a> >> <a href='<?= $f_Hidden_URL ?>topic_<?= $f_Topic_ID ?>.html#reply<?= $f_RowID ?>'><?= $f_Subject ?></a>
+  </td>
+</tr>
+
+<tr>
+  <td style='background:<?= is_even($f_RowNum) ? "#EEE" : "#FFF" ?>' colspan='2'>
+    <?= nl2br(nc_bbcode(htmlspecialchars($f_Message))) ?><br/><br/>
+	  <? if ($f_Author_Signature) : ?> ———————————<br/><?= nc_bbcode(htmlspecialchars($f_Author_Signature)) ?><? endif; ?>
+  </td>
+</tr><!-- /RecordTemplate -->
+
+<!-- FormSuffix --></table>
+<? if ($totRows > $f_RowNum) : ?>
+	<tr><td colspan='2' style='background:#EEE'>Страницы: <?= browse_messages($cc_env, 5) ?></td></tr>
+<? endif; ?><!-- /FormSuffix -->

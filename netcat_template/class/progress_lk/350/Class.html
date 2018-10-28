@@ -1,0 +1,19 @@
+<!-- FormPrefix --><div class="progress0 text js-wrap tpl-<?=$classID?>">
+    <div class="progress-left">
+    <div class="progress-option"><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?if ($f_Option != $old):?>
+    <?if ($old):?>
+    </div>
+    <div class="progress-option">
+    <?endif?>
+        <div class="progress-option-title"><a data-callback="" data-target=".js-ajax-result" href="#" data-load1="<?=$f_Url?>"><?=$f_Option?></a></div>
+<?$old = $f_Option; endif?>
+        <div class="progress-itm"><a data-callback="initSliders();" data-target=".js-ajax-result" href="#" data-load1="<?=$f_Link?>"><?=$f_Name?></a></div><!-- /RecordTemplate -->
+
+<!-- FormSuffix -->    </div>
+    </div>
+    <div class="progress-right js-ajax-result">
+        <?=s_list_class($pro->rs[0]['sub'],$cc1,"&nc_ctpl=351&option=".$pro->rs[0]['Option'])?>
+    </div>
+</div><!-- /FormSuffix -->

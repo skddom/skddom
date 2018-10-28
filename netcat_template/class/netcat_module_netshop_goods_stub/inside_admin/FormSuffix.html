@@ -1,0 +1,10 @@
+</div>
+<div class="tpl-block-pagination">
+    <? if (strlen($prevLink)): ?>
+        <a href="<?= $prevLink; ?>" class="tpl-link-prev" title="Предыдущая страница">Предыдущая страница</a>
+    <? endif; ?>
+    <?= nc_browse_messages($cc_env, 10, $pages_template); ?>
+    <? if (strlen($nextLink)): ?>
+        <a href="<?= $nextLink; ?>" class="tpl-link-next" title="Следующая страница">Следующая страница</a>
+    <? endif; ?>
+</div>

@@ -1,0 +1,573 @@
+<?
+//favorites
+$rsFav = $db->get_results("select ID from Message2279 where (User='$AUTH_USER_ID' and User>0) or CookieID='".$_COOKIE['skd_token']."'",ARRAY_A);
+$isFav = count($rsFav)>0;
+$arFav = array();
+foreach($rsFav as $v) $arFav[] = $v['ID'];
+
+
+$transparentHeader = $template_settings['transparentHeader'];
+$bg = $template_settings['Image']['resultpath'];
+if ($transparentHeader) {
+    $class2 = "transparent-header";
+}
+$new="Y";
+$br = CBranding::get_object();
+global $lk;
+if (!$lk) $lk = new CPersonal();
+
+//var_dump($br);
+foreach ($br->cities as $city) {
+    if ($br->current['Message_ID']==$city["Message_ID"]) {
+        $currentCity = $city["Name"];
+        continue;
+    }
+    $cities.="<li class='menu-item menu-item-object-page ".($br->current['Message_ID']==$city["Message_ID"]?"selected":"")."'><a href='#' data-id='{$city['Message_ID']}'>{$city['Name']}</a></li>";
+}
+
+$currentCity=$currentCity?$currentCity:"не выбран";
+
+$pre_title=$dopdescr='';
+if($_SERVER['REQUEST_URI'] == '/price/ceny-na-doma-iz-kleenogo-brusa/' || $_SERVER['REQUEST_URI'] == '/catalog/popular/'  || $_SERVER['REQUEST_URI'] == '/' || $_SERVER['REQUEST_URI'] == '/uslugi/stroitelstvo/' ){
+$suffix_title = '';
+}else{
+$suffix_title = '- СКД дом';
+}
+include $_SERVER['DOCUMENT_ROOT'].'/netcat_files/include/objuri.php';
+
+$url = $_SERVER['REQUEST_URI'];
+if (preg_match("/\/page-([0-9]+)\/?$/uisU", $url, $matches)) {
+    $number = ' стр №'.$matches[1];
+}
+
+if (isset($_GET["object"]) && preg_match("/\/page-([0-9]+)\/?/uisU", $url, $matches)) {
+    $o_title = $db->get_var("select Text from Message255 where ID=$object order by Message_ID desc limit 1");
+    $object_t = ' '.$o_title;
+    $number = ' стр №'.$matches[1];
+}
+
+if($_SERVER['REQUEST_URI']=='/otvet/faq/add_faq.html'){
+    $dopdescr='. Задайте нам любой вопрос и если он не обсуждался, то мы разместим ответ на него на сайте.';
+    $pre_title='Задать вопрос - ';
+}
+
+
+if (preg_match("/\/catalog\/proektirovanie\/portfolio-int\/\w+.*/uisU", $url) && !empty($f_Name)) {
+    $description = 'Фото: '.$f_Name;   
+}
+elseif (!preg_match("/\/page-([0-9]+)\/?/uisU", $url))
+{
+    if ($_GET["object"])
+    {
+        $o_title = $db->get_var("select Text from Message255 where ID=$object order by Message_ID desc limit 1");
+        $object_t = ' '.$o_title;
+        if (!empty($o_title)) {
+        $description = 'Фото строящего объекта компанией СКД Дом:'.$object_t; 
+        }
+        
+    }
+    else
+    {
+        $description = $nc_core->page->get_description(); 
+        /*if ($description){
+         if($_GET["object"]) {$description .= ', описание объекта - '.$_GET["object"];}
+         $description .= $dopdescr;
+        }*/
+    } 
+}
+else
+{
+    $description = '';    
+}
+
+if (in_array($url, $objUri)) {
+    $description = '';
+}
+
+$keywords = $nc_core->page->get_keywords();
+if (strstr($_SERVER['REQUEST_URI'], '/catalog/proektirovanie/portfolio-int/') || strstr($_SERVER['REQUEST_URI'], '/galereya/gallery2/') || strstr($_SERVER['REQUEST_URI'], '/o-kompanii/otzyvy/')){
+    $keywords = '';
+}
+
+if (isset($_GET['curPos'])) { // если есть признаки юза листинга по страницам
+    if ($_GET['curPos']%$current_cc['RecordsPerPage'] == 0) { // тут проверяем начинается ли вывод объекта так как задумано
+       $page = ' - Страница '.($_GET['curPos']/$current_cc['RecordsPerPage'] + 1); // считаем  номер страницы
+    } else { // если вывод начинается с левого номера
+       $page = ' - Страница '.(floor($_GET['curPos']/$current_cc['RecordsPerPage']) + 2); // все равно посчитаем правильно
+    }
+    $description = '';
+} else { // если признаков нет
+    $page = ''; // холодная пустота
+}
+
+
+if (strstr($_SERVER['REQUEST_URI'], '/price/calc/?house') && isset($_GET['house'])){
+    $title = 'Калькулятор проекта дома СКД-'.$_GET['house'];
+}else if ($_SERVER['REQUEST_URI'] == '/otvet/faq2/add_faq.html'){
+    $title = 'Вопросы и ответы по домам из клееного бруса: задать вопрос';
+}else if ($_SERVER['REQUEST_URI'] == '/o-kompanii/otzyvy/add_otzyvy.html'){
+    $title = 'Добавить отзыв о компании';
+}else if (preg_match("/\/catalog\/proektirovanie\/portfolio-int\/\w+.*/uisU", $url)) {
+    $title = $f_Name;    
+}else{
+    $title = $nc_core->page->get_title();
+    if (!$title) $title = strip_tags(s_browse_path($browse_path));  
+}
+
+$curURI = $_SERVER['REQUEST_URI'];
+$noDescr = array('/otvet/faq2/add_faq.html', '/o-kompanii/otzyvy/add_otzyvy.html', '/otvet/faq2/faq_144.html', '/otvet/faq2/faq_151.html');
+if (in_array($curURI, $noDescr)){
+    $description = '';
+}
+?><!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="<?= $nc_core->NC_CHARSET ?>" />
+    <meta name="yandex-verification" content="767a14d1a3478799" />
+    <meta name="google-site-verification" content="sQ7V570LhbueM_zX9Imx8h5Y5OeoMqb8Blfolyr-5xI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><?
+        $ttl = '';
+
+        include($_SERVER['DOCUMENT_ROOT'].'/seo.php'); 
+        
+         
+        if($ttl == '')
+            $ttl = $pre_title." ".$title.$object_t.$number." ".$suffix_title;
+ 
+        echo "<title>".$ttl."</title>";
+ 
+ 
+echo "".( ($description) ? "<meta name='description' content='".$description."' />" : "" )."
+".( ($keywords) ? "<meta name='Keywords' content='".$keywords."' />" : "" );
+
+    ?><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700,700i&amp;amp;subset=cyrillic">
+    
+    <?php
+     $robots = file($_SERVER['DOCUMENT_ROOT'].'/robots.txt');
+     foreach($robots as $key){
+          if(preg_match('#Disallow:[\s]*(.*)\n#siU',$key,$s_match)){
+           $stroka = $s_match[1];
+           $stroka = trim($stroka);
+           $stroka = str_replace(array('.','*','?',),array('*','.*','\?',),$stroka);
+               if(preg_match('#'.$stroka.'#siU',$_SERVER['REQUEST_URI'])){
+                echo '<meta name="googlebot" content="noindex">';
+                break;
+               }
+          }
+     }
+
+
+$array_robots_noindex = array(
+'/uslugi/stroitelstvo/kalkulyator-srokov-stroitelstva/naruzhnye-raboty/',
+'/uslugi/stroitelstvo/kalkulyator-srokov-stroitelstva/otdelka/',
+'/uslugi/stroitelstvo/kalkulyator-srokov-stroitelstva/teplovoy-kontur/',
+);
+
+//
+if (in_array($_SERVER['REQUEST_URI'], $array_robots_noindex)){
+    echo '<meta name="robots" content="noindex"/>';
+}
+
+
+    ?>
+    
+    <link rel="stylesheet" href="<?= $nc_parent_template_folder_path ?>css/styles.css">
+    <link rel="stylesheet" href="<?= $nc_parent_template_folder_path ?>css/style.css">
+    <link rel="stylesheet" href="<?= $nc_parent_template_folder_path ?>css/vc_carousel.min.css?ver=4.12">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <?= nc_js(); ?>
+    <script type="text/javascript">
+    
+        var arFav = [<?=join(",",$arFav)?>];
+        function revslider_showDoubleJqueryError(sliderID)
+        {
+            var errorMessage =
+                "Revolution Slider Error: You have some jquery.js library include that comes after the revolution files js include.";
+            errorMessage +=
+                "<br> This includes make eliminates the revolution slider libraries, and make it not work.";
+            errorMessage +=
+                "<br><br> To fix it you can:<br>&nbsp;&nbsp;&nbsp; 1. In the Slider Settings -> Troubleshooting set option:  <span style='font-weight: bold;'>Put JS Includes To Body</span> option to true.";
+            errorMessage +=
+                "<br>&nbsp;&nbsp;&nbsp; 2. Find the double jquery.js include and remove it.";
+            errorMessage = "<span style='font-size:16px;color:#BC0C06;'>" +
+                errorMessage + "</span>";
+            jQuery(sliderID).show().html(errorMessage);
+        }
+
+        var thickboxL10n = {
+            "next": "Next >",
+            "prev": "< Prev",
+            "image": "Image",
+            "of": "of",
+            "close": "Close",
+            "noiframes": "This feature requires inline frames. You have iframes disabled or your browser does not support them.",
+            //"loadingAnimation": "http:\\/\/wp.magnium-themes.com\/thebuilt\/thebuilt-1\/wp-includes\/js\/thickbox\/loadingAnimation.gif"
+        };
+
+        var rlArgs = {
+            "script": "tosrus",
+            "selector": "lightbox",
+            "customEvents": "",
+            "activeGalleries": "1",
+            "effect": "slide",
+            "infinite": "1",
+            "keys": "0",
+            "autoplay": "1",
+            "pauseOnHover": "0",
+            "timeout": "4000",
+            "pagination": "1",
+            "paginationType": "thumbnails"
+        };
+    </script>
+    <?= nc_js(); ?>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBKtQuyC-t1nVL0IiNFLqP7L3gruU2w1s&amp;lang=ru"></script>
+    <script type="text/javascript" src="<?= $nc_parent_template_folder_path ?>js/script.min.js"></script>
+    <script type="text/javascript" src="<?= $nc_parent_template_folder_path ?>js/extensions/revolution.extension.slideanims.min.js"></script>
+    <script type="text/javascript" src="<?= $nc_parent_template_folder_path ?>js/extensions/revolution.extension.actions.min.js"></script>
+    <script type="text/javascript" src="<?= $nc_parent_template_folder_path ?>js/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script type="text/javascript" src="<?= $nc_parent_template_folder_path ?>js/extensions/revolution.extension.navigation.min.js"></script>
+    <script type="text/javascript" src="<?= $nc_parent_template_folder_path ?>js/extensions/revolution.extension.parallax.min.js"></script>
+    <script type="text/javascript" src="<?= $nc_parent_template_folder_path ?>js/vc_carousel.min.js?ver=4.12"></script>
+    <script type="text/javascript" src="<?= $nc_parent_template_folder_path ?>js/my.js"></script>
+    <style type="text/css" data-type="vc_shortcodes-custom-css">
+        .vc_custom_1464179469571 {
+            margin-top: -100px !important;
+            padding-bottom: 50px !important;
+        }
+
+        .vc_custom_1459162774762 {
+            padding-top: 50px !important;
+            padding-bottom: 50px !important;
+            background-color: #f5f5f5 !important;
+        }
+
+        .vc_custom_1459437352339 {
+            margin-bottom: 50px !important;
+        }
+
+        .vc_custom_1459335800844 {
+            padding-bottom: 60px !important;
+            background-color: #2a2f35 !important;
+        }
+
+        .vc_custom_1465151624441 {
+            padding-top: 20px !important;
+            /*padding-bottom:20px !important;*/
+            background-color: #f7f7f7 !important;
+        }
+
+        .vc_custom_1466422963185 {
+            padding-bottom: 20px !important;
+            /*padding-bottom:20px !important;*/
+            background-color: #f7f7f7 !important;
+        }
+
+        .vc_custom_1466422963185 .mgt-header-block.wpb_content_element {
+            margin-top: 20px;
+        }
+
+        .vc_custom_1466422963189 {
+            padding-bottom: 30px !important;
+            background-color: #f7f7f7 !important;
+        }
+
+        .vc_custom_1466422963189 .text-black.wpb_content_element {
+            margin-top: 30px;
+        }
+
+        .vc_custom_1466422234232 {
+            overflow: visible!important;
+        }
+
+        .vc_custom_1466581415033 {
+            margin-top: 0px!important;
+        }
+
+        .vc_custom_1466501689743 {
+            margin-top: 30px !important;
+            margin-bottom: 20px !important;
+        }
+
+        .vc_custom_1466689686119 {
+            background-color: #1a1f23 !important;
+        }
+
+        .vc_custom_1461317391634 {
+            margin-bottom: 20px !important;
+        }
+
+        .vc_custom_1461317379236 {
+            margin-bottom: 50px !important;
+        }
+
+        .vc_custom_1466614059509 {
+            padding-top: 20px !important;
+            padding-right: 50px !important;
+            padding-bottom: 20px !important;
+            padding-left: 50px !important;
+        }
+
+        .vc_custom_1464598757561 {
+            padding-bottom: 30px !important;
+        }
+
+        .vc_custom_1464684611093 {
+            background-image: url('<?= $nc_parent_template_folder_path ?>/images/example/reviews_bg.jpg')!important;
+            background-position: center;
+            background-repeat: no-repeat !important;
+            background-size: cover !important;
+        }
+
+        .vc_custom_1459501258600 {
+            padding-top: 30px !important;
+            padding-bottom: 30px !important;
+        }
+
+        .vc_custom_1465207604440 {
+            padding-top: 50px !important;
+            padding-bottom: 50px !important;
+            background-color: #f7f7f7 !important;
+        }
+
+        .vc_custom_1465197248270 {
+            padding-top: 25px !important;
+            padding-right: 25px !important;
+            padding-left: 25px !important;
+        }
+
+        .vc_custom_1465197273348 {
+            padding-top: 25px !important;
+            padding-right: 25px !important;
+            padding-left: 25px !important;
+        }
+
+        .vc_custom_1470040014654 {
+            padding-right: 25px !important;
+            padding-left: 25px !important;
+        }
+
+        .vc_custom_1470040040890 {
+            padding-right: 25px !important;
+            padding-left: 25px !important;
+        }
+
+        .vc_custom_1459186986556 {
+            margin-right: 0px !important;
+            padding-right: 0px !important;
+        }
+
+        .vc_custom_1459186959095 {
+            margin-left: 0px !important;
+            padding-left: 0px !important;
+        }
+
+        .vc_custom_1460558952530 {
+            padding-top: 25px !important;
+            padding-right: 25px !important;
+            padding-left: 25px !important;
+        }
+
+        .vc_custom_1470040092901 {
+            padding-right: 25px !important;
+            padding-left: 25px !important;
+        }
+
+        .vc_custom_1459415178192 {
+            padding-top: 25px !important;
+            padding-right: 25px !important;
+            padding-bottom: 25px !important;
+            padding-left: 25px !important;
+            background-color: #f5f5f5 !important;
+        }
+
+        .vc_custom_1470040110657 {
+            padding-right: 25px !important;
+            padding-left: 25px !important;
+        }
+
+        .vc_custom_1459415137038 {
+            padding-top: 25px !important;
+            padding-right: 25px !important;
+            padding-bottom: 25px !important;
+            padding-left: 25px !important;
+            background-color: #f5f5f5 !important;
+        }
+
+        .vc_custom_1470040129131 {
+            padding-right: 25px !important;
+            padding-left: 25px !important;
+        }
+
+        .vc_custom_1459415187822 {
+            padding-top: 25px !important;
+            padding-right: 25px !important;
+            padding-bottom: 25px !important;
+            padding-left: 25px !important;
+            background-color: #f5f5f5 !important;
+        }
+
+        .vc_custom_1470040147943 {
+            padding-right: 25px !important;
+            padding-left: 25px !important;
+        }
+
+        .vc_custom_1459415207847 {
+            padding-top: 25px !important;
+            padding-right: 25px !important;
+            padding-bottom: 25px !important;
+            padding-left: 25px !important;
+            background-color: #f5f5f5 !important;
+        }
+
+        .vc_custom_1470040161700 {
+            padding-right: 25px !important;
+            padding-left: 25px !important;
+        }
+
+        .vc_custom_1459415347117 {
+            padding-top: 25px !important;
+            padding-right: 25px !important;
+            padding-bottom: 25px !important;
+            padding-left: 25px !important;
+            background-color: #f5f5f5 !important;
+        }
+
+        .vc_custom_1470040177034 {
+            padding-right: 25px !important;
+            padding-left: 25px !important;
+        }
+
+        .vc_custom_1459415359834 {
+            padding-top: 25px !important;
+            padding-right: 25px !important;
+            padding-bottom: 25px !important;
+            padding-left: 25px !important;
+            background-color: #f5f5f5 !important;
+        }
+
+        .vc_custom_1461317657369 {
+            margin-left: 0px !important;
+        }
+
+        .vc_custom_1466181347354 {
+            margin-left: -15px !important;
+            padding-top: 50px !important;
+        }
+
+        .vc_custom_1465197583085 {
+            padding-right: 20px !important;
+            padding-left: 20px !important;
+        }
+
+        .vc_custom_1465197676848 {
+            padding-right: 20px !important;
+            padding-left: 20px !important;
+        }
+
+        .vc_custom_1465197615220 {
+            padding-right: 20px !important;
+            padding-left: 20px !important;
+        }
+
+        .vc_custom_1465197629387 {
+            padding-right: 20px !important;
+            padding-left: 20px !important;
+        }
+        %CSS
+    </style>
+    <noscript>
+        <style type="text/css">
+            .wpb_animate_when_almost_visible {
+                opacity: 1;
+            }
+        </style>
+    </noscript>
+   <link rel="stylesheet" href="<?= $nc_parent_template_folder_path ?>css/responsive.css">
+   <?= $this->partial('counters') ?>
+</head>
+<body class="home page page-id-11 page-template-default wpb-js-composer <?if($bg) echo "with-bg ";?>vc_responsive js-comp-ver-4.12 <?=$class2?>">
+    <div class="header-menu-bg top-menu-position-default <?=$class2?>">
+        <div class="header-menu">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="header-info-text">Проектирование, производство и строительство домов из клееного бруса.</div>
+                        <div
+                         class="profile"><?
+                            ?><a href="/kabinet/" class="header-info-text">Личный кабинет</a><?
+                            if ($AUTH_USER_ID>0) {
+                            ?><a href="/netcat/modules/auth/?logoff=yes&amp;REQUESTED_FROM=/" class="view-more btn mgt-button">Выход</a><?
+                            } 
+                    ?></div><div class="social-icons-top">
+<?= $this->partial('socials') ?>
+                    </div>
+                    <div class="menu-top-menu-container-toggle"></div>
+                    <div class="top-menu-container ch_city"><?
+                    if ($br->isOn()) {
+                        ?><ul class="top-menu menu-item-object-page menu-item-has-children" id="menu-top-menu">
+                            <li class="menu-item">
+                                <div class="header-info-text">Ваш город:</div>
+                            </li>
+                            <li class="menu-item menu-item-object-page menu-item-has-children">
+                                <a href="javascript:void('0');" class="js-ch-city"><?=$currentCity?></a>
+                                <ul class="sub-menu"><?
+                                    echo $cities;   
+                                ?></ul>
+                            </li>
+                        </ul><?
+                    }
+                    ?></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <header class="sticky-header main-header <?=$class2?>">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="header-left logo">
+                        <a class="logo-link" href="/">
+                            <img src="<?= $nc_parent_template_folder_path ?>/images/logo.png" alt="">
+                        </a>
+                    </div>
+                    <div class="header-center">
+                        <div class="header-info-2-text">
+                            <div class="header-info-half">
+                                <div class="header-info-content-icon"><span class="svg-icon svg-phone"></span></div>
+                                <div class="header-info-content-title">Консультации и отдел продаж</div>
+                                <div class="header-info-content-text"><?= $this->partial('phone') ?></div>
+                            </div>
+                            <div class="header-info-half">
+                                <div class="header-info-content-icon"><span class="svg-icon svg-clock"></span></div>
+                                <div class="header-info-content-title">Время работы</div>
+                                <div class="header-info-content-text">9:00 - 21:00</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <ul class="header-nav">
+                            <li class="float-sidebar-toggle">
+                                <div id="st-sidebar-trigger-effects">
+                                    <a onclick="window.location.href=jQuery(this).attr('href')" class="favorites" href="/favorites/"><i class="fa <?=($isFav?"fa-star":"fa-star-o")?>"></i></a>
+                                    <a class="float-sidebar-toggle-btn" data-effect="st-sidebar-effect-2"><i class="fa fa-bars"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mainmenu-belowheader mainmenu-dark menu-uppercase">
+            <div class="navbar navbar-default clearfix mgt-mega-menu" id="navbar">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <div class="navbar-toggle" data-toggle="collapse" data-target=".collapse">Меню</div>
+                        <div class="navbar-collapse collapse"><?
+                        echo nc_browse_sub(0, $browse_template);    
+                        ?></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>

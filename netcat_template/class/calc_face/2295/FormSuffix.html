@@ -1,0 +1,260 @@
+<?php
+$i = 1;
+$rows = '';
+$group_id = 0; // id группы для убирания бордюра между ячейками одной группы
+foreach ($arrCalc as $razdel => $arrRazdel) { // перебираем основной массив этапов работ
+    if ($razdel!='Отделка* (прединженерный этап) '){
+    // дополняем данными выбранного дома
+    foreach ($arrRazdel as $key => $arWork) { // создание разделов таблицы
+    $i++;
+    $description = $arWork['Name'];
+
+    $tooltip1 = "";
+    $tooltip2 = "";
+    if ($arWork['Description'] || $arWork['Text']) {
+        $tooltip1 = '<div class="notices_wrapper"><div class="notices">';
+        if ($arWork['Text']) {
+            $tooltip1 .= '                        <div class="notice_wrapper">
+                            <div class="button">!</div>
+                            <div class="notice_inner">
+                                <span class="close_btn">х</span>
+                                <div class="text">
+                                    <!--<div class="title">'.$description.'</div>-->
+                                   '.$arWork['Text'].'
+                                </div>
+                            </div>
+                        </div>';
+        }
+        if ($arWork['Description']) {
+            $tooltip1 .= '<div class="notice_wrapper"><div class="button button-warn">?</div></div>';
+            $tooltip2 .= '<div class="tooltip_wrapper"><div class="tooltip_inner">'.$arWork['Description'].'</div></div>';
+        }
+        $tooltip1.='</div></div>';
+    }
+
+        if($arrSale[$house_id]['base'][$key][0] == 0 and // если нет расчетной части
+                $arrSale[$house_id]['base'][$key][1] == 0 and
+                $arrSale[$house_id]['base'][$key][2] == 0 and 0)
+        {
+            # открытие раздела
+            // если все базовые параметры 0, то производим объединение колонок в одну
+            $rows .= "<tr>\n<td>$description</td>\n<td colspan='3' align='center'> \n"; // наименование
+            $rows .= $arrSale[$house_id]['base'][$key][3];    //." key=$key; ".print_r($arrSale[$house_id]['base'][$key],1);
+            $rows .="</td>\n</tr>\n"; // закрытие раздела
+            continue;
+        } else {
+            $rows .= "<tr>\n<td class='tooltiptd'>$tooltip1 $description $tooltip2</td>\n<td align='center'>\n"; // наименование
+        }
+
+        if ($key == 35) { //
+            $toDost = array(6,50,52,7,8,26,13,17);
+            $dostPrice=0;
+            foreach ($toDost as $key1) {
+                if($rs1['base'][$key1]['set1']) $dostPrice += $arrSale[$house_id]['base'][$key1][0];
+            }
+            $dostPrice = ceil($dostPrice/35);
+            $arrSale[$house_id]['base'][$key][0] = $dostPrice;
+        }
+        if ($key==36) $arrSale[$house_id]['base'][$key][0] = $dostPrice;
+        if ($key==37) {
+            $toDost = array( 19,30,51);
+            $musPrice=0;
+            foreach ($toDost as $key1) {
+                if($rs1['base'][$key1]['set1']) $musPrice += $arrSale[$house_id]['base'][$key1][0];
+            }
+            $musPrice = ceil($dostPrice/2+$musPrice/250);
+            $arrSale[$house_id]['base'][$key][0] = $musPrice;
+        }
+
+    $rows .="<input type='".($AUTH_USER_ID && $debug ? "text":"hidden")."' data-set2='".$arrSale[$house_id]['base'][$key][4]."'  data-set3='".$arrSale[$house_id]['base'][$key][5]."' data-discount='".$arrSale[$house_id]['base'][$key][4]."' data-price='".$arrSale[$house_id]['base'][$key][3]."' data-vol='".$arrSale[$house_id]['base'][$key][2]."' name='price_$key' id='price_$key' value='".str_replace(",",".",$arrSale[$house_id]['base'][$key][0])."' />\n"; // стоимость
+       // $rows.="<!-- ".print_r($rs1,1)."  -->";
+    // комплектация 1
+    if ($rs1['base'][$key]['set1'] ) {
+            $rows .=
+                "<div class='chk-on-disabled-c1'>
+                <input type='checkbox' class='chk-none' name='chk1_$key' id='chk1_$key' checked='checked' disabled />
+                <label for='chk1_$key'></label>
+                </div>\n"; // выбрано без возможности изменить
+        } else if ($rs1['custom'][$key]['choice'] == 3 ) {
+            $rows .= "<input type='checkbox' class='chk-none' name='chk1_$key' id='chk1_$key' disabled /><label for='chk1_$key'></label>\n"; // не выбрано без возможности изменить
+        } else {
+            //$rows .= "<input type='radio' class='chk-none' name='chk1_$key' id='chk1_$key' disabled /><label for='chk1_$key'></label>\n"; // не выбрано без возможности изменить
+        }
+    $rows .= "</td>\n";
+
+    /*$rows .= "<td align='center'>\n";
+
+    // комплектация 2
+    if ($arrSale[$house_id]['base'][$key][2] == 1 ) {
+            $rows .= "<div class='chk-on-disabled-c2'><input type='checkbox' class='chk-none' name='chk2_$key' id='chk2_$key' checked='checked' disabled /></div>\n"; // выбрано без возможности изменить
+        } else {
+            $rows .= "<input type='checkbox' class='chk-none' name='chk2_$key' id='chk2_$key' disabled />\n"; // не выбрано без возможности изменить
+        }
+    $rows .= "</td>\n";*/
+
+    // Индивидуальная комплектация
+        # блок if для стирания бордера
+        $current_group = $arrSale[$house_id]['custom'][$key][1];
+        if($current_group == 0 and $group_id == 0) {
+            $rows .= "<td align='center' class='border-ind'>\n "; // группы radio нет
+        } else if($current_group !== $group_id and $current_group !== 0){
+            $rows .= "<td align='center' style='border-bottom:none;' class='border-ind'>\n "; // начало новой группы
+            $group_id = $current_group;
+        } else if($current_group == $group_id and $group_id !== 0) {
+            $rows .= "<td align='center' style='border-top:none;' class='border-ind'>\n "; // продолжение группы
+        } else if($current_group == 0 and $group_id !== 0) {
+            $rows .= "<td align='center' class='border-ind'>\n "; // конец группы
+            $group_id = $current_group;
+        } # конец блока
+
+        $checked = ($arrSale[$house_id]['custom'][$key][2] == 1 ) ? "checked='checked'" : '';
+    if ($arrSale[$house_id]['custom'][$key][0] == 1 ) {
+            $rows .= "<div class='chk-on-disabled-c3'><input type='checkbox' class='chk-none' name='chk3_$key' id='chk3_$key' checked='checked' disabled /><label for='chk3_$key'></label></div>\n"; // выбрано без возможности изменить
+        }
+        if ($arrSale[$house_id]['custom'][$key][0] == 3 ) { // можно выбрать или отменить
+            $rows .= "<input type='checkbox' name='chk3_$key' id='chk3_$key' $checked /><label for='chk3_$key'></label>\n"; // выбрано, возможно изменить
+        }
+        if ($arrSale[$house_id]['custom'][$key][0] == 2 ) { // можно выбрать только 1 вид работ
+            $rows .= "<input type='radio' name='radio3[{$arrSale[$house_id]['custom'][$key][1]}]' id='chk3_$key' value='$key' $checked/><label for='chk3_$key'></label>\n";
+        }
+
+    $rows .="</td>\n</tr>\n"; // закрытие раздела
+        }
+    echo  "<tr><td class='razdel mob' colspan='3'>$razdel</td></tr><tr>\n<td colspan='3' data-rowspan = '$i' class='razdel'>$razdel</td>\n</tr>\n$rows"; // вывод раздела (этапа)
+    $i = 1;
+    $rows = '';
+    }
+}
+?><?if($common) {?>
+        <tr class="dostavka">
+            <td class="razdel" rowspan="3">Общие расходы</td>
+            <td>Доставка</td>
+            <td class="b1"><span id='dostPrice0'>0</span> руб.</td>
+            <td class="b3"><span id='dostPrice'>0</span> руб.</td>
+        </tr>
+        <tr class="razgruzka">
+
+            <td>Разгрузка</td>
+            <td class="b1"><span id='razgPrice0'>0</span> руб.</td>
+            <td class="b3"><span id='razgPrice'>0</span> руб.</td>
+        </tr>
+        <tr class="musor">
+
+            <td>Вывоз мусора</td>
+            <td class="b1"><span id='musPrice0'>0</span> руб.</td>
+            <td class="b3"><span id='musPrice'>0</span> руб.</td>
+        </tr>
+<? } ?>
+        <tr class="itogo">
+            <td class="razdel">Стоимость, руб.</td>
+            <!--<td></td>-->
+            <td class="b1 js-b1" data-price="<?=$arPrice['set1']['discount_price']?>"><?=number_format($arPrice['set1']['discount_price'],0,' ',' ')?> руб.</td>
+            <!--<td class="b2"><?php /*echo $arrSale[$house_id]['c2'];*/ ?></td>-->
+            <td class="b3 js-b3"></td>
+        </tr>
+</tbody>
+</table>
+</form>
+<?
+echo $nc_core->template->get_partial("thebuilt", "save_compl", $data);
+?></div>
+
+<script>calc();</script>
+
+<Script>
+
+
+
+$('.gomanager').click(function(){
+    var vibor = $('input[name=vibor]:checked').val();
+    var price;
+    var nomer;
+    //var chk3_2 = $('input[name=chk3_2]:checked').val();
+
+
+    if(vibor=='Комплектация c1')
+    price = $('.b1').text();
+    else if(vibor=='Комплектация c2')
+    price = $('.b2').text();
+    else price = $('.b3').text();
+    nomer = $('.head-calc h2').text();
+
+
+    $.ajax({
+    type: "POST",
+    url: "/test/test.php",
+    data: {vibor:vibor,price:price,nomer:nomer},
+    success: function(msg){
+    //alert(msg);
+    }
+});
+
+});
+
+</script>
+
+
+
+                                 </div>
+                                 <div class="col-md-3 main-sidebar sidebar">
+        <ul id="main-sidebar"><?
+$row1 = $db->get_row("select Subdivision_ID as sub1,Message_ID as message1 from Message210 where house_id='".$db->escape($house_id)."'",ARRAY_A);
+extract($row1);
+$br->ExModifyQueryWhere($query, $cc_env, $inside_admin, $admin_mode);
+$q="select a.Subdivision_ID as id, a.Subdivision_Name as name,a.NotShowCities
+from Sub_Class c
+left join Subdivision a ON a.Subdivision_ID=c.Subdivision_ID
+where c.Class_ID=210 and a.Parent_Sub_ID=120 and $query
+order by a.Priority ASC";
+$q = str_replace("a.Cities","a.NotShowCities",$q);
+$arLines = $db->get_results($q,ARRAY_A);
+
+foreach ($rs as $v) $ipro[] = $v['id'];
+$rs = $db->get_results("select house_id as name, Message_ID as id, Subdivision_ID as line from Message210 where Checked=1 order by house_id",ARRAY_A);
+foreach ($rs as $v) $arProjects[$v['line']][] = $v;
+
+?><li id="nav_menu-8" class="widget widget_nav_menu">
+<div class="menu-blog-menu-container"><ul class="menu"><li class="menu-item menu-item-type-taxonomy menu-item-object-category text-transform-uppercase"><a>Каталог проектов СКД</a></li><li><?
+    foreach ($arLines as $v) {
+        ?><div class=""><a class="accordion<?=$v['id']==$sub1?" active":""?>">Линейка <?=$v['name']?></a><div class='toggle-content'><?
+            foreach ($arProjects[$v['id']] as $pro) {
+                ?><a class="<?=$pro['id']==$message1?"active":""?>" href="<?=nc_message_link($pro['id'],210)?>">CKD - <?=$pro['name']?></a><?
+            }
+        ?></div></div><?
+    }
+?></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category text-transform-uppercase"><a href="/catalog/individualnye-proekty-gallery/">Индивидуальные проекты</a></li></ul></div><script>
+$(function(){
+    $(".accordion").click(function(){
+        $this = $(this);
+        if ($this.hasClass("active")) return false;
+        $(".toggle-content").slideUp(200,function(){
+            $(".accordion").removeClass("active");
+        });
+        $(this).siblings(".toggle-content").slideDown(200,function(){
+            $this.toggleClass("active");
+        });
+        return false;
+    });
+});
+</script></li><?
+
+
+
+
+
+//$docCC = $db->get_var("select Sub_Class_ID from Sub_Class where Subdivision_ID=$sub and Class_ID=2257");
+//if ($docCC) $brochures = s_list_class($sub, $docCC, "");
+if ($brochures) {
+?><li id="text-13" class="widget widget_text"><h2 class="widgettitle">Документы</h2>
+            <div class="textwidget">
+            <?=$brochures?>
+
+</div>
+        </li><?
+}
+
+?>
+        </ul>
+                                 </div>
+                              </div>                                 

@@ -1,0 +1,191 @@
+<?
+$prev = $db->get_row("select *,(Priority*1000+Message_ID) as Pri from Message$classID having Pri<(Priority*1000+$message) order by Pri desc limit 1", ARRAY_A);
+$next = $db->get_row("select *,(Priority*1000+Message_ID) as Pri from Message$classID having Pri>(Priority*1000+$message) order by Pri asc limit 1", ARRAY_A);
+//echo "select *,(Priority*1000+Message_ID) as Pri from Message$classID having Pri<(Priority*1000+Message_ID) order by Pri desc limit 1";
+     
+        $current_sub['Icon'] = $f_SliderPath.$f_MainImgPath;
+			?><div class="blog-post blog-post-single">
+				<article id="post-<?=$sub?>" class="post type-post status-publish format-standard has-post-thumbnail hentry category-house-renovation">
+							<div class="">
+					
+								<div class="project-content"><?
+				?><div id="vc_images-carousel-1-1493484544" data-ride="vc_carousel" data-wrap="false" style="width: 100%;" data-interval="0" data-auto-height="yes" data-mode="horizontal" data-partial="false" data-navstyle="bullets" data-per-view="1" data-hide-on-end="true" class="vc_slide vc_images_carousel">
+						<!-- Wrapper for slides -->
+			<div class="vc_carousel-inner">
+				<div class="vc_carousel-slideline">
+					<div class="carousel vc_carousel-slideline-inner"><?
+$s =  $f_Images;
+$slides = explode(";", $s);                    
+                    foreach ($slides as $v) {
+                        $v=explode(",",$v);
+                        $img = $v[2];
+							?><div class="vc_item">
+								<div class="vc_inner">
+										<a href="<?=$img?>"  rel="lightbox">
+											<img width="1170" height="775" src="<?=$img?>" class="attachment-full" alt="" srcset="<?=$img?> 1170w, <?=$img?> 300w, <?=$img?> 768w, <?=$img?> 1024w" sizes="(max-width: 1170px) 100vw, 1170px" />
+                                        </a>
+								</div>
+							</div><?                    
+                    }
+                    ?>			</div>
+							<!-- Controls -->
+				<a class="vc_left vc_carousel-control" href="#vc_images-carousel-1-1493484544" data-slide="prev">
+					<span class="icon-prev"></span>
+				</a>
+				<a class="vc_right vc_carousel-control" href="#vc_images-carousel-1-1493484544" data-slide="next">
+					<span class="icon-next"></span>
+				</a><?
+                /*
+  ?><!-- Indicators -->
+  <ol class="carousel-indicators"><?
+  foreach ($slides as $k=>$v) {
+    ?><li data-target="#vc_images-carousel-1-1493484544" data-slide-to="<?=$k?>" class="<?=$k?"":"active"?>"></li><?
+   }
+  ?></ol><?*/
+					?></div>
+	</div>
+</div>
+ 
+ 
+ <div class="vc_row wpb_row vc_row-fluid vc_custom_1462525906878">
+ <div class="wpb_column vc_column_container vc_col-sm-6"><div class="vc_column-inner "><div class="wpb_wrapper"><div class="mgt-header-block clearfix text-left text-black wpb_animate_when_almost_visible wpb_top-to-bottom wpb_content_element  mgt-header-block-style-2 mgt-header-texttransform-header  wpb_start_animation"><h2 class="mgt-header-block-title">Описание проекта</h2><div class="mgt-header-line"></div></div>
+ </br>
+	<div class="wpb_text_column wpb_content_element ">
+		<div class="wpb_wrapper">
+			<?=$f_Text?>
+		</div>
+	</div>
+</div></div></div>
+
+<div class="wpb_column vc_column_container vc_col-sm-6">
+<div class="vc_column-inner "><div class="wpb_wrapper">
+
+<div class="mgt-header-block clearfix text-left text-black wpb_animate_when_almost_visible wpb_top-to-bottom wpb_content_element  mgt-header-block-style-2 mgt-header-texttransform-header  wpb_start_animation"><h2 class="mgt-header-block-title">Общие данные</h2><div class="mgt-header-line"></div></div>
+</br>
+<div class="vc_row wpb_row vc_inner vc_row-fluid">
+
+	<div class="wpb_column vc_column_container vc_col-sm-6">
+		<div class="vc_column-inner ">
+			<div class="wpb_wrapper">
+				<div class="mgt-icon-box wpb_content_element mgt-icon-box-right mgt-icon-fa text-black ">
+					<div class="mgt-icon-box-icon hvr-icon-push">
+						<div class="mgt-font-icon"><i class="fa fa-map-marker"></i></div>
+					</div>
+					<div class="mgt-icon-box-content">
+						<h6>МЕСТОПОЛОЖЕНИЕ</h6>
+						<h5><?=$f_Location?></h5>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="wpb_column vc_column_container vc_col-sm-6">
+		<div class="vc_column-inner ">
+			<div class="wpb_wrapper">
+				<div class="mgt-icon-box wpb_content_element mgt-icon-box-right mgt-icon-fa text-black ">
+					<div class="mgt-icon-box-icon hvr-icon-push">
+						<div class="mgt-font-icon"><i class="fa fa-map-o"></i></div>
+					</div>
+					<div class="mgt-icon-box-content">
+						<h6>ПЛОЩАДЬ</h6>
+						<h5><?=$f_Square?> M2</h5>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="vc_row wpb_row vc_inner vc_row-fluid">
+	<div class="wpb_column vc_column_container vc_col-sm-6">
+		<div class="vc_column-inner ">
+			<div class="wpb_wrapper">
+				<div class="mgt-icon-box wpb_content_element mgt-icon-box-right mgt-icon-fa text-black ">
+					<div class="mgt-icon-box-icon hvr-icon-push">
+						<div class="mgt-font-icon"><i class="fa fa-calendar"></i></div>
+					</div>
+					<div class="mgt-icon-box-content">
+						<h6>ГОД</h6>
+						<h5><?=$f_Year?></h5>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="wpb_column vc_column_container vc_col-sm-6">
+		<div class="vc_column-inner ">
+			<div class="wpb_wrapper">
+				<div class="mgt-icon-box wpb_content_element mgt-icon-box-right mgt-icon-fa text-black ">
+					<div class="mgt-icon-box-icon hvr-icon-push">
+						<div class="mgt-font-icon"><i class="fa fa-briefcase"></i></div>
+					</div>
+					<div class="mgt-icon-box-content">
+						<h6>Стоимость</h6>
+						<h5><?=$f_Price?></h5>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</div></div>
+</div>
+
+
+</div>
+ 
+ 
+
+
+</div>
+
+<div class="vc_row wpb_row vc_row-fluid vc_custom_1462525911341">
+
+<div class="wpb_column vc_column_container vc_col-sm-6"><div class="vc_column-inner "><div class="wpb_wrapper"><div class="mgt-header-block clearfix text-left text-black wpb_animate_when_almost_visible wpb_top-to-bottom wpb_content_element  mgt-header-block-style-2 mgt-header-texttransform-header  wpb_start_animation"><h2 class="mgt-header-block-title">Подробно</h2><div class="mgt-header-line"></div></div>
+ </br>
+	<div class="wpb_text_column wpb_content_element ">
+		<div class="wpb_wrapper">
+			<?=$f_text2?>
+		</div>
+	</div>
+</div></div></div>
+
+
+
+
+<div class="wpb_column vc_column_container vc_col-sm-6"><div class="vc_column-inner "><div class="wpb_wrapper"><div class="mgt-header-block clearfix text-left text-black wpb_animate_when_almost_visible wpb_top-to-bottom wpb_content_element  mgt-header-block-style-2 mgt-header-texttransform-header  wpb_start_animation"><h2 class="mgt-header-block-title">МЕСТОПОЛОЖЕНИЕ</h2><div class="mgt-header-line"></div></div><div class="vc_tta-container" data-vc-action="collapse"> </br>
+<?=$f_kod?>
+
+</div></div></div></div></div>
+
+<?=$f_Plan?>
+										
+<br><br><br><br><br><br>
+
+<?
+if(!$grid){
+                                ?></div>
+                            </div>
+                </article>
+            </div><?
+}            
+         ?>
+           <script>(function($){
+      $(document).ready(function() {
+
+        $("#portfolio-list").mixItUp({effects:["fade","scale"],easing:"snap"});
+
+      });})(jQuery);</script>
+      <link rel='stylesheet' id='vc_carousel_css-css'  href='/netcat_template/template/thebuilt/css/vc_carousel.min.css?ver=4.12' type='text/css' media='all' />
+      <script type='text/javascript' src='/netcat_template/template/thebuilt/js/transition.min.js?ver=4.12'></script>
+<script type='text/javascript' src='/netcat_template/template/thebuilt/js/vc_carousel.min.js?ver=4.12'></script>
+      
+      

@@ -1,0 +1,44 @@
+<!-- FormPrefix --><?php $result .= " <div class='".opt_case($mobile,"mobile","desktop")."'>            <div class=\"line $Name\"> <img alt=\"\" src=\"$Logo\">
+              <div class=\"about\">$Text</div>
+            </div>
+            <div class=\"inner\"> "; ?><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?php $result .= " ";
+if (is_array($br->projects[$f_RowID])) extract($br->projects[$f_RowID]);
+if ($f_SliderPath && $f_MainImgPath) $f_MainImg = $f_SliderPath.$f_MainImgPath;
+$result.="
+".($f_RowNum0 ? "
+              <div class=\"special\"".opt($f_RowNum%3==0," style=\"margin-right:0;\"").">
+                <div class=\"pic\"><a href=\"$fullLink\"><img src=\"$f_ResizeImg\" alt=\"$f_Name \" title=\"$f_Name\" width=\"220\" height=\"165\" /></a></div>
+                <div class=\"desc\"> <a href=\"$fullLink\">
+                  <div class=\"name\">$f_Name</div>
+                  <div class=\"area\">Площадь дома - $f_Square кв.м.</div>
+                  <div class=\"clr\"></div>
+                  <div class=\"cost\"> <span class=\"ico\"></span> <span>Цена в компл.С1<br>
+                    $f_Price1 р.</span> </div>
+                  </a> <a class=\"calc\" href=\"/price/?house=$f_house_id\">Калькулятор</a> </div>
+              </div>
+" : "
+              <div class=\"announce\">
+                <div class=\"special\">
+                  <div class=\"pic\"> ".opt($f_house_id==280,"<span class=\"i2013-OLD\"></span>")." <a href=\"$fullLink\"><img src=\"".($f_ResizeImgMain?$f_ResizeImgMain:$f_ResizeImg)."\" alt=\"$f_Name\" title=\"$f_Name\" style=\"width:330px;height:218px;\" /></a></div>
+                  <div class=\"desc\">
+				  <a href=\"$fullLink\">
+                    <div class=\"name\">$f_Name</div>
+                    <div class=\"area\">Площадь дома - $f_Square кв.м.</div>
+                    <div class=\"clr\"></div>
+                    <div class=\"cost\">  <span>Цена в базовой комплектации<br>
+                      <span>$f_Price1 р.</span></span>  </div>
+					  </a>
+					  <a class=\"calc\" href=\"/price/calc/?house=$f_house_id\">Другие<br>комплектации</a>
+                  </div>
+                </div>
+                ".(0?"<div class=\"txt\">$Description</div>":"")."
+               
+              </div>
+          
+")." "; ?><!-- /RecordTemplate -->
+
+<!-- FormSuffix --><?php $result .= "               <div class=\"clr\"></div>
+            </div>
+            </div> "; ?><!-- /FormSuffix -->

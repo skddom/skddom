@@ -1,0 +1,47 @@
+<!-- FormPrefix --><?php $result .= " $f_AdminCommon
+<!-- bxSlider Javascript file -->
+<script src=\"/images/bxslider/jquery.bxslider.min.js\"></script>
+<!-- bxSlider CSS file -->
+<link href=\"/images/bxslider/jquery.bxslider.css\" rel="stylesheet" />
+        <div class=\"slider slider_projects\">
+          <ul id=\"bxslider$sub\" class=\"bxslider\">
+ "; ?><!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?php $result .= " ";if($f_SliderPath&&$f_MainImgPath)$f_MainImg=$f_SliderPath.$f_MainImgPath;
+if (is_array($br->projects[$f_RowID])) extract($br->projects[$f_RowID]);
+$result.="$f_AdminButtons
+
+            <li><a href='$fullLink'><img src=\"$f_SliderPath$f_MainImgPath\" alt=\"$f_Name\" title=\"$f_Name\" /></a><span class=\"icon\"></span>
+              <div class=\"rhino-caption\">
+                <div class=\"name corbel\"><a href=\"$fullLink\">$f_Name</a></div>
+                <div class=\"price\"> <a href=\"/price/calc/?house=$f_house_id\" class=\"calc\"></a>
+                  <p> <span><a href=\"$fullLink\">Стоимость</a>: </span> <a href=\"$fullLink\" class=\"cos\">$f_Price р.</a></p>
+                  <p> <span><a href=\"$fullLink\">Прощадь</a>:</span> <a href=\"$fullLink\" class=\"cos\">$f_Square кв.м.</a></p>
+                </div>
+                <a href=\"$fullLink\" class=\"special\">Спецпредложение</a> </div>
+            </li>
+ "; ?><!-- /RecordTemplate -->
+
+<!-- FormSuffix --><?php $result .= "           </ul>
+        </div>
+<style>
+.rhino-prev, .rhino-next {
+top: 245px;
+}
+.rhino-toggle {
+top: 445px;
+}
+.rhino-bullets {
+top: 453px;
+}
+#bxslider$sub {
+height: 594px;
+}
+</style>
+<script>
+$(function(){
+  \$(document).ready(function(){
+    \$('.bxslider').bxSlider();
+  });
+});
+</script> "; ?><!-- /FormSuffix -->

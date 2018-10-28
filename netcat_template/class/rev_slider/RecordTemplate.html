@@ -1,0 +1,82 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+<?= $f_AdminButtons;
+if ($f_Mobile) $data[] = array("f_Image"=>$f_Image,"f_Link1"=>$f_Link1,"f_Line1"=>$f_MobLine1,"f_Line2"=>$f_Line2,"f_Name"=>$f_Name,"f_MobImage"=>$f_MobImage);
+?>                                                      <!-- SLIDE-->
+                                                        <li  data-index="rs-<?=$f_RowID?>" data-transition="slotslide-horizontal,slidingoverlayleft,scaledownfromtop,cube-horizontal"
+                                                         data-slotamount="default,default,default,default" data-hideafterloop="0"
+                                                         data-hideslideonmobile="off" data-easein="default,default,default,default"
+                                                         data-easeout="default,default,default,default" data-masterspeed="default,default,default,default"
+                                                         data-thumb="<?=$f_Image?>" data-rotate="0,0,0,0" data-saveperformance="off"
+                                                         data-title="<?=$f_Name?>" data-param1="" data-param2="" data-param3=""
+                                                         data-param4="" data-param5="" data-param6="" data-param7="" data-param8=""
+                                                         data-param9="" data-param10="" data-description="">
+                                                            <!-- MAIN IMAGE-->
+                                                            <img class="rev-slidebg" src="<?=$f_Image?>" alt=""
+                                                             title="<?=$f_Name?>" width="1730"
+                                                             height="700" data-bgposition="center center" data-bgfit="cover"
+                                                             data-bgrepeat="no-repeat" data-bgparallax="off" data-no-retina="">
+                                                            <!-- LAYERS-->
+                                                            <!-- LAYER NR. 1-->
+                                                            <div class="tp-caption tp-shape tp-shapewrapper tp-resizeme" id="slide-<?=$f_RowID?>-layer-1"
+                                                             data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                                                             data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']"
+                                                             data-width="full" data-height="full" data-whitespace="nowrap" data-transform_idle="o:1;"
+                                                             data-transform_in="opacity:0;s:300;e:Power2.easeInOut;" data-transform_out="opacity:0;s:300;"
+                                                             data-start="0" data-basealign="slide" data-responsive_offset="on"
+                                                             style="z-index: 5;<?if(!$f_Fon):?>background-color:rgba(0, 0, 0, 0.40);<?endif?>border-color:rgba(0, 0, 0, 0);"></div>
+                                                            <!-- LAYER NR. 2-->
+                                                            <div class="tp-caption tp-resizeme" id="slide-<?=$f_RowID?>-layer-4" data-x="['center','center','center','center']"
+                                                             data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
+                                                             data-voffset="['-141','-141','-141','-161']" data-width="none" data-height="none"
+                                                             data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:500;e:Power3.easeInOut;"
+                                                             data-transform_out="y:[-100%];s:300;" data-mask_in="x:0px;y:0px;"
+                                                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="500"
+                                                             data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                                                             style="z-index: 6; white-space: nowrap; font-size: 18px; line-height: 22px; font-weight: 400; color: rgba(186, 113, 0, 1.00);"><?=$f_Line1?></div>
+                                                            <!-- LAYER NR. 3-->
+                                                            <div class="tp-caption tp-resizeme" id="slide-<?=$f_RowID?>-layer-5" data-x="['center','center','center','center']"
+                                                             data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
+                                                             data-voffset="['-86','-86','-86','-66']" data-fontsize="['50','50','50','40']"
+                                                             data-width="['593','593','593','402']" data-height="none" data-whitespace="normal"
+                                                             data-transform_idle="o:1;" data-transform_in="x:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:1500;e:Power3.easeInOut;"
+                                                             data-transform_out="x:[-100%];s:300;e:Power3.easeInOut;" data-mask_in="x:0px;y:0px;"
+                                                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="500"
+                                                             data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                                                             style="z-index: 7; min-width: 593px; max-width: 593px; white-space: normal; font-size: 50px; line-height: 54px; font-weight: 400; color: rgba(255, 255, 255, 1.00);text-align:center;"><?=$f_Name?></div>
+                                                            <!-- LAYER NR. 4-->
+                                                            <div class="tp-caption tp-resizeme" id="slide-<?=$f_RowID?>-layer-6" data-x="['center','center','center','center']"
+                                                             data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
+                                                             data-voffset="['0','0','0','50']" data-width="['568','568','568','372']"
+                                                             data-height="['76','76','76','78']" data-whitespace="normal" data-transform_idle="o:1;"
+                                                             data-transform_in="x:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:1500;e:Power3.easeInOut;"
+                                                             data-transform_out="x:[100%];s:300;e:Power3.easeInOut;" data-mask_in="x:0px;y:0px;"
+                                                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="500"
+                                                             data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                                                             style="z-index: 8; min-width: 568px; max-width: 568px; max-width: 76px; max-width: 76px; white-space: normal; font-size: 16px; line-height: 22px; font-weight: 400; color: rgba(209, 209, 209, 1.00);text-align:center;"><?=$f_Line2?></div>
+                                                            <!-- LAYER NR. 5-->
+                                                            <a class="tp-caption rev-btn tp-resizeme" id="slide-<?=$f_RowID?>-layer-7" href="<?=$f_Link1?>"
+                                                             target="_self" data-x="['center','center','center','center']" data-hoffset="['-1','-1','-1','-1']"
+                                                             data-y="['middle','middle','middle','middle']" data-voffset="['70','70','70','140']"
+                                                             data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;"
+                                                             data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power1.easeIn;"
+                                                             data-style_hover="c:rgba(255, 255, 255, 1.00);bg:rgba(42, 47, 53, 1.00);br:3px 30px 3px 30px;"
+                                                             data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:540;e:Power2.easeInOut;"
+                                                             data-transform_out="y:[100%];s:300;" data-mask_in="x:0px;y:[100%];"
+                                                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="520"
+                                                             data-splitin="none" data-splitout="none" data-actions="" data-responsive_offset="on"
+                                                             style="z-index: 9; white-space: nowrap; font-size: 14px; line-height: 14px; font-weight: 400; color: rgba(42, 47, 53, 1.00);background-color:rgba(186, 113, 0, 1.00);padding:15px 30px 15px 30px;border-color:rgba(0, 0, 0, 0);outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;"><?=$f_TextLink1?></a>
+                                                             <? /*
+                                                            <!-- LAYER NR. 6-->
+                                                            <a class="tp-caption rev-btn tp-resizeme" id="slide-<?=$f_RowID?>-layer-8" href="<?=$f_Link2?>"
+                                                             target="_self" data-x="['center','center','center','center']" data-hoffset="['100','100','100','100']"
+                                                             data-y="['middle','middle','middle','middle']" data-voffset="['70','70','70','140']"
+                                                             data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;"
+                                                             data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power1.easeIn;"
+                                                             data-style_hover="c:rgba(42, 47, 53, 1.00);bg:rgba(186, 113, 0, 1.00);br:30px 3px 30px 3px;"
+                                                             data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:520;e:Power2.easeInOut;"
+                                                             data-transform_out="y:[100%];s:300;" data-mask_in="x:0px;y:[100%];"
+                                                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" data-start="520"
+                                                             data-splitin="none" data-splitout="none" data-actions="" data-responsive_offset="on"
+                                                             style="z-index: 10; white-space: nowrap; font-size: 14px; line-height: 14px; font-weight: 400; color: rgba(255, 255, 255, 1.00);background-color:rgba(42, 47, 53, 1.00);padding:15px 30px 15px 30px;border-color:rgba(0, 0, 0, 0);outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;"><?=$f_TextLink2?></a>
+                                                        */ ?></li>
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

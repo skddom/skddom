@@ -1,0 +1,236 @@
+<!-- FormPrefix --><?
+function getExtension000($filename) {
+    $path_info = pathinfo($filename);
+    return $path_info['extension'];
+}
+function formatSize000($size) {
+  $filesizename = array( " Bytes", " KB", " MB", " GB", " TB", " PB", " EB", " ZB", " YB" );
+  return $size ?
+    round($size/pow(1024, ($i = floor(log($size, 1024)))), 2) . $filesizename[$i] :
+    '0 ' . $filesizename[0];
+}
+if ($cc_settings['PDF']) {
+    $file = $_SERVER['DOCUMENT_ROOT'].$cc_settings['PDF'];
+    $size = filesize($file);
+    $ext = strtoupper(getExtension000($cc_settings['PDF']));
+    $pdf = "<a class='pdf' href='".$cc_settings['PDF']."' target='_blank'>Каталог проектов CKD<span>".formatSize000($size).",".$ext."</span></a>";
+    $cc_settings['Text2'] = str_replace("<!-- pdf -->",$pdf,$cc_settings['Text2']);
+}
+?><div class="vc_row wpb_row vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner "><div class="wpb_wrapper">
+    <div class="wpb_text_column wpb_content_element ">
+        <div class="wpb_wrapper">
+<p style="margin-top: -15px;">Компания «СКД-дом» занимается проектированием, строительством и продажей коттеджей в Москве и МО. Если вы заняты поиском дома, ознакомьтесь с линейками готовых проектов. При строительстве используется клееный брус собственного производства. Все решения объединены в линейки по архитектурной концепции, а в каждой группе представлены варианты, отличающиеся площадью и планировками.</p>
+<p>Готовые проекты коттеджей из клееного бруса адаптируются к требованиям заказчика. Работы выполняются нашими архитекторами бесплатно. </p>
+            <p><?
+           echo $cc_settings['Text2'];
+           ?></p>
+
+        </div>
+    </div>
+</div></div></div></div>
+<div class="vc_row wpb_row vc_row-fluid vc_custom_1438333348452 by-area">
+    <div class="projects wpb_column vc_column_container vc_col-sm-12">
+        <div class="vc_column-inner ">
+            <div class="wpb_wrapper">
+                <div class="row portfolio-filter filter-left">
+                    <div class="col-md-12">
+                        <a class="active" >По линейкам</a>
+                        <a href="/catalog/by-area/">По площади</a>
+                        <a href="/price/doma-iz-brusa/">По цене</a>
+
+                    </div>
+                </div>
+                <div class="area-range"><?
+                    ?><a onclick="$('.line-slides').css('position','absolute');" data-filter="all" class="filter active">Все</a><?
+                    foreach ($arLines as $v) {
+                        ?><a onclick="$('.line<?=$v['id']?> .line-slides').css('position','static');" data-filter=".line<?=$v['id']?>" class="filter<?=$v['id']?> filter"><?=$v['name']?></a><?
+                    }
+                ?></div>
+
+                <div class="portfolio-list portfolio-columns-4 portfolio-grid-layout-6  portfolio-with-spaces clearfix" id="portfolio-list">
+
+                
+<!-- /FormPrefix -->
+
+<!-- RecordTemplate --><?php $result .= ' ';
+
+
+                    $slides = array();
+
+
+$f_Price2 = $f_Price1;
+if (is_array($br->projects[$f_RowID])) extract($br->projects[$f_RowID]);
+unset($br->projects[$f_RowID]['f_Price1']);
+$t=explode("CKD",$f_Name);
+if(count($t)>1) $f_Name="<span class='fs12'>$t[0]</span> CKD$t[1]";
+else {
+    $t=explode("СКД",$f_Name);
+    if(count($t)>1) $f_Name="<span class='fs12'>$t[0]</span> CKD$t[1]";
+}
+/*if($f_SliderPath&&$f_MainImgPath)$f_MainImg=$f_SliderPath.$f_MainImgPath;*/
+$f_MainImg=$f_MainImgPath;
+if (!$f_MainImg) $f_MainImg = $f_ResizeImg;
+
+if(strpos($f_MainImg,"files/")==false) $f_MainImg = $f_SliderPath.$f_MainImgPath;
+
+foreach ($arRange as $v) {
+    if ($f_house_id >= $v['RANGE'][0] && $f_house_id<$v['RANGE'][1]) $id = $v['ID'];
+}
+
+if (!$lineOut[$f_SubID]) {
+    foreach ($arLines as $v) {
+
+        if ($v['id']!=$f_SubID) continue;
+if ($handle = opendir($_SERVER['DOCUMENT_ROOT'].$v['SliderPath'])) {
+    while (false !== ($f = readdir($handle))) {
+            if (is_file($_SERVER['DOCUMENT_ROOT'].$v['SliderPath'].$f)) {
+                $f = ($v['SliderPath'].$f);
+                $slides[]=$f;
+            }
+    }
+}
+        ?><div class="line<?=$v['id']?> line-desc col-md-12 clearfix portfolio-item-animation-2 mix building">
+        <div class="mgt-header-block clearfix text-left text-black wpb_animate_when_almost_visible wpb_top-to-bottom wpb_content_element mgt-header-block-style-2 mgt-header-texttransform-header  wpb_start_animation">
+            <div class="reconlife mgt-header-block-title h2"><?=$v['name']?></div>
+            <div class="mgt-header-line"></div></div>
+            <div class="wpb_text_column wpb_content_element ">
+                <div class="wpb_wrapper"><?
+                if ($v['Video']) {
+                ?><div data-id="<?=$f_RowID?>" class="portfolio-item-block portfolio-item-animation-6 video building" data-item="" data-name="" style="display: inline-block;">
+                                        <div class="portfolio-item-block-inside">
+                                            <a class="js-turn-video" id="video<?=$v['id']?>" href="#" target="_blank" rel="" title="">
+                                                <div class="portfolio-item-image" data-style="background-image: url(<?=$f_MainImg?>);" style="background-image: url(<?=$f_MainImg?>);"></div>
+                                                <div class="portfolio-item-bg"></div>
+                                                <div class="info"><i class="svg-icon svg-video"></i>
+                                                    <div class="hh4 title">Видеообзор линейки “<?=$v['name']?>”</div>
+                                                </div>
+                                            </a><?
+                                            ?><div style="display:none" class="js-video"><?=$v['Video']?></div>
+                                         </div>
+                                    </div><?
+                }
+                    ?><div class="line-description"><?=$v['text']?></div><?
+
+if (count($slides)) {
+                        ?><div class="line-box"><div class="line-slides"><?
+                        ?><div id="vc_images-carousel-1-<?=$v['id']?>" data-ride="vc_carousel" data-wrap="false"  data-interval="0" data-auto-height="yes" data-mode="horizontal" data-partial="false" data-per-view="1" data-hide-on-end="true" class="vc_slide vc_images_carousel">
+                            <!-- Wrapper for slides -->
+                            <div class="vc_carousel-inner">
+                                <div class="vc_carousel-slideline">
+                                    <div class="vc_carousel-slideline-inner"><?
+    foreach($slides as $f) {
+        if (is_file($_SERVER['DOCUMENT_ROOT'].$f)) {
+
+                                        ?><div class="vc_item">
+                                            <div class="vc_inner">
+                                                <a href="<?=$f?>"  rel="lightbox">
+                                                <img width="1170" height="780" src="<?=($f)?>" class="attachment-full" alt="" srcset="<?=$f?> 1170w, <?=$f?> 300w, <?=$f?> 768w, <?=$f?> 1024w" sizes="(max-width: 1170px) 100vw, 1170px" />                                        </a>
+                                            </div>
+                                        </div><?
+            //echo "<img src=\"$f\" alt=\"\" />";
+        }
+    }
+
+                                    ?></div>
+                                </div>
+                            </div>
+                            <!-- Controls -->
+                            <a class="vc_left vc_carousel-control" href="#vc_images-carousel-1-<?=$v['id']?>" data-slide="prev">
+                            <span class="icon-prev"></span>
+                            </a>
+                            <a class="vc_right vc_carousel-control" href="#vc_images-carousel-1-<?=$v['id']?>" data-slide="next">
+                            <span class="icon-next"></span>
+                            </a>
+                        </div></div>
+                        <div class="line-pro-title">Проекты линейки <?=$v['name']?></div>
+                        </div>
+                    <?
+
+}
+                ?></div>
+            </div>
+        </div><?
+    }
+    $lineOut[$f_SubID] = true;
+}
+?>
+<div data-id="<?=$f_RowID?>" data-class="<?=$id?>" class="<?=$id?> line<?=$f_SubID?> portfolio-item-block portfolio-item-animation-2 mix building" data-item="<?=$f_RowNum?>" data-name="<?=strip_tags($f_Name)?>" style="display: inline-block;">
+    <div class="portfolio-item-block-inside">
+      <a href="<?=$fullLink?>" target="_self" rel="" title="<?=strip_tags($f_Name)?>">
+        <div class="portfolio-item-image" data-style="background-image: url('<?=$f_MainImg?>');" style="background-image: url('<?=$f_MainImg?>');"></div>
+        <div class="portfolio-item-bg"></div>
+        <div class="info">
+          <span class="sub-title"></span>
+          <div class="hh4 title">CKD-<?=$f_house_id?></div>
+                  <div class="project-description">
+                      Площадь <?=$f_Square?> кв.м.<br>
+                      Цена <?=$f_Price2?$f_Price2:$f_Price1?> р.
+                  </div>
+<div class="hvr-icon-wobble-horizontal mgt-button mgt-style-textwhite mgt-size-normal mgt-align-left mgt-display-newline mgt-text-size-small mgt-button-icon-position-right mgt-text-transform-uppercase">УЗНАТЬ БОЛЬШЕ<i class="fa fa-arrow-right"></i></div>
+                </div>
+                <div class="labels">
+        <?if($f_Hit):?><div class="label hit">Хит продаж</div><br><?endif?>
+        <?if($f_Special):?><div class="label special">Спецпредложение</div><br><?endif?>
+        <?if($f_Cheap):?><div class="label cheap">Выгодная цена</div><?endif?>
+  </div>
+      </a>
+    </div>
+    </div><!-- /RecordTemplate -->
+
+<!-- FormSuffix -->                </div>
+<script>(function($){
+      $(document).ready(function() {
+            $(".filter.active").show();
+
+<?
+    foreach (array_keys($exists) as $v) {
+    ?>$(".filter<?=$v?>").show();<?
+    }
+?>
+        $("#portfolio-list").mixItUp({effects:["fade","scale"],easing:"snap", callbacks:{onMixEnd:function(){initLine()}}, layout:{display:"block"}});
+
+
+      });})(jQuery);</script>
+            </div>
+        </div>
+    </div>
+</div>
+<? echo $cc_settings['Text1'].$cc_settings['Text3']; ?>
+
+</div></article></div></div></div>
+
+<div class="wpb_wrapper" style='background-color:#F4F4F4;     padding: 45px;'>
+<div class="container">
+<h2>Строительство коттеджей из клееного бруса</h2>
+<p><span style="font-weight:bold">Предлагаются услуги в трех направлениях:</span></p>
+<ul>
+<li>строительство домов под ключ;</li>
+<li>изготовление домокомплектов по представленным проектам;</li>
+<li>проектирование и создание дизайн-проектов интерьеров.</li>
+</ul>
+<p>Возведение объектов завершается в минимальные сроки, детали собираются по типу конструктора. Строение обладает низкой теплопроводностью и не нуждается в утеплении. Отделка минимальна за счет эстетичности материала.</p>
+<p><span style="font-weight:bold">Преимущества домокомплектов</span></p>
+<p>Все изделия изготавливаются из безопасного сырья. Дома из клееного бруса прочны, не дают усадки, сохраняют первоначальные параметры. </p>
+<h2>Что учитывают при выборе проекта коттеджа из клееного бруса?</h2>
+<p><span style="font-weight:bold">При утверждении планировки необходимо учитывать следующие моменты:</span></p>
+<ul>
+<li>стилистические предпочтения и требования; </li>
+<li>количество членов семьи, стиль жизни; </li>
+<li>особенности расположения и рельефа участка; </li>
+<li>временное или постоянное проживание. </li>
+</ul>
+<p>Представленные деревянные дома отвечают требованиям самых избирательных заказчиков. </p>
+<h2>Преимущества заказа строительства под ключ в «СКД-дом»</h2>
+<ol>
+<li><span style="font-weight:bold">Комплексный подход</span>. Работы начинаются с обследования участка и поставок материалов и завершаются расстановкой мебели, техники, аксессуаров.</li>
+<li><span style="font-weight:bold">Высокое качество</span>. На все виды услуг и продукцию гарантия.</li>
+<li><span style="font-weight:bold">Фиксированная цена на готовые решения</span>. </li>
+</ol>
+<p>Хотите построить дом из клееного бруса? Позвоните прямо сейчас по номеру +7 (495) 983-00-39 или закажите обратный звонок.</p>
+</div>
+</div>
+
+<div class="page-container container" style="margin-bottom:-60px;">
+    <div class="row">
+                <div class="col-md-12 entry-content">
+                  <article><div class="tpl-block-list tpl-component-210 tpl-template-2255" id="nc-block-6518f0414b183a59eab62d4d9da3fb8b-1"><!-- /FormSuffix -->

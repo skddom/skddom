@@ -1,0 +1,9 @@
+<?php require_once($nc_core->INCLUDE_FOLDER."classes/nc_imagetransform.class.php");
+$ignore_sub=$ignore_cc=true;
+$query_where = "LENGTH(a.MainImgPath)>0";
+global $path;
+$br = CBranding::get_object();
+$br->getProjects();
+$br->ExModifyQueryWhere($query_where, $cc_env, $inside_admin, $admin_mode);
+
+//if ($current_user) print_r($br); ?>

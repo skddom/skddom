@@ -1,0 +1,10 @@
+<?php
+$ignore_all=true;
+$lk = new CPersonal();
+if ($lk->lk || $admin_mode) {
+$query_from = "Subdivision s";
+$query_where = "s.Parent_Sub_ID=$sub and s.Checked=1";
+$query_select = "s.Subdivision_ID as ID, s.Subdivision_Name as Name, s.EnglishName as Keyword, s.Hidden_URL as Url";
+$query_order = "s.Priority asc";
+}
+?>

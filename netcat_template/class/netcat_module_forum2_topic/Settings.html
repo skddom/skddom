@@ -1,0 +1,82 @@
+<?
+$forum_obj = nc_forum2_forum::get_object();
+$topic_obj = nc_forum2_topic::get_object();
+$reply_obj = nc_forum2_reply::get_object();
+
+// replies Sub_Class_ID
+$replies_cc_id = $reply_obj->get_subclass_id($sub);
+
+// determine reply component linkname
+if ($replies_cc_id) $replies_cc_name = $db->get_var("SELECT `EnglishName` FROM `Sub_Class` WHERE `Sub_Class_ID` = '".$replies_cc_id."'");
+
+//  subscribe link
+$subscribe_link_word = false;
+if ( $nc_core->modules->get_by_keyword("subscriber") && $MODULE_VARS['subscriber']['VERSION'] > 1 ) { 
+  try {
+    $nc_subscriber = nc_subscriber::get_object(); 
+    $mailer_id = $nc_subscriber->get_mailer_by_cc($cc, 'Mailer_ID');
+    // check rights
+    if (  $nc_subscriber->check_rights ( $mailer_id )  ) {  
+      $subscribe_link_word =  $nc_subscriber->is_subscribe_to_message($cc, $message)  ?  "Отписаться" : "Подписаться";
+    }
+  }
+ catch ( Exception $e) { 
+   ; 
+ } 
+}
+
+$query_select = "ft.`Replies` as Replies, usr2.`User_ID` as Topic_Author_ID, IF(usr2.`ForumName` <> '',usr2.`ForumName`,usr2.`Login`) AS `Topic_Author`, UNIX_TIMESTAMP(usr2.`Created`) AS `Topic_Author_Regdate`, usr.`User_ID` as `Reply_Author_ID`, IF(usr.`ForumName` <> '',usr.`ForumName`,usr.`Login`) AS `Reply_Author`, rpl.`Message_ID` as Reply_ID, rpl.`Created` as `Reply_Date`, rpl.`Subject` as `Reply_Subject`, rpl.`Message`".($MODULE_VARS['forum2']['FORUM_SIGNATURE_FIELD'] ? " as `Reply_Message_full`, usr2.`".$MODULE_VARS['forum2']['FORUM_SIGNATURE_FIELD']."` as `Topic_Author_Signature`" : "");
+$query_join = "LEFT JOIN `Forum_Topics` AS ft ON a.`Message_ID` = ft.`Topic_ID`".
+  " LEFT JOIN `Message".$reply_obj->get_class_id()."` AS rpl ON ft.`Last_Reply_ID` = rpl.`Message_ID`".
+  " LEFT JOIN `User` AS usr ON rpl.`User_ID` = usr.`User_ID`".
+  " LEFT JOIN `User` AS usr2 ON a.`User_ID` = usr2.`User_ID`".
+  " LEFT JOIN `Classificator_ForumTopicType` AS tt ON a.`Type` = tt.`ForumTopicType_ID`";
+$query_order = "a.`Type` DESC, ";
+switch ($sort) {
+  case "updated": $query_order.= "a.`LastUpdated`"; break;
+  case "created": $query_order.= "a.`Created`"; break;
+  case "subject": $query_order.= "a.`Subject`"; break;
+  case "replies": $query_order.= "ft.`Replies`"; break;
+  case "views": $query_order.= "a.`Views`"; break;
+  case "author": $query_order.= "usr2.`Login`"; break;
+  default: $query_order.= "a.`LastUpdated`";
+}
+$query_order.= ($sortDir=="asc" ? " ASC" : " DESC");
+
+// if advertisement
+if ($advertisement) {
+  $query_where = "a.`Type` = 3";
+  $ignore_prefix = true;
+  $ignore_suffix = true;
+  $ignore_limit = true;
+}
+elseif ($action != "full") {
+  $query_where = "a.`Type` != 3";
+  $adv_messages = $db->get_var("SELECT COUNT(`Type`) FROM `Message".$topic_obj->get_class_id()."` WHERE `Sub_Class_ID` = '".intval($cc)."' AND `Type` = 3");
+  // because adv messages will be passed by the s_list_class()
+  if ($adv_messages) {
+    $recNum = $cc_env['RecordsPerPage'] - $adv_messages;
+    $query_limit = $cc_env['RecordsPerPage'] ? intval($curPos).", ".$recNum : "";
+  }
+}
+
+// check current user rights
+if ( is_object($perm) ) {
+  $editRight = $perm->isSubClass ($cc, MASK_EDIT | MASK_MODERATE);
+  $deleteRight = $perm->isSubClass ($cc, MASK_DELETE | MASK_MODERATE);
+}
+else {
+  $editRight = false;
+  $deleteRight = false;
+}
+
+// модуль личный кабинет
+$m_auth = $nc_core->modules->get_by_keyword('auth');
+$pw_allow = false; // доступны личные сообщения
+$materials_url  = false; // ссылка на "мои материалы"
+if ( $m_auth ) {
+  $pw_allow = $AUTH_USER_ID && $nc_core->get_settings('pm_allow', 'auth');
+  $materials_url = $nc_core->get_settings('materials_url', 'auth');
+  if ( $materials_url ) $materials_url .= "?by_user_id=";
+}
+?>

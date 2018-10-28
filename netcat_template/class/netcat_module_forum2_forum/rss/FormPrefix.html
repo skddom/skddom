@@ -1,0 +1,23 @@
+<rss version="2.0" xml:lang="ru-RU">
+  <channel>
+    <title><?= htmlspecialchars($current_sub['Subdivision_Name'], ENT_QUOTES) ?></title>
+    <link>http://<?= $HTTP_HOST ?></link>
+    <description>
+    <![CDATA[
+    <?= htmlspecialchars(strip_tags($current_sub['Description']), ENT_QUOTES) ?>
+    ]]>
+    </description>    
+    <image>
+      <title><?= NETCAT_MODULE_FORUM2 ?></title>
+      <?= ($cc_settings['ShowImage'] ? '<url>http://".$HTTP_HOST.$ADMIN_TEMPLATE."/img/i_info_big.gif</url>' : '') ?>
+      <link>http://<?= $HTTP_HOST ?></link>
+    </image>
+    <language>ru-RU</language>
+    <copyright>Copyright <?= date("Y") ?> <?= htmlspecialchars($system_env['ProjectName'], ENT_QUOTES) ?></copyright>
+    <lastBuildDate><?= gmdate("D, d M Y H:i:s", $UpdatedTopic) ?> GMT</lastBuildDate>
+    <generator>NetCat <?= $system_env['VersionNumber'] ?> <?= $netcat_editions[$system_env['SystemID']] ?></generator>
+    <category>новости</category>
+    <managingEditor><?= $system_env['SpamFromEmail'] ?> (<?= htmlspecialchars($system_env['SpamFromName'], ENT_QUOTES) ?>)</managingEditor>
+    <webMaster><?= $system_env['SpamFromEmail'] ?> (<?= htmlspecialchars($system_env['SpamFromName'], ENT_QUOTES) ?>)</webMaster>
+    <ttl><?= $cc_settings['ttl'] ?></ttl>
+    

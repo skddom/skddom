@@ -1,0 +1,20 @@
+<? echo $f_AdminCommon; ?>
+<div class='nc_forum_feed'>
+	
+	<? if ($rssLink) : ?>
+		<img src='<?= $SUB_FOLDER ?>/images/rss.png' alt='RSS' /><a href='$rssLink'>RSS</a>
+	<? endif; ?>
+	
+	<? if (!$inside_admin && is_object($perm) && $perm->isSubClass($cc, MASK_ADD)) : ?>
+ 		<a href='<?= $addLink ?>'>Добавить форум</a>
+	<? endif; ?>
+	
+</div>
+<table class='nc_forum_header' cellpadding='5' cellspacing='1' >
+<tr valign='top'>
+  <td class='cell' style='width:1%;' >#</td>
+  <td class='cell' style='width:60%;'>Название форума</td>
+  <td class='cell_main' style='width:10%;'>Топиков</td>
+  <td class='cell_main' style='width:10%;'>Ответов</td>
+  <td class='cell' style='width:19%;'>Последний пост</td>
+</tr>

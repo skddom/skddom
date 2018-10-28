@@ -1,0 +1,84 @@
+<aside>
+    <!-- Список разделов в боковой колонке -->
+    <?= nc_browse_sub($parent_sub_tree[count($parent_sub_tree)-2]['Subdivision_ID'], array($GLOBALS['browse_top_menu'][1], $GLOBALS['browse_top_menu'][2])); ?>
+    <!-- Фильтр -->
+    <div class="tpl-block-filter" action="<?= htmlspecialchars($_SERVER["REQUEST_URI"]); ?>" method="post">
+        <input type="hidden" name="request_uri" value="<?= htmlspecialchars($_SERVER["REQUEST_URI"]); ?>">
+        <h3>Фильтр</h3>
+        <?= $netshop->filter->make_form() ?>
+    </div>
+</aside>
+
+<div class="tpl-block-main">
+<div class="tpl-block-list tpl-component-goods">
+<!-- Управление списком объектов -->
+<div class="tpl-block-list-prefix">
+    <!-- Хлебные крошки-->
+    <?= nc_browse_path_range(0, $sub_level_count - 2, $GLOBALS['browse_path']); ?>
+    <? if ($sorting_methods): ?>
+        <!-- Сотрировка -->
+        <? $sortBy = (string)$nc_core->input->fetch_get('sortBy'); ?>
+        <div class="tpl-block-list-order">
+            <span class="tpl-block-dropdown tpl-link-pseudo" data-target="#ordering_dropdown">
+                <u><?= $sorting_methods[$sortBy]['title'] ?></u><i class="icon-angle-down"></i>
+                <ul id="ordering_dropdown">
+                    <? foreach ($sorting_methods as $key => $row): ?>
+                        <li<?= $sortBy == $key ? " class='tpl-state-active'" : '' ?>>
+                            <a href="<?= current_link('sortBy', $key) ?>" rel="nofollow"><?= $row['title'] ?></a>
+                        </li>
+                    <? endforeach ?>
+                </ul>
+            </span>
+            <span class="tpl-link-pseudo<?= empty($sortDesc) ? ' tpl-state-active' : '' ?>">
+                <u><a href="<?= current_link('sortDesc', null) ?>" title="По возрастанию" rel="nofollow"><i class="icon-lowtohight"></i></a></u>
+            </span>
+            <span class="tpl-link-pseudo<?= !empty($sortDesc) ? ' tpl-state-active' : '' ?>">
+                <u><a href="<?= current_link('sortDesc', '1') ?>" title="По убыванию" rel="nofollow"><i class="icon-highttolow"></i></a></u>
+            </span>
+        </div>
+    <? endif ?>
+    <!-- Количество записей на странице -->
+    <div class="tpl-block-list-per-page">
+        <span class="tpl-link-pseudo tpl-block-dropdown" data-target="#ordering_limit">
+            <u>Показывать по <?= $recNum ?></u><i class="icon-angle-down"></i>
+            <ul id="ordering_limit">
+                <? foreach (array(20, 40, 60) as $limit): ?>
+                    <li<?= $limit == $recNum ? " class='tpl-state-active'" : '' ?>>
+                        <a href="<?= current_link('recNum', $limit) ?>" rel="nofollow">Показывать по <?= $limit ?></a></li>
+                <? endforeach ?>
+            </ul>
+        </span>
+    </div>
+    <!-- Список / плитка-->
+    <div class="tpl-block-list-layout">
+        <div class="tpl-block-list-layout-tiles<?= ($list_layout_class != 'tpl-layout-list' ? ' tpl-state-active' : '') ?>" 
+            title="Выводить плиткой"><i class="icon-th"></i></div>
+        <div class="tpl-block-list-layout-list<?=  ($list_layout_class == 'tpl-layout-list' ? ' tpl-state-active' : '') ?>"
+            title="Выводить строчками"><i class="icon-list"></i>
+        </div>
+    </div>
+
+    <!-- Заголовок-->
+    <h2><?= $nc_core->subdivision->get_by_id($sub, 'Subdivision_Name'); ?></h2>
+    
+    <!-- Список страниц -->
+    <div class="tpl-block-pagination">
+        <? if (strlen($prevLink)): ?>
+            <a href="<?= $prevLink; ?>" class="tpl-link-prev" title="Предыдущая страница">Предыдущая страница</a>
+        <? elseif (strlen($nextLink)): ?>
+            <a class="tpl-link-prev tpl-state-disabled" title="Предыдущая страница">Предыдущая страница</a>
+        <? endif; ?>
+        <?= nc_browse_messages($cc_env, 5, $GLOBALS['pages_template']); ?>
+        <? if (strlen($nextLink)): ?>
+            <a href="<?= $nextLink; ?>" class="tpl-link-next" title="Следующая страница">Следующая страница</a>
+        <? elseif (strlen($prevLink)): ?>
+            <a class="tpl-link-next tpl-state-disabled" title="Следующая страница">Следующая страница</a>
+        <? endif; ?>
+    </div>
+    <? if ($admin_mode): // блок с элементами интерфейса управления ?>
+        <div class="tpl-block-admin"><?= $f_AdminCommon ?></div>
+    <? endif; ?>
+</div>
+
+<!-- Список объектов -->
+<div class="tpl-block-list-objects <?= $list_layout_class ?>">

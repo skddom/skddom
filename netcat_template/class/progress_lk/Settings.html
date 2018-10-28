@@ -1,0 +1,17 @@
+<?php
+global $pro;
+if (!$pro) {
+    $lk = new CPersonal();
+    $pro = new CProgress($lk, 340);
+}
+$query_where = "a.Project=".(int)$lk->lk;
+
+$f_Photo_tpl = array(
+    'prefix' => "<div class='bxslider'>",
+    'record' => "<div><span>%Name%</span><a href='%Path%'><img src='%Preview%' /></a></div>",
+    'divider' => " ",
+    'suffix' => "</div>",
+    'i' => 1
+);
+
+?>

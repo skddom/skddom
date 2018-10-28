@@ -1,0 +1,25 @@
+<div class="text">
+  <div class="robototitle"><?=$f_Name?></div>
+  <?=str_replace("#TITLE#", $lk->data['Title1'],$f_Text)?>
+  <?if($f_Certificate):?>
+  <p class="offer2u-btn" align="center"><a href="<?=$fullLink?>?do=download" class="data-download"></a><a data-lightbox="lightbox" href="<?=$f_Certificate?>">Предложение для Вас</a></p>
+  <?endif?>
+</div>
+<?
+if ($do == "download" && $f_Certificate) {
+  ob_clean();
+  header("Content-Type: ".$f_Certificate_type."; charset=windows-1251");
+  header("Expires: Mon, 26 Jul 2001 05:00:00 GMT");
+  header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+  header("Cache-Control: no-store, no-cache, must-revalidate");
+  header("Cache-Control: post-check=0, pre-check=0", false);
+  header("Pragma: no-cache");
+  header("Cache-Control: private");
+  header("Content-Type: ".$f_Certificate_type);
+  header("Content-Disposition: attachment; filename=\"$f_Certificate_name");
+  header("Content-Length: ".($f_Certificate_size));
+  echo file_get_contents($_SERVER['DOCUMENT_ROOT'].$f_Certificate_url);
+  exit;
+  die();
+}
+?>

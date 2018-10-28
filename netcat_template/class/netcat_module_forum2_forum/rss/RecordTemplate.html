@@ -1,0 +1,10 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+<item>
+  <title><?= htmlspecialchars(strip_tags($SubName), ENT_QUOTES) ?></title>
+  <link>http://<?= $HTTP_HOST ?><?= $SubLink ?></link>
+  <description><?= htmlspecialchars(strip_tags(strtotime($f_Last_Reply_Date) > strtotime($f_Last_Topic_Date) ? ($f_Last_Reply_Subject ? $f_Last_Reply_Subject : $f_Last_Reply_Message) : ($f_Last_Topic_Subject ? $f_Last_Topic_Subject : $f_Last_Topic_Message)), ENT_QUOTES) ?></description>
+  <?= ($f_Last_Reply_Date || $f_Last_Topic_Date ? "<pubDate>".gmdate("D, d M Y H:i:s", strtotime($f_Last_Reply_Date) > strtotime($f_Last_Topic_Date) ? $f_Last_Reply_Date : $f_Last_Topic_Date)." GMT</pubDate>" : "") ?>
+  <guid isPermaLink="true">http://<?= $HTTP_HOST.$SubLink ?></guid>
+  <author><?= htmlspecialchars(strip_tags(strtotime($f_Last_Reply_Date) > strtotime($f_Last_Topic_Date) ? $f_Last_Reply_Author : $f_Last_Topic_Author), ENT_QUOTES) ?> ()</author>
+</item>
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

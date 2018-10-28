@@ -1,0 +1,36 @@
+<?
+// get forum object
+$parent_obj = nc_forum2_parent::get_object();
+$forum_obj = nc_forum2_forum::get_object();
+$topic_obj = nc_forum2_topic::get_object();
+$reply_obj = nc_forum2_reply::get_object();
+
+// clear query
+$ignore_all = 1;
+
+$last_topic_link = ($admin_mode ? "CONCAT('".$SUB_FOLDER.$HTTP_ROOT_PATH."full.php?catalogue=', cc.`Catalogue_ID`, '&sub=', m.`Subdivision_ID`,  '&cc=', m.`Sub_Class_ID`, '&message=', m.`Message_ID`)" : "CONCAT('".$SUB_FOLDER."',sub.`Hidden_URL`, cc.`EnglishName`, '_', m.`Message_ID`, '.html')");
+$last_reply_link = ($admin_mode ? "CONCAT('".$SUB_FOLDER.$HTTP_ROOT_PATH."full.php?catalogue=', cc.`Catalogue_ID`, '&sub=', m.`Subdivision_ID`,  '&cc=', tm.`Sub_Class_ID`, '&message=', m.`Topic_ID`)" : "CONCAT('".$SUB_FOLDER."',sub.`Hidden_URL`, cc.`EnglishName`, '_', m.`Topic_ID`, '.html', '#reply', m.`Message_ID`)");
+
+$message_select = "
+		(SELECT usr.`Login` AS `Author`, 
+		m.`Message_ID` AS `RowID`, 
+		m.`Created`, 
+		m.`Subject`, 
+		m.`Message` AS `Message_full`, 
+		".$last_topic_link." AS `fullLink`, 
+		'topic' AS Type 
+				FROM `Message".$topic_obj->get_class_id()."` AS m
+  LEFT JOIN `User` AS usr ON m.`User_ID` = usr.`User_ID`
+  LEFT JOIN `Subdivision` AS sub ON m.`Subdivision_ID` = sub.`Subdivision_ID`
+  LEFT JOIN `Sub_Class` AS cc ON m.`Sub_Class_ID` = cc.`Sub_Class_ID` $order_by $sort_by)
+  UNION
+  (SELECT usr.`Login`, m.`Message_ID`, m.`Created`, m.`Subject`, m.`Message`, ".$last_reply_link.", 'reply' AS type FROM `Message".$reply_obj->get_class_id()."` AS m
+  LEFT JOIN `User` AS usr ON m.`User_ID` = usr.`User_ID`
+  LEFT JOIN `Message".$topic_obj->get_class_id()."` AS tm ON m.`Topic_ID` = tm.`Message_ID`
+  LEFT JOIN `Subdivision` AS sub ON tm.`Subdivision_ID` = sub.`Subdivision_ID`
+  LEFT JOIN `Sub_Class` AS cc ON tm.`Sub_Class_ID` = cc.`Sub_Class_ID` $order_by $sort_by)
+  ".($cc_env['SortBy'] ? " ORDER BY ".$cc_env['SortBy'] : "")."
+  ".($recNum ? " LIMIT ".intval($recNum) : ($cc_env['RecordsPerPage'] ? " LIMIT ".$cc_env['RecordsPerPage'] : "") );
+
+unset($last_topic_link, $last_reply_link);
+?>

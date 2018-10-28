@@ -1,0 +1,12 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+<?= $f_AdminButtons; ?><?
+$files = $f_Photo->to_array();
+?><div  data-callback="initSliders2();" data-target=".js-ajax-result" data-load1-off="<?=$fullLink?>?isNaked=1" class="news-itm">
+    <div class="news-date" style="margin-bottom: 4px; font-size: 14px; color: #d47000; "><?=$f_Date?></div>
+    <div class="option-name" style="font-size: 17px;  margin-bottom: 7px;"><?=$f_Name?></div>
+    <div class="news-text" style="line-height: 18px;">
+    <img src="/images/emp.gif" style="background:url(<?=$files[0]['Preview']?>); background-size: cover; width:88px; height:76px; float: left; margin: 0 10px 0 0">
+    <?=$f_Text?></div>
+    <div style="clear: both">&nbsp;</div>
+</div>
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

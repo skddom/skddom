@@ -1,0 +1,75 @@
+<? global $browse_tabs;
+// записи определенного пользователя
+$by_user_id = intval($by_user_id);
+if ( !$by_user_id ) $by_user_id = $AUTH_USER_ID;
+$query_where .= " AND a.`User_ID` = '".$by_user_id."' ";
+
+$ignore_all = 1;
+
+$parent_obj = nc_forum2_parent::get_object();
+$forum_obj = nc_forum2_forum::get_object();
+$topic_obj = nc_forum2_topic::get_object();
+$reply_obj = nc_forum2_reply::get_object();
+
+$maxRows = $recNum ? $recNum : $cc_env['RecordsPerPage'];
+$maxRows +=0;
+
+//таблица с темами
+$topic_table = "Message" . $topic_obj->get_class_id();
+//таблица с сообщениями
+$reply_table = "Message" . $reply_obj->get_class_id();
+
+//выбираем данные
+$select = "
+		SELECT UNIX_TIMESTAMP(u.`Created`) AS `Author_Regdate`, 
+		a.`Subject`, 
+		a.`Message`, 
+		a.`Message_ID`, 
+		a.Created AS `Created`, 
+		a.User_ID,
+        sub.`EnglishName`, 
+		sub.`Hidden_URL`, 
+		sub.`Subdivision_Name`, ";
+
+$where = " 
+	sub.`Subdivision_ID` = a.`Subdivision_ID` 
+	AND u.`User_ID` = '".$by_user_id."' ";
+              
+
+$message_select = $select ." 
+0 as `is_reply`, 
+a.Message_ID, 
+a.Subject as `Subject`
+                   FROM ($topic_table AS a, Subdivision as `sub`)
+                   LEFT JOIN `User` AS `u` ON u.User_ID = a.User_ID
+                   WHERE $where
+
+                   UNION 
+
+                   ".$select." 1 as `is_reply`, 
+               a.Topic_ID, 
+               ( select Subject FROM Message".$topic_obj->get_class_id()." where Message_ID =  a.Topic_ID) as `Subject`
+                   FROM ($reply_table AS a, Subdivision as `sub`)
+                   LEFT JOIN `User` AS `u` ON u.User_ID = a.User_ID
+                   WHERE $where
+
+		  ORDER BY `Created` DESC
+                  LIMIT " . (isset($cc_env['cur_cc']) && $cc_env['cur_cc'] == $cur_cc ? $curPos : (!isset($cc_env['cur_cc']) ? $curPos : "0")) . "," . $maxRows;       
+                  
+$result_vars = '$f_Author_Regdate, $f_Subject, $f_Message, $f_RowID, $f_Created, $f_UserID, $eng_name, $url, $Name, $f_is_reply, $f_topic_id, $f_subject';
+
+
+
+if ( $by_user_id != $AUTH_USER_ID ) {
+  $f_Author = $db->get_var("SELECT IF(`ForumName` <> '', `ForumName`, `Login`) FROM `User` WHERE `User_ID` = '".$by_user_id."' ");
+  $PageTitle = "Сообщения на форуме пользователя <a href='".nc_auth_profile_url($by_user_id)."'>$f_Author</a>";
+   if ( !$f_Author ) header("Location: /");
+}
+else {
+  $f_Author = $current_user[$nc_core->AUTHORIZE_BY];
+  $PageTitle = "Мои сообщения на форуме";
+}
+
+$cc_env['Cache_Access_ID'] = 2;
+
+?>

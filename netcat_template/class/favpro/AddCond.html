@@ -1,0 +1,8 @@
+<?php
+$f_CookieID = $_COOKIE['skd_token'];
+$f_User = $AUTH_USER_ID;
+$exists = $db->get_var("select Message_ID from Message$classID where ID=$f_ID and (User='$f_User' or CookieID='$f_CookieID')");
+if($exists) {
+    $posting=0;
+}
+?>

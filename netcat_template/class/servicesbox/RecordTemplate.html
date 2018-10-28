@@ -1,0 +1,40 @@
+<?/* Служебная часть */for ($f_RowNum = 0; $f_RowNum < $rowCount; $f_RowNum++) {    if($fetch_row[$f_RowNum] instanceof Iterator) {        extract($fetch_row[$f_RowNum]->to_array(), EXTR_PREFIX_ALL, "f");    } else {        extract($fetch_row[$f_RowNum], EXTR_PREFIX_ALL, "f");    }    foreach($iteration_RecordTemplate[$f_RowNum] as $value) {        extract($value);    }    eval($cc_env["convert2txt"]);    ob_start();/* Конец служебной части */?>
+<?= $f_AdminButtons;
+$classes = explode("\n",$f_Class);
+?>					<div class="wpb_column vc_column_container vc_col-sm-<?=round(12/$totRows)?>">
+						<div class="vc_column-inner">
+                        <noindex>
+							<div class="wpb_wrapper">
+								<style scoped="scoped">
+									.mgt-promo-block-<?=$f_RowID?>.mgt-promo-block.darken .mgt-promo-block-content {
+										background-color: rgba(10, 10, 10, 0.6) !important;
+									}
+
+									.mgt-promo-block-<?=$f_RowID?>.mgt-promo-block.animated:hover .mgt-promo-block-content {
+										background-color: rgba(0, 0, 0, 0.8) !important;
+									}
+								</style>
+								<div class="mgt-promo-block animated white-text cover-image text-size-normal darken mgt-promo-block-<?=$classes[0]?> wpb_content_element wpb_animate_when_almost_visible wpb_appear"
+								 data-style="background-image: url(<?=$f_Image?>);background-repeat: no-repeat;width: 100%; height: 220px;">
+									<div class="mgt-promo-block-content va-top">
+										<div class="mgt-promo-block-content-inside vc_custom_<?=$classes[1]?>"><i class="svg-icon <?=$f_Icon?>"></i>
+											<p class="h3_block"><?=$f_Name?></p>
+											<div class="mgt-button-wrapper mgt-button-wrapper-align-left mgt-button-wrapper-display-newline mgt-button-top-margin-disable"><?
+                                            if ($f_Link) {
+												?><a class="btn hvr-icon-wobble-horizontal mgt-button mgt-style-textwhite mgt-size-normal mgt-align-left mgt-display-newline mgt-text-size-small mgt-button-icon-position-right mgt-text-transform-uppercase"
+												 href="<?=$f_Link?>"><?=$f_Link_Text?$f_LinkText:'Узнать больше'?><i class="fa fa-arrow-right"></i></a><?
+                                            }
+											?></div>
+										</div>
+									</div>
+								</div>
+								<div class="wpb_text_column wpb_content_element wpb_animate_when_almost_visible wpb_left-to-right vc_custom_<?=$classes[2]?>">
+									<div class="wpb_wrapper">
+										<p><?=$f_Text?></p>
+									</div>
+								</div>
+							</div>
+                            </noindex>
+						</div>
+					</div>
+<?/* Служебная часть */    echo nc_finishing_RecordTemplate(ob_get_clean(), $inside_admin, $classID, $f_RowID, $parent_message, $cc, $cc_env["Class_Name"], $no_cache_marks);}/* Конец служебной части */?>

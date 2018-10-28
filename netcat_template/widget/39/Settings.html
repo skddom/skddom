@@ -1,0 +1,9 @@
+<?php
+
+$template_folder = $nc_core->WIDGET_TEMPLATE_FOLDER . $widget_class_id . DIRECTORY_SEPARATOR . $widget_id . DIRECTORY_SEPARATOR;
+$template_file   = $template_folder . 'WidgetTemplate.html';
+$css_path        = $nc_core->HTTP_TEMPLATE_PATH . "widget/{$widget_class_id}/{$widget_id}/style.css";
+
+if ( ! file_exists($template_file)) {
+	$template_file = false;
+}

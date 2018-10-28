@@ -1,0 +1,14 @@
+body {color: #757575; background: #EBEBEB;}
+
+.logotype, .blue_block, .footer .s_relative_top2 {background: #405866;}
+.top_image {background: #405866 url('../i/layer/top_image.gif') no-repeat left top;}
+.banner_left {background: #405866 url('../i/templates/navy/banner_left.gif') no-repeat left bottom;}
+.banner_right {background: #405866 url('../i/templates/navy/banner_right.gif') no-repeat left bottom;}
+
+.form_submit {border: 1px solid #5E717C; background: #405866 url('../i/templates/navy/submit_bg.gif') repeat-x left center;}
+.search_block {background: #D4D4D4;}
+.search_block .search_header {color: #7A7A7A;}
+.auth_block {background: #D4D4D4;}
+.shop_block .good_item {background: #496474;}
+.footer .s_relative_top {background: #D5D5D5;}
+.page_content {color: #2D2D2D;}

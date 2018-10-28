@@ -1,0 +1,17 @@
+<?
+// get forum object
+$nc_forum2_forum = nc_forum2_forum::get_object();
+// determine forum url
+$forum_url = $nc_forum2_forum->get_forum_url_by_cc_id($cc);
+
+// redirect in back-office or link in front-office mode
+if($inside_admin) {
+  ob_end_clean();
+  header("Location: ".$forum_url."&inside_admin=1");
+  exit;
+}
+else {
+  echo $IsChecked ? NETCAT_MODULE_FORUM2_COMPONENT_TOPIC_ADDED : NETCAT_MODULE_FORUM2_COMPONENT_TOPIC_ADDED_MODERATION;
+  echo "<br/><br/><a href='".$forum_url.($curPos ? "&curPos=".$curPos : "")."'>".NETCAT_MODULE_FORUM2_COMPONENT_RETURN_TO_THE_FORUM."</a>";
+}
+?>
