@@ -1,4 +1,37 @@
 <?php
+if ($_POST['project']) {
+	$_SESSION['project'] = intval($_POST['project']);
+}
+$project = $_SESSION['project']?:2;
 
-
+$ignore_all = true;
+$db->query("SET lc_time_names = 'ru_RU';");
+$query_select  = "
+  m.Message_ID RowID, 
+  css.StageSection_Name,
+  csr.StageReports_Name,
+  m.Date1,
+  REPLACE(LCASE(DATE_FORMAT(m.Date1, '%D %M')), 'th', '') date1_text,
+  m.Date2,
+  REPLACE(LCASE(DATE_FORMAT(m.Date2, '%D %M')), 'th', '') date2_text,
+  m.Number1,
+  m.Number2,
+  m.LastUpdated,
+  m.StageGroundwork StageGroundwork_ID,
+  (SELECT csg.StageGroundwork_Name FROM Classificator_StageGroundwork csg WHERE csg.StageGroundwork_ID = m.StageGroundwork) StageGroundwork,
+  m.StageReports StageReports_ID,    
+  (SELECT csot.StageObjectType_Name FROM Classificator_StageObjectType csot WHERE csot.StageObjectType_ID = m.StageObjectType) StageObjectType,
+  REPLACE(LCASE(DATE_FORMAT(m.StageDate, '%D %M')), 'th', '') date_text ";
+$query_from = " Message$classID m,  
+     Classificator_StageSection css,
+     Classificator_StageReports csr ";
+$query_where = "
+m.Checked = 1 
+AND m.StageSection = css.StageSection_ID
+AND m.StageReports = csr.StageReports_ID 
+AND m.Sub_Class_ID = $cc 
+AND m.Subdivision_ID = $sub 
+AND m.Project = $project
+";
+$query_order = "css.StageSection_Priority,m.StageDate,m.Priority";
 ?>
