@@ -8,3 +8,4 @@ vars.inc.php
 /.local/*
 .bash_history
 gcommit.sh
+/.idea/
