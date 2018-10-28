@@ -1,0 +1,31 @@
+<?= ( $warnText ? "<div class='warnText'>$warnText</div>" : NULL ) ?>
+<form name='adminForm' id='adminForm' class='nc-form' enctype='multipart/form-data' method='post' action='<?= $SUB_FOLDER ?><?= $HTTP_ROOT_PATH ?>message.php'>
+  <div id='nc_moderate_form'>
+    <div class='nc_clear'></div>
+    <input name='admin_mode' type='hidden' value='<?= $admin_mode ?>'/>
+	  <?= $nc_core->token->get_input() ?>
+    <input name='catalogue' type='hidden' value='<?= $catalogue ?>'/>
+    <input name='cc' type='hidden' value='<?= $cc ?>'/>
+    <input name='sub' type='hidden' value='<?= $sub ?>'/><input name='message' type='hidden' value='<?= $message ?>'/>
+    <input name='posting' type='hidden' value='1'/>
+    <input name='curPos' type='hidden' value='<?= $curPos ?>'/>
+    <input name='f_Parent_Message_ID' type='hidden' value='<?= $f_Parent_Message_ID ?>'/>
+	  <?= nc_form_moderate( 'change', $admin_mode, 0, $systemTableID, $current_cc, ( isset( $f_Checked ) ? $f_Checked : NULL ), $f_Priority, $f_Keyword, $f_ncTitle, $f_ncKeywords, $f_ncDescription ) ?>
+  </div>
+  <div class='nc-field nc-field-type-relation'><?= nc_related_field( 'Project', "" ) ?></div>
+  <div class='nc-field nc-field-type-select'><?= nc_list_field( 'StageSection', "", ( $class_id ? $class_id : $classID ), 1 ) ?></div>
+  <div class='nc-field nc-field-type-datetime'><?= nc_date_field( 'StageDate', "", ( $class_id ? $class_id : $classID ), 1 ) ?></div>
+  <div class='nc-field nc-field-type-select'><?= nc_list_field( 'StageReports', "", ( $class_id ? $class_id : $classID ), 1 ) ?></div>
+  <div class='nc-field nc-field-type-select'><?= nc_list_field( 'StageObjectType', "", ( $class_id ? $class_id : $classID ), 1 ) ?></div>
+  <div class='nc-field nc-field-type-int'><?= nc_int_field( 'Number1', "maxlength='12' size='12'", ( $class_id ? $class_id : $classID ), 1 ) ?></div>
+  <div class='nc-field nc-field-type-int'><?= nc_int_field( 'Number2', "maxlength='12' size='12'", ( $class_id ? $class_id : $classID ), 1 ) ?></div>
+  <div class='nc-field nc-field-type-datetime'><?= nc_date_field( 'Date1', "", ( $class_id ? $class_id : $classID ), 1 ) ?></div>
+  <div class='nc-field nc-field-type-datetime'><?= nc_date_field( 'Date2', "", ( $class_id ? $class_id : $classID ), 1 ) ?></div>
+  <div class='nc-field nc-field-type-select'><?= nc_list_field( 'StageGroundwork', "", ( $class_id ? $class_id : $classID ), 1 ) ?></div>
+
+  <div class='nc-hint nc-hint-required-fields'><?= NETCAT_MODERATION_INFO_REQFIELDS ?></div>
+	<?= nc_submit_button( NETCAT_MODERATION_BUTTON_CHANGE ) ?>
+</form>
+<script>
+  updateStageReports(document.getElementsByName('f_StageSection'));
+</script>

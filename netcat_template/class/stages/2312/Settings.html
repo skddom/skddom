@@ -1,0 +1,13 @@
+<? require_once $nc_parent_field_path; ?>
+<?php
+if ( $_POST['p'] ) {
+	$_SESSION['project'] = intval( $_POST['p'] );
+}
+$project      = $_SESSION['project'] ?: 2;
+$query_where  = "a.Project = $project";
+$query_select = "
+REPLACE(REPLACE(REPLACE(LCASE(DATE_FORMAT(a.StageDate, '%D %M')), 'th', ''),'rd',''),'nd','') date_text,
+REPLACE(REPLACE(REPLACE(LCASE(DATE_FORMAT(a.Date1, '%D %M')), 'th', ''),'rd',''),'nd','') date1_text,
+REPLACE(REPLACE(REPLACE(LCASE(DATE_FORMAT(a.Date2, '%D %M')), 'th', ''),'rd',''),'nd','') date2_text";
+$query_order  = "a.StageSection,a.StageDate desc,a.Priority";
+$db->query( "SET lc_time_names = 'ru_RU';" );

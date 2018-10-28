@@ -1,0 +1,28 @@
+<? require_once $nc_parent_field_path; ?>
+<?= ( $searchForm ? "
+    <div id='nc_admin_filter'>
+      <fieldset>
+        <legend>" . NETCAT_MODERATION_FILTER . "</legend>
+        $searchForm
+      </fieldset>
+    </div>
+    " : "" ); ?>
+<form method="post">
+  <label>Укажите проект
+    <select name="p">
+		<?php
+		foreach ( $db->get_results( "SELECT Name, Message_ID id FROM Message295 WHERE Checked=1", ARRAY_A ) as $row ) {
+			print "<option value='$row[id]'" . ( $row['id'] != $project ?: ' selected="selected"' ) . ">$row[Name]</option>";
+		}
+		?>
+    </select>
+  </label>
+</form>
+<script>
+  (function ($) {
+    $(document).on('change', 'select[name=p]', function () {
+      $(this).closest('form').submit();
+    });
+
+  })(jQuery)
+</script>

@@ -5,11 +5,13 @@ $db->query("SET lc_time_names = 'ru_RU';");
 $query_select  = "
   m.Message_ID RowID, 
   css.StageSection_Name,
+  css.StageSection_ID,
   csr.StageReports_Name,
+  csr.StageReports_ID,
   m.Date1,
-  REPLACE(LCASE(DATE_FORMAT(m.Date1, '%D %M')), 'th', '') date1_text,
+  REPLACE(REPLACE(REPLACE(LCASE(DATE_FORMAT(m.Date1, '%D %M')), 'th', ''),'rd',''),'nd','') date1_text,
   m.Date2,
-  REPLACE(LCASE(DATE_FORMAT(m.Date2, '%D %M')), 'th', '') date2_text,
+  REPLACE(REPLACE(REPLACE(LCASE(DATE_FORMAT(m.Date2, '%D %M')), 'th', ''),'rd',''),'nd','') date2_text,
   m.Number1,
   m.Number2,
   m.LastUpdated,
@@ -17,7 +19,7 @@ $query_select  = "
   (SELECT csg.StageGroundwork_Name FROM Classificator_StageGroundwork csg WHERE csg.StageGroundwork_ID = m.StageGroundwork) StageGroundwork,
   m.StageReports StageReports_ID,    
   (SELECT csot.StageObjectType_Name FROM Classificator_StageObjectType csot WHERE csot.StageObjectType_ID = m.StageObjectType) StageObjectType,
-  REPLACE(LCASE(DATE_FORMAT(m.StageDate, '%D %M')), 'th', '') date_text ";
+  REPLACE(REPLACE(REPLACE(LCASE(DATE_FORMAT(m.StageDate, '%D %M')), 'th', ''),'rd',''),'nd','') date_text ";
 $query_from = " Message$classID m,  
      Classificator_StageSection css,
      Classificator_StageReports csr ";
@@ -33,9 +35,6 @@ AND m.Sub_Class_ID = $cc
 AND m.Subdivision_ID = $sub 
 AND m.Project = {$lk->lk} 
 ";
-$query_order = "css.StageSection_Priority,m.StageDate,m.Priority";
-//$sql = "Select $query_select \nFROM $query_from \nWHERE $query_where \nORDER BY $query_order";
-//print "<textarea>".var_export($sql,1)."</textarea>"
-
+$query_order = "css.StageSection_Priority,m.StageDate desc,m.Priority";
 
 ?>

@@ -1,9 +1,0 @@
-<form method="post" id="pro">
-  <label>Укажите проект
-    <select name="project" onchange="document.getElementById('pro').submit()">
-		<?php foreach ( $db->get_results( "SELECT Name, Message_ID id FROM Message295 WHERE Checked=1", ARRAY_A ) as $row ) {
-			print "<option value='$row[id]'" . ( $row['id'] != $project ?: ' selected="selected"' ) . ">$row[Name]</option>";
-		} ?>
-    </select>
-  </label>
-</form>
