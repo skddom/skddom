@@ -9,9 +9,9 @@ $query_select  = "
   csr.StageReports_Name,
   csr.StageReports_ID,
   m.Date1,
-  REPLACE(REPLACE(REPLACE(LCASE(DATE_FORMAT(m.Date1, '%D %M')), 'th', ''),'rd',''),'nd','') date1_text,
+  REPLACE(REPLACE(REPLACE(REPLACE(LCASE(DATE_FORMAT(m.Date1, '%D %M')), 'th', ''),'rd',''),'nd',''),'st','') date1_text,
   m.Date2,
-  REPLACE(REPLACE(REPLACE(LCASE(DATE_FORMAT(m.Date2, '%D %M')), 'th', ''),'rd',''),'nd','') date2_text,
+  REPLACE(REPLACE(REPLACE(REPLACE(LCASE(DATE_FORMAT(m.Date2, '%D %M')), 'th', ''),'rd',''),'nd',''),'st','') date2_text,
   m.Number1,
   m.Number2,
   m.LastUpdated,
@@ -19,7 +19,7 @@ $query_select  = "
   (SELECT csg.StageGroundwork_Name FROM Classificator_StageGroundwork csg WHERE csg.StageGroundwork_ID = m.StageGroundwork) StageGroundwork,
   m.StageReports StageReports_ID,    
   (SELECT csot.StageObjectType_Name FROM Classificator_StageObjectType csot WHERE csot.StageObjectType_ID = m.StageObjectType) StageObjectType,
-  REPLACE(REPLACE(REPLACE(LCASE(DATE_FORMAT(m.StageDate, '%D %M')), 'th', ''),'rd',''),'nd','') date_text ";
+  REPLACE(REPLACE(REPLACE(REPLACE(LCASE(DATE_FORMAT(m.StageDate, '%D %M')), 'th', ''),'rd',''),'nd',''),'st','') date_text ";
 $query_from = " Message$classID m,  
      Classificator_StageSection css,
      Classificator_StageReports csr ";

@@ -1,6 +1,7 @@
 <?php
 define( "DATE_FORMAT", "d.m.Y" );
 include $_SERVER['DOCUMENT_ROOT'] . "/netcat/modules/default/geo.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/netcat/modules/default/bt.inc.php";
 
 function syncMailchimp( $data ) {
 	$apiKey = 'f78a666e68bd0b0a98736d3628391cbc-us14';

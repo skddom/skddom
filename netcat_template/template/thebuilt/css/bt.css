@@ -1,0 +1,18 @@
+html body .portfolio-list .portfolio-item-block .vote-skdmans {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  line-height: 30px;
+  width: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  background: url(/netcat_template/template/thebuilt/images/heart-outline-64.png) no-repeat top left transparent;
+  background-size: 50%;
+  z-index: 1;
+  text-align: center;
+  cursor: pointer; }
+  html body .portfolio-list .portfolio-item-block .vote-skdmans.voted {
+    cursor: default; }
+
+/*# sourceMappingURL=bt.css.map */
