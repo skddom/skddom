@@ -2,13 +2,14 @@
 
 class CSKDMans {
 	private $object;
+	private $object_clean;
 	private $log;
 	private $cookie;
 	const MessageID = 2316;
 	const CookieName = 'fdsfasd2';
 
 	function __construct( $object ) {
-
+		$this->object_clean = $object;
 		$this->object = md5( $object );
 	}
 
@@ -19,7 +20,7 @@ class CSKDMans {
 	}
 
 	public function get_html() {
-		return '<div class="vote-skdmans' . ( $this->already_voted() ? ' voted' : '' ) . '">' . $this->get() . '</div>';
+		return '<div data-myid="' . $this->object_clean . '" class="vote-skdmans' . ( $this->already_voted() ? ' voted' : '' ) . '">' . $this->get() . '</div>';
 	}
 
 	private function already_voted() {
@@ -44,7 +45,7 @@ class CSKDMans {
 		if ( ! $this->already_voted() ) {
 			$db->query( "INSERT INTO Message" . self::MessageID .
 			            " SET IP = '" . $_SERVER['REMOTE_ADDR'] . "',UserAgent='" . $_SERVER['HTTP_USER_AGENT'] . "'" .
-			            ",m.Subdivision_ID = 501, m.Sub_Class_ID = 663" .
+			            ",Subdivision_ID = 501, Sub_Class_ID = 663" .
 			            ",Created = now(), LastUser_ID = 0,`Subject` = '" . $this->object . "'" .
 			            ",Votes = 1 ON DUPLICATE KEY UPDATE Votes = " . ( $this->get() + 1 ) );
 			$this->log[]                   = $db->last_error;

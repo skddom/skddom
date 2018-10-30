@@ -5,7 +5,7 @@
     }
     var self = $(this);
     $.ajax({
-      url: '/netcat/modules/stages/ajax.php?vote-skdmans=' + $(this).parent().find('.portfolio-item-image').data('style'),
+      url: '/netcat/modules/stages/ajax.php?vote-skdmans=' + self.data('myid'),
       tyep: 'json',
       success: function (d) {
         self.addClass('voted');

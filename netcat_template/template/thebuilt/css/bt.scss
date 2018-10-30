@@ -1,23 +1,171 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+$sk-w: 585px;
+$sk-h: 585px;
+$sk-zoom: 20px;
 html {
   body {
-    .portfolio-list {
-      .portfolio-item-block {
+    .skdmans-container {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      .skdmans-item {
+        position: relative;
+        border: none;
+        width: $sk-w;
+        height: $sk-h;
+        overflow: hidden;
+        .skdmans-text {
+          z-index: 3;
+          width: 95%;
+          position: absolute;
+          top: 40px;
+          left: -100%;
+          color: black;
+          transition: all 777ms ease-out 0ms;
+          .skdmans-comment,
+          .skdmans-title {
+            font-family: 'Monserrat', 'Open Sans', sans-serif;
+            color: white;
+            font-size: 20px;
+            text-shadow: black 0 0 3px;
+            font-weight: 400;
+            line-height: 1.2em;
+          }
+          .skdmans-title {
+            padding-top: 2em;
+            font-weight: normal;
+            font-size: 13px;
+          }
+        }
+        &:hover {
+          .skdmans-text {
+            left: 20px;
+          }
+          .skdmans-shadow {
+            opacity: 0.6;
+          }
+          &.skdmans-format-1 {
+            .skdmans-image {
+              width: ($sk-w / 2) + $sk-zoom;
+              height: ($sk-h /2) + $sk-zoom;
+            }
+          }
+          &.skdmans-format-2 {
+            .skdmans-image {
+              width: $sk-w + $sk-zoom;
+              height: $sk-h + $sk-zoom;
+            }
+          }
+          &.skdmans-format-3 {
+            .skdmans-image {
+              width: ($sk-w / 2) + $sk-zoom;
+              height: $sk-h + $sk-zoom;
+            }
+          }
+          &.skdmans-format-4 {
+            .skdmans-image {
+              width: $sk-w + $sk-zoom;
+              height: ($sk-h / 2)  + $sk-zoom;
+            }
+          }
+        }
+        .skdmans-shadow {
+          position: absolute;
+          top: 0;
+          left: 0;
+          opacity: 0;
+          z-index: 1;
+          background: black;
+          transition: all 888ms ease-out 0ms;
+        }
+        .skdmans-image {
+          transition: all 333ms ease 0ms;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 0;
+          border: none;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center center;
+        }
+        &.skdmans-format-1 {
+          width: $sk-w / 2;
+          height: $sk-h / 2;
+          .skdmans-shadow,
+          .skdmans-image {
+            width: $sk-w / 2;
+            height: $sk-h / 2;
+          }
+        }
+        &.skdmans-format-2 {
+          width: $sk-w;
+          height: $sk-h;
+          .skdmans-shadow,
+          .skdmans-image {
+            width: $sk-w;
+            height: $sk-h;
+          }
+        }
+        &.skdmans-format-3 {
+          width: $sk-w /2;
+          height: $sk-h;
+          .skdmans-shadow,
+          .skdmans-image {
+            width: $sk-w /2;
+            height: $sk-h;
+          }
+        }
+        &.skdmans-format-4 {
+          width: $sk-w;
+          height: $sk-h / 2;
+          .skdmans-shadow,
+          .skdmans-image {
+            width: $sk-w;
+            height: $sk-h / 2;
+          }
+        }
+        padding: 0;
+        margin: 0;
         .vote-skdmans {
           position: absolute;
           left: 10px;
           bottom: 10px;
-          line-height: 30px;
-          width: 30px;
+          line-height: 45px;
+          width: 45px;
           font-size: 20px;
           font-weight: bold;
           color: white;
-          background: url(/netcat_template/template/thebuilt/images/heart-outline-64.png) no-repeat top left transparent;
-          background-size: 50%;
-          z-index: 1;
+          background: url(/netcat_template/template/thebuilt/images/heart-outline-64-green.png) no-repeat top left transparent;
+          background-size: contain;
+          z-index: 2;
           text-align: center;
+          vertical-align: top;
           cursor: pointer;
           &.voted {
             cursor: default;
+            background: url(/netcat_template/template/thebuilt/images/heart-outline-64-brown.png) no-repeat top left transparent;
+            background-size: contain;
+          }
+        }
+      }
+    }
+  }
+}
+@media(min-width:1169px){
+  html{
+    body{
+      .skdmans-container{
+        .skdmans-item{
+          width: 50%;
+          height: auto;
+          .skdmans-image{
+            width: 100%;
+            height: auto;
           }
         }
       }
