@@ -12957,3 +12957,312 @@
 [30-Oct-2018 13:30:01 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
 [30-Oct-2018 13:30:01 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
 [30-Oct-2018 13:30:01 Europe/Moscow] PHP Notice:  Undefined property: nc_comments_admin::$template in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/nc_comments_admin.class.php on line 25
+[30-Oct-2018 15:12:17 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 15:12:17 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 15:12:17 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 15:12:17 Europe/Moscow] PHP Notice:  Undefined index: USERGEO in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 72
+[30-Oct-2018 15:12:17 Europe/Moscow] PHP Notice:  Undefined index: skd_token in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 78
+[30-Oct-2018 15:12:17 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 15:12:17 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 15:12:17 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 15:12:17 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 15:12:17 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 15:12:17 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 15:12:17 Europe/Moscow] PHP Notice:  Undefined variable: catalogue in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_user.class.php on line 402
+[30-Oct-2018 15:12:17 Europe/Moscow] PHP Notice:  Undefined index: NC_HTTP_REQUEST in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 358
+[30-Oct-2018 15:12:17 Europe/Moscow] PHP Notice:  Use of undefined constant NC_ADMIN_ASK_PASSWORD - assumed 'NC_ADMIN_ASK_PASSWORD' in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 358
+[30-Oct-2018 15:12:17 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 15:12:17 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 15:12:17 Europe/Moscow] PHP Notice:  Undefined variable: VERSION_ID in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 88
+[30-Oct-2018 15:12:17 Europe/Moscow] PHP Notice:  Undefined variable: SYSTEM_NAME in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 88
+[30-Oct-2018 15:12:18 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 15:12:18 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 15:12:18 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 15:12:18 Europe/Moscow] PHP Notice:  Undefined index: USERGEO in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 72
+[30-Oct-2018 15:12:18 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 15:12:18 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 15:12:18 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 15:12:18 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 15:12:18 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 15:12:18 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 15:12:18 Europe/Moscow] PHP Notice:  Undefined variable: catalogue in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_user.class.php on line 402
+[30-Oct-2018 15:12:18 Europe/Moscow] PHP Notice:  Undefined index: NC_HTTP_REQUEST in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 358
+[30-Oct-2018 15:12:18 Europe/Moscow] PHP Notice:  Use of undefined constant NC_ADMIN_ASK_PASSWORD - assumed 'NC_ADMIN_ASK_PASSWORD' in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 358
+[30-Oct-2018 15:12:18 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 15:12:18 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 15:12:18 Europe/Moscow] PHP Notice:  Undefined variable: VERSION_ID in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 88
+[30-Oct-2018 15:12:18 Europe/Moscow] PHP Notice:  Undefined variable: SYSTEM_NAME in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 88
+[30-Oct-2018 15:12:20 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 15:12:20 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 15:12:20 Europe/Moscow] PHP Notice:  Undefined index: USERGEO in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 72
+[30-Oct-2018 15:12:20 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 15:12:20 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 15:12:20 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 15:12:20 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 15:12:20 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 15:12:20 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 15:12:20 Europe/Moscow] PHP Notice:  Undefined variable: catalogue in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_user.class.php on line 402
+[30-Oct-2018 15:12:20 Europe/Moscow] PHP Notice:  Undefined index: NC_HTTP_REQUEST in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 358
+[30-Oct-2018 15:12:20 Europe/Moscow] PHP Notice:  Use of undefined constant NC_ADMIN_ASK_PASSWORD - assumed 'NC_ADMIN_ASK_PASSWORD' in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 358
+[30-Oct-2018 15:12:20 Europe/Moscow] PHP Notice:  Undefined variable: VERSION_ID in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 88
+[30-Oct-2018 15:12:20 Europe/Moscow] PHP Notice:  Undefined variable: SYSTEM_NAME in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 88
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Undefined variable: Catalogue_ID in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_user.class.php on line 465
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Undefined index: 0 in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/permission.class.php on line 97
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Undefined index: 0 in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/permission.class.php on line 97
+[30-Oct-2018 15:12:41 Europe/Moscow] PHP Notice:  Undefined variable: ret in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/permission.class.php on line 1486
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: NC_HTTP_REQUEST in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 358
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Use of undefined constant NC_ADMIN_ASK_PASSWORD - assumed 'NC_ADMIN_ASK_PASSWORD' in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 358
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined variable: VERSION_ID in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 88
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined variable: SYSTEM_NAME in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 88
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: NC_HTTP_REQUEST in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 358
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Use of undefined constant NC_ADMIN_ASK_PASSWORD - assumed 'NC_ADMIN_ASK_PASSWORD' in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 358
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined variable: VERSION_ID in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 88
+[30-Oct-2018 15:33:59 Europe/Moscow] PHP Notice:  Undefined variable: SYSTEM_NAME in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 88
+[30-Oct-2018 15:34:02 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 15:34:02 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 15:34:02 Europe/Moscow] PHP Notice:  Undefined index: USERGEO in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 72
+[30-Oct-2018 15:34:02 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 15:34:02 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 15:34:02 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 15:34:02 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 15:34:02 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 15:34:02 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 15:34:02 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 15:34:02 Europe/Moscow] PHP Notice:  Undefined index: 0 in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/permission.class.php on line 97
+[30-Oct-2018 15:34:02 Europe/Moscow] PHP Notice:  Undefined variable: ret in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/permission.class.php on line 1486
+[30-Oct-2018 15:49:21 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 15:49:21 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 15:49:21 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 15:49:21 Europe/Moscow] PHP Notice:  Undefined index: USERGEO in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 72
+[30-Oct-2018 15:49:21 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 15:49:21 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 15:49:21 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 15:49:21 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 15:49:21 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 15:49:21 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 15:49:21 Europe/Moscow] PHP Notice:  Undefined variable: catalogue in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_user.class.php on line 402
+[30-Oct-2018 15:49:21 Europe/Moscow] PHP Notice:  Undefined index: NC_HTTP_REQUEST in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 358
+[30-Oct-2018 15:49:21 Europe/Moscow] PHP Notice:  Use of undefined constant NC_ADMIN_ASK_PASSWORD - assumed 'NC_ADMIN_ASK_PASSWORD' in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 358
+[30-Oct-2018 15:49:21 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 15:49:21 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 15:49:21 Europe/Moscow] PHP Notice:  Undefined variable: VERSION_ID in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 88
+[30-Oct-2018 15:49:21 Europe/Moscow] PHP Notice:  Undefined variable: SYSTEM_NAME in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 88
+[30-Oct-2018 15:49:22 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 15:49:22 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 15:49:22 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 15:49:22 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 15:49:22 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 15:49:22 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 15:49:22 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 15:49:22 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 15:49:22 Europe/Moscow] PHP Notice:  Undefined index: loginsave in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_user.class.php on line 451
+[30-Oct-2018 15:49:22 Europe/Moscow] PHP Notice:  Undefined variable: Catalogue_ID in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_user.class.php on line 465
+[30-Oct-2018 15:49:22 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 15:49:23 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 15:49:23 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 15:49:23 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 15:49:23 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 15:49:23 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 15:49:23 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 15:49:23 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 15:49:23 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 15:49:23 Europe/Moscow] PHP Notice:  Undefined index: loginsave in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_user.class.php on line 451
+[30-Oct-2018 15:49:23 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 15:49:23 Europe/Moscow] PHP Notice:  Undefined property: nc_comments_admin::$template in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/nc_comments_admin.class.php on line 25
+[30-Oct-2018 16:11:00 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 16:11:00 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 16:11:00 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 16:11:00 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 16:11:00 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 16:11:00 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 16:11:00 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 16:11:00 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 16:11:00 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 16:11:00 Europe/Moscow] PHP Notice:  Undefined property: nc_comments_admin::$template in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/nc_comments_admin.class.php on line 25
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: USERGEO in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 72
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: skd_token in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 78
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined variable: catalogue in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_user.class.php on line 402
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: NC_HTTP_REQUEST in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 358
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Use of undefined constant NC_ADMIN_ASK_PASSWORD - assumed 'NC_ADMIN_ASK_PASSWORD' in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 358
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined variable: VERSION_ID in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 88
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined variable: SYSTEM_NAME in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 88
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: USERGEO in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 72
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined variable: catalogue in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_user.class.php on line 402
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: NC_HTTP_REQUEST in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 358
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Use of undefined constant NC_ADMIN_ASK_PASSWORD - assumed 'NC_ADMIN_ASK_PASSWORD' in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 358
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined variable: VERSION_ID in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 88
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined variable: SYSTEM_NAME in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 88
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined index: 0 in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/permission.class.php on line 97
+[30-Oct-2018 16:53:54 Europe/Moscow] PHP Notice:  Undefined variable: ret in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/permission.class.php on line 1486
+[30-Oct-2018 16:58:58 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 16:58:58 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 16:58:58 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 16:58:58 Europe/Moscow] PHP Notice:  Undefined index: USERGEO in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 72
+[30-Oct-2018 16:58:58 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 16:58:58 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 16:58:58 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 16:58:58 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 16:58:58 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 16:58:58 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 16:58:58 Europe/Moscow] PHP Notice:  Undefined variable: catalogue in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_user.class.php on line 402
+[30-Oct-2018 16:58:58 Europe/Moscow] PHP Notice:  Undefined index: NC_HTTP_REQUEST in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 358
+[30-Oct-2018 16:58:58 Europe/Moscow] PHP Notice:  Use of undefined constant NC_ADMIN_ASK_PASSWORD - assumed 'NC_ADMIN_ASK_PASSWORD' in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 358
+[30-Oct-2018 16:58:58 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 16:58:58 Europe/Moscow] PHP Notice:  Undefined index: User in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/nc_lang.class.php on line 164
+[30-Oct-2018 16:58:58 Europe/Moscow] PHP Notice:  Undefined variable: VERSION_ID in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 88
+[30-Oct-2018 16:58:58 Europe/Moscow] PHP Notice:  Undefined variable: SYSTEM_NAME in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/CheckUserFunctions.inc.php on line 88
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Undefined index: loginsave in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_user.class.php on line 451
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Undefined variable: Catalogue_ID in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_user.class.php on line 465
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Undefined index: loginsave in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_user.class.php on line 451
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 16:59:00 Europe/Moscow] PHP Notice:  Undefined property: nc_comments_admin::$template in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/nc_comments_admin.class.php on line 25
+[30-Oct-2018 17:04:55 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 17:04:55 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 17:04:55 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 17:04:55 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 17:04:55 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 17:04:55 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 17:04:55 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 17:04:55 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 17:04:55 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 17:04:55 Europe/Moscow] PHP Notice:  Undefined index: 0 in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/permission.class.php on line 97
+[30-Oct-2018 17:04:55 Europe/Moscow] PHP Notice:  Undefined variable: ret in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/permission.class.php on line 1486
+[30-Oct-2018 17:05:07 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 17:05:07 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 17:05:07 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 17:05:07 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 17:05:07 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 17:05:07 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 17:05:07 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 17:05:07 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 17:05:07 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 17:05:07 Europe/Moscow] PHP Notice:  Undefined index: 0 in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/permission.class.php on line 97
+[30-Oct-2018 17:05:07 Europe/Moscow] PHP Notice:  Undefined variable: ret in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/permission.class.php on line 1486
+[30-Oct-2018 18:18:45 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 18:18:45 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 18:18:45 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 18:18:45 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 18:18:45 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 18:18:45 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 18:18:45 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 18:18:45 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 18:18:45 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 18:18:45 Europe/Moscow] PHP Notice:  Undefined property: nc_comments_admin::$template in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/nc_comments_admin.class.php on line 25
+[30-Oct-2018 18:38:21 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 18:38:21 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 18:38:21 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 18:38:21 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 18:38:21 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 18:38:21 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 18:38:21 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 18:38:21 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 18:38:21 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 18:38:21 Europe/Moscow] PHP Notice:  Undefined property: nc_comments_admin::$template in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/nc_comments_admin.class.php on line 25
+[30-Oct-2018 18:52:05 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 18:52:05 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 18:52:05 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 18:52:05 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 18:52:05 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 18:52:05 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 18:52:05 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 18:52:05 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 18:52:05 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 18:52:05 Europe/Moscow] PHP Notice:  Undefined property: nc_comments_admin::$template in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/nc_comments_admin.class.php on line 25
+[30-Oct-2018 22:09:46 Europe/Moscow] PHP Notice:  Undefined index: current_catalogue_id in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_catalogue.class.php on line 23
+[30-Oct-2018 22:09:46 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 22:09:46 Europe/Moscow] PHP Notice:  Undefined index: full_version in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/default/function.inc.php on line 1115
+[30-Oct-2018 22:09:46 Europe/Moscow] PHP Notice:  Constant NETCAT_MODULE_COMMENTS_ADMIN_NONE_CC already defined in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/ru_utf8.lang.php on line 69
+[30-Oct-2018 22:09:46 Europe/Moscow] PHP Notice:  Undefined index: web in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/templating/nc_tpl_fields.class.php on line 53
+[30-Oct-2018 22:09:46 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_parent.class.php on line 30
+[30-Oct-2018 22:09:46 Europe/Moscow] PHP Notice:  Undefined index: TRACKING_MODE in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/forum2/nc_forum2_forum.class.php on line 29
+[30-Oct-2018 22:09:46 Europe/Moscow] PHP Notice:  Undefined index: InlineImageCropDimensions in /home/s/skddom/new.skd-dom.ru/public_html/netcat/admin/function.inc.php on line 130
+[30-Oct-2018 22:09:46 Europe/Moscow] PHP Notice:  Undefined index: extension in /home/s/skddom/new.skd-dom.ru/public_html/netcat/system/essences/nc_component.class.php on line 398
+[30-Oct-2018 22:09:46 Europe/Moscow] PHP Notice:  Undefined property: nc_comments_admin::$template in /home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/comments/nc_comments_admin.class.php on line 25

@@ -114,6 +114,12 @@ html body .skdmans-container {
         cursor: default;
         background: url(/netcat_template/template/thebuilt/images/heart-outline-64-brown.png) no-repeat top left transparent;
         background-size: contain; }
+html body .recomm.stages-flow td {
+  vertical-align: top;
+  text-align: left; }
+html body .stages-small-image img {
+  width: 100px;
+  margin: 3px; }
 
 @media (min-width: 1169px) {
   html body .skdmans-container .skdmans-item {

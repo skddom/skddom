@@ -13,28 +13,32 @@ $query_select  = "
   m.Date2,
   REPLACE(REPLACE(REPLACE(REPLACE(LCASE(DATE_FORMAT(m.Date2, '%D %M')), 'th', ''),'rd',''),'nd',''),'st','') date2_text,
   m.Number1,
-  m.Number2,
+  m.Number2,  
   m.LastUpdated,
   m.StageGroundwork StageGroundwork_ID,
+  (Select Object From Message295 Where Message_ID = {$lk->lk}) Object_id,
   (SELECT csg.StageGroundwork_Name FROM Classificator_StageGroundwork csg WHERE csg.StageGroundwork_ID = m.StageGroundwork) StageGroundwork,
   m.StageReports StageReports_ID,    
   (SELECT csot.StageObjectType_Name FROM Classificator_StageObjectType csot WHERE csot.StageObjectType_ID = m.StageObjectType) StageObjectType,
-  REPLACE(REPLACE(REPLACE(REPLACE(LCASE(DATE_FORMAT(m.StageDate, '%D %M')), 'th', ''),'rd',''),'nd',''),'st','') date_text ";
-$query_from = " Message$classID m,  
+  REPLACE(REPLACE(REPLACE(REPLACE(LCASE(DATE_FORMAT(m.StageDate, '%D %M')), 'th', ''),'rd',''),'nd',''),'st','') date_text, 
+  DATE_FORMAT(m.StageDate, '%d.%m.%Y') StageDate_Digits,
+  DATE_FORMAT(m.StageDate, '%Y-%m-%d 00:00:00') StageDate_Sql";
+$query_from = "Message$classID m,  
      Classificator_StageSection css,
      Classificator_StageReports csr ";
-if(!isset($lk->lk)){
-	$lk = new stdClass();
-	$lk->lk = 2;
-}
+//if(!isset($lk->lk)){
+//	$lk = new stdClass();
+//	$lk->lk = 2;
+//}
 $query_where = "
-m.Checked = 1 
+m.Checked = 1
+AND m.StageSection > 2 
 AND m.StageSection = css.StageSection_ID
 AND m.StageReports = csr.StageReports_ID 
 AND m.Sub_Class_ID = $cc 
 AND m.Subdivision_ID = $sub 
 AND m.Project = {$lk->lk} 
 ";
-$query_order = "css.StageSection_Priority,m.StageDate desc,m.Priority";
+$query_order = "m.StageDate desc,css.StageSection_Priority,m.Priority";
 
 ?>
