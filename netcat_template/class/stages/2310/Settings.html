@@ -1,8 +1,8 @@
 <?php
-$lk = new CPersonal();
-$ignore_all = true;
-$db->query("SET lc_time_names = 'ru_RU';");
-$query_select  = "
+$lk         = new CPersonal();
+$ignore_all = TRUE;
+$db->query( "SET lc_time_names = 'ru_RU';" );
+$query_select = "
   m.Message_ID RowID, 
   css.StageSection_Name,
   css.StageSection_ID,
@@ -23,13 +23,10 @@ $query_select  = "
   REPLACE(REPLACE(REPLACE(REPLACE(LCASE(DATE_FORMAT(m.StageDate, '%D %M')), 'th', ''),'rd',''),'nd',''),'st','') date_text, 
   DATE_FORMAT(m.StageDate, '%d.%m.%Y') StageDate_Digits,
   DATE_FORMAT(m.StageDate, '%Y-%m-%d 00:00:00') StageDate_Sql";
-$query_from = "Message$classID m,  
+$query_from   = "Message$classID m,  
      Classificator_StageSection css,
      Classificator_StageReports csr ";
-//if(!isset($lk->lk)){
-//	$lk = new stdClass();
-//	$lk->lk = 2;
-//}
+
 $query_where = "
 m.Checked = 1
 AND m.StageSection > 2 

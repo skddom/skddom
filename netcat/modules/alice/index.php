@@ -5,19 +5,25 @@
  * Date: 31.10.2018
  * Time: 1:46
  */
-include_once '../../../vars.inc.php';
-include_once '../../connect_io.php';
-include_once '../default/function.inc.php';
-function _l( $s ) {
-	static $fr = FALSE;
-	$fn = __FILE__ . '.log';
+define( 'LOG_FILE', __DIR__ . '/alice.log' );
+require_once 'inc/func.inc.php';
 
-	file_put_contents( $fn, var_export( $s, 1 ). "\n" . str_repeat( '=', 40 ) . "\n", $fr ? FILE_APPEND : NULL );
-	$fr = TRUE;
+_l( $_POST );
+_l( $_GET );
+//_l( $_SERVER );
+$ua = explode( ' ', $_SERVER['HTTP_USER_AGENT'] );
+$ua = explode( '/', $ua[0] );
+if ( ! in_array( $ua[0], array( 'YaAlice', 'Wget' ) ) ) {
+	header( $_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', TRUE, 500 );
+	exit( 500 );
 }
+require_once 'inc/Alice.php';
+require_once '../../../vars.inc.php';
+require_once '../../connect_io.php';
+require_once '../default/function.inc.php';
 
-$ret = array( 'ip' => $_SERVER['REMOTE_ADDR'] );
-_l( $_REQUEST );
-_l( $_SERVER );
+$ua = explode( '.', $ua[1] );
 
-print json_encode( $ret );
+$alice = new Alice( "$ua[0].$ua[1]" );
+_l( $alice->getResponse() );
+$alice->printResponse();

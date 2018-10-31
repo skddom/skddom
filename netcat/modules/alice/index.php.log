@@ -1,9 +1,13 @@
+2018-10-31 05:16:41========================================
 array (
-  12345 => '',
 )
-========================================
+2018-10-31 05:16:41========================================
 array (
-  'UNIQUE_ID' => 'W9kLGAVlnKwAACZjw3UAAAAF',
+  1234 => '',
+)
+2018-10-31 05:16:41========================================
+array (
+  'UNIQUE_ID' => 'W9kQiQVlnKwAAC9ES3oAAAAE',
   'GEOIP_ADDR' => '178.46.64.212',
   'GEOIP_CONTINENT_CODE' => 'EU',
   'GEOIP_COUNTRY_CODE' => 'RU',
@@ -41,19 +45,23 @@ array (
   'CONTEXT_DOCUMENT_ROOT' => '/home/s/skddom/new.skd-dom.ru/public_html',
   'SERVER_ADMIN' => 'webmaster@skd-dom.ru',
   'SCRIPT_FILENAME' => '/home/s/skddom/new.skd-dom.ru/public_html/netcat/modules/alice/index.php',
-  'REMOTE_PORT' => '19200',
+  'REMOTE_PORT' => '18382',
   'GATEWAY_INTERFACE' => 'CGI/1.1',
   'SERVER_PROTOCOL' => 'HTTP/1.1',
   'REQUEST_METHOD' => 'GET',
-  'QUERY_STRING' => '12345',
-  'REQUEST_URI' => '/netcat/modules/alice/index.php?12345',
+  'QUERY_STRING' => '1234',
+  'REQUEST_URI' => '/netcat/modules/alice/index.php?1234',
   'SCRIPT_NAME' => '/netcat/modules/alice/index.php',
   'PHP_SELF' => '/netcat/modules/alice/index.php',
-  'REQUEST_TIME' => 1540950808,
+  'REQUEST_TIME' => 1540952201,
   'argv' => 
   array (
-    0 => '12345',
+    0 => '1234',
   ),
   'argc' => 1,
 )
-========================================
+2018-10-31 05:16:41========================================
+array (
+  'ip' => '178.46.64.212',
+  'version' => '1.19',
+)
