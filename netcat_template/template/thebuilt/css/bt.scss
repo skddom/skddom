@@ -8,11 +8,16 @@ html {
     .skdmans-container {
       padding: 0;
       margin: 0;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-
+      //display: flex;
+      //flex-direction: row;
+      //flex-wrap: wrap;
+      //justify-content: center;
+      //align-content: center;
+      //flex-flow: row wrap;
+      //align-items: center;
       .skdmans-item {
+        float: left;
+        //flex-basis: 25%;
         position: relative;
         border: none;
         width: $sk-w;
@@ -49,24 +54,28 @@ html {
             opacity: 0.6;
           }
           &.skdmans-format-1 {
+            //flex-basis: 25%;
             .skdmans-image {
               width: ($sk-w / 2) + $sk-zoom;
               height: ($sk-h /2) + $sk-zoom;
             }
           }
           &.skdmans-format-2 {
+            //flex-basis: 50%;
             .skdmans-image {
               width: $sk-w + $sk-zoom;
               height: $sk-h + $sk-zoom;
             }
           }
           &.skdmans-format-3 {
+            //flex-basis: 25%;
             .skdmans-image {
               width: ($sk-w / 2) + $sk-zoom;
               height: $sk-h + $sk-zoom;
             }
           }
           &.skdmans-format-4 {
+            //flex-basis: 50%;
             .skdmans-image {
               width: $sk-w + $sk-zoom;
               height: ($sk-h / 2)  + $sk-zoom;
@@ -154,28 +163,29 @@ html {
         }
       }
     }
-    .recomm.stages-flow{
-      td{
+    .recomm.stages-flow {
+      td {
         vertical-align: top;
         text-align: left;
       }
     }
-    .stages-small-image{
-      img{
+    .stages-small-image {
+      img {
         width: 100px;
         margin: 3px;
       }
     }
   }
 }
-@media(min-width:1169px){
-  html{
-    body{
-      .skdmans-container{
-        .skdmans-item{
+
+@media(min-width: 1169px) {
+  html {
+    body {
+      .skdmans-container {
+        .skdmans-item {
           width: 50%;
           height: auto;
-          .skdmans-image{
+          .skdmans-image {
             width: 100%;
             height: auto;
           }

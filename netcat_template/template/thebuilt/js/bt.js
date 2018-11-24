@@ -10,7 +10,7 @@
       success: function (d) {
         self.addClass('voted');
         self.html(d.votes);
-        console.log(d);
+        // console.log(d);
       }
     })
     return false;
