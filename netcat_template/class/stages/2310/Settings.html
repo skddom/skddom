@@ -1,6 +1,9 @@
 <?php
 $lk         = new CPersonal();
 $ignore_all = TRUE;
+if(!isset($lk->lk)){
+	$lk->lk = 2;
+}
 $db->query( "SET lc_time_names = 'ru_RU';" );
 $query_select = "
   m.Message_ID RowID, 

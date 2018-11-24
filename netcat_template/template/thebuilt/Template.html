@@ -53,7 +53,7 @@ if($_SERVER['REQUEST_URI']=='/otvet/faq/add_faq.html'){
 
 
 if (preg_match("/\/catalog\/proektirovanie\/portfolio-int\/\w+.*/uisU", $url) && !empty($f_Name)) {
-    $description = 'Фото: '.$f_Name;   
+    $description = 'Фото: '.$f_Name;
 }
 elseif (!preg_match("/\/page-([0-9]+)\/?/uisU", $url))
 {
@@ -62,22 +62,22 @@ elseif (!preg_match("/\/page-([0-9]+)\/?/uisU", $url))
         $o_title = $db->get_var("select Text from Message255 where ID=$object order by Message_ID desc limit 1");
         $object_t = ' '.$o_title;
         if (!empty($o_title)) {
-        $description = 'Фото строящего объекта компанией СКД Дом:'.$object_t; 
+        $description = 'Фото строящего объекта компанией СКД Дом:'.$object_t;
         }
-        
+
     }
     else
     {
-        $description = $nc_core->page->get_description(); 
+        $description = $nc_core->page->get_description();
         /*if ($description){
          if($_GET["object"]) {$description .= ', описание объекта - '.$_GET["object"];}
          $description .= $dopdescr;
         }*/
-    } 
+    }
 }
 else
 {
-    $description = '';    
+    $description = '';
 }
 
 if (in_array($url, $objUri)) {
@@ -108,10 +108,10 @@ if (strstr($_SERVER['REQUEST_URI'], '/price/calc/?house') && isset($_GET['house'
 }else if ($_SERVER['REQUEST_URI'] == '/o-kompanii/otzyvy/add_otzyvy.html'){
     $title = 'Добавить отзыв о компании';
 }else if (preg_match("/\/catalog\/proektirovanie\/portfolio-int\/\w+.*/uisU", $url)) {
-    $title = $f_Name;    
+    $title = $f_Name;
 }else{
     $title = $nc_core->page->get_title();
-    if (!$title) $title = strip_tags(s_browse_path($browse_path));  
+    if (!$title) $title = strip_tags(s_browse_path($browse_path));
 }
 
 $curURI = $_SERVER['REQUEST_URI'];
@@ -138,21 +138,21 @@ if (in_array($curURI, $noDescr)){
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><?
         $ttl = '';
 
-        include($_SERVER['DOCUMENT_ROOT'].'/seo.php'); 
-        
-         
+        include($_SERVER['DOCUMENT_ROOT'].'/seo.php');
+
+
         if($ttl == '')
             $ttl = $pre_title." ".$title.$object_t.$number." ".$suffix_title;
- 
+
         echo "<title>".$ttl."</title>";
- 
- 
+
+
 echo "".( ($description) ? "<meta name='description' content='".$description."' />" : "" )."
 ".( ($keywords) ? "<meta name='Keywords' content='".$keywords."' />" : "" );
 
     ?><?/*<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700,700i&amp;amp;subset=cyrillic">*/?>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700,700i&amp;subset=cyrillic,cyrillic-ext" rel="stylesheet">
-    
+
     <?php
      $robots = file($_SERVER['DOCUMENT_ROOT'].'/robots.txt');
      foreach($robots as $key){
@@ -181,7 +181,7 @@ if (in_array($_SERVER['REQUEST_URI'], $array_robots_noindex)){
 
 
     ?>
-    
+
     <link rel="stylesheet" href="<?= $nc_parent_template_folder_path ?>css/styles.css?ver=2">
     <link rel="stylesheet" href="<?= $nc_parent_template_folder_path ?>css/style.css">
     <link rel="stylesheet" href="<?= $nc_parent_template_folder_path ?>css/vc_carousel.min.css?ver=4.12">
@@ -189,7 +189,7 @@ if (in_array($_SERVER['REQUEST_URI'], $array_robots_noindex)){
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&amp;subset=cyrillic,cyrillic-ext" rel="stylesheet">
     <?= nc_js(); ?>
     <script type="text/javascript">
-    
+
         var arFav = [<?=join(",",$arFav)?>];
         function revslider_showDoubleJqueryError(sliderID)
         {
@@ -254,12 +254,12 @@ if (in_array($_SERVER['REQUEST_URI'], $array_robots_noindex)){
     ?>
 [data-sub="111"] a:after{
     content:" (<?=$fotos?>)";
-}    
+}
         .vc_custom_1464179469571 {
             margin-top: -100px !important;
             padding-bottom: 50px !important;
         }
-        
+
        .vc_custom_1464179469571.bl_seo_class {
             margin-top: 0px !important;
         }
@@ -525,16 +525,16 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window,document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '188719175067990'); 
+fbq('init', '188719175067990');
 fbq('track', 'PageView');
 </script>
 <noscript>
-<img height="1" width="1" 
+<img height="1" width="1"
 src="https://www.facebook.com/tr?id=188719175067990&ev=PageView
 &noscript=1"/>
 </noscript>
-<!-- End Facebook Pixel Code --> 
- 
+<!-- End Facebook Pixel Code -->
+
 </head>
 <body class="home page page-id-11 page-template-default wpb-js-composer <?if($bg) echo "with-bg ";?>vc_responsive js-comp-ver-4.12 <?=$class2?> <? if ($AUTH_USER_ID>0) { echo 'logged-in'; }?>">
     <div class="header-menu-bg top-menu-position-default <?=$class2?>">
@@ -548,7 +548,7 @@ src="https://www.facebook.com/tr?id=188719175067990&ev=PageView
                             ?><a href="/kabinet/" class="header-info-text">Личный кабинет</a><?
                             if ($AUTH_USER_ID>0) {
                             ?><a href="/netcat/modules/auth/?logoff=yes&amp;REQUESTED_FROM=/" class="view-more btn mgt-button">Выход</a><?
-                            } 
+                            }
                     ?></div><div class="social-icons-top">
 <?= $this->partial('socials') ?>
                     </div>
@@ -562,7 +562,7 @@ src="https://www.facebook.com/tr?id=188719175067990&ev=PageView
                             <li class="menu-item menu-item-object-page menu-item-has-children">
                                 <a href="javascript:void('0');" class="js-ch-city"><?=$currentCity?></a>
                                 <ul class="sub-menu"><?
-                                    echo $cities;   
+                                    echo $cities;
                                 ?></ul>
                             </li>
                         </ul><?
@@ -582,7 +582,7 @@ src="https://www.facebook.com/tr?id=188719175067990&ev=PageView
                 <div class="col-md-12">
                     <div class="header-left logo">
                         <a class="logo-link" href="/">
-                            <img src="<?= $nc_parent_template_folder_path ?>/images/logo.png" alt="">
+                            <img src="<?= $nc_parent_template_folder_path ?>images/logo.png" alt="">
                         </a>
                     </div>
                     <div class="header-center">
@@ -624,7 +624,7 @@ src="https://www.facebook.com/tr?id=188719175067990&ev=PageView
                             </li>
                             <li class="float-sidebar-toggle">
                                 <div id="st-sidebar-trigger-effects">
-                                   
+
                                     <a class="float-sidebar-toggle-btn" data-effect="st-sidebar-effect-2"><i class="fa fa-bars"></i></a>
                                 </div>
                             </li>
@@ -640,7 +640,7 @@ src="https://www.facebook.com/tr?id=188719175067990&ev=PageView
                     <div class="container">
                         <div class="navbar-toggle" data-toggle="collapse" data-target=".collapse">Меню</div>
                         <div class="navbar-collapse collapse"><?
-                        echo nc_browse_sub(0, $browse_template);    
+                        echo nc_browse_sub(0, $browse_template);
                         ?></div>
                     </div>
                 </div>
@@ -661,6 +661,7 @@ src="https://www.facebook.com/tr?id=188719175067990&ev=PageView
                         <li class="widget widget_text" id="text-2">
                             <div class="textwidget">
                                 <img itemprop="logo" src="<?= $nc_parent_template_folder_path ?>images/flogo.png">
+                                <meta itemprop="url" content="https://www.skd-dom.ru/" />
                                 <span style="display:none" itemprop="name">CKD</span>
                                 <br>
                                 <br>
@@ -683,7 +684,7 @@ src="https://www.facebook.com/tr?id=188719175067990&ev=PageView
                         <li class="widget widget_text" id="text-4">
                             <div style="color: #fff; font-size: 15px;" class="widgettitle">Представительства в регионах</div>
                             <div class="textwidget">
-                                <img class="footer-map-img" src="<?= $nc_parent_template_folder_path ?>/images/footer_map.png">
+                                <img class="footer-map-img" src="<?= $nc_parent_template_folder_path ?>images/footer_map.png">
                                 <br>
                                 <br>
                                 <? echo $this->partial('copy2');?>
@@ -704,8 +705,8 @@ src="https://www.facebook.com/tr?id=188719175067990&ev=PageView
                         </div>
                         <div class="col-md-2 col-sm-3 col-xs-12 footer-demis">
                             <a href="https://www.demis.ru/" <? if($_SERVER["REQUEST_URI"] != '/') echo 'rel="nofollow"'; ?> >
-								<img src="/images/demis_logo.png" alt="Компания Demis Group">
-							</a>
+                                <img src="/images/demis_logo.png" alt="Компания Demis Group">
+                            </a>
                         </div>
                         <div class="col-md-3 col-sm-6 col-xs-6 footer-social">
                             <? echo $this->partial('socials');?>

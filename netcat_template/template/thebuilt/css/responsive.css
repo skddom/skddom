@@ -392,8 +392,8 @@ a.phone-icon.js-openPopup {
 
     .mainmenu-belowheader:not(.menu-center) .navbar .nav > li:first-child > a,
     .mainmenu-belowheader:not(.menu-center) .navbar .nav > li > a {
-        padding-left: 15px;
-        padding-right:15px;
+        padding-left: 10px;
+        padding-right:10px;
     }
     .mainmenu-belowheader:not(.menu-center) .navbar .nav > li:first-child > a {
         padding-left:0;

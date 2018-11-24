@@ -3,8 +3,9 @@
 if ( $_POST['p'] ) {
 	$_SESSION['project'] = intval( $_POST['p'] );
 }
-$project      = $_SESSION['project'] ?: 2;
-$query_where  = "a.Project = $project and a.StageSection != 1";
+$project      = $_SESSION['project'] ?: 0;
+$query_where  = "a.Project = $project ";
+//$query_where  = "a.Project = $project and a.StageSection > 2";
 $query_select = "
 REPLACE(REPLACE(REPLACE(REPLACE(LCASE(DATE_FORMAT(a.StageDate, '%D %M')), 'th', ''),'rd',''),'nd',''),'st','') date_text,
 REPLACE(REPLACE(REPLACE(REPLACE(LCASE(DATE_FORMAT(a.Date1, '%D %M')), 'th', ''),'rd',''),'nd',''),'st','') date1_text,

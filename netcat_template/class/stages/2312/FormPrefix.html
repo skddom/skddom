@@ -10,6 +10,7 @@
 <form method="post">
   <label>Укажите проект
     <select name="p">
+      <option value="">Выберите проект</option>
 		<?php
 		foreach ( $db->get_results( "SELECT Name, Message_ID id FROM Message295 WHERE Checked=1", ARRAY_A ) as $row ) {
 			print "<option value='$row[id]'" . ( $row['id'] != $project ?: ' selected="selected"' ) . ">$row[Name]</option>";

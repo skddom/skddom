@@ -10,6 +10,7 @@
                         <li class="widget widget_text" id="text-2">
                             <div class="textwidget">
                                 <img itemprop="logo" src="<?= $nc_parent_template_folder_path ?>images/flogo.png">
+                                <meta itemprop="url" content="https://www.skd-dom.ru/" />
                                 <span style="display:none" itemprop="name">CKD</span>
                                 <br>
                                 <br>
@@ -32,7 +33,7 @@
                         <li class="widget widget_text" id="text-4">
                             <div style="color: #fff; font-size: 15px;" class="widgettitle">Представительства в регионах</div>
                             <div class="textwidget">
-                                <img class="footer-map-img" src="<?= $nc_parent_template_folder_path ?>/images/footer_map.png">
+                                <img class="footer-map-img" src="<?= $nc_parent_template_folder_path ?>images/footer_map.png">
                                 <br>
                                 <br>
                                 <? echo $this->partial('copy2');?>
@@ -53,8 +54,8 @@
                         </div>
                         <div class="col-md-2 col-sm-3 col-xs-12 footer-demis">
                             <a href="https://www.demis.ru/" <? if($_SERVER["REQUEST_URI"] != '/') echo 'rel="nofollow"'; ?> >
-								<img src="/images/demis_logo.png" alt="Компания Demis Group">
-							</a>
+                                <img src="/images/demis_logo.png" alt="Компания Demis Group">
+                            </a>
                         </div>
                         <div class="col-md-3 col-sm-6 col-xs-6 footer-social">
                             <? echo $this->partial('socials');?>
@@ -173,6 +174,5 @@ document.write('<img src="//ads.adfox.ru/1424/tracePoint?p7=pcxl&amp;p8=e&amp;dl
 <!-- /////////// -->
         </div>
     </div><div style="position:absolute;width:0px;height:0px;left:-100000px;" id="modalmap"></div><i></i>
-<script type="text/javascript" src="/netcat_template/template/thebuilt/js/bt.js?<?php print microtime(true);?>"></script>
 </body>
 </html>

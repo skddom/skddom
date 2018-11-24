@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE yml_catalog SYSTEM "shops.dtd">
+<yml_catalog date="2018-11-08 15:00">
+<shop>
+<name>CKД дом</name>
+<company>CKД дом</company>
+<url>https://www.skd-dom.ru/</url>
+<phone>+7 (495) 983-00-39</phone>
+<currencies>
+<currency id="RUB" rate="1" />
+</currencies>
+<categories>
+  <category id="1" >Альпино</category>
+  <category id="2" >Завидово</category>
+  <category id="3" >Заречье</category>
+  <category id="4" >Вотчина</category>
+  <category id="5" >Духанино</category>
+</categories>
+<offers>
+
+<offer id="6" available="true" >
+<url>https://www.skd-dom.ru/catalog/proekti-domov-iz-kleenogo-brusa/alpino/alpino-3_20.html</url>
+<price>6401041</price>
+<currencyId>RUB</currencyId>
+<categoryId>1</categoryId>
+<delivery>true</delivery>
+<name>CKD-240</name>
+</offer>
+
+<offer id="7" available="true" >
+<url>https://www.skd-dom.ru/catalog/proekti-domov-iz-kleenogo-brusa/alpino/alpino-3_21.html</url>
+<price>7411574</price>
+<currencyId>RUB</currencyId>
+<categoryId>1</categoryId>
+<delivery>true</delivery>
+<name>CKD-310</name>
+</offer>
+
+<offer id="8" available="true" >
+<url>https://www.skd-dom.ru/catalog/proekti-domov-iz-kleenogo-brusa/alpino/alpino-3_25.html</url>
+<price>8448375</price>
+<currencyId>RUB</currencyId>
+<categoryId>1</categoryId>
+<delivery>true</delivery>
+<name>CKD-410</name>
+</offer>
+
+<offer id="9" available="true" >
+<url>https://www.skd-dom.ru/catalog/proekti-domov-iz-kleenogo-brusa/zavidovo/zavidovo-2_18.html</url>
+<price>5578123</price>
+<currencyId>RUB</currencyId>
+<categoryId>2</categoryId>
+<delivery>true</delivery>
+<name>CKD-254</name>
+</offer>
+
+<offer id="10" available="true" >
+<url>https://www.skd-dom.ru/catalog/proekti-domov-iz-kleenogo-brusa/zavidovo/zavidovo-2_19.html</url>
+<price>7539326</price>
+<currencyId>RUB</currencyId>
+<categoryId>2</categoryId>
+<delivery>true</delivery>
+<name>CKD-352</name>
+</offer>
+
+<offer id="11" available="true" >
+<url>https://www.skd-dom.ru/catalog/proekti-domov-iz-kleenogo-brusa/zavidovo/zavidovo-2_17.html</url>
+<price>8071747</price>
+<currencyId>RUB</currencyId>
+<categoryId>2</categoryId>
+<delivery>true</delivery>
+<name>CKD-401</name>
+</offer>
+
+<offer id="12" available="true" >
+<url>https://www.skd-dom.ru/catalog/proekti-domov-iz-kleenogo-brusa/zarechie/zarechie-3_13.html</url>
+<price>3093238</price>
+<currencyId>RUB</currencyId>
+<categoryId>3</categoryId>
+<delivery>true</delivery>
+<name>CKD-80</name>
+</offer>
+
+<offer id="13" available="true" >
+<url>https://www.skd-dom.ru/catalog/proekti-domov-iz-kleenogo-brusa/zarechie/zarechie-3_14.html</url>
+<price>5505794</price>
+<currencyId>RUB</currencyId>
+<categoryId>3</categoryId>
+<delivery>true</delivery>
+<name>CKD-233</name>
+</offer>
+
+<offer id="14" available="true" >
+<url>https://www.skd-dom.ru/catalog/proekti-domov-iz-kleenogo-brusa/zarechie/zarechie-3_15.html</url>
+<price>6893129</price>
+<currencyId>RUB</currencyId>
+<categoryId>3</categoryId>
+<delivery>true</delivery>
+<name>CKD-302</name>
+</offer>
+
+<offer id="15" available="true" >
+<url>https://www.skd-dom.ru/catalog/proekti-domov-iz-kleenogo-brusa/zarechie/zarechie-3_16.html</url>
+<price>8310154</price>
+<currencyId>RUB</currencyId>
+<categoryId>3</categoryId>
+<delivery>true</delivery>
+<name>CKD-415</name>
+</offer>
+
+<offer id="16" available="true" >
+<url>https://www.skd-dom.ru/catalog/proekti-domov-iz-kleenogo-brusa/votchina/votchina_4.html</url>
+<price>4989047</price>
+<currencyId>RUB</currencyId>
+<categoryId>4</categoryId>
+<delivery>true</delivery>
+<name>CKD-215</name>
+</offer>
+
+<offer id="17" available="true" >
+<url>https://www.skd-dom.ru/catalog/proekti-domov-iz-kleenogo-brusa/votchina/votchina_5.html</url>
+<price>5928613</price>
+<currencyId>RUB</currencyId>
+<categoryId>4</categoryId>
+<delivery>true</delivery>
+<name>CKD-280</name>
+</offer>
+
+<offer id="18" available="true" >
+<url>https://www.skd-dom.ru/catalog/proekti-domov-iz-kleenogo-brusa/votchina/votchina_6.html</url>
+<price>8085520</price>
+<currencyId>RUB</currencyId>
+<categoryId>4</categoryId>
+<delivery>true</delivery>
+<name>CKD-390</name>
+</offer>
+
+<offer id="19" available="true" >
+<url>https://www.skd-dom.ru/catalog/proekti-domov-iz-kleenogo-brusa/duhanino/duhanino-3_12.html</url>
+<price>4191777</price>
+<currencyId>RUB</currencyId>
+<categoryId>5</categoryId>
+<delivery>true</delivery>
+<name>CKD-175</name>
+</offer>
+
+<offer id="20" available="true" >
+<url>https://www.skd-dom.ru/catalog/proekti-domov-iz-kleenogo-brusa/duhanino/duhanino-3_11.html</url>
+<price>4674886</price>
+<currencyId>RUB</currencyId>
+<categoryId>5</categoryId>
+<delivery>true</delivery>
+<name>CKD-200</name>
+</offer>
+
+<offer id="21" available="true" >
+<url>https://www.skd-dom.ru/catalog/proekti-domov-iz-kleenogo-brusa/duhanino/duhanino-3_10.html</url>
+<price>5673119</price>
+<currencyId>RUB</currencyId>
+<categoryId>5</categoryId>
+<delivery>true</delivery>
+<name>CKD-235</name>
+</offer>
+
+<offer id="22" available="true" >
+<url>https://www.skd-dom.ru/catalog/proekti-domov-iz-kleenogo-brusa/duhanino/duhanino-3_9.html</url>
+<price>5736633</price>
+<currencyId>RUB</currencyId>
+<categoryId>5</categoryId>
+<delivery>true</delivery>
+<name>CKD-263</name>
+</offer>
+
+<offer id="23" available="true" >
+<url>https://www.skd-dom.ru/catalog/proekti-domov-iz-kleenogo-brusa/duhanino/duhanino-3_8.html</url>
+<price>7706396</price>
+<currencyId>RUB</currencyId>
+<categoryId>5</categoryId>
+<delivery>true</delivery>
+<name>CKD-360</name>
+</offer>
+
+</offers>
+</shop>
+</yml_catalog>

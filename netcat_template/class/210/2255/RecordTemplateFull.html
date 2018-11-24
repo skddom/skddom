@@ -316,10 +316,12 @@ if ($include2=1) {
         $partial_keyword = 'included';
         $data = array('house' => $f_house_id,'link'=>"/price/calc/?house=$f_house_id","srok"=>$f_Srok);
         echo $nc_core->template->get_partial($template_keyword, $partial_keyword, $data);
-        ?><div class="row"><div class="wpb_column vc_column_container vc_col-sm-12">
+?>
 
-<div class="vc_column-inner "><div class="wpb_wrapper"><div class="mgt-header-block clearfix text-left text-black   mgt-header-block-style-1 mgt-header-texttransform-header "><h2 class="mgt-header-block-title">Планировки</h2><div class="mgt-header-line"></div></div></div></div></div></div><div class="clearfix"></div><br><br><?
-}
+<div class="row"><div class="wpb_column vc_column_container vc_col-sm-12">
+<div class="vc_column-inner "><div class="wpb_wrapper"><div class="mgt-header-block clearfix text-left text-black   mgt-header-block-style-1 mgt-header-texttransform-header "><h2 class="mgt-header-block-title">Планировки</h2><div class="mgt-header-line"></div></div></div></div></div></div><div class="clearfix"></div><br><br>
+
+<? }
 
 if ($plans) {
 ?><div class="vc_tta-container" data-vc-action="collapse">
@@ -378,10 +380,10 @@ if ($plans) {
 */
     ?>
         <div class="vc_row wpb_row vc_row-fluid vc_custom_1459500687188"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner "><div class="wpb_wrapper">
-    <div class="mgt-cta-block clearfix parallax white-text with-text wpb_content_element" data-style="background: #ffd300 url(/files/Back-Architecture-3.jpg) no-repeat;" style="background: url(&quot;/files/Back-Architecture-3.jpg&quot;) 50% 101px no-repeat rgb(255, 211, 0);">
+    <div class="mgt-cta-block clearfix parallax white-text with-text wpb_content_element" data-style="background: #ffd300 url(/files/Back-Architecture-3.jpg) no-repeat;" style="background: url(/files/Back-Architecture-3.jpg) 50% 101px no-repeat rgb(255, 211, 0);">
 
         <div class="mgt-button-wrapper mgt-button-wrapper-align-right mgt-button-wrapper-display-newline mgt-button-top-margin-disable">
-      <a onclick="yaCounter4312879.reachGoal('zayavkaarchitector');" data-action="/catalog/architect/" data-show="#parent_popup_form_detail_phone" data-href=".js-callback-wrap" 
+      <a onclick="yaCounter4312879.reachGoal('zayavkaarchitector');" data-action="/catalog/architect/" data-show="#parent_popup_form_detail_phone" data-href=".js-callback-wrap"
       class="btn btn_new_style_color hvr-bounce-to-right mgt-button mgt-style-solid-invert mgt-size-normal mgt-align-right mgt-display-newline mgt-text-size-normal mgt-button-icon-position-left mgt-text-transform-uppercase js-openPopup" href="#">Записаться </a></div>
 
     <h3 class="mgt-cta-block-header">Создайте свою планировку! </h3>
@@ -493,8 +495,9 @@ else $end = date("d-m-Y", strtotime("+80 day next Monday"));
 //echo $nc_core->widget->show('prosmotr');
 
 
+
 //Интерьеры
-if ($interior){ 
+if ($interior){
 
 
       $foto = ( base64_decode(trim(s_list_class(111,86,"&nc_ctpl=2256&recNum=20&house_id=$f_house_id&name=$f_Name"))));
@@ -622,7 +625,7 @@ if(!$grid){
             </div><?
 }
 }
-         ?>
+?>
 
 </div>
 <script>

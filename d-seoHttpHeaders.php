@@ -3,6 +3,8 @@
 
 
 $array_410 = array(
+'/galereya/dizain-doma-iz-kleenogo-brusa/zelenko.htmlpage-3/',
+'/galereya/dizain-doma-iz-kleenogo-brusa/dizaynery_3.htmlpage-2/',
 '/catalog/individualnye-proekty/volga1/page-2/',
 '/price/actions/specials_12.html',
 '/uslugi/choose-color/choose-color_12.html',
@@ -246,11 +248,11 @@ $array_301 = array(
 '/o-kompanii/novosti/?cur_cc=336&curPos=20' => '/',
 '/catalog/individualnye-proekty/volga1/page-19/' => '/',
 '/catalog/individualnye-proekty/volga1/page-16/' => '/',
-'/price/gotovye-doma-iz-kleenogo-brusa/gotovye-doma-new_2.html' => '/',
+// '/price/gotovye-doma-iz-kleenogo-brusa/gotovye-doma-new_2.html' => '/',
 '/catalog/individualnye-proekty/volga1/page-49/' => '/',
 '/catalog/individualnye-proekty/volga1/page-38/' => '/',
 '/catalog/individualnye-proekty/volga1/page-29/' => '/',
-'/price/gotovye-doma-iz-kleenogo-brusa/gotovye-doma-new_4.html' => '/',
+// '/price/gotovye-doma-iz-kleenogo-brusa/gotovye-doma-new_4.html' => '/',
 '/catalog/individualnye-proekty/volga1/page-38/' => '/',
 '/o-kompanii/developer/index_2.html' => '/',
 '/catalog/individualnye-proekty/volga1/page-32/' => '/',
