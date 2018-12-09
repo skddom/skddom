@@ -12381,7 +12381,7 @@ body #content .wpb_text_column .mgt-button:last-child {
     padding-right: 0;
 }
 .mgt-button.mgt-text-size-small {
-    font-size: 12px;
+    font-size: 13px;
     height: auto;
 }
 .mgt-button.mgt-text-size-large {
@@ -13093,11 +13093,20 @@ body #content .wpb_text_column .mgt-button:last-child {
     margin-top: 20px;
 }
 .portfolio-item-block .project-description {
-    font-size: 13px;
+    font-size: 14px;
     color: rgba(255,255,255,0.8);
     margin-top: 15px;
     margin-bottom: 30px;
 }
+
+#portfolio-list .portfolio-item-block .project-description {
+    font-size: 16px;
+    color: rgba(255,255,255,0.8);
+    margin-top: 15px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
 /*.portfolio-item-block .btn:hover {
     background: #b76c00;
     border-color: #b76c00;
@@ -22255,6 +22264,32 @@ margin:0px;
   }
  }
 
+  a.order_btn_style2,   a.order_btn_style2:focus {
+  z-index: 1;
+  background: rgba(35,43,51,.51);
+  position: absolute;
+  left: 570px;
+  bottom: 20px;
+  border: 2px solid #fff;
+  line-height: 42px;
+  padding:0px 10px;
+  box-sizing: border-box;
+  }
+
+  a.order_btn_style2 > span{
+  color: #b76c00;
+    font-size: 25px;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+@media screen and (max-width: 1199px){
+  a.order_btn_style2 {
+  display: none;
+  }
+ }
+
+
 .footer_button_shem{
     margin-top: 30px;
 }
@@ -22790,4 +22825,49 @@ header .header-info-2-text .header-info-half .header-info-content-text{
 }
 .btn_new_style_color.mgt-button.mgt-style-solid-invert:hover{
   color: #fff;
+}
+
+
+.vc_custom_1459 {
+    position: relative;
+    /* padding-bottom: 60px !important; */
+    background-color: #2a2f35 !important;
+
+}
+
+.wpb_wrapper.wpb_wrapper_1459:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    margin-left: calc((100vw - 100%) /-2);
+    background-color: #2a2f35 !important;
+    z-index: -1;
+}
+
+
+
+
+.wpb_wrapper_1459{
+  text-align: center;
+}
+.wpb_wrapper_1459 > span{
+  width: 220px;
+  margin:  0 5px;
+  display:  inline-block;
+      vertical-align: top;
+
+    margin-bottom: 20px;
+}
+
+.wpb_wrapper_1459 > span > img{
+  padding-right: 30px;
+}
+
+.wpb_wrapper_1459 > span > p{
+    color: #fff;
+    text-align: left;
+    padding-left: 50px;
 }

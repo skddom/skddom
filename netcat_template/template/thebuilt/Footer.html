@@ -5,17 +5,41 @@
     ?><div class="container-fluid container-fluid-footer">
         <div class="row">
             <div class="footer-sidebar-2-wrapper">
-                <div class="footer-sidebar-2 sidebar container footer-container" itemscope itemtype="http://schema.org/Organization">
+                <div class="footer-sidebar-2 sidebar container footer-container">
                     <ul class="clearfix" id="footer-sidebar-2">
                         <li class="widget widget_text" id="text-2">
                             <div class="textwidget">
-                                <img itemprop="logo" src="<?= $nc_parent_template_folder_path ?>images/flogo.png">
-                                <meta itemprop="url" content="https://www.skd-dom.ru/" />
-                                <span style="display:none" itemprop="name">CKD</span>
+                                <img  src="<?= $nc_parent_template_folder_path ?>images/flogo.png">
                                 <br>
                                 <br>
                                 <p><?
                                 echo $this->partial('footer-text');?></p>
+                                                                <div style="display:none;visibility:hidden"> 
+                                    <div itemscope itemtype="http://schema.org/Organization"> 
+                                       <a href="/" itemprop="url">
+	   <img src="<?= $nc_parent_template_folder_path ?>images/flogo.png" alt="" itemprop="logo">
+   </a>
+    <span style="display:none" itemprop="name">CKD</span>
+                                        <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"> 
+                                            <span itemprop="streetAddress">ул. Нижняя Сыромятническая, д. 10, стр. 2, 8 этаж. </span>
+                                            <span itemprop="addressLocality">Москва</span>
+                                            <span itemprop="telephone">+7 (495) 983-00-39</span>
+                                            <span itemprop="email">op@skd-dom.ru</span> 
+                                        </div> 
+                                        <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"> 
+                                            <span itemprop="streetAddress">Пискаревский проспект, д.150к2</span>
+                                            <span itemprop="addressLocality">Санкт-Петербурге</span>
+                                            <span itemprop="telephone">+7 (919) 998-96-01</span>
+                                            <span itemprop="email">spb@skd-dom.ru</span> 
+                                        </div>  
+                                        <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"> 
+                                            <span itemprop="streetAddress">ул. Белинского, д.177а</span>
+                                            <span itemprop="addressLocality">Екатеринбург</span>
+                                            <span itemprop="telephone">+7 (343) 273-08-29</span>
+                                            <span itemprop="email">ekb@skd-dom.ru</span> 
+                                        </div> 
+                                    </div> 
+                                </div>
                             </div>
                         </li>
                         <li class="widget widget_nav_menu" id="nav_menu-2">
