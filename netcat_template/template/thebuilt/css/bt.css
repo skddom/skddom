@@ -1,117 +1,137 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat");
-html body .skdmans-container {
-  padding: 0;
-  margin: 0; }
-  html body .skdmans-container .skdmans-item {
-    float: left;
-    position: relative;
-    border: none;
-    width: 585px;
-    height: 585px;
-    overflow: hidden;
-    padding: 0;
-    margin: 0; }
-    html body .skdmans-container .skdmans-item .skdmans-text {
-      z-index: 3;
-      width: 95%;
-      position: absolute;
-      top: 40px;
-      left: -100%;
-      color: black;
-      transition: all 777ms ease-out 0ms; }
-      html body .skdmans-container .skdmans-item .skdmans-text .skdmans-comment,
-      html body .skdmans-container .skdmans-item .skdmans-text .skdmans-title {
-        font-family: 'Monserrat', 'Open Sans', sans-serif;
-        color: white;
+html body .skdmans-container-fixed {
+  position: relative;
+  width: 1170px;
+  min-width: 1170px;
+  height: 2632.5px; }
+  html body .skdmans-container-fixed .skdmans-item-container {
+    position: absolute;
+    min-height: 292.5px;
+    min-width: 292.5px;
+    height: 292.5px;
+    width: 292.5px;
+    bottom: 0;
+    right: 0; }
+    html body .skdmans-container-fixed .skdmans-item-container.skdmans-item-npp-1 {
+      top: 0;
+      left: 0; }
+    html body .skdmans-container-fixed .skdmans-item-container.skdmans-item-npp-2 {
+      top: 292.5px;
+      left: 0; }
+    html body .skdmans-container-fixed .skdmans-item-container.skdmans-item-npp-3 {
+      top: 0;
+      left: 292.5px;
+      height: 585px;
+      width: 585px; }
+    html body .skdmans-container-fixed .skdmans-item-container.skdmans-item-npp-4 {
+      top: 0;
+      left: 877.5px;
+      height: 585px; }
+    html body .skdmans-container-fixed .skdmans-item-container.skdmans-item-npp-5 {
+      top: 585px;
+      left: 0;
+      width: 585px; }
+    html body .skdmans-container-fixed .skdmans-item-container.skdmans-item-npp-6 {
+      top: 585px;
+      left: 585px; }
+    html body .skdmans-container-fixed .skdmans-item-container.skdmans-item-npp-7 {
+      top: 585px;
+      left: 877.5px; }
+    html body .skdmans-container-fixed .skdmans-item-container.skdmans-item-npp-8 {
+      top: 877.5px;
+      left: 0; }
+    html body .skdmans-container-fixed .skdmans-item-container.skdmans-item-npp-9 {
+      top: 877.5px;
+      left: 292.5px; }
+    html body .skdmans-container-fixed .skdmans-item-container.skdmans-item-npp-10 {
+      top: 1170px;
+      left: 0;
+      width: 585px; }
+    html body .skdmans-container-fixed .skdmans-item-container.skdmans-item-npp-11 {
+      top: 877.5px;
+      left: 585px;
+      height: 585px;
+      width: 585px; }
+    html body .skdmans-container-fixed .skdmans-item-container.skdmans-item-npp-12 {
+      top: 1462.5px;
+      left: 0; }
+    html body .skdmans-container-fixed .skdmans-item-container.skdmans-item-npp-13 {
+      top: 1462.5px;
+      left: 292.5px; }
+    html body .skdmans-container-fixed .skdmans-item-container.skdmans-item-npp-14 {
+      top: 1462.5px;
+      left: 585px;
+      width: 585px; }
+    html body .skdmans-container-fixed .skdmans-item-container .skdmans-item {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden; }
+      html body .skdmans-container-fixed .skdmans-item-container .skdmans-item:hover .skdmans-text {
+        left: 20px; }
+      html body .skdmans-container-fixed .skdmans-item-container .skdmans-item:hover .skdmans-shadow {
+        opacity: 0.6; }
+      html body .skdmans-container-fixed .skdmans-item-container .skdmans-item .skdmans-text {
+        z-index: 3;
+        width: 95%;
+        position: absolute;
+        top: 40px;
+        left: -100%;
+        color: black;
+        transition: all 777ms ease-out 0ms; }
+        html body .skdmans-container-fixed .skdmans-item-container .skdmans-item .skdmans-text .skdmans-comment,
+        html body .skdmans-container-fixed .skdmans-item-container .skdmans-item .skdmans-text .skdmans-title {
+          font-family: 'Monserrat', 'Open Sans', sans-serif;
+          color: white;
+          font-size: 20px;
+          text-shadow: black 0 0 3px;
+          font-weight: 400;
+          line-height: 1.2em; }
+        html body .skdmans-container-fixed .skdmans-item-container .skdmans-item .skdmans-text .skdmans-title {
+          padding-top: 2em;
+          font-weight: normal;
+          font-size: 13px; }
+      html body .skdmans-container-fixed .skdmans-item-container .skdmans-item .skdmans-shadow {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        z-index: 1;
+        background: black;
+        transition: all 888ms ease-out 0ms; }
+      html body .skdmans-container-fixed .skdmans-item-container .skdmans-item .skdmans-image {
+        width: 100%;
+        height: 100%;
+        transition: all 333ms ease 0ms;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        border: none;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center; }
+      html body .skdmans-container-fixed .skdmans-item-container .skdmans-item .vote-skdmans {
+        position: absolute;
+        left: 10px;
+        bottom: 10px;
+        line-height: 45px;
+        width: 45px;
         font-size: 20px;
-        text-shadow: black 0 0 3px;
-        font-weight: 400;
-        line-height: 1.2em; }
-      html body .skdmans-container .skdmans-item .skdmans-text .skdmans-title {
-        padding-top: 2em;
-        font-weight: normal;
-        font-size: 13px; }
-    html body .skdmans-container .skdmans-item:hover .skdmans-text {
-      left: 20px; }
-    html body .skdmans-container .skdmans-item:hover .skdmans-shadow {
-      opacity: 0.6; }
-    html body .skdmans-container .skdmans-item:hover.skdmans-format-1 .skdmans-image {
-      width: 312.5px;
-      height: 312.5px; }
-    html body .skdmans-container .skdmans-item:hover.skdmans-format-2 .skdmans-image {
-      width: 605px;
-      height: 605px; }
-    html body .skdmans-container .skdmans-item:hover.skdmans-format-3 .skdmans-image {
-      width: 312.5px;
-      height: 605px; }
-    html body .skdmans-container .skdmans-item:hover.skdmans-format-4 .skdmans-image {
-      width: 605px;
-      height: 312.5px; }
-    html body .skdmans-container .skdmans-item .skdmans-shadow {
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0;
-      z-index: 1;
-      background: black;
-      transition: all 888ms ease-out 0ms; }
-    html body .skdmans-container .skdmans-item .skdmans-image {
-      transition: all 333ms ease 0ms;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 0;
-      border: none;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center center; }
-    html body .skdmans-container .skdmans-item.skdmans-format-1 {
-      width: 292.5px;
-      height: 292.5px; }
-      html body .skdmans-container .skdmans-item.skdmans-format-1 .skdmans-shadow,
-      html body .skdmans-container .skdmans-item.skdmans-format-1 .skdmans-image {
-        width: 292.5px;
-        height: 292.5px; }
-    html body .skdmans-container .skdmans-item.skdmans-format-2 {
-      width: 585px;
-      height: 585px; }
-      html body .skdmans-container .skdmans-item.skdmans-format-2 .skdmans-shadow,
-      html body .skdmans-container .skdmans-item.skdmans-format-2 .skdmans-image {
-        width: 585px;
-        height: 585px; }
-    html body .skdmans-container .skdmans-item.skdmans-format-3 {
-      width: 292.5px;
-      height: 585px; }
-      html body .skdmans-container .skdmans-item.skdmans-format-3 .skdmans-shadow,
-      html body .skdmans-container .skdmans-item.skdmans-format-3 .skdmans-image {
-        width: 292.5px;
-        height: 585px; }
-    html body .skdmans-container .skdmans-item.skdmans-format-4 {
-      width: 585px;
-      height: 292.5px; }
-      html body .skdmans-container .skdmans-item.skdmans-format-4 .skdmans-shadow,
-      html body .skdmans-container .skdmans-item.skdmans-format-4 .skdmans-image {
-        width: 585px;
-        height: 292.5px; }
-    html body .skdmans-container .skdmans-item .vote-skdmans {
-      position: absolute;
-      left: 10px;
-      bottom: 10px;
-      line-height: 45px;
-      width: 45px;
-      font-size: 20px;
-      font-weight: bold;
-      color: white;
-      background: url(/netcat_template/template/thebuilt/images/heart-outline-64-green.png) no-repeat top left transparent;
-      background-size: contain;
-      z-index: 2;
-      text-align: center;
-      vertical-align: top;
-      cursor: pointer; }
-      html body .skdmans-container .skdmans-item .vote-skdmans.voted {
-        cursor: default;
-        background: url(/netcat_template/template/thebuilt/images/heart-outline-64-brown.png) no-repeat top left transparent;
-        background-size: contain; }
+        font-weight: bold;
+        color: white;
+        background: url(/netcat_template/template/thebuilt/images/heart-outline-64-green.png) no-repeat top left transparent;
+        background-size: contain;
+        z-index: 2;
+        text-align: center;
+        vertical-align: top;
+        cursor: pointer; }
+        html body .skdmans-container-fixed .skdmans-item-container .skdmans-item .vote-skdmans.voted {
+          cursor: default;
+          background: url(/netcat_template/template/thebuilt/images/heart-outline-64-brown.png) no-repeat top left transparent;
+          background-size: contain; }
 html body .recomm.stages-flow td {
   vertical-align: top;
   text-align: left; }
