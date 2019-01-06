@@ -70,7 +70,7 @@
             <footer>
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-2 col-sm-6 col-xs-6 footer-copyright">
+                        <div class="col-md-3 col-sm-6 col-xs-6 footer-copyright">
                             <? echo $this->partial('copy');?>
                         </div>
                         <div class="col-md-2 col-sm-3 col-xs-6 footer-sitemap">
@@ -81,7 +81,7 @@
                                 <img src="/images/demis_logo.png" alt="Компания Demis Group">
                             </a>
                         </div>
-                        <div class="col-md-3 col-sm-6 col-xs-6 footer-social">
+                        <div class="col-md-2 col-sm-6 col-xs-6 footer-social">
                             <? echo $this->partial('socials');?>
                         </div>
                         <div class="col-md-3 col-sm-6 col-xs-6 footer-rules">
@@ -122,7 +122,7 @@
             </form>
         </div>
     </div>
-    <?= $this->partial('counter2') ?><?
+    <? if ($PHP_AUTH_USER!="developer") echo $this->partial('counter2') ?><?
     //echo "<-- pau/$PHP_AUTH_USER -->";
     if ($PHP_AUTH_USER!="developer") {
     ?><script src="/d-goals.js" type="text/javascript"></script><?

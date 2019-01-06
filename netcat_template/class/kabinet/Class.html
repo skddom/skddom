@@ -1,7 +1,8 @@
 <!-- FormPrefix --><?= $f_AdminCommon; ?><?if (!$totRows):?>Доступ запрещен!<?else:?>
-
+<?if ($lk->data['Owner']!="12"):?>
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-<div class="tpl-101">
+<?endif?>
+<div class="tpl-101" data-du="<?=$PHP_AUTH_USER?>">
 <?endif?><!-- /FormPrefix -->
 
 <!-- RecordTemplate --><div class="vc_row wpb_row vc_row-fluid mt30">

@@ -10,7 +10,12 @@ function initAddFaq() {
     "#add" == window.location.hash && $(".js-add-toggle")
         .toggle()
 }
-
+function appendCalcData($this){
+            var f_Data = $.param({data:JSON.stringify(email_data)});
+            $data = $("<input/>");
+            $data.attr("name","f_Data").attr("type","hidden").val(f_Data);
+            $this.parent().find("form").append($data);
+}
 function initLine() {
     $hash = window.location.hash.split("#"), $hash = $hash[1], void 0 != $hash && ($hash = "." + $hash, $(".line-desc,.portfolio-item-block")
         .hide(), $($hash)
@@ -87,6 +92,32 @@ function getComplTableHTML() {
 }
 jQuery(document)
     .ready(function () {
+if ($("[name=f_Phone]").size()>0) {
+    jQuery.prototype.mask=function(mask){
+	    cleave = new Cleave("[name=f_Phone]", {
+            phone: true,
+            phoneRegionCode: 'ru',
+	        prefix: '+7 '
+        });
+    }
+}
+    $("div[data-load]").each(function(){
+        $this = $(this);
+        var url = $this.data("load");
+        url = url.split("?");
+        if (url[1]==undefined) url[1]="";
+        url = url[0] + "?" + url[1] + "&isNaked=1";
+        $this.load(url,function(){
+            appendCalcData($this);
+if ($("[name=f_Phone]").size()>0) {
+	    cleave = new Cleave("[name=f_Phone]", {
+            phone: true,
+            phoneRegionCode: 'ru',
+	        prefix: '+7 '
+        });
+}
+        });
+    });    
         initAddFaq(), jQuery(".vc_tta-tab")
             .click(function () {
                 jQuery(".vc_tta-tab")

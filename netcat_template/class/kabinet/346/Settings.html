@@ -5,6 +5,7 @@ if (!$admin_mode) {
   
     $ignore_sub=$ignore_cc=true;
     $query_where = "a.Owner='{$lk->data['Owner']}'";
+    if ($lk->data['Owner']==12) $query_where = "0";
     $query_join = "LEFT JOIN User u ON a.Owner=u.User_ID
     LEFT JOIN Message294 as m ON a.Manager=m.Message_ID
     LEFT JOIN Message294 as p ON a.Prorab=p.Message_ID";

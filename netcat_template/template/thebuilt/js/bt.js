@@ -14,4 +14,10 @@
     })
     return false;
   })
+  $(document).ready(function () {
+    if ($('.skdmans-container-fixed').length) {
+      c = $('.skdmans-container-fixed:last').find('.skdmans-item-container').last();
+      $('.skdmans-container-fixed:last').height(c.position().top + c.height());
+    }
+  })
 })(jQuery)
