@@ -1,6 +1,6 @@
 <?php
 $SES = array (
-  'e698afc025c6ece567c1742c9780cdfc' => 
+  '44647146ae8671e30008952b34ddba84' => 
   array (
     'cfg' => 
     array (
@@ -12,10 +12,10 @@ $SES = array (
       'backup_url' => 'backup/',
       'only_create' => 'MRG_MyISAM MERGE HEAP MEMORY',
       'globstat' => 0,
-      'my_host' => 'u335095.mysql.masterhost.ru',
-      'my_port' => 3306,
-      'my_user' => 'u335095',
-      'my_pass' => 'beric4tomanic',
+      'my_host' => 'localhost',
+      'my_port' => '3306',
+      'my_user' => 'skddom_skd',
+      'my_pass' => '%3@696*A',
       'my_comp' => 0,
       'my_db' => '',
       'auth' => 'mysql cfg',
@@ -24,7 +24,7 @@ $SES = array (
       'confirm' => '6',
       'exitURL' => './',
     ),
-    'time' => 1412446105,
+    'time' => 1546888534,
     'lng' => 'ru',
   ),
 );
